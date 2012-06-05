@@ -29,6 +29,7 @@ endif
 
 " SESSIONS AND PROJECTS
 set viminfo+=% " remember buffers
+set sessionoptions+="sesdir"
 
 " SETTINGS FOR GVIM 
 set guifont=Consolas:h9
@@ -45,7 +46,7 @@ set noscrollbind
 "map <F12> :!start ctags -R<CR>
 
 " show syntax highlighting groups for word under cursor
-nmap <C-S-p> :call <SID>SynStack()<CR>
+nnoremap <C-S-p> :call <SID>SynStack()<CR>
 function! <SID>SynStack()
     if !exists("*synstack")
         return
@@ -73,25 +74,25 @@ if !exists("autocommands_loaded")
     autocmd bufwritepost David.vim :colorscheme David
 endif
 
-
 " CUSTOM KEYCOMMANDS
 let mapleader = ","
 
 " Trigger file-explorer plugin Nerd tree
-nnoremap <F1> :NERDTreeToggle<CR>
+nnoremap <silent> <F1> : NERDTreeToggle<CR>
 
 " Fullscreen
-map <F11> <ESC>:call libcallnr("gvimfullscreen.dll","ToggleFullScreen",0)<CR>
+noremap <F11> <ESC>:call libcallnr("gvimfullscreen.dll","ToggleFullScreen",0)<CR>
 
 " Toggle spell checking on and off with `,s`
-nmap <silent> <leader>s :set spell!<CR>
+nnoremap <silent> <leader>s :set spell!<CR>
 set spelllang=en_us " Set region to US English
 
 " Start editing the vimrc in a new tab
-nmap <leader>v :tabedit $MYVIMRC<CR>
+nnoremap <leader>v :e $MYVIMRC<CR>
 
 " VISUALIZATION STUFF
 " Show EOL type and last modified timestamp, right after the filename
+set numberwidth=3
 set statusline=%<%F%h%m%r\ [%{&ff}]\ (%{strftime(\"%H:%M\ %d/%m/%Y\",getftime(expand(\"%:p\")))})%=%l,%c%V\ %P
 
 " SOME GIT SPECIFIC SETTINGS

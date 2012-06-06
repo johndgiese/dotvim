@@ -43,5 +43,11 @@ hi NERDTreePartFile guibg=black guifg=white gui=NONE
 hi NERDTreeOpenable guibg=black guifg=white gui=NONE
 hi NERDTreePart guibg=black guifg=white gui=NONE
 hi NERDTreeDirSlash guibg=black guifg=#0052FF gui=NONE
+
+" Taglist
+hi TaglistFileName guibg=black guifg=white gui=italic
+hi TaglistTagName guibg=black guifg=#00ED45 gui=NONE
+hi TaglistTitle guibg=black guifg=red gui=NONE
+
 " CTags 
 hi TagListFileName guibg=#151515 guifg=white gui=bold,italic 

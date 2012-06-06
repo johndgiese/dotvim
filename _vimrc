@@ -30,6 +30,8 @@ endif
 " SESSIONS AND PROJECTS
 set viminfo+=% " remember buffers
 set sessionoptions+="sesdir"
+noremap <F2> :TlistToggle<CR>
+let Tlist_Use_Right_Window=1
 
 " SETTINGS FOR GVIM 
 set guifont=Consolas:h9
@@ -39,11 +41,6 @@ set guioptions+=LlRrb   " remove all scrollbars
 set guioptions-=LlRrb
 set guioptions-=e
 set noscrollbind
-
-"Setup C-tags location
-"set tags=.\tags,.\..\tags,.\*\tags
-"let Tlist_WinWidth=50
-"map <F12> :!start ctags -R<CR>
 
 " show syntax highlighting groups for word under cursor
 nnoremap <C-S-p> :call <SID>SynStack()<CR>
@@ -78,7 +75,7 @@ endif
 let mapleader = ","
 
 " Trigger file-explorer plugin Nerd tree
-nnoremap <silent> <F1> : NERDTreeToggle<CR>
+noremap <F1> :NERDTreeToggle<CR>
 
 " Fullscreen
 noremap <F11> <ESC>:call libcallnr("gvimfullscreen.dll","ToggleFullScreen",0)<CR>
@@ -86,6 +83,10 @@ noremap <F11> <ESC>:call libcallnr("gvimfullscreen.dll","ToggleFullScreen",0)<CR
 " Toggle spell checking on and off with `,s`
 nnoremap <silent> <leader>s :set spell!<CR>
 set spelllang=en_us " Set region to US English
+
+" Better <ESC> (to go back to normal mode from insert mode)
+inoremap jk <ESC>
+inoremap <ESC> <nop>
 
 " Start editing the vimrc in a new tab
 nnoremap <leader>v :e $MYVIMRC<CR>

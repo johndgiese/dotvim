@@ -1,6 +1,6 @@
 Windows Installation:
 
-	git clone git://github.com/jdgiese/dotvim.git C:\opt\vim
+	git clone git://github.com/johndgiese/dotvim.git C:\opt\vim\vimfiles
 
 Create symlinks:
 
@@ -9,7 +9,6 @@ Create symlinks:
 
 Switch to the C:\opt\vim\vimfiles directory, and fetch the submodule:
 	cd C:\opt\vim\vimfiles
-
 
 For some of the utilities to work, you will need to have the following programs on the $PATH:
     latex

@@ -19,10 +19,10 @@ hi Title guibg=black guifg=#FFFF44 gui=bold
 
 " VIM gui 
 hi LineNr guibg=#111111 guifg=white gui=NONE
-hi NonText guibg=black guifg=white gui=NONE
+hi NonText guibg=black guifg=#333333 gui=NONE
 hi PMenu guibg=#252525 guifg=white gui=NONE
 hi PMenuSelect guibg=#151515 guifg=white gui=NONE
-hi VertSplit guibg=black guifg=#3F3F3F gui=bold
+hi VertSplit guibg=black guifg=#333333 gui=bold
 hi Folded guibg=black guifg=#AAFFAA gui=bold
 hi FoldColumn guibg=black guifg=#EEFFAA gui=bold
 hi PMenuThumb guibg=black guifg=#EEFFAA gui=NONE

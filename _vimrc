@@ -16,7 +16,7 @@ if !exists("first_time_opened")
     let first_time_opened=1
     set lines=50 columns=140
 endif
-colorscheme David
+colorscheme betterblack
 set noswapfile
 set nobackup
 set nowb
@@ -70,7 +70,7 @@ if !exists("autocommands_loaded")
     autocmd bufwritepost _vimrc source $MYVIMRC
 
     " update the colorscheme upon saving
-    autocmd bufwritepost David.vim :colorscheme David
+    autocmd bufwritepost betterblack.vim :colorscheme betterblack
 endif
 
 " CUSTOM KEYCOMMANDS

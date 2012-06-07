@@ -1,0 +1,19 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=910
+
+This plugin integrates the python documentation view- and search-tool "pydoc" into (g)vim. The plugin allows yout to view the documentation of a python-module or class by typing 
+
+:Pydoc foo.bar.baz (e.g. :Pydoc re.compile)
+
+or search a word (uses pydoc -k) in the documentation by typing
+
+:PydocSearch foobar
+
+Vim will split a new buffer, which shows the python-documentation found by pydoc. (The buffer is called "__doc__" (pythonic, isn't it ;-) ). The name might cause problems, if you have a file with the same name, but usually this should not happen).
+
+pydoc.vim also allows you view the documentation of the "word" (see :help word) under the cursor by pressing <leader>pw or the "WORD" (see :help WORD) under the cursor by pressing <leader>pW. This is very useful if you want to jump to the docs of a module or class found by "PydocSearch" or if you want to see the docs of a module/class in your source code.
+
+To have a browser like feeling you can use "u" and "CTRL-r" to go back and forward,  just like editing normal text in a normal buffer.
+
+If you have suggestions for pydoc.vim, feel free to contact me (fs111 at web dot de) and if you like it, please rate it :-)
+
+The script is now also officially hosted on github: https://github.com/fs111/pydoc.vim

@@ -35,6 +35,7 @@ hi StatusLineNC guibg=#333333 guifg=white gui=NONE
 hi IncSearch guibg=#333333 guifg=white gui=NONE
 hi CursorLine guibg=#252525  gui=NONE
 hi CursorColumn guibg=#252525 gui=NONE
+hi FoldColumn guibg=black guifg=white gui=NONE
 
 " NERDTree
 hi NERDTreeDir guibg=black guifg=#0052FF gui=NONE
@@ -43,11 +44,10 @@ hi NERDTreePartFile guibg=black guifg=white gui=NONE
 hi NERDTreeOpenable guibg=black guifg=white gui=NONE
 hi NERDTreePart guibg=black guifg=white gui=NONE
 hi NERDTreeDirSlash guibg=black guifg=#0052FF gui=NONE
+hi link NERDTreeHelp Comment
 
 " Taglist
 hi TaglistFileName guibg=black guifg=white gui=italic
 hi TaglistTagName guibg=black guifg=#00ED45 gui=NONE
 hi TaglistTitle guibg=black guifg=red gui=NONE
-
-" CTags 
-hi TagListFileName guibg=#151515 guifg=white gui=bold,italic 
+hi link TagListComment Comment

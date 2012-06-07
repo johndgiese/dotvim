@@ -33,7 +33,7 @@ set sessionoptions+="sesdir"
 noremap <F2> :TlistToggle<CR>
 let Tlist_Use_Right_Window=1
 
-" SETTINGS FOR GVIM 
+" SETTINGS FOR GVIM
 set guifont=Consolas:h9
 set guioptions-=m 		" remove menu bar
 set guioptions-=T		" remove toolbar
@@ -54,10 +54,12 @@ endfunc
 filetype plugin indent on
 filetype plugin on
 
+" WEB DEVELOPMENT
+
 " PYTHON SETTINGS
 let g:pydoc_cmd = 'C:\Python27\Lib\pydoc.py'
 if !exists("autocommands_loaded")
-    let autocommands_loaded=1 
+    let autocommands_loaded=1
     " Setup Python features
     "autocmd BufRead,BufNewFile,FileReadPost *.py source $DV.'\ftplugin\python.vim'
 
@@ -74,6 +76,9 @@ endif
 " CUSTOM KEYCOMMANDS
 let mapleader = ","
 
+nnoremap <leader>w :/\s\+$<CR>
+nnoremap <leader>W :%s/\s\+$//e<CR><silent>:noh<CR>
+
 " Trigger file-explorer plugin Nerd tree
 noremap <F1> :NERDTreeToggle<CR>
 
@@ -87,6 +92,7 @@ set spelllang=en_us " Set region to US English
 " Better <ESC> (to go back to normal mode from insert mode)
 inoremap jk <ESC>
 inoremap <ESC> <nop>
+noremap <C-s> :w<CR>
 
 " Start editing the vimrc in a new tab
 nnoremap <leader>v :e $MYVIMRC<CR>
@@ -94,6 +100,8 @@ nnoremap <leader>v :e $MYVIMRC<CR>
 " VISUALIZATION STUFF
 " Show EOL type and last modified timestamp, right after the filename
 set numberwidth=3
+set hlsearch incsearch
+" TODO: make search use regular expressions by default
 set statusline=%<%F%h%m%r\ [%{&ff}]\ (%{strftime(\"%H:%M\ %d/%m/%Y\",getftime(expand(\"%:p\")))})%=%l,%c%V\ %P
 
 " SOME GIT SPECIFIC SETTINGS

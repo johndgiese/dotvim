@@ -1,3 +1,11 @@
+" TODO: add smart commenting
+" TODO: add reference for HTML, CSS
+" TODO: add python completion
+" TODO: add pydoc
+" TODO: add function to start debuging file in IPython
+" TODO: check that I am using autocommands correctly
+" TODO: add execute selection (in Pylab)
+" TODO: make windows resize correctly in gvim
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 set ai                          " set auto-indenting on for programming
@@ -28,9 +36,8 @@ else
 endif
 
 " SESSIONS AND PROJECTS
-set viminfo+=% " remember buffers
 set sessionoptions+="sesdir"
-noremap <F2> :TlistToggle<CR>
+noremap <silent> <F2> :TlistToggle<CR>
 let Tlist_Use_Right_Window=1
 
 " SETTINGS FOR GVIM
@@ -57,7 +64,7 @@ filetype plugin on
 " WEB DEVELOPMENT
 
 " PYTHON SETTINGS
-let g:pydoc_cmd = 'C:\Python27\Lib\pydoc.py'
+let g:pydoc_cmd = 'python C:\Python27\Lib\pydoc.py'
 if !exists("autocommands_loaded")
     let autocommands_loaded=1
     " Setup Python features
@@ -80,7 +87,7 @@ nnoremap <leader>w :/\s\+$<CR>
 nnoremap <leader>W :%s/\s\+$//e<CR><silent>:noh<CR>
 
 " Trigger file-explorer plugin Nerd tree
-noremap <F1> :NERDTreeToggle<CR>
+noremap <silent> <F1> :NERDTreeToggle<CR>
 
 " Fullscreen
 noremap <F11> <ESC>:call libcallnr("gvimfullscreen.dll","ToggleFullScreen",0)<CR>
@@ -93,6 +100,7 @@ set spelllang=en_us " Set region to US English
 inoremap jk <ESC>
 inoremap <ESC> <nop>
 noremap <C-s> :w<CR>
+noremap <C-p> "*p<CR>
 
 " Start editing the vimrc in a new tab
 nnoremap <leader>v :e $MYVIMRC<CR>
@@ -103,6 +111,23 @@ set numberwidth=3
 set hlsearch incsearch
 " TODO: make search use regular expressions by default
 set statusline=%<%F%h%m%r\ [%{&ff}]\ (%{strftime(\"%H:%M\ %d/%m/%Y\",getftime(expand(\"%:p\")))})%=%l,%c%V\ %P
+
+" BETTER AUTOCOMPLETE
+function! SuperCleverTab()
+    if strpart(getline('.'), 0, col('.') - 1) =~ '^\s*$'
+        return 
+    else
+        if &omnifunc != ''
+            return "\<C-X>\<C-O>"
+        elseif &dictionary != ''
+            return "\<C-K>"
+        else
+            return "\<C-N>"
+        endif
+    endif
+endfunction
+
+inoremap <C-space> <C-R>=SuperCleverTab()<cr>
 
 " SOME GIT SPECIFIC SETTINGS
 " Only do this part when compiled with support for autocommands.

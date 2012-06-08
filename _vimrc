@@ -6,6 +6,10 @@
 " TODO: check that I am using autocommands correctly
 " TODO: add execute selection (in Pylab)
 " TODO: make windows resize correctly in gvim
+" TODO: correct autocomplete
+" TODO: update autocomplete for CSS3 and HTML5
+" TODO: add python rope (autocomplete)
+" TODO: make a better status line
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 set ai                          " set auto-indenting on for programming
@@ -112,22 +116,17 @@ set hlsearch incsearch
 " TODO: make search use regular expressions by default
 set statusline=%<%F%h%m%r\ [%{&ff}]\ (%{strftime(\"%H:%M\ %d/%m/%Y\",getftime(expand(\"%:p\")))})%=%l,%c%V\ %P
 
-" BETTER AUTOCOMPLETE
-function! SuperCleverTab()
-    if strpart(getline('.'), 0, col('.') - 1) =~ '^\s*$'
-        return 
-    else
-        if &omnifunc != ''
-            return "\<C-X>\<C-O>"
-        elseif &dictionary != ''
-            return "\<C-K>"
-        else
-            return "\<C-N>"
-        endif
-    endif
-endfunction
-
-inoremap <C-space> <C-R>=SuperCleverTab()<cr>
+" AUTOCOMPLETE
+set completeopt=longest,menuone
+:inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
+  \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+inoremap <expr> <C-Space> (pumvisible() ? (col('.') > 1 ? '<Esc>i<Right>' : '<Esc>i') : '') .
+            \ '<C-x><C-o><C-r>=pumvisible() ? "\<lt>C-n>\<lt>C-p>\<lt>Down>" : ""<CR>'
+inoremap <expr> <S-Space> (pumvisible() ? (col('.') > 1 ? '<Esc>i<Right>' : '<Esc>i') : '') .
+            \ '<C-x><C-u><C-r>=pumvisible() ? "\<lt>C-n>\<lt>C-p>\<lt>Down>" : ""<CR>'
 
 " SOME GIT SPECIFIC SETTINGS
 " Only do this part when compiled with support for autocommands.

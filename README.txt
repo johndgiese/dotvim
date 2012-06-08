@@ -1,19 +1,21 @@
-Windows Installation:
+WINDOWS INSTALLATION:
+    This assumes that your vim directory is in: C:\opt\vim
 
 	git clone git://github.com/johndgiese/dotvim.git C:\opt\vim\vimfiles
 
-Create symlinks:
+Copy the _vimrc file up one directory:
 
-	mklink /h C:\opt\vim\_vimrc C:\opt\vim\vimfiles\_vimrc 
-	mklink /h C:\opt\vim\_gvimrc C:\opt\vim\vimfiles\_gvimrc 
+    copy C:\opt\vim\vimfiles\_vimrc C:\opt\vim\_vimrc
 
-Switch to the C:\opt\vim\vimfiles directory, and fetch the submodule:
-	cd C:\opt\vim\vimfiles
+For some of the utilities to work, you will need to add the vimfiles\onpath 
+directory to the windows PATH:
 
-For some of the utilities to work, you will need to have the following programs on the $PATH:
-    latex
-    bibtex
-    git
-    ctags -- the ctags.exe is in the vimfiles\extra
-    fullscreen dll -- (in extra) add to the directory where the gvim.exe is
+    setx PATH "%PATH%;C:\opt\vim\vimfiles\onpath"
 
+Note that this will only change the environment variable for the current 
+windows user, to add it to the machine path variable use:
+
+    setx PATH "%PATH%;C:\opt\vim\vimfiles\onpath" -M
+        
+Setup a directory for vim to save its undo files:
+    mkdir C:\tmp\vim

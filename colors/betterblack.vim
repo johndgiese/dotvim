@@ -52,3 +52,6 @@ hi TaglistFileName guibg=black guifg=white gui=italic
 hi TaglistTagName guibg=black guifg=#00ED45 gui=NONE
 hi TaglistTitle guibg=black guifg=red gui=NONE
 hi link TagListComment Comment
+
+" Javascript
+hi link Javascript Normal

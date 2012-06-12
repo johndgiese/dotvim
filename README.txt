@@ -18,4 +18,4 @@ windows user, to add it to the machine path variable use:
     setx PATH "%PATH%;C:\opt\vim\vimfiles\onpath" -M
         
 Setup a directory for vim to save its undo files:
-    mkdir C:\tmp\vim
+    mkdir C:\tmp\vim\undo C:\tmp\vim\swap C:\tmp\vim\backup

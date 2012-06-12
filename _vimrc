@@ -26,7 +26,7 @@ set number		            	" turn on line numbers by default
 set noignorecase
 if !exists("first_time_opened")
     let first_time_opened=1
-    set lines=50 columns=140
+    set lines=50 columns=88
 endif
 colorscheme betterblack
 set directory=C:\\tmp\\vim\\swap

@@ -29,9 +29,10 @@ if !exists("first_time_opened")
     set lines=50 columns=140
 endif
 colorscheme betterblack
-set noswapfile
-set nobackup
-set nowb
+set directory=C:\\tmp\\vim\\swap
+set backupdir=C:\\tmp\\vim\\backup
+set undofile
+set undodir=C:\\tmp\\vim\\undo
 set hidden
 if has('win32') || has('win64')
     let $DV='C:\opt\vim\vimfiles'
@@ -87,6 +88,19 @@ endif
 " CUSTOM KEYCOMMANDS
 let mapleader = ","
 
+" Move between editor lines (instead of actual lines) when holding CTRL 
+vmap <C-j> gj
+vmap <C-k> gk
+vmap <C-4> g$
+vmap <C-6> g^
+vmap <C-0> g^
+nmap <C-j> gj
+nmap <C-k> gk
+nmap <C-4> g$
+nmap <C-6> g^
+nmap <C-0> g^
+
+" Highlight whitespace with <leader>w, and remove with <leader>W
 nnoremap <leader>w :/\s\+$<CR>
 nnoremap <leader>W :%s/\s\+$//e<CR><silent>:noh<CR>
 
@@ -104,29 +118,21 @@ set spelllang=en_us " Set region to US English
 inoremap jk <ESC>
 inoremap <ESC> <nop>
 noremap <C-s> :w<CR>
-noremap <C-p> "*p<CR>
 
 " Start editing the vimrc in a new tab
 nnoremap <leader>v :e $MYVIMRC<CR>
+nnoremap <leader>o :e $DV\colors\betterblack.vim<CR>
 
 " VISUALIZATION STUFF
 " Show EOL type and last modified timestamp, right after the filename
 set numberwidth=3
 set hlsearch incsearch
+set wrap linebreak
 " TODO: make search use regular expressions by default
 set statusline=%<%F%h%m%r\ [%{&ff}]\ (%{strftime(\"%H:%M\ %d/%m/%Y\",getftime(expand(\"%:p\")))})%=%l,%c%V\ %P
 
 " AUTOCOMPLETE
 set completeopt=longest,menuone
-:inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
-  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
-  \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-inoremap <expr> <C-Space> (pumvisible() ? (col('.') > 1 ? '<Esc>i<Right>' : '<Esc>i') : '') .
-            \ '<C-x><C-o><C-r>=pumvisible() ? "\<lt>C-n>\<lt>C-p>\<lt>Down>" : ""<CR>'
-inoremap <expr> <S-Space> (pumvisible() ? (col('.') > 1 ? '<Esc>i<Right>' : '<Esc>i') : '') .
-            \ '<C-x><C-u><C-r>=pumvisible() ? "\<lt>C-n>\<lt>C-p>\<lt>Down>" : ""<CR>'
 
 " SOME GIT SPECIFIC SETTINGS
 " Only do this part when compiled with support for autocommands.

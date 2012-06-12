@@ -9,7 +9,7 @@ hi Normal guibg=black guifg=white gui=NONE
 " Coding 
 hi string guibg=NONE guifg=#FF0000 gui=NONE
 hi comment guibg=NONE guifg=#FF7300 gui=NONE
-hi number guibg=NONE guifg=#C90000 gui=NONE
+hi number guibg=NONE guifg=#C92040 gui=bold
 hi function guibg=NONE guifg=#0Fef33 gui=NONE
 hi keyword guibg=NONE guifg=#0051FF gui=NONE
 hi statement guibg=NONE guifg=#0052FF gui=NONE
@@ -52,6 +52,11 @@ hi TaglistFileName guibg=black guifg=white gui=italic
 hi TaglistTagName guibg=black guifg=#00ED45 gui=NONE
 hi TaglistTitle guibg=black guifg=red gui=NONE
 hi link TagListComment Comment
+
+" MATLAB
+hi link matlabSemicolon Normal
+hi link matlabImplicit Normal
+hi link matlabOperator Normal
 
 " Javascript
 hi link Javascript Normal

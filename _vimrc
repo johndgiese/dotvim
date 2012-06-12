@@ -40,6 +40,17 @@ else
     let $DV='~/.vim'
 endif
 
+" SUPERTAB
+let g:SuperTabLongestEnhanced = 1
+let g:SuperTabLongestHighlight = 1
+autocmd FileType *
+    \ if &omnifunc != '' |
+    \   call SuperTabChain(&omnifunc, "<c-p>") |
+    \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+    \ else |
+    \   call SuperTabSetDefaultCompletionType("context") |
+    \ endif
+
 " SESSIONS AND PROJECTS
 set sessionoptions+="sesdir"
 noremap <silent> <F2> :TlistToggle<CR>
@@ -69,7 +80,7 @@ filetype plugin on
 " WEB DEVELOPMENT
 
 " PYTHON SETTINGS
-let g:pydoc_cmd = 'python C:\Python27\Lib\pydoc.py'
+nnoremap <leader>r :!start ipython --pdb % <CR><CR>
 if !exists("autocommands_loaded")
     let autocommands_loaded=1
     " Setup Python features
@@ -119,7 +130,7 @@ inoremap jk <ESC>
 inoremap <ESC> <nop>
 noremap <C-s> :w<CR>
 
-" Start editing the vimrc in a new tab
+" Start editing the vimrc in a new buffer
 nnoremap <leader>v :e $MYVIMRC<CR>
 nnoremap <leader>o :e $DV\colors\betterblack.vim<CR>
 

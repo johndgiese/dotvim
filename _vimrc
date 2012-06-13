@@ -9,6 +9,7 @@
 " TODO: update autocomplete for CSS3 and HTML5
 " TODO: add python rope (autocomplete)
 " TODO: make a better status line
+" TODO: add "new from template" feature
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 set ai                          " set auto-indenting on for programming
@@ -39,16 +40,20 @@ else
     let $DV='~/.vim'
 endif
 
+
 " SUPERTAB
 let g:SuperTabLongestEnhanced = 1
 let g:SuperTabLongestHighlight = 1
+let g:SuperTabNoCompleteBefore = []
+let g:SuperTabNoCompleteAfter = []
+let g:SuperTabMappingForward = '<C-space>'
+let g:SuperTabMappingBackward = '<C-S-space>'
+let g:SuperTabCrMapping = 0
 autocmd FileType *
-    \ if &omnifunc != '' |
-    \   call SuperTabChain(&omnifunc, "<c-p>") |
-    \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
-    \ else |
-    \   call SuperTabSetDefaultCompletionType("context") |
-    \ endif
+\ if &omnifunc != '' |
+\ call SuperTabChain(&omnifunc, "<C-p>") |
+\ call SuperTabSetDefaultCompletionType("<C-x><C-u>") |
+\ endif
 
 " SESSIONS AND PROJECTS
 set sessionoptions+="sesdir"
@@ -102,6 +107,7 @@ let mapleader = ","
 nnoremap <A-v> <C-v>
 nnoremap <C-v> "*p<CR>
 inoremap <C-v> <ESC>"*p<CR>a
+vnoremap <C-c> "*y
 
 " Move between editor lines (instead of actual lines) when holding CTRL 
 vmap <C-j> gj

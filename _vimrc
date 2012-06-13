@@ -5,7 +5,6 @@
 " TODO: add function to start debuging file in IPython
 " TODO: check that I am using autocommands correctly
 " TODO: add execute selection (in Pylab)
-" TODO: make windows resize correctly in gvim
 " TODO: correct autocomplete
 " TODO: update autocomplete for CSS3 and HTML5
 " TODO: add python rope (autocomplete)
@@ -13,10 +12,10 @@
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 set ai                          " set auto-indenting on for programming
-set showmatch                   " automatically show matching brackets. works like it does in bbedit.
-set vb                          " turn on the "visual bell" - which is much quieter than the "audio blink"
+set showmatch                   " automatically show matching brackets
+set vb                          " turn on the "visual bell" - quieter than the "audio blink"
 set ruler                       " show the cursor position all the time
-set laststatus=2                " make the last line where the status is two lines deep so you can see status always
+set laststatus=2                
 set backspace=indent,eol,start  " make that backspace key work the way it should
 set nocompatible                " vi compatible is LAME
 set showmode                    " show the current mode
@@ -26,7 +25,7 @@ set number		            	" turn on line numbers by default
 set noignorecase
 if !exists("first_time_opened")
     let first_time_opened=1
-    set lines=50 columns=88
+    set lines=50 columns=110
 endif
 colorscheme betterblack
 set directory=C:\\tmp\\vim\\swap
@@ -57,7 +56,7 @@ noremap <silent> <F2> :TlistToggle<CR>
 let Tlist_Use_Right_Window=1
 
 " SETTINGS FOR GVIM
-set guifont=Consolas:h9
+set guifont=Consolas:h10
 set guioptions-=m 		" remove menu bar
 set guioptions-=T		" remove toolbar
 set guioptions+=LlRrb   " remove all scrollbars
@@ -99,6 +98,11 @@ endif
 " CUSTOM KEYCOMMANDS
 let mapleader = ","
 
+" Remap block-visual mode to alt-V, and set paste-from-clipboard to C-v
+nnoremap <A-v> <C-v>
+nnoremap <C-v> "*p<CR>
+inoremap <C-v> <ESC>"*p<CR>a
+
 " Move between editor lines (instead of actual lines) when holding CTRL 
 vmap <C-j> gj
 vmap <C-k> gk
@@ -117,6 +121,7 @@ nnoremap <leader>W :%s/\s\+$//e<CR><silent>:noh<CR>
 
 " Trigger file-explorer plugin Nerd tree
 noremap <silent> <F1> :NERDTreeToggle<CR>
+nnoremap <silent> <F4> :GundoToggle<CR>
 
 " Fullscreen
 noremap <F11> <ESC>:call libcallnr("gvimfullscreen.dll","ToggleFullScreen",0)<CR>

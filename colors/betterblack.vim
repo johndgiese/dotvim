@@ -32,7 +32,7 @@ hi TabLineSel guibg=#666666 guifg=white gui=NONE
 hi TabLine guibg=#333333 guifg=white gui=NONE
 hi StatusLine guibg=#333333 guifg=white gui=NONE
 hi StatusLineNC guibg=#333333 guifg=white gui=NONE
-hi IncSearch guibg=#333333 guifg=white gui=NONE
+hi IncSearch guibg=#FFFF44 gui=NONE
 hi CursorLine guibg=#252525  gui=NONE
 hi CursorColumn guibg=#252525 gui=NONE
 hi FoldColumn guibg=black guifg=white gui=NONE

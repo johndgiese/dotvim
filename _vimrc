@@ -9,7 +9,6 @@
 " TODO: update autocomplete for CSS3 and HTML5
 " TODO: add python rope (autocomplete)
 " TODO: make a better status line
-" TODO: add "new from template" feature
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 set ai                          " set auto-indenting on for programming
@@ -40,20 +39,19 @@ else
     let $DV='~/.vim'
 endif
 
-
 " SUPERTAB
 let g:SuperTabLongestEnhanced = 1
 let g:SuperTabLongestHighlight = 1
 let g:SuperTabNoCompleteBefore = []
 let g:SuperTabNoCompleteAfter = []
 let g:SuperTabMappingForward = '<C-space>'
-let g:SuperTabMappingBackward = '<C-S-space>'
-let g:SuperTabCrMapping = 0
+let g:SuperTabMappingBackward = '<S-C-space>'
+let g:SuperTabCrMapping = 1
 autocmd FileType *
-\ if &omnifunc != '' |
-\ call SuperTabChain(&omnifunc, "<C-p>") |
-\ call SuperTabSetDefaultCompletionType("<C-x><C-u>") |
-\ endif
+    \ if &omnifunc != '' |
+    \   call SuperTabChain(&omnifunc, "<c-p>") |
+    \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+    \ endif
 
 " SESSIONS AND PROJECTS
 set sessionoptions+="sesdir"
@@ -87,8 +85,6 @@ filetype plugin on
 nnoremap <leader>r :!start ipython --pdb % <CR><CR>
 if !exists("autocommands_loaded")
     let autocommands_loaded=1
-    " Setup Python features
-    "autocmd BufRead,BufNewFile,FileReadPost *.py source $DV.'\ftplugin\python.vim'
 
     " This beauty remembers where you were the last time you edited the file, and returns to the same position.
     au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
@@ -101,13 +97,23 @@ if !exists("autocommands_loaded")
 endif
 
 " CUSTOM KEYCOMMANDS
+" use comma instead of \ for leader, because it is closer
 let mapleader = ","
+map \ ,
+" switch semi-colon and colon
+nnoremap ; :
+vnoremap ; :
+nnoremap : ;
+vnoremap : ;
 
 " Remap block-visual mode to alt-V, and set paste-from-clipboard to C-v
 nnoremap <A-v> <C-v>
 nnoremap <C-v> "*p<CR>
-inoremap <C-v> <ESC>"*p<CR>a
-vnoremap <C-c> "*y
+inoremap <C-v> <ESC>"*p<CR>
+vnoremap <C-v> d"*p<CR>
+nnoremap <C-c> "*y<CR>
+inoremap <C-c> <ESC>"*y<CR>
+vnoremap <C-c> "*y<CR>
 
 " Move between editor lines (instead of actual lines) when holding CTRL 
 vmap <C-j> gj

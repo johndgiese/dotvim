@@ -73,6 +73,8 @@ filetype plugin indent on
 filetype plugin on
 
 " WEB DEVELOPMENT
+au BufRead,BufNewFile *.cls set filetype=apex
+au BufRead,BufNewFile *.page set filetype=page
 
 " PYTHON SETTINGS
 nnoremap <leader>r :!start ipython --pdb % <CR><CR>
@@ -123,6 +125,10 @@ nmap <C-0> g^
 " Highlight whitespace with <leader>w, and remove with <leader>W
 nnoremap <leader>w :/\s\+$<CR>
 nnoremap <leader>W :%s/\s\+$//e<CR><silent>:noh<CR>
+
+" Insert Data
+nnoremap <leader>t "=strftime("%H:%M")<CR>P
+nnoremap <leader>d "=strftime("%a %b %d, %Y")<CR>P
 
 " Trigger file-explorer plugin Nerd tree
 noremap <silent> <F1> :NERDTreeToggle<CR>

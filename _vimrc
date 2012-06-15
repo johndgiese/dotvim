@@ -23,6 +23,7 @@ set ts=4 sts=4 sw=4 expandtab   " default indentation settings
 syntax enable                   " turn syntax highlighting
 set number		            	" turn on line numbers by default
 set noignorecase
+set history=100                 " remember the last 100 commands
 if !exists("first_time_opened")
     let first_time_opened=1
     set lines=50 columns=110
@@ -34,6 +35,7 @@ set undofile
 set undodir=C:\\tmp\\vim\\undo
 set hidden
 if has('win32') || has('win64')
+    set guifont=Consolas:h10
     let $DV='C:\opt\vim\vimfiles'
 else
     let $DV='~/.vim'
@@ -59,7 +61,6 @@ noremap <silent> <F2> :TlistToggle<CR>
 let Tlist_Use_Right_Window=1
 
 " SETTINGS FOR GVIM
-set guifont=Consolas:h10
 set guioptions-=m 		" remove menu bar
 set guioptions-=T		" remove toolbar
 set guioptions+=LlRrb   " remove all scrollbars

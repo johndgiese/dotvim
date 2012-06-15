@@ -1,1 +1,2 @@
-cd C:\Users\David\Desktop
+@echo off
+cd %USERPROFILE%\Desktop

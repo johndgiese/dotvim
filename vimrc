@@ -29,14 +29,14 @@ if !exists("first_time_opened")
     set lines=50 columns=110
 endif
 colorscheme betterblack
-set directory=C:\\tmp\\vim\\swap
-set backupdir=C:\\tmp\\vim\\backup
+set directory=C:\\opt\\vim\\tmp\\swap
+set backupdir=C:\\opt\\vim\\tmp\\backup
 set undofile
-set undodir=C:\\tmp\\vim\\undo
+set undodir=C:\\opt\\vim\\tmp\\undo
 set hidden
 if has('win32') || has('win64')
     set guifont=Consolas:h10
-    let $DV='C:\opt\vim\vimfiles'
+    let $DV='C:\opt\vim\.vim'
 else
     let $DV='~/.vim'
 endif
@@ -83,7 +83,7 @@ if !exists("autocommands_loaded")
     au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 
     " Rerun vimrc upon editing
-    autocmd bufwritepost _vimrc source $MYVIMRC
+    autocmd bufwritepost vimrc source $DV\vimrc
 
     " update the colorscheme upon saving
     autocmd bufwritepost betterblack.vim :colorscheme betterblack
@@ -141,7 +141,7 @@ inoremap <ESC> <nop>
 noremap <C-s> :w<CR>
 
 " Start editing the vimrc in a new buffer
-nnoremap <leader>v :e $MYVIMRC<CR>
+nnoremap <leader>v :e $DV\vimrc<CR>
 nnoremap <leader>o :e $DV\colors\betterblack.vim<CR>
 
 " VISUALIZATION STUFF

@@ -26,3 +26,7 @@
 	path = bundle/surround
 	url = https://github.com/tpope/vim-surround.git
     ignore = dirty
+[submodule "bundle/nerdtree"]
+	path = bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
+    ignore = dirty

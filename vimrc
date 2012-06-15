@@ -60,14 +60,6 @@ set sessionoptions+="sesdir"
 noremap <silent> <F2> :TlistToggle<CR>
 let Tlist_Use_Right_Window=1
 
-" SETTINGS FOR GVIM
-set guioptions-=m 		" remove menu bar
-set guioptions-=T		" remove toolbar
-set guioptions+=LlRrb   " remove all scrollbars
-set guioptions-=LlRrb
-set guioptions-=e
-set noscrollbind
-
 " show syntax highlighting groups for word under cursor
 nnoremap <C-S-p> :call <SID>SynStack()<CR>
 function! <SID>SynStack()

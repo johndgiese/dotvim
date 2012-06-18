@@ -34,3 +34,6 @@
 	path = bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
     ignore = dirty
+[submodule "bundle/tabular"]
+	path = bundle/tabular
+	url = https://github.com/godlygeek/tabular.git

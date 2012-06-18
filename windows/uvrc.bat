@@ -12,8 +12,8 @@ if not exist C:\opt\vim\tmp\swap mkdir C:\opt\vim\tmp\swap
 if not exist C:\opt\vim\tmp\session mkdir C:\opt\vim\tmp\session
 
 :: pull changes from git
-git pull
+call git pull
 
 :: setup submodules
-git submodule init
-git submodule update
+call git submodule init
+call git submodule update

@@ -49,3 +49,4 @@
 [submodule "bundle\\bufexplorer"]
 	path = bundle\\bufexplorer
 	url = https://github.com/corntrace/bufexplorer.git
+    ignore = dirty

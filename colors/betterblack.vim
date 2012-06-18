@@ -7,12 +7,13 @@ let g:colors_name = "betterblack"
 
 hi Normal guibg=#000000 guifg=#FFFFFF gui=NONE
 " Coding 
-hi string guibg=NONE guifg=#FF0000 gui=NONE
-hi comment guibg=NONE guifg=#FF7300 gui=NONE
-hi number guibg=NONE guifg=#C92040 gui=bold
-hi function guibg=NONE guifg=#0Fef33 gui=NONE
-hi keyword guibg=NONE guifg=#0051FF gui=NONE
-hi statement guibg=NONE guifg=#0052FF gui=NONE
+hi String guibg=NONE guifg=#FF0000 gui=NONE
+hi Comment guibg=NONE guifg=#FF7300 gui=NONE
+hi Number guibg=NONE guifg=#C92040 gui=bold
+hi Function guibg=NONE guifg=#0Fef33 gui=NONE
+hi Keyword guibg=NONE guifg=#0051FF gui=NONE
+hi Statement guibg=NONE guifg=#0052FF gui=NONE
+hi Identifier guibg=NONE guifg=#00ED45 gui=NONE
 hi Type guibg=NONE guifg=#0052FF gui=NONE
 hi Todo guibg=#151515 guifg=#FF7300 gui=bold
 hi Title guibg=#000000 guifg=#FFFFFF gui=bold
@@ -32,7 +33,8 @@ hi TabLineSel guibg=#666666 guifg=#FFFFFF gui=NONE
 hi TabLine guibg=#333333 guifg=#FFFFFF gui=NONE
 hi StatusLine guibg=#333333 guifg=#FFFFFF gui=NONE
 hi StatusLineNC guibg=#333333 guifg=#FFFFFF gui=NONE
-hi IncSearch guibg=#FFFF44 guifg=#FFFFFF gui=NONE
+hi Search guibg=#FFFF22 guifg=#000000 gui=NONE
+hi IncSearch guibg=#CCCCFF guifg=#000000 gui=NONE
 hi CursorLine guibg=#252525  gui=NONE
 hi CursorColumn guibg=#252525 gui=NONE
 hi FoldColumn guibg=#000000 guifg=#FFFFFF gui=NONE
@@ -60,3 +62,12 @@ hi link matlabOperator Normal
 
 " Javascript
 hi link Javascript Normal
+
+" PHP
+hi link phpRegion Normal
+hi link Delimiter Normal
+hi link None String
+hi link phpStringSingle String
+hi link phpStringDouble String
+hi phpVarSelector guibg=NONE guifg=#00EF50 gui=NONE
+hi phpIdentifier guibg=NONE guifg=#00EF50 gui=NONE

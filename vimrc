@@ -138,7 +138,7 @@ nnoremap <leader>W :%s/\s\+$//e<CR><silent>:noh<CR>
 " Insert Data
 nnoremap <leader>t "=strftime(" %I:%M %p")<CR>p
 " capitalize the line, insert time at the end, and start a new line
-nnoremap <leader>T gUU$"=strftime(" (%I:%M %p)")<CR>po
+nnoremap <leader>T 0i# <ESC>gUU$"=strftime(" (%I:%M %p)")<CR>po
 nnoremap <leader>d "=strftime("%a %b %d, %Y")<CR>p
 
 " Trigger file-explorer plugin Nerd tree
@@ -158,6 +158,7 @@ set spelllang=en_us " Set region to US English
 
 " Better <ESC> (to go back to normal mode from insert mode)
 inoremap jk <ESC>
+inoremap kj <ESC>
 inoremap <ESC> <nop>
 noremap <C-s> :w<CR>
 

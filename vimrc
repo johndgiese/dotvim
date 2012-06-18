@@ -1,16 +1,16 @@
+" TODO: add jslint and csslint
 " TODO: add smart commenting
 " TODO: add reference for HTML, CSS
-" TODO: add python completion
 " TODO: add pydoc
 " TODO: add function to start debuging file in IPython
 " TODO: check that I am using autocommands correctly
 " TODO: add execute selection (in Pylab)
-" TODO: correct autocomplete
 " TODO: update autocomplete for CSS3 and HTML5
 " TODO: add python rope (autocomplete)
 " TODO: make a better status line
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
+let mapleader = ","
 set ai                          " set auto-indenting on for programming
 set showmatch                   " automatically show matching brackets
 set vb                          " turn on the "visual bell" - quieter than the "audio blink"
@@ -56,9 +56,13 @@ autocmd FileType *
     \ endif
 
 " SESSIONS AND PROJECTS
-set sessionoptions+="sesdir"
+let g:session_directory = expand($VIM) . "\\tmp\\session"
 noremap <silent> <F2> :TlistToggle<CR>
 let Tlist_Use_Right_Window=1
+let g:session_autosave = 'no'
+let g:session_autoload = 'no'
+" bufexplorer plugin
+let g:bufExplorerDefaultHelp=0
 
 " show syntax highlighting groups for word under cursor
 nnoremap <C-S-p> :call <SID>SynStack()<CR>
@@ -75,6 +79,12 @@ filetype plugin on
 " WEB DEVELOPMENT
 au BufRead,BufNewFile *.cls set filetype=apex
 au BufRead,BufNewFile *.page set filetype=page
+au BufRead,BufNewFile *.json set filetype=javascript
+function! GoogleSearch()
+    let searchterm = getreg("g")
+    silent! exec "silent! !chrome \"http://google.com/search?q=" . searchterm . "\" &"
+endfunction
+vnoremap <leader>g "gy<Esc>:call GoogleSearch()<CR>
 
 " PYTHON SETTINGS
 nnoremap <leader>r :!start ipython --pdb % <CR><CR>
@@ -93,7 +103,6 @@ endif
 
 " CUSTOM KEYCOMMANDS
 " use comma instead of \ for leader, because it is closer
-let mapleader = ","
 map \ ,
 " switch semi-colon and colon
 nnoremap ; :
@@ -127,12 +136,18 @@ nnoremap <leader>w :/\s\+$<CR>
 nnoremap <leader>W :%s/\s\+$//e<CR><silent>:noh<CR>
 
 " Insert Data
-nnoremap <leader>t "=strftime("%H:%M")<CR>P
-nnoremap <leader>d "=strftime("%a %b %d, %Y")<CR>P
+nnoremap <leader>t "=strftime(" %I:%M %p")<CR>p
+" capitalize the line, insert time at the end, and start a new line
+nnoremap <leader>T gUU$"=strftime(" (%I:%M %p)")<CR>po
+nnoremap <leader>d "=strftime("%a %b %d, %Y")<CR>p
 
 " Trigger file-explorer plugin Nerd tree
 noremap <silent> <F1> :NERDTreeToggle<CR>
+
+" Gundo plugin
 nnoremap <silent> <F4> :GundoToggle<CR>
+let g:gundo_right = 1
+let g:gundo_help  = 0
 
 " Fullscreen
 noremap <F11> <ESC>:call libcallnr("gvimfullscreen.dll","ToggleFullScreen",0)<CR>

@@ -19,7 +19,7 @@ set laststatus=2
 set backspace=indent,eol,start  " make that backspace key work the way it should
 set nocompatible                " vi compatible is LAME
 set showmode                    " show the current mode
-set ts=4 sts=4 sw=4 expandtab   " default indentation settings
+" set ts=4 sts=4 sw=4 expandtab   " default indentation settings
 syntax enable                   " turn syntax highlighting
 set number		            	" turn on line numbers by default
 set noignorecase
@@ -138,7 +138,7 @@ nnoremap <leader>W :%s/\s\+$//e<CR><silent>:noh<CR>
 " Insert Data
 nnoremap <leader>t "=strftime(" %I:%M %p")<CR>p
 " capitalize the line, insert time at the end, and start a new line
-nnoremap <leader>T 0i# <ESC>gUU$"=strftime(" (%I:%M %p)")<CR>po
+nnoremap <leader>T 0i## <ESC>gUU$"=strftime(" (%I:%M %p)")<CR>po
 nnoremap <leader>d "=strftime("%a %b %d, %Y")<CR>p
 
 " Trigger file-explorer plugin Nerd tree

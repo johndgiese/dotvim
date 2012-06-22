@@ -55,6 +55,9 @@ hi TaglistTagName guibg=#000000 guifg=#00ED45 gui=NONE
 hi TaglistTitle guibg=#000000 guifg=#FF0000 gui=NONE
 hi link TagListComment Comment
 
+" TagBar
+hi TagbarHighlight guibg=#333333 guifg=NONE gui=bold 
+
 " MATLAB
 hi link matlabSemicolon Normal
 hi link matlabImplicit Normal

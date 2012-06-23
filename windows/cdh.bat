@@ -1,2 +1,2 @@
 @echo off
-cd %USERPROFILE%\Desktop
+cd %USERPROFILE%\Dropbox

@@ -19,15 +19,11 @@ set laststatus=2
 set backspace=indent,eol,start  " make that backspace key work the way it should
 set nocompatible                " vi compatible is LAME
 set showmode                    " show the current mode
-" set ts=4 sts=4 sw=4 expandtab   " default indentation settings
+set ts=4 sts=4 sw=4 expandtab   " default indentation settings
 syntax enable                   " turn syntax highlighting
 set number		            	" turn on line numbers by default
 set noignorecase
 set history=100                 " remember the last 100 commands
-if !exists("first_time_opened")
-    let first_time_opened=1
-    set lines=50 columns=110
-endif
 colorscheme betterblack
 set directory=C:\\opt\\vim\\tmp\\swap
 set backupdir=C:\\opt\\vim\\tmp\\backup
@@ -56,13 +52,24 @@ autocmd FileType *
     \ endif
 
 " SESSIONS AND PROJECTS
-let g:session_directory = expand($VIM) . "\\tmp\\session"
-noremap <silent> <F2> :TlistToggle<CR>
+" Trigger file-explorer plugin Nerd tree
+noremap <silent> <F1> :NERDTreeToggle<CR>
+noremap <silent> <S-F2> :TlistToggle<CR>
+noremap <silent> <F2> :TagbarToggle<CR>
+noremap <silent> <F3> :BufExplorer<CR>
 let Tlist_Use_Right_Window=1
 let g:session_autosave = 'no'
 let g:session_autoload = 'no'
+let g:session_directory = expand($VIM) . "\\tmp\\session"
+" Gundo plugin
+nnoremap <silent> <F4> :GundoToggle<CR>
+let g:gundo_right = 1
+let g:gundo_help  = 0
 " bufexplorer plugin
 let g:bufExplorerDefaultHelp=0
+" Fullscreen
+noremap <F11> <ESC>:call libcallnr("gvimfullscreen.dll","ToggleFullScreen",0)<CR>
+
 
 " show syntax highlighting groups for word under cursor
 nnoremap <C-S-p> :call <SID>SynStack()<CR>
@@ -90,6 +97,8 @@ vnoremap <leader>g "gy<Esc>:call GoogleSearch()<CR>
 nnoremap <leader>r :!start ipython --pdb % <CR><CR>
 if !exists("autocommands_loaded")
     let autocommands_loaded=1
+" disable pylint warnings
+let g:PyLintDissabledMessages = 'C0103,C0111,C0301,W0141,W0142,W0212,W0221,W0223,W0232,W0401,W0613,W0631,E1101,E1120,R0903,R0904,R0913'
 
     " This beauty remembers where you were the last time you edited the file, and returns to the same position.
     au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
@@ -137,20 +146,9 @@ nnoremap <leader>W :%s/\s\+$//e<CR><silent>:noh<CR>
 
 " Insert Data
 nnoremap <leader>t "=strftime(" %I:%M %p")<CR>p
-" capitalize the line, insert time at the end, and start a new line
-nnoremap <leader>T 0i## <ESC>gUU$"=strftime(" (%I:%M %p)")<CR>po
-nnoremap <leader>d "=strftime("%a %b %d, %Y")<CR>p
-
-" Trigger file-explorer plugin Nerd tree
-noremap <silent> <F1> :NERDTreeToggle<CR>
-
-" Gundo plugin
-nnoremap <silent> <F4> :GundoToggle<CR>
-let g:gundo_right = 1
-let g:gundo_help  = 0
-
-" Fullscreen
-noremap <F11> <ESC>:call libcallnr("gvimfullscreen.dll","ToggleFullScreen",0)<CR>
+nnoremap <leader>T 0i## <ESC>gUU$"=strftime(" (%I:%M %p)")<CR>po<ESC>xxi
+nnoremap <leader>d "=strftime("%a %b %d, %Y")<CR>
+nnoremap <leader>D 0i# <ESC>"=strftime("%a %b %d, %Y (%I:%M %p)")<CR>po<ESC>xxi
 
 " Toggle spell checking on and off with `,s`
 nnoremap <silent> <leader>s :set spell!<CR>

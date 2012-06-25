@@ -58,6 +58,9 @@ hi link TagListComment Comment
 " TagBar
 hi TagbarHighlight guibg=#333333 guifg=NONE gui=bold 
 
+" Python
+hi link PythonEscape String
+
 " MATLAB
 hi link matlabSemicolon Normal
 hi link matlabImplicit Normal

@@ -98,7 +98,6 @@ nnoremap <leader>r :!start ipython --pdb % <CR><CR>
 if !exists("autocommands_loaded")
     let autocommands_loaded=1
 " disable pylint warnings
-let g:PyLintDissabledMessages = 'C0103,C0111,C0301,W0141,W0142,W0212,W0221,W0223,W0232,W0401,W0613,W0631,E1101,E1120,R0903,R0904,R0913'
 
     " This beauty remembers where you were the last time you edited the file, and returns to the same position.
     au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif

@@ -93,15 +93,6 @@ function! GoogleSearch()
 endfunction
 vnoremap <leader>g "gy<Esc>:call GoogleSearch()<CR>
 
-" PYTHON SETTINGS
-let g:ipy_perform_mappings=1
-noremap <silent> <F5> :w<CR>:python run_this_file()<CR>
-noremap <silent> K :py get_doc_buffer()<CR>
-noremap <silent> <F9> :python run_these_lines()<CR>
-noremap <silent> <F12> :!start cmd /c "ipython qtconsole"<CR>:sleep 2<CR>:IPython<CR>:py if update_subchannel_msgs(force=True): echo("vim-ipython shell updated",'Operator')<CR><C-w><S-H><C-w><c-w>:setlocal nonumber<CR>:15 new <CR><c-w>r:setlocal nohlsearch nonumber<CR>
-inoremap <silent> <S-CR> <ESC>V?^\n<CR>:python run_these_lines()<CR>Go<ESC>o
-nnoremap <silent> <S-CR> /^\n<CR>V?^\n<CR>:python run_these_lines()<CR>:noh<CR>
-nnoremap <silent> <C-CR> :nohlsearch<CR>/^##<CR>kV?^##<CR>:python run_these_lines()<CR>:set hlsearch<CR>:noh<CR>
 if !exists("autocommands_loaded")
     let autocommands_loaded=1
 

@@ -84,9 +84,16 @@ filetype plugin indent on
 filetype plugin on
 
 " WEB DEVELOPMENT
+" better html/javascript syntax/indenting (see javascript plugin)
+let g:html_indent_inctags = "html,body,head,tbody"
+let g:html_indent_script1 = "inc"
+let g:html_indent_style1 = "inc"
+" Some salesforce stuff
 au BufRead,BufNewFile *.cls set filetype=apex
 au BufRead,BufNewFile *.page set filetype=page
 au BufRead,BufNewFile *.json set filetype=javascript
+
+" Add google searching capability
 function! GoogleSearch()
     let searchterm = getreg("g")
     silent! exec "silent! !chrome \"http://google.com/search?q=" . searchterm . "\" &"

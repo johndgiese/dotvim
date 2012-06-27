@@ -141,7 +141,7 @@ nnoremap <leader>w :/\s\+$<CR>
 nnoremap <leader>W :%s/\s\+$//e<CR><silent>:noh<CR>
 
 " Insert Data
-nnoremap <leader>t "=strftime(" %I:%M %p")<CR>p
+nnoremap <leader>t "=strftime(" (%I:%M %p)")<CR>p
 nnoremap <leader>T 0i## <ESC>gUU$"=strftime(" (%I:%M %p)")<CR>po<ESC>xxi
 nnoremap <leader>d "=strftime("%a %b %d, %Y")<CR>
 nnoremap <leader>D 0i# <ESC>"=strftime("%a %b %d, %Y (%I:%M %p)")<CR>po<ESC>xxi

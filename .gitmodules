@@ -54,3 +54,6 @@
 	path = bundle/tagbar
 	url = https://github.com/majutsushi/tagbar.git
     ignore = dirty
+[submodule "bundle/javascript"]
+	path = bundle/javascript
+	url = https://github.com/pangloss/vim-javascript.git

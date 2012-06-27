@@ -19,7 +19,7 @@ hi Todo guibg=#151515 guifg=#FF7300 gui=bold
 hi Title guibg=#000000 guifg=#FFFFFF gui=bold
 
 " VIM gui 
-hi LineNr guibg=#111111 guifg=#FFFFFF gui=NONE
+hi LineNr guibg=#333333 guifg=#FFFFFF gui=NONE
 hi NonText guibg=#000000 guifg=#333333 gui=NONE
 hi PMenu guibg=#252525 guifg=#FFFFFF gui=NONE
 hi PMenuSelect guibg=#151515 guifg=#FFFFFF gui=NONE

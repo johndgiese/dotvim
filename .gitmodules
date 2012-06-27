@@ -6,10 +6,6 @@
 	path = bundle/autoclose
 	url = https://github.com/Townk/vim-autoclose.git
 	ignore = dirty
-[submodule "bundle/ipython"]
-	path = bundle/ipython
-	url = https://github.com/ivanov/vim-ipython.git
-	ignore = dirty
 [submodule "bundle/gundo"]
 	path = bundle/gundo
 	url = https://github.com/sjl/gundo.vim.git

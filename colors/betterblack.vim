@@ -19,7 +19,7 @@ hi Todo guibg=#151515 guifg=#FF7300 gui=bold
 hi Title guibg=#000000 guifg=#FFFFFF gui=bold
 
 " VIM gui 
-hi LineNr guibg=#333333 guifg=#FFFFFF gui=NONE
+hi LineNr guibg=#222222 guifg=#FFFFFF gui=NONE
 hi NonText guibg=#000000 guifg=#333333 gui=NONE
 hi PMenu guibg=#252525 guifg=#FFFFFF gui=NONE
 hi PMenuSelect guibg=#151515 guifg=#FFFFFF gui=NONE
@@ -30,15 +30,15 @@ hi PMenuThumb guibg=#000000 guifg=#EEFFAA gui=NONE
 hi MatchParen guibg=#555555 guifg=#FFFFFF gui=NONE
 hi TabLineFill guibg=#000000 guifg=#FFFFFF gui=NONE
 hi TabLineSel guibg=#666666 guifg=#FFFFFF gui=NONE
-hi TabLine guibg=#333333 guifg=#FFFFFF gui=NONE
-hi StatusLine guibg=#333333 guifg=#FFFFFF gui=NONE
-hi StatusLineNC guibg=#333333 guifg=#FFFFFF gui=NONE
+hi TabLine guibg=#222222 guifg=#FFFFFF gui=NONE
+hi StatusLine guibg=#222222 guifg=#FFFFFF gui=NONE
+hi StatusLineNC guibg=#222222 guifg=#FFFFFF gui=NONE
 hi Search guibg=#FFFF22 guifg=#000000 gui=NONE
 hi IncSearch guibg=#CCCCFF guifg=#000000 gui=NONE
 hi CursorLine guibg=#252525  gui=NONE
 hi CursorColumn guibg=#252525 gui=NONE
 hi FoldColumn guibg=#000000 guifg=#FFFFFF gui=NONE
-hi Visual guibg=#333333 gui=NONE
+hi Visual guibg=#222222 gui=NONE
 
 " NERDTree
 hi NERDTreeDir guibg=#000000 guifg=#0052FF gui=NONE

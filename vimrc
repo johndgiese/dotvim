@@ -26,6 +26,7 @@ set noignorecase
 set history=100                 " remember the last 100 commands
 colorscheme betterblack
 set directory=C:\\opt\\vim\\tmp\\swap
+set noswapfile
 set backupdir=C:\\opt\\vim\\tmp\\backup
 set undofile
 set undodir=C:\\opt\\vim\\tmp\\undo
@@ -167,7 +168,6 @@ set spelllang=en_us " Set region to US English
 
 " Better <ESC> (to go back to normal mode from insert mode)
 inoremap jk <ESC>
-inoremap kj <ESC>
 inoremap <ESC> <nop>
 noremap <C-s> :w<CR>
 
@@ -178,7 +178,7 @@ nnoremap <leader>o :e $DV\colors\betterblack.vim<CR>
 " VISUALIZATION STUFF
 " Show EOL type and last modified timestamp, right after the filename
 set numberwidth=3
-set hlsearch incsearch
+set incsearch
 set wrap linebreak
 " TODO: make search use regular expressions by default
 set statusline=%<%F%h%m%r\ [%{&ff}]\ (%{strftime(\"%H:%M\ %d/%m/%Y\",getftime(expand(\"%:p\")))})%=%l,%c%V\ %P

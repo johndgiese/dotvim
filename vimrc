@@ -136,6 +136,14 @@ nmap <C-4> g$
 nmap <C-6> g^
 nmap <C-0> g^
 
+" buffer switching
+inoremap <C-tab> <ESC>:bn<CR>
+inoremap <C-S-tab> <ESC>:bp<CR>
+nnoremap <C-tab> :bn<CR>
+nnoremap <C-S-tab> :bp<CR>
+vnoremap <C-tab> <ESC>:bn<CR>
+vnoremap <C-S-tab> <ESC>:bp<CR>
+
 " Highlight whitespace with <leader>w, and remove with <leader>W
 nnoremap <leader>w :/\s\+$<CR>
 nnoremap <leader>W :%s/\s\+$//e<CR><silent>:noh<CR>

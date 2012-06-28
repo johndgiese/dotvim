@@ -202,42 +202,29 @@ def get_doc_msg(msg_id):
     return b
 
 def get_doc_buffer(level=0):
-    global open_docbuffer
     # empty string in case vim.eval return None
     word = vim.eval('expand("<cfile>")') or ''
-    if open_docbuffer:
-        vim.command("try | bd " + open_docbuffer + " | endtry")
-        open_docbuffer = None
-        echo('closed the doc window')
-        return
 
     doc = get_doc(word)
     if len(doc) ==0:
         echo(repr(word)+" not found","Error")
         return
     # documentation buffer name is same as the query made to ipython
-    vim.command('new ' + word)
-    vim.command('setlocal modifiable noro')
+    vim.command('new pyhelp')
+    vim.command('setlocal nonumber modifiable noro')
     # doc window quick quit keys: 'q' and 'escape'
     vim.command('noremap <buffer> q :q<CR>')
     # Known issue: to enable the use of arrow keys inside the terminal when
     # viewing the documentation, comment out the next line
     vim.command('map <buffer> <Esc> :q<CR>')
+    vim.command('noremap <buffer> <silent> K :q<CR>')
     # and uncomment this line (which will work if you have a timoutlen set)
-    #vim.command('map <buffer> <Esc><Esc> :q<CR>')
     b = vim.current.buffer
-    open_docbuffer = word
 
     b[:] = None
     b[:] = doc
     vim.command('setlocal nomodified bufhidden=wipe')
-    #vim.command('setlocal previewwindow nomodifiable nomodified ro')
-    #vim.command('set previewheight=%d'%len(b))# go to previous window
     vim.command('resize %d'% 20)
-    #vim.command('pcl')
-    #vim.command('pedit doc')
-    #vim.command('normal ') # go to previous window
-    # use the ReST formatting that ships with stock vim
     vim.command('setlocal syntax=rst')
 
 def vim_ipython_is_open():
@@ -291,7 +278,7 @@ def update_subchannel_msgs(debug=False, force=False):
             vim.command("wincmd P") #switch to preview window
             # subchannel window quick quit key 'q'
             vim.command('noremap <buffer> q :q<CR>')
-            vim.command("set bufhidden=hide buftype=nofile ft=python noswf nonumber")
+            vim.command("setlocal bufhidden=hide buftype=nofile ft=python noswf nonumber showbreak=\ \ \ ")
             # make shift-enter and control-enter in insert mode behave same as in ipython notebook
             # shift-enter send the current line, control-enter send the line
             # but keeps it around for further editing.
@@ -303,20 +290,13 @@ def update_subchannel_msgs(debug=False, force=False):
             vim.command("noremap <buffer>  :IPythonInterrupt<cr>")
     
     #syntax highlighting for python prompt
-    # QtConsole In[] is blue, but I prefer the oldschool green
-    # since it makes the vim-ipython 'shell' look like the holidays!
-    #vim.command("hi Blue ctermfg=Blue guifg=Blue")
     vim.command("hi Green ctermfg=Green guifg=#00ED45")
     vim.command("hi Red ctermfg=Red guifg=Red")
-    vim.command("syn keyword Green 'In\ []:'")
-    vim.command("syn match Green /^In \[[0-9]*\]\:/")
     vim.command("syn match Green /^>>/")
     vim.command("syn match Red /^<</")
-    vim.command("syn match Red /^Out\[[0-9]*\]\:/")
     b = vim.current.buffer
     update_occured = False
     for m in msgs:
-        #db.append(str(m).splitlines())
         s = ''
         if 'msg_type' not in m['header']:
             # debug information
@@ -326,39 +306,39 @@ def update_subchannel_msgs(debug=False, force=False):
         elif m['header']['msg_type'] == 'status':
             continue
         elif m['header']['msg_type'] == 'stream':
-            s = strip_color_escapes(m['content']['data'])
-        elif m['header']['msg_type'] == 'pyout':
-            s = "<< " 
-            s += sub(r'\n','\n   ', m['content']['data']['text/plain'])
-        elif m['header']['msg_type'] == 'pyin':
-            # TODO: the next line allows us to resend a line to ipython if
-            # %doctest_mode is on. In the future, IPython will send the
-            # execution_count on subchannel, so this will need to be updated
-            # once that happens
-            if 'execution_count' in m['content']:
-                s = "In [%d]: "% m['content']['execution_count']
+            tempstr = strip_color_escapes(m['content']['data'])
+            if tempstr.endswith('##done\n'):
+                s = '>> '
             else:
-                s = ">> "
-            s += sub(r'\n','\n   ', m['content']['code'].strip())
+                s = '<< ' + tempstr
+        elif m['header']['msg_type'] == 'pyout':
+            s = '<< ' + m['content']['data']['text/plain']
+        elif m['header']['msg_type'] == 'pyin':
+            # remove last input line
+            if b[-1] in ['>> ','>>'] and len(b) > 1:
+                del b[-1]
+            s = ">> " + m['content']['code'].strip()
+            if s.endswith("\nprint('##done')"):
+                s = s[0:-16]
         elif m['header']['msg_type'] == 'pyerr':
             c = m['content']
-            s = "<< " + "\n ".join(map(strip_color_escapes,c['traceback']))
+            s = "<< " + "\n".join(map(strip_color_escapes,c['traceback']))
             s += c['ename'] + ": " + c['evalue']
+            # add prompt after an error occurs
+            s += ">> "
+            
         if s.find('\n') == -1:
             # somewhat ugly unicode workaround from 
             # http://vim.1045645.n5.nabble.com/Limitations-of-vim-python-interface-with-respect-to-character-encodings-td1223881.html
             if isinstance(s,unicode):
                 s=s.encode(vim_encoding)
-            b.append(s)
+            b.append(sub(r'\n',r'\n   ',s))
         else:
             try:
-                b.append(s.splitlines())
+                b.append(sub(r'\n',r'\n   ',s).splitlines())
             except:
-                b.append([l.encode(vim_encoding) for l in s.splitlines()])
+                b.append([l.encode(vim_encoding) for l in sub(r'\n',r'\n   ',s).splitlines()])
         update_occured = True
-    # make a newline so we can just start typing there
-    if b[-1] != '':
-        b.append([''])
     vim.command('normal G') # go to the end of the file
     if not startedin_vimipython:
         vim.command('normal p') # go back to where you were
@@ -402,38 +382,26 @@ def with_subchannel(f,*args):
 
 @with_subchannel
 def run_this_file():
-    msg_id = send('run %s %s' % (run_flags, repr(vim.current.buffer.name),))
-    print_prompt("run %s %s" % (run_flags, repr(vim.current.buffer.name)),msg_id)
+    msg_id = send("get_ipython().magic(u'run %s %s')\nprint('##done')" % (run_flags, repr(vim.current.buffer.name)[1:-1]))
 
 @with_subchannel
 def run_this_line():
-    msg_id = send(vim.current.line)
-    print_prompt(vim.current.line, msg_id)
+    if vim.current.line != '':
+        msg_id = send(vim.current.line + "\nprint('##done')")
 
 @with_subchannel
 def run_command(cmd):
     msg_id = send(cmd)
-    print_prompt(cmd, msg_id)
 
 @with_subchannel
 def run_these_lines():
     r = vim.current.range
     lines = "\n".join(vim.current.buffer[r.start:r.end+1])
-    msg_id = send(lines)
-    #alternative way of doing this in more recent versions of ipython
-    #but %paste only works on the local machine
-    #vim.command("\"*yy")
-    #send("'%paste')")
-    #reselect the previously highlighted block
+    msg_id = send(lines + "\nprint('##done')")
+    # reselect the previously highlighted block
     vim.command("normal gv")
     if not reselect:
         vim.command("normal ")
-
-    #vim lines start with 1
-    #print "lines %d-%d sent to ipython"% (r.start+1,r.end+1)
-    prompt = "lines %d-%d "% (r.start+1,r.end+1)
-    print_prompt(prompt,msg_id)
-
 
 def set_pid():
     """
@@ -441,7 +409,7 @@ def set_pid():
     """
     global km, pid
     lines = '\n'.join(['import os', '_pid = os.getpid()'])
-    msg_id = send(lines, silent=True, user_variables=['_pid'])
+    msg_id = send(lines + "\nprint('##done')", silent=True, user_variables=['_pid'])
 
     # wait to get message back from kernel
     try:
@@ -492,38 +460,10 @@ def dedent_run_these_lines():
     run_these_lines()
     vim.command("silent undo")
     
-#def set_this_line():
-#    # not sure if there's a way to do this, since we have multiple clients
-#    send("get_ipython().shell.set_next_input(\'%s\')" % vim.current.line.replace("\'","\\\'"))
-#    #print "line \'%s\' set at ipython prompt"% vim.current.line
-#    echo("line \'%s\' set at ipython prompt"% vim.current.line,'Statement')
-
-
 def toggle_reselect():
     global reselect
     reselect=not reselect
     print "F9 will%sreselect lines after sending to ipython"% (reselect and " " or " not ")
-
-#def set_breakpoint():
-#    send("__IP.InteractiveTB.pdb.set_break('%s',%d)" % (vim.current.buffer.name,
-#                                                        vim.current.window.cursor[0]))
-#    print "set breakpoint in %s:%d"% (vim.current.buffer.name, 
-#                                      vim.current.window.cursor[0])
-#    
-#def clear_breakpoint():
-#    send("__IP.InteractiveTB.pdb.clear_break('%s',%d)" % (vim.current.buffer.name,
-#                                                          vim.current.window.cursor[0]))
-#    print "clearing breakpoint in %s:%d" % (vim.current.buffer.name,
-#                                            vim.current.window.cursor[0])
-#
-#def clear_all_breakpoints():
-#    send("__IP.InteractiveTB.pdb.clear_all_breaks()");
-#    print "clearing all breakpoints"
-#
-#def run_this_file_pdb():
-#    send(' __IP.InteractiveTB.pdb.run(\'execfile("%s")\')' % (vim.current.buffer.name,))
-#    #send('run -d %s' % (vim.current.buffer.name,))
-#    echo("In[]: run -d %s (using pdb)" % vim.current.buffer.name)
 
 EOF
 
@@ -564,56 +504,21 @@ au CursorHold *.*,vim-ipython :python if update_subchannel_msgs(): echo("vim-ipy
 " Same as above, but on regaining window focus (mostly for GUIs)
 au FocusGained *.*,vim-ipython :python if update_subchannel_msgs(): echo("vim-ipython shell updated (on input focus)",'Operator')
 
-" Update vim-ipython buffer when we move the cursor there. A message is only
-" displayed if vim-ipython buffer has been updated.
-au BufEnter vim-ipython :python if update_subchannel_msgs(): echo("vim-ipython shell updated (on buffer enter)",'Operator')
+" Move cursor to and start editing
+au WinEnter *.*,vim-ipython :normal G | :normal A
 
-if g:ipy_perform_mappings != 0
-    noremap <silent> <F5> :w<CR>:python run_this_file()<CR>
-    noremap <silent> K :py get_doc_buffer()<CR>
-    vnoremap <silent> <F9> :py run_these_lines()<CR>
-    nnoremap <silent> <F9> :py run_this_line()<CR>j
-    inoremap <silent> <F9> :py run_this_line()<CR>j
-    noremap <silent> <F12> :cd %:p:h<CR> :!start /min ipython qtconsole<CR>:sleep 2<CR>:IPython<CR>:py if update_subchannel_msgs(force=True): echo("vim-ipython shell updated",'Operator')<CR><C-w><S-H><C-w><c-w>:setlocal nonumber<CR>
-    noremap <silent> <S-F12> :b vim-ipython<CR>ggdG<CR>:2bp<CR>
-    inoremap <silent> <S-CR> <ESC>:set nohlsearch<CR>V?^\n<CR>:python run_these_lines()<CR>:let @/ = ""<CR>:set hlsearch<CR>Go<ESC>o
-    nnoremap <silent> <S-CR> :set nohlsearch<CR>/^\n<CR>V?^\n<CR>:python run_these_lines()<CR>:let @/ = ""<CR>:set hlsearch<CR>j
-    nnoremap <silent> <C-CR> :set nohlsearch<CR>/^##\\|\%$<CR>:let @/ = ""<CR>kV?^##\\|\%^<CR>:python run_these_lines()<CR>:let @/ = ""<CR>:set hlsearch<CR>
-    " same as above, except moves to the next cell
-    nnoremap <silent> <C-S-CR> :set nohlsearch<CR>/^##\\|\%$<CR>:let @/ = ""<CR>kV?^##\\|\%^<CR>:python run_these_lines()<CR>N:let @/ = ""<CR>:set hlsearch<CR>
+noremap <buffer> <silent> <F5> :w<CR>:python run_this_file()<CR>
+noremap <buffer> <silent> K :py get_doc_buffer()<CR>
+vnoremap <buffer> <silent> <F9> :py run_these_lines()<CR>
+nnoremap <buffer> <silent> <F9> :py run_this_line()<CR>j
+noremap <buffer> <silent> <F12> :drop vim-ipython<CR>
+noremap <buffer> <silent> <C-F12> :cd %:p:h<CR> :!start /min ipython qtconsole<CR>:sleep 2<CR>:IPython<CR>:py if update_subchannel_msgs(force=True): echo("vim-ipython shell updated",'Operator')<CR><C-w><S-H><C-w><c-w>:setlocal nonumber<CR>
+inoremap <buffer> <silent> <S-CR> <ESC>:set nohlsearch<CR>V?^\n<CR>:python run_these_lines()<CR>:let @/ = ""<CR>:set hlsearch<CR>Go<ESC>o
+nnoremap <buffer> <silent> <S-CR> :set nohlsearch<CR>/^\n<CR>V?^\n<CR>:python run_these_lines()<CR>:let @/ = ""<CR>:set hlsearch<CR>j
+nnoremap <buffer> <silent> <C-CR> :set nohlsearch<CR>/^##\\|\%$<CR>:let @/ = ""<CR>kV?^##\\|\%^<CR>:python run_these_lines()<CR>:let @/ = ""<CR>:set hlsearch<CR>
+" same as above, except moves to the next cell
+nnoremap <buffer> <silent> <C-S-CR> :set nohlsearch<CR>/^##\\|\%$<CR>:let @/ = ""<CR>kV?^##\\|\%^<CR>:python run_these_lines()<CR>N:let @/ = ""<CR>:set hlsearch<CR>
 
-    "map <silent> <F5> :python run_this_file()<CR>
-    "map <silent> <S-F5> :python run_this_line()<CR>
-    "map <silent> <F9> :python run_these_lines()<CR>
-    "map <silent> <leader>d :py get_doc_buffer()<CR>
-    "map <silent> <leader>s :py if update_subchannel_msgs(force=True): echo("vim-ipython shell updated",'Operator')<CR>
-    "map <silent> <S-F9> :python toggle_reselect()<CR>
-    ""map <silent> <C-F6> :python send('%pdb')<CR>
-    ""map <silent> <F6> :python set_breakpoint()<CR>
-    ""map <silent> <s-F6> :python clear_breakpoint()<CR>
-    ""map <silent> <F7> :python run_this_file_pdb()<CR>
-    ""map <silent> <s-F7> :python clear_all_breaks()<CR>
-    "imap <C-F5> <C-O><F5>
-    "imap <S-F5> <C-O><S-F5>
-    "imap <silent> <F5> <C-O><F5>
-    "map <C-F5> :call <SID>toggle_send_on_save()<CR>
-    """ Example of how to quickly clear the current plot with a keystroke
-    ""map <silent> <F12> :python run_command("plt.clf()")<cr>
-    """ Example of how to quickly close all figures with a keystroke
-    ""map <silent> <F11> :python run_command("plt.close('all')")<cr>
-
-    ""pi custom
-    "map <silent> <C-Return> :python run_this_file()<CR>
-    "map <silent> <C-s> :python run_this_line()<CR>
-    "imap <silent> <C-s> <C-O>:python run_this_line()<CR>
-    "map <silent> <M-s> :python dedent_run_this_line()<CR>
-    "vmap <silent> <C-S> :python run_these_lines()<CR>
-    "vmap <silent> <M-s> :python dedent_run_these_lines()<CR>
-    "map <silent> <M-c> I#<ESC>
-    "vmap <silent> <M-c> I#<ESC>
-    "map <silent> <M-C> :s/^\([ \t]*\)#/\1/<CR>
-    "vmap <silent> <M-C> :s/^\([ \t]*\)#/\1/<CR>
-endif
 
 command! -nargs=* IPython :py km_from_string("<args>")
 command! -nargs=0 IPythonClipboard :py km_from_string(vim.eval('@+'))

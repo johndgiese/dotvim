@@ -27,18 +27,6 @@ if !exists('g:ipy_perform_mappings')
     let g:ipy_perform_mappings = 1
 endif
 
-" Register IPython completefunc
-" 'global'   -- for all of vim (default).
-" 'local'    -- only for the current buffer.
-" otherwise  -- don't register it at all.
-"
-" you can later set it using ':set completefunc=CompleteIPython', which will
-" correspond to the 'global' behavior, or with ':setl ...' to get the 'local'
-" behavior
-if !exists('g:ipy_completefunc')
-    let g:ipy_completefunc = 'global'
-endif
-
 python << EOF
 reselect = False            # reselect lines after sending from Visual mode
 show_execution_count = True # wait to get numbers for In[43]: feedback?
@@ -50,6 +38,7 @@ open_docbuffer = False   # used to toggle the doc buffer open or closed with K
 import vim
 import sys
 import re
+from os.path import basename
 
 # get around unicode problems when interfacing with vim
 vim_encoding=vim.eval('&encoding') or 'utf-8'
@@ -66,8 +55,6 @@ except AttributeError:
         def flush(self):pass
     sys.stdout = WithFlush(sys.stdout)
     sys.stderr = WithFlush(sys.stderr)
-
-
 
 ip = '127.0.0.1'
 try:
@@ -88,7 +75,7 @@ def km_from_string(s=''):
     from IPython.zmq.blockingkernelmanager import BlockingKernelManager, Empty
     from IPython.config.loader import KeyValueConfigLoader
     from IPython.zmq.kernelapp import kernel_aliases
-    global km,send,Empty
+    global km, send, Empty
 
     s = s.replace('--existing', '')
     if 'connection_file' in BlockingKernelManager.class_trait_names():
@@ -132,27 +119,19 @@ def km_from_string(s=''):
             echo("^-- failed --"+e.message.replace('_port','')+" not specified", "Error")
             return
     km.start_channels()
-    # send = km.shell_channel.execute
+
     def send(cmds, *args, **kargs):
-        cmds = re.sub(r'\n>> ',r'\n', cmds)
-        cmds = re.sub(r'^>> ',r'\n', cmds)
+        """ Send commands to ipython kernel.
+
+        Append a print statement so that we know when IPython
+        is done processing the commands. """
+
         km.shell_channel.execute(cmds + "\nprint('##done')", *args, **kargs)
         return
 
-    # now that we're connect to an ipython kernel, activate completion
-    # machinery, but do so only for the local buffer if the user added the
-    # following line the vimrc:
-    #   let g:ipy_completefunc = 'local'
-    vim.command("""
-        if g:ipy_completefunc == 'global'
-            set completefunc=CompleteIPython
-        elseif g:ipy_completefunc == 'local'
-            setl completefunc=CompleteIPython
-        endif
-        """)
-    # setup vim-ipython buffer
+    # SETUP VIM-IPYTHON BUFFER
     vim.command("rightbelow vnew vim-ipython")
-    vim.current.buffer[-1] == '>> '
+    vim.current.buffer[0] == '>> '
     vim.command("startinsert!")
     vim.command("setl nonumber showbreak=\ \ \ ")
     vim.command("setl bufhidden=hide buftype=nofile ft=python noswf ")
@@ -160,14 +139,40 @@ def km_from_string(s=''):
     vim.command("hi Red ctermfg=Red guifg=Red")
     vim.command("syn match Green /^>>/")
     vim.command("syn match Red /^<</")
-    vim.command("inoremap <buffer> <s-cr> <ESC>:py run_this_line()<CR>dd")
-
-    #inoremap <buffer> <s-Enter> <esc>:python run_command('''<C-r>\"''')<CR>i")
+    vim.command("syn region Red start=/^ERROR >>$/ end=/^<< ERROR$/")
+    vim.command("inoremap <buffer> <s-cr> <ESC>:py shift_enter_at_prompt()<CR>")
+    vim.command("inoremap <buffer> <cr> <ESC>:py enter_at_prompt()<CR>")
     # ctrl-C gets sent to the IPython process as a signal on POSIX
-    #noremap <buffer>  :IPythonInterrupt<cr>
+    vim.command("noremap <buffer>  :IPythonInterrupt<cr>")
+    # add and auto command, so that the cursor always moves to the end
+    # upon entereing the vim-ipython buffer
     vim.command('au BufEnter <buffer> exe "normal G" | startinsert!')
+
     set_pid()
     return km
+
+def shift_enter_at_prompt():
+    linen = -1
+    b = vim.current.buffer
+    cmds = b[-1][3:]
+    while not b[linen].startswith('>> '):
+        cmds = b[linen][3:] + '\n' + cmds
+        linen -= linen
+    send(cmds)
+
+def enter_at_prompt():
+    b = vim.current.buffer
+    lastline = b[-1]
+    b.append("bottom")
+    if lastline.startswith('>> '):
+        ws = re.match(r'^([ \t])*', lastline)
+        if ws:
+            ws = ws.group(1)
+        b[-1] = ws
+    else:
+        b[-1] = '   '
+    vim.command('normal G')
+    vim.command('startinsert!')
 
 def echo(arg,style="Question"):
     try:
@@ -248,7 +253,7 @@ def get_doc_buffer(level=0):
     vim.command('resize %d'% 20)
     vim.command('setlocal syntax=rst')
 
-def vim_ipython_is_open():
+def is_vim_ipython_open():
     """
     Helper function to let us know if the vim-ipython shell is currently
     visible
@@ -258,75 +263,106 @@ def vim_ipython_is_open():
             return True
     return False
 
+def get_vim_ipython_buffer():
+    """ Return the vim-ipython buffer. """
+    for b in vim.buffers:
+        if b.name.endswith("vim-ipython"):
+            return b
+    raise Exception("couldn't find ipython-vim buffer")
+
+def get_vim_ipython_window():
+    """ Return the vim-ipython window. """
+    for w in vim.windows:
+        if w.buffer.name is not None and w.buffer.name.endswith("vim-ipython"):
+            return w
+    raise Exception("couldn't find ipython-vim window")
+
 def update_subchannel_msgs(debug=False, force=False):
     """
     Grab any pending messages and place them inside the vim-ipython shell.
     This function will do nothing if the vim-ipython shell is not visible,
     unless force=True argument is passed.
     """
-    if km is None or (not vim_ipython_is_open() and not force):
+    if km is None or (not is_vim_ipython_open() and not force):
         return False
     msgs = km.sub_channel.get_msgs()
-    b = vim.current.buffer
-    startedin_vimipython = vim.eval('@%')=='vim-ipython'
-    if not startedin_vimipython:
-        vim.command('drop vim-ipython')
+    vimipyb = get_vim_ipython_buffer()
+    in_vimipyb = vim.current.buffer.name.endswith('vim-ipython')
+    newprompt = False
 
-    update_occured = False
     for m in msgs:
-        s = ''
         if 'msg_type' not in m['header']:
             continue
-        elif m['header']['msg_type'] == 'status':
+        else:
+            msg_type = m['header']['msg_type']
+            
+        s = ''
+        if msg_type == 'status':
             continue
-        elif m['header']['msg_type'] == 'stream':
+        elif msg_type == 'stream':
             tempstr = strip_color_escapes(m['content']['data'])
             # This lets you know when the ipython kernel is done with the
             # command
             if tempstr.endswith('##done\n'):
-                s = '>> '
-                vim.command('exe "normal G" | startinsert!')
+                if len(tempstr) > 7:
+                    s = tempstr[:-8] + '>> '
+                else:
+                    s = '>> '
+                newprompt = True
             else:
                 s = '<< ' + tempstr
-        elif m['header']['msg_type'] == 'pyout':
-            s = '<< ' + m['content']['data']['text/plain']
-        elif m['header']['msg_type'] == 'pyin':
-            # remove last input line
-            if b[-1] in ['>> ','>>'] and len(b) > 1:
-                del b[-1]
-            s = ">> " + m['content']['code'].strip()
-            if s.endswith("\nprint('##done')"):
-                s = s[0:-16]
-            s = re.sub(r'\n',r'\n   ',s)
-        elif m['header']['msg_type'] == 'pyerr':
+        elif msg_type == 'pyout':
+            s = m['content']['data']['text/plain']
+        elif msg_type == 'pyin':
+            if not in_vimipyb:
+                # remove last input line
+                if vimipyb[-1] in ['>> ','>>'] and len(vimipyb) > 1:
+                    del vimipyb[-1]
+                s = ">> " + m['content']['code'].strip()
+                if s.endswith("\nprint('##done')"):
+                    s = s[0:-16]
+                s = re.sub(r'\n',r'\n   ',s)
+        elif msg_type == 'pyerr':
             c = m['content']
-            s = "<< " + "\n   ".join(map(strip_color_escapes,c['traceback']))
+            s = "ERROR >>\n" + "\n".join(map(strip_color_escapes,c['traceback']))
             s += c['ename'] + ": " + c['evalue']
+            s += "\n<< ERROR"
             # add prompt after an error occurs
             s += "\n>> "
-            
+            newprompt = True
+        
+        # update the vim-ipython buffer with the formatted text
         if s.find('\n') == -1:
             # somewhat ugly unicode workaround from 
             # http://vim.1045645.n5.nabble.com/Limitations-of-vim-python-interface-with-respect-to-character-encodings-td1223881.html
             if isinstance(s,unicode):
                 s=s.encode(vim_encoding)
-            b.append(s)
-            b.append(m['content']['msg_type'])
+            vimipyb.append(s)
         else:
             try:
-                b.append(s.splitlines())
+                vimipyb.append(s.splitlines())
             except:
-                b.append([l.encode(vim_encoding) for l in s.splitlines()])
-        update_occured = True
-    if not startedin_vimipython:
-        vim.command('normal p') # go back to where you were
-    return update_occured
+                vimipyb.append([l.encode(vim_encoding) for l in s.splitlines()])
+        
+        if in_vimipyb:
+            vim.command('exe "normal G"')
+            if newprompt:
+                vim.command('startinsert!')
+        else:
+            cw = vim.current.window
+            cc = cw.cursor
+            # move to the vim-ipython (so that the autocommand can scroll down)
+            vim.command('drop vim-ipython')
+            vim.command('normal G')
+            # then get out of insert mode and go back to the previous location
+            vim.command('drop ' + cw.buffer.name)
+            vim.current.window.cursor = cc
     
 def get_child_msg(msg_id):
     # XXX: message handling should be split into its own process in the future
     while True:
-        # get_msg will raise with Empty exception if no messages arrive in 1 second
-        m= km.shell_channel.get_msg(timeout=1)
+        # get_msg will raise with Empty exception if no messages arrive in 5 second
+        m= km.shell_channel.get_msg(timeout=5)
         if m['parent_header']['msg_id'] == msg_id:
             break
         else:
@@ -399,6 +435,14 @@ def set_pid():
     pid = int(child['content']['user_variables']['_pid'])
     return pid
 
+def shutdown():
+    
+    if is_vim_ipython_open(): # close the window
+        vim.command('drop vim-ipython')
+        vim.command('quit')
+    # wipe the buffer
+    vim.command('bw vim-ipython')
+    km.kill_kernel()
 
 def interrupt_kernel_hack():
     """
@@ -438,31 +482,14 @@ def dedent_run_these_lines():
     run_these_lines()
     vim.command("silent undo")
     
-def toggle_reselect():
-    global reselect
-    reselect=not reselect
-    print "F9 will%sreselect lines after sending to ipython"% (reselect and " " or " not ")
-
 EOF
-
-fun! <SID>toggle_send_on_save()
-    if exists("s:ssos") && s:ssos == 0
-        let s:ssos = 1
-        au BufWritePost *.py :py run_this_file()
-        echo "Autosend On"
-    else
-        let s:ssos = 0
-        au! BufWritePost *.py
-        echo "Autosend Off"
-    endif
-endfun
 
 " Update the vim-ipython shell when the cursor is not moving.
 " You can change how quickly this happens after you stop moving the cursor by
 " setting 'updatetime' (in milliseconds). For example, to have this event
 " trigger after 1 second:
 "
-"       :set updatetime 1000
+set updatetime=500
 "
 " NOTE: This will only be triggered once, after the first 'updatetime'
 " milliseconds, *not* every 'updatetime' milliseconds. see :help CursorHold
@@ -472,22 +499,23 @@ endfun
 " buffer we may have opened up doesn't get closed just because of an idle
 " event (i.e. user pressed \d and then left the buffer that popped up, but
 " expects it to stay there).
-au CursorHold *.*,vim-ipython :python update_subchannel_msgs()
+au CursorHold * :python update_subchannel_msgs()
 
 " Same as above, but on regaining window focus (mostly for GUIs)
-au FocusGained *.*,vim-ipython :python update_subchannel_msgs()
+au FocusGained * :python update_subchannel_msgs()
 
-noremap <buffer> <silent> <F5> :w<CR>:python run_this_file()<CR>
-noremap <buffer> <silent> K :py get_doc_buffer()<CR>
-vnoremap <buffer> <silent> <F9> :py run_these_lines()<CR>
-nnoremap <buffer> <silent> <F9> :py run_this_line()<CR>j
-noremap <buffer> <silent> <F12> :drop vim-ipython<CR>
-noremap <buffer> <silent> <C-F12> :cd %:p:h<CR> :!start /min ipython qtconsole<CR>:sleep 2<CR>:IPython<CR>
-inoremap <buffer> <silent> <S-CR> <ESC>:set nohlsearch<CR>V?^\n<CR>:python run_these_lines()<CR>:let @/ = ""<CR>:set hlsearch<CR>Go<ESC>o
-nnoremap <buffer> <silent> <S-CR> :set nohlsearch<CR>/^\n<CR>V?^\n<CR>:python run_these_lines()<CR>:let @/ = ""<CR>:set hlsearch<CR>j
-nnoremap <buffer> <silent> <C-CR> :set nohlsearch<CR>/^##\\|\%$<CR>:let @/ = ""<CR>kV?^##\\|\%^<CR>:python run_these_lines()<CR>:let @/ = ""<CR>:set hlsearch<CR>
+noremap <silent> <F5> :w<CR>:python run_this_file()<CR>
+noremap <silent> K :py get_doc_buffer()<CR>
+vnoremap <silent> <F9> :py run_these_lines()<CR>
+nnoremap <silent> <F9> :py run_this_line()<CR>j
+noremap <silent> <F12> :drop vim-ipython<CR>
+noremap <silent> <C-F12> :cd %:p:h<CR> :!start /min ipython qtconsole<CR>:sleep 2<CR>:IPython<CR>
+noremap <silent> <S-F12> :shutdown()<CR>
+inoremap <silent> <S-CR> <ESC>:set nohlsearch<CR>V?^\n<CR>:python run_these_lines()<CR>:let @/ = ""<CR>:set hlsearch<CR>Go<ESC>o
+nnoremap <silent> <S-CR> :set nohlsearch<CR>/^\n<CR>V?^\n<CR>:python run_these_lines()<CR>:let @/ = ""<CR>:set hlsearch<CR>j
+nnoremap <silent> <C-CR> :set nohlsearch<CR>/^##\\|\%$<CR>:let @/ = ""<CR>kV?^##\\|\%^<CR>:python run_these_lines()<CR>:let @/ = ""<CR>:set hlsearch<CR>
 " same as above, except moves to the next cell
-nnoremap <buffer> <silent> <C-S-CR> :set nohlsearch<CR>/^##\\|\%$<CR>:let @/ = ""<CR>kV?^##\\|\%^<CR>:python run_these_lines()<CR>N:let @/ = ""<CR>:set hlsearch<CR>
+nnoremap <silent> <C-S-CR> :set nohlsearch<CR>/^##\\|\%$<CR>:let @/ = ""<CR>kV?^##\\|\%^<CR>:python run_these_lines()<CR>N:let @/ = ""<CR>:set hlsearch<CR>
 
 
 command! -nargs=* IPython :py km_from_string("<args>")
@@ -495,55 +523,4 @@ command! -nargs=0 IPythonClipboard :py km_from_string(vim.eval('@+'))
 command! -nargs=0 IPythonXSelection :py km_from_string(vim.eval('@*'))
 command! -nargs=0 IPythonInterrupt :py interrupt_kernel_hack()
 
-fun! CompleteIPython(findstart, base)
-      if a:findstart
-        " locate the start of the word
-        let line = getline('.')
-        let start = col('.') - 1
-        while start > 0 && line[start-1] =~ '\k\|\.' "keyword
-          let start -= 1
-        endwhile
-        echo start
-        python << endpython
-current_line = vim.current.line
-endpython
-        return start
-      else
-        " find months matching with "a:base"
-        let res = []
-        python << endpython
-base = vim.eval("a:base")
-findstart = vim.eval("a:findstart")
-msg_id = km.shell_channel.complete(base, current_line, vim.eval("col('.')"))
-try:
-    m = get_child_msg(msg_id)
-    matches = m['content']['matches']
-    matches.insert(0,base) # the "no completion" version
-    # we need to be careful with unicode, because we can have unicode
-    # completions for filenames (for the %run magic, for example). So the next
-    # line will fail on those:
-    #completions= [str(u) for u in matches]
-    # because str() won't work for non-ascii characters
-    # and we also have problems with unicode in vim, hence the following:
-    completions = [s.encode(vim_encoding) for s in matches]
-except Empty:
-    echo("no reply from IPython kernel")
-    completions=['']
-## Additionally, we have no good way of communicating lists to vim, so we have
-## to turn in into one long string, which can be problematic if e.g. the
-## completions contain quotes. The next line will not work if some filenames
-## contain quotes - but if that's the case, the user's just asking for
-## it, right?
-#completions = '["'+ '", "'.join(completions)+'"]'
-#vim.command("let completions = %s" % completions)
-## An alternative for the above, which will insert matches one at a time, so
-## if there's a problem with turning a match into a string, it'll just not
-## include the problematic match, instead of not including anything. There's a
-## bit more indirection here, but I think it's worth it
-for c in completions:
-    vim.command('call add(res,"'+c+'")')
-endpython
-        "call extend(res,completions) 
-        return res
-      endif
-    endfun
+

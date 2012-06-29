@@ -49,6 +49,7 @@ open_docbuffer = False   # used to toggle the doc buffer open or closed with K
 
 import vim
 import sys
+import re
 
 # get around unicode problems when interfacing with vim
 vim_encoding=vim.eval('&encoding') or 'utf-8'
@@ -131,7 +132,12 @@ def km_from_string(s=''):
             echo("^-- failed --"+e.message.replace('_port','')+" not specified", "Error")
             return
     km.start_channels()
-    send = km.shell_channel.execute
+    # send = km.shell_channel.execute
+    def send(cmds, *args, **kargs):
+        cmds = re.sub(r'\n>> ',r'\n', cmds)
+        cmds = re.sub(r'^>> ',r'\n', cmds)
+        km.shell_channel.execute(cmds + "\nprint('##done')", *args, **kargs)
+        return
 
     # now that we're connect to an ipython kernel, activate completion
     # machinery, but do so only for the local buffer if the user added the
@@ -144,6 +150,22 @@ def km_from_string(s=''):
             setl completefunc=CompleteIPython
         endif
         """)
+    # setup vim-ipython buffer
+    vim.command("rightbelow vnew vim-ipython")
+    vim.current.buffer[-1] == '>> '
+    vim.command("startinsert!")
+    vim.command("setl nonumber showbreak=\ \ \ ")
+    vim.command("setl bufhidden=hide buftype=nofile ft=python noswf ")
+    vim.command("hi Green ctermfg=Green guifg=#00ED45")
+    vim.command("hi Red ctermfg=Red guifg=Red")
+    vim.command("syn match Green /^>>/")
+    vim.command("syn match Red /^<</")
+    vim.command("inoremap <buffer> <s-cr> <ESC>:py run_this_line()<CR>dd")
+
+    #inoremap <buffer> <s-Enter> <esc>:python run_command('''<C-r>\"''')<CR>i")
+    # ctrl-C gets sent to the IPython process as a signal on POSIX
+    #noremap <buffer>  :IPythonInterrupt<cr>
+    vim.command('au BufEnter <buffer> exe "normal G" | startinsert!')
     set_pid()
     return km
 
@@ -168,7 +190,6 @@ def get_doc(word):
     # get around unicode problems when interfacing with vim
     return [d.encode(vim_encoding) for d in doc]
 
-import re
 # from http://serverfault.com/questions/71285/in-centos-4-4-how-can-i-strip-escape-sequences-from-a-text-file
 strip = re.compile('\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]')
 def strip_color_escapes(s):
@@ -243,72 +264,28 @@ def update_subchannel_msgs(debug=False, force=False):
     This function will do nothing if the vim-ipython shell is not visible,
     unless force=True argument is passed.
     """
-    from re import sub
     if km is None or (not vim_ipython_is_open() and not force):
         return False
     msgs = km.sub_channel.get_msgs()
-    if debug:
-        #try:
-        #    vim.command("b debug_msgs")
-        #except vim.error:
-        #    vim.command("new debug_msgs")
-        #finally:
-        db = vim.current.buffer
-    else:
-        db = []
     b = vim.current.buffer
     startedin_vimipython = vim.eval('@%')=='vim-ipython'
     if not startedin_vimipython:
-        # switch to preview window
-        vim.command(
-            "try"
-            "|silent! wincmd P"
-            "|catch /^Vim\%((\a\+)\)\=:E441/"
-            "|silent pedit +set\ ma vim-ipython"
-            "|silent! wincmd P"
-            "|endtry")
-        # if the current window is called 'vim-ipython'
-        if vim.eval('@%')=='vim-ipython':
-            # set the preview window height to the current height
-            vim.command("set pvh=" + vim.eval('winheight(0)'))
-        else:
-            # close preview window, it was something other than 'vim-ipython'
-            vim.command("pcl")
-            vim.command("silent pedit +set\ ma vim-ipython")
-            vim.command("wincmd P") #switch to preview window
-            # subchannel window quick quit key 'q'
-            vim.command('noremap <buffer> q :q<CR>')
-            vim.command("setlocal bufhidden=hide buftype=nofile ft=python noswf nonumber showbreak=\ \ \ ")
-            # make shift-enter and control-enter in insert mode behave same as in ipython notebook
-            # shift-enter send the current line, control-enter send the line
-            # but keeps it around for further editing.
-            vim.command("inoremap <buffer> <s-Enter> <esc>dd:python run_command('''<C-r>\"''')<CR>i")
-            # pkddA: paste, go up one line which is blank after run_command,
-            # delete it, and then back to insert mode
-            vim.command("inoremap <buffer> <c-Enter> <esc>dd:python run_command('''<C-r>\"''')<CR>pkddA")
-            # ctrl-C gets sent to the IPython process as a signal on POSIX
-            vim.command("noremap <buffer>  :IPythonInterrupt<cr>")
-    
-    #syntax highlighting for python prompt
-    vim.command("hi Green ctermfg=Green guifg=#00ED45")
-    vim.command("hi Red ctermfg=Red guifg=Red")
-    vim.command("syn match Green /^>>/")
-    vim.command("syn match Red /^<</")
-    b = vim.current.buffer
+        vim.command('drop vim-ipython')
+
     update_occured = False
     for m in msgs:
         s = ''
         if 'msg_type' not in m['header']:
-            # debug information
-            echo('skipping a message on sub_channel','WarningMsg')
-            echo(str(m))
             continue
         elif m['header']['msg_type'] == 'status':
             continue
         elif m['header']['msg_type'] == 'stream':
             tempstr = strip_color_escapes(m['content']['data'])
+            # This lets you know when the ipython kernel is done with the
+            # command
             if tempstr.endswith('##done\n'):
                 s = '>> '
+                vim.command('exe "normal G" | startinsert!')
             else:
                 s = '<< ' + tempstr
         elif m['header']['msg_type'] == 'pyout':
@@ -320,26 +297,27 @@ def update_subchannel_msgs(debug=False, force=False):
             s = ">> " + m['content']['code'].strip()
             if s.endswith("\nprint('##done')"):
                 s = s[0:-16]
+            s = re.sub(r'\n',r'\n   ',s)
         elif m['header']['msg_type'] == 'pyerr':
             c = m['content']
-            s = "<< " + "\n".join(map(strip_color_escapes,c['traceback']))
+            s = "<< " + "\n   ".join(map(strip_color_escapes,c['traceback']))
             s += c['ename'] + ": " + c['evalue']
             # add prompt after an error occurs
-            s += ">> "
+            s += "\n>> "
             
         if s.find('\n') == -1:
             # somewhat ugly unicode workaround from 
             # http://vim.1045645.n5.nabble.com/Limitations-of-vim-python-interface-with-respect-to-character-encodings-td1223881.html
             if isinstance(s,unicode):
                 s=s.encode(vim_encoding)
-            b.append(sub(r'\n',r'\n   ',s))
+            b.append(s)
+            b.append(m['content']['msg_type'])
         else:
             try:
-                b.append(sub(r'\n',r'\n   ',s).splitlines())
+                b.append(s.splitlines())
             except:
-                b.append([l.encode(vim_encoding) for l in sub(r'\n',r'\n   ',s).splitlines()])
+                b.append([l.encode(vim_encoding) for l in s.splitlines()])
         update_occured = True
-    vim.command('normal G') # go to the end of the file
     if not startedin_vimipython:
         vim.command('normal p') # go back to where you were
     return update_occured
@@ -382,12 +360,12 @@ def with_subchannel(f,*args):
 
 @with_subchannel
 def run_this_file():
-    msg_id = send("get_ipython().magic(u'run %s %s')\nprint('##done')" % (run_flags, repr(vim.current.buffer.name)[1:-1]))
+    msg_id = send("get_ipython().magic(u'run %s %s')" % (run_flags, repr(vim.current.buffer.name)[1:-1]))
 
 @with_subchannel
 def run_this_line():
     if vim.current.line != '':
-        msg_id = send(vim.current.line + "\nprint('##done')")
+        msg_id = send(vim.current.line)
 
 @with_subchannel
 def run_command(cmd):
@@ -397,7 +375,7 @@ def run_command(cmd):
 def run_these_lines():
     r = vim.current.range
     lines = "\n".join(vim.current.buffer[r.start:r.end+1])
-    msg_id = send(lines + "\nprint('##done')")
+    msg_id = send(lines)
     # reselect the previously highlighted block
     vim.command("normal gv")
     if not reselect:
@@ -409,7 +387,7 @@ def set_pid():
     """
     global km, pid
     lines = '\n'.join(['import os', '_pid = os.getpid()'])
-    msg_id = send(lines + "\nprint('##done')", silent=True, user_variables=['_pid'])
+    msg_id = send(lines, silent=True, user_variables=['_pid'])
 
     # wait to get message back from kernel
     try:
@@ -494,25 +472,17 @@ endfun
 " buffer we may have opened up doesn't get closed just because of an idle
 " event (i.e. user pressed \d and then left the buffer that popped up, but
 " expects it to stay there).
-au CursorHold *.*,vim-ipython :python if update_subchannel_msgs(): echo("vim-ipython shell updated (on idle)",'Operator')
-
-" XXX: broken - cursor hold update for insert mode moves the cursor one
-" character to the left of the last character (update_subchannel_msgs must be
-" doing this)
-"au CursorHoldI *.* :python if update_subchannel_msgs(): echo("vim-ipython shell updated (on idle)",'Operator')
+au CursorHold *.*,vim-ipython :python update_subchannel_msgs()
 
 " Same as above, but on regaining window focus (mostly for GUIs)
-au FocusGained *.*,vim-ipython :python if update_subchannel_msgs(): echo("vim-ipython shell updated (on input focus)",'Operator')
-
-" Move cursor to and start editing
-au WinEnter *.*,vim-ipython :normal G | :normal A
+au FocusGained *.*,vim-ipython :python update_subchannel_msgs()
 
 noremap <buffer> <silent> <F5> :w<CR>:python run_this_file()<CR>
 noremap <buffer> <silent> K :py get_doc_buffer()<CR>
 vnoremap <buffer> <silent> <F9> :py run_these_lines()<CR>
 nnoremap <buffer> <silent> <F9> :py run_this_line()<CR>j
 noremap <buffer> <silent> <F12> :drop vim-ipython<CR>
-noremap <buffer> <silent> <C-F12> :cd %:p:h<CR> :!start /min ipython qtconsole<CR>:sleep 2<CR>:IPython<CR>:py if update_subchannel_msgs(force=True): echo("vim-ipython shell updated",'Operator')<CR><C-w><S-H><C-w><c-w>:setlocal nonumber<CR>
+noremap <buffer> <silent> <C-F12> :cd %:p:h<CR> :!start /min ipython qtconsole<CR>:sleep 2<CR>:IPython<CR>
 inoremap <buffer> <silent> <S-CR> <ESC>:set nohlsearch<CR>V?^\n<CR>:python run_these_lines()<CR>:let @/ = ""<CR>:set hlsearch<CR>Go<ESC>o
 nnoremap <buffer> <silent> <S-CR> :set nohlsearch<CR>/^\n<CR>V?^\n<CR>:python run_these_lines()<CR>:let @/ = ""<CR>:set hlsearch<CR>j
 nnoremap <buffer> <silent> <C-CR> :set nohlsearch<CR>/^##\\|\%$<CR>:let @/ = ""<CR>kV?^##\\|\%^<CR>:python run_these_lines()<CR>:let @/ = ""<CR>:set hlsearch<CR>

@@ -117,6 +117,12 @@ endif
 " CUSTOM KEYCOMMANDS
 " use comma instead of \ for leader, because it is closer
 map \ ,
+
+" insert the very magic reg-ex mode every time
+set hlsearch incsearch
+nnoremap / /\v
+nnoremap <leader>/ :noh<CR>
+
 " switch semi-colon and colon
 nnoremap ; :
 vnoremap ; :
@@ -178,7 +184,6 @@ nnoremap <leader>o :e $DV\colors\betterblack.vim<CR>
 " VISUALIZATION STUFF
 " Show EOL type and last modified timestamp, right after the filename
 set numberwidth=3
-set incsearch
 set wrap linebreak
 " TODO: make search use regular expressions by default
 set statusline=%<%F%h%m%r\ [%{&ff}]\ (%{strftime(\"%H:%M\ %d/%m/%Y\",getftime(expand(\"%:p\")))})%=%l,%c%V\ %P

@@ -8,8 +8,13 @@
 " TODO: update autocomplete for CSS3 and HTML5
 " TODO: add python rope (autocomplete)
 " TODO: make a better status line
+set nocompatible                " vi compatible is LAME
+autocmd!
+filetype off
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
+filetype plugin indent on
+filetype plugin on
 let mapleader = ","
 set ai                          " set auto-indenting on for programming
 set showmatch                   " automatically show matching brackets
@@ -17,7 +22,6 @@ set vb                          " turn on the "visual bell" - quieter than the "
 set ruler                       " show the cursor position all the time
 set laststatus=2                
 set backspace=indent,eol,start  " make that backspace key work the way it should
-set nocompatible                " vi compatible is LAME
 set showmode                    " show the current mode
 set ts=4 sts=4 sw=4 expandtab   " default indentation settings
 syntax enable                   " turn syntax highlighting
@@ -45,7 +49,7 @@ let g:SuperTabNoCompleteBefore = []
 let g:SuperTabNoCompleteAfter = []
 let g:SuperTabMappingForward = '<C-space>'
 let g:SuperTabMappingBackward = '<S-C-space>'
-let g:SuperTabCrMapping = 1
+let g:SuperTabCrMapping = 0
 autocmd FileType *
     \ if &omnifunc != '' |
     \   call SuperTabChain(&omnifunc, "<c-p>") |
@@ -81,8 +85,6 @@ function! <SID>SynStack()
     echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
 
-filetype plugin indent on
-filetype plugin on
 
 " WEB DEVELOPMENT
 " better html/javascript syntax/indenting (see javascript plugin)

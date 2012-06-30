@@ -42,10 +42,6 @@
 	path = bundle/tabular
 	url = https://github.com/godlygeek/tabular.git
 	ignore = dirty
-[submodule "bundle/snipmate"]
-	path = bundle/snipmate
-	url = https://github.com/msanders/snipmate.vim.git
-	ignore = dirty
 [submodule "bundle\\tagbar"]
 	path = bundle/tagbar
 	url = https://github.com/majutsushi/tagbar.git
@@ -53,3 +49,4 @@
 [submodule "bundle/javascript"]
 	path = bundle/javascript
 	url = https://github.com/pangloss/vim-javascript.git
+    ignore = dirty

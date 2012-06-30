@@ -305,12 +305,12 @@ def update_subchannel_msgs(debug=False, force=False):
             # command
             if tempstr.endswith('##done\n'):
                 if len(tempstr) > 7:
-                    s = tempstr[:-8] + '>> '
+                    s = tempstr[:-8] + '\n>> '
                 else:
                     s = '>> '
                 newprompt = True
             else:
-                s = '<< ' + tempstr
+                s = tempstr
         elif msg_type == 'pyout':
             s = m['content']['data']['text/plain']
         elif msg_type == 'pyin':

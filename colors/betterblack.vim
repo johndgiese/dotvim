@@ -68,6 +68,7 @@ hi link matlabOperator Normal
 
 " Javascript
 hi link Javascript Normal
+hi link JavascriptSpecial String
 
 " PHP
 hi link phpRegion Normal

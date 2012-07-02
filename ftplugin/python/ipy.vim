@@ -123,8 +123,9 @@ def setup_vib():
     
     if not get_vim_ipython_buffer():
         vim.command("rightbelow vnew vim-ipython.py")
-        vim.current.buffer[0] = '>>> '
-        vim.command("startinsert!")
+        # set the global variable for everyone to reference easily
+        vib = get_vim_ipython_buffer()
+        new_prompt()
         vim.command("setl nonumber showbreak=\ \ \ \ ")
         vim.command("setl bufhidden=hide buftype=nofile ft=python noswf ")
         # turn of auto indent (there is some custom indenting that accounts
@@ -133,8 +134,17 @@ def setup_vib():
         vim.command("hi Green ctermfg=Green guifg=#00ED45")
         vim.command("hi Red ctermfg=Red guifg=Red")
         vim.command("syn match Normal /^>>>/")
+
+        # mappings to control sending stuff from vim-ipython
         vim.command("inoremap <buffer> <s-cr> <ESC>:py shift_enter_at_prompt()<CR>")
         vim.command("inoremap <buffer> <cr> <ESC>:py enter_at_prompt()<CR>")
+        # mappings to control history
+        vim.command("inoremap <buffer> <up> <ESC>:py up_at_prompt('up')<CR>GA")
+        vim.command("inoremap <buffer> <down> <ESC>:py up_at_prompt('down')<CR>GA")
+        vim.command("inoremap <buffer> <right> <ESC>:py up_at_prompt('done')<CR>GA")
+        vim.command("inoremap <buffer> <BS> <ESC>:py up_at_prompt('done')<CR>a<BS>")
+
+        # commands for escaping
         vim.command("map <buffer> <F12> <ESC><C-w>p")
         vim.command("imap <buffer> <F12> <ESC><C-w>p")
         # ctrl-C gets sent to the IPython process as a signal on POSIX
@@ -143,18 +153,69 @@ def setup_vib():
         # upon entereing the vim-ipython buffer
         vim.command("au WinEnter <buffer> :python insert_at_new()")
 
-        # set the global variable for everyone to reference easily
-        vib = get_vim_ipython_buffer()
     else:
         vib = get_vim_ipython_buffer()
         echo("vim-ipython.py is already open!")
 
+new_hist_search = True
+last_hist = []
+hist_pos = 0
+num_lines_added_last = 1
+hist_prompt_type = '>>> '
+def up_at_prompt(key):
+    global last_hist, hist_pos, new_hist_search, num_lines_added_last, hist_prompt_type
+    if key == "done":
+        new_hist_search = True
+        return
+    if new_hist_search:
+        cl = vim.current.line
+        if at_end_of_prompt():
+            if len(cl) > 4:
+                pat = cl[4:] + '*' # search for everything starting with the current line
+                msg_id = km.shell_channel.history(hist_access_type='search', pattern=pat)
+            else:
+                # if the prompt is empty, return the last 100 inputs
+                msg_id = km.shell_channel.history(hist_access_type='tail', n=50)
+            if len(cl) >= 4:
+                hist_prompt_type = cl[:4]
+            else:
+                hist_prompt_type = '>>> '
+            hist = get_child_msg(msg_id)['content']['history']
+            # sort the history by time
+            last_hist = sorted(hist, key=hist_sort)
+            # extract out the strings, encode appropriatly, and append the original text
+            last_hist = [hist_item[2].encode(vim_encoding) for hist_item in last_hist] + [cl[4:]]
+            if debugging:
+                vib.append('msg_id = ' + str(msg_id) + 'pattern = ' + pat + 'content = :')
+                vib.append(repr(hist))
+                vib.append(repr(last_hist))
+            new_hist_search = False
+            hist_pos = 0
+    else:
+        if key == "up":
+            hist_pos = (hist_pos + 1) % (len(last_hist) - 1)
+        else: # if key == "down"
+            hist_pos = (hist_pos - 1) % (len(last_hist) - 1)
+    # remove the previously added lines
+    del vib[-num_lines_added_last:]
+    toadd = format_for_prompt(last_hist[hist_pos], firstline=hist_prompt_type)
+    num_lines_added_last = len(toadd)
+    for line in toadd:
+        vib.append(line)
+    vim.command('normal G$')
+
+
+
+def hist_sort(hist_item):
+    """ hist_item is a tuple with: (session, line_number, input)
+    where session and line_number increase through time """
+    return hist_item[0]*10000 + hist_item[1]
+
 numspace = re.compile(r'^[>.]{3}(\s*)')
 def enter_at_prompt():
-    row, col = vim.current.window.cursor
-    lineend = len(vim.current.line) - 1
-    bufend = len(vim.current.buffer)
-    if row == bufend and col == lineend:
+    global new_hist_search
+    new_hist_search = True # reset history search
+    if at_end_of_prompt():
         match = numspace.match(vib[-1])
         if match:
             space_on_lastline = match.group(1)
@@ -168,8 +229,18 @@ def enter_at_prompt():
         # vim.command('call feedkeys("\<CR>")')
         vim.command('normal <CR>')
 
+def at_end_of_prompt():
+    """ Is the cursor at the end of a prompt line? """
+    row, col = vim.current.window.cursor
+    lineend = len(vim.current.line) - 1
+    bufend = len(vim.current.buffer)
+    return numspace.match(vim.current.line) and row == bufend and col == lineend
+
+
 def shift_enter_at_prompt():
     """ Remove prompts and whitespace before sending to ipython. """
+    global new_hist_search
+    new_hist_search = True # reset history search
     cmds = []
     linen = len(vib)
     while linen > 0:
@@ -185,9 +256,16 @@ def shift_enter_at_prompt():
         vib.append(cmds)
     cmds = '\n'.join(cmds)
     if cmds == 'cls':
+        if debugging:
+            vib.append('a vim-only command was triggered')
         vib[:] = None # clear the buffer
-        vib[-1] = '>>> '
-        vim.command('startinsert!')
+        new_prompt()
+    elif cmds.endswith('?'):
+        if debugging:
+            vib.append('a object info request was triggered')
+        content = get_doc(cmds[:-1])
+        vib.append(content)
+        new_prompt()
     else:
         send(cmds)
 
@@ -197,6 +275,17 @@ def shift_enter_at_prompt():
             vim.command("sleep 20m")
             ping_count += 1
 
+def new_prompt(goto=True):
+    vib.append('>>> ')
+    if goto:
+        vim.command('normal G')
+        vim.command('startinsert!')
+
+def format_for_prompt(cmds, firstline='>>> '):
+    # format and input text
+    formatted = re.sub(r'\n',r'\n... ',cmds).splitlines()
+    formatted[0] = firstline + formatted[0]
+    return formatted
 
 blankprompt = re.compile(r'^\>\>\> $')
 def send(cmds, *args, **kargs):
@@ -208,9 +297,7 @@ def send(cmds, *args, **kargs):
     if debugging:
         vib.append('about to send ...')
     if not in_vim_ipython():
-        # format and input text
-        formatted = re.sub(r'\n',r'\n... ',cmds).splitlines()
-        formatted[0] = '>>> ' + formatted[0]
+        formatted = format_for_prompt(cmds)
 
         # remove any prompts or blank lines
         while len(vib) > 1 and blankprompt.match(vib[-1]):
@@ -319,7 +406,21 @@ def update_subchannel_msgs(debug=False, force=False):
         elif msg_type == 'pyerr':
             c = m['content']
             s = "\n".join(map(strip_color_escapes,c['traceback']))
-            s += c['ename'] + ": " + c['evalue']
+            # s += c['ename'] + ": " + c['evalue']
+        elif msg_type == 'object_info_reply':
+            c = m['content']
+            if not c['found']:
+                s = c['name'] + " not found!"
+            else:
+            # TODO: finish implementing this
+                s = c['docstring']
+
+        elif msg_type == 'crash':
+            s = "The IPython Kernel Crashed!"
+            s += "\nUnfortuneatly this means that all variables in the interactive namespace were lost."
+            s += "\nHere is the crash info from IPython:\n"
+            s += repr(m['content']['info'])
+            s += "Type CTRL-F12 to restart the Kernel"
         
         if s: # then update the vim-ipython buffer with the formatted text
             if s.find('\n') == -1: # then use ugly unicode workaround from 
@@ -338,17 +439,13 @@ def update_subchannel_msgs(debug=False, force=False):
     # move to the vim-ipython (so that the autocommand can scroll down)
     if in_vim_ipython():
         if newprompt:
-            vib.append('>>> ')
-            vim.command('normal G')
-            vim.command('startinsert!')
+            new_prompt()
     else:
-        vim.command('drop vim-ipython.py')
         if newprompt:
-            vib.append('>>> ')
-        # then get out of insert mode and go back to the previous location
-        vim.command('exe "normal \<C-w>p"')
-    # make an arbitrary command, so that the cursorhold autocommand will be triggered again
-    # vim.command("call feedkeys('f\e')")
+            new_prompt(got=False)
+        if is_vim_ipython_open():
+            vim.command('drop vim-ipython.py')
+            vim.command('exe "normal G\<C-w>p"')
     return len(msgs)
             
 def get_child_msg(msg_id):
@@ -428,13 +525,13 @@ def set_pid():
     return pid
 
 def shutdown():
+    km.shell_channel.shutdown()
     
     if is_vim_ipython_open(): # close the window
         vim.command('drop vim-ipython.py')
         vim.command('quit')
     # wipe the buffer
     vim.command('bw vim-ipython.py')
-    km.kill_kernel()
 
 def interrupt_kernel_hack():
     """
@@ -475,7 +572,7 @@ def dedent_run_these_lines():
     vim.command("silent undo")
 
 def startup():
-    vim.command('!start /min ipython qtconsole')
+    vim.command('!start /min ipython kernel')
     vim.command('sleep 1')
     origin_dir = vim.current.buffer.name
     setup_vib()
@@ -491,8 +588,6 @@ def startup():
 
 
 def get_doc(word):
-    if km is None:
-        return ["Not connected to IPython, cannot query: %s" % word]
     msg_id = km.shell_channel.object_info(word)
     doc = get_doc_msg(msg_id)
     # get around unicode problems when interfacing with vim
@@ -528,6 +623,9 @@ def get_doc_msg(msg_id):
 def get_doc_buffer(level=0):
     if not isidle:
         echo("Can't query for Help When IPython is busy.  Do you have figures opened?")
+    if km is None:
+        echo("Not connected to the IPython kernel... Type CTRL-F12 to start it.")
+
     # empty string in case vim.eval return None
     word = vim.eval('expand("<cfile>")') or ''
     doc = get_doc(word)
@@ -559,7 +657,10 @@ vnoremap <silent> <F9> :py run_these_lines()<CR><ESC>j
 nnoremap <silent> <F9> :py run_this_line()<CR><ESC>j
 noremap <silent> <F12> :drop vim-ipython.py<CR>
 noremap <silent> <C-F12> :py startup()<CR>
-" noremap <silent> <S-F12> :shutdown()<CR>
+noremap <silent> <S-F12> :py shutdown()<CR>
+inoremap <silent> <F12> :drop vim-ipython.py<CR>
+inoremap <silent> <C-F12> :py startup()<CR>
+inoremap <silent> <S-F12> :py shutdown()<CR>
 "inoremap <silent> <S-CR> <ESC>:set nohlsearch<CR>V?^\n<CR>:python run_these_lines()<CR>:let @/ = ""<CR>:set hlsearch<CR>Go<ESC>o
 "nnoremap <silent> <S-CR> :set nohlsearch<CR>/^\n<CR>V?^\n<CR>:python run_these_lines()<CR>:let @/ = ""<CR>:set hlsearch<CR>j
 "nnoremap <silent> <C-CR> :set nohlsearch<CR>/^##\\|\%$<CR>:let @/ = ""<CR>kV?^##\\|\%^<CR>:python run_these_lines()<CR>:let @/ = ""<CR>:set hlsearch<CR>

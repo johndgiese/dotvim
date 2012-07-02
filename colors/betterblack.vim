@@ -70,6 +70,12 @@ hi link matlabOperator Normal
 hi link Javascript Normal
 hi link JavascriptSpecial String
 
+" Vimdiff
+hi DiffAdd guibg=#22FF22 guifg=#000000 gui=None
+hi DiffDelete guibg=#FF2222 guifg=#000000 gui=None
+hi DiffChange guibg=#4444FF guifg=#000000 gui=None
+hi DiffText guibg=#8888FF guifg=#000000 gui=None
+
 " PHP
 hi link phpRegion Normal
 hi link Delimiter Normal

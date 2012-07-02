@@ -9,24 +9,23 @@
 " TODO: better error display
 " TODO: add ? and ?? functionality
 " TODO: make status line update
+" TODO: make up and down arrows work correctly
 
 if !has('python')
     " exit if python is not available.
     finish
 endif
 
-" Allow custom mappings.
-if !exists('g:ipy_perform_mappings')
-    let g:ipy_perform_mappings = 1
-endif
 
 python << EOF
+debugging = False
 reselect = False            # reselect lines after sending from Visual mode
 show_execution_count = True # wait to get numbers for In[43]: feedback?
 monitor_subchannel = True   # update vim-ipython 'shell' on every send?
 run_flags= "-i"             # flags to for IPython's run magic when using <F5>
 current_line = ''
 open_docbuffer = False   # used to toggle the doc buffer open or closed with K
+isidle = False
 
 import vim
 import sys
@@ -59,7 +58,6 @@ try:
 except NameError:
     pid = None
 
-debugging = False
 def km_from_string(s=''):
     """create kernel manager from IPKernelApp string
     such as '--shell=47378 --iopub=39859 --stdin=36778 --hb=52668' for IPython 0.11
@@ -125,15 +123,16 @@ def setup_vib():
     
     if not get_vim_ipython_buffer():
         vim.command("rightbelow vnew vim-ipython.py")
-        vim.current.buffer[0] = '>> '
+        vim.current.buffer[0] = '>>> '
         vim.command("startinsert!")
-        vim.command("setl nonumber showbreak=\ \ \ ")
+        vim.command("setl nonumber showbreak=\ \ \ \ ")
         vim.command("setl bufhidden=hide buftype=nofile ft=python noswf ")
+        # turn of auto indent (there is some custom indenting that accounts
+        # for the prompt).  See vim-tip 330
+        vim.command("setl noai nocin nosi inde=") 
         vim.command("hi Green ctermfg=Green guifg=#00ED45")
         vim.command("hi Red ctermfg=Red guifg=Red")
-        vim.command("syn match Normal /^>>/")
-        vim.command("syn match Red /^<</")
-        vim.command("syn region Red start=/^ERROR >>$/ end=/^<< ERROR$/")
+        vim.command("syn match Normal /^>>>/")
         vim.command("inoremap <buffer> <s-cr> <ESC>:py shift_enter_at_prompt()<CR>")
         vim.command("inoremap <buffer> <cr> <ESC>:py enter_at_prompt()<CR>")
         vim.command("map <buffer> <F12> <ESC><C-w>p")
@@ -150,20 +149,36 @@ def setup_vib():
         vib = get_vim_ipython_buffer()
         echo("vim-ipython.py is already open!")
 
-
+numspace = re.compile(r'^[>.]{3}(\s*)')
 def enter_at_prompt():
-    vib.append('   ')
-    vim.command('normal G')
-    vim.command('startinsert!')
+    row, col = vim.current.window.cursor
+    lineend = len(vim.current.line) - 1
+    bufend = len(vim.current.buffer)
+    if row == bufend and col == lineend:
+        match = numspace.match(vib[-1])
+        if match:
+            space_on_lastline = match.group(1)
+        else:
+            space_on_lastline = ''
+        vib.append('...' + space_on_lastline)
+        vim.command('normal G')
+        vim.command('startinsert!')
+    else:
+        # do a normal return FIXME
+        # vim.command('call feedkeys("\<CR>")')
+        vim.command('normal <CR>')
 
-isinput = re.compile(r'^(\>\> |   )(.*)$')
 def shift_enter_at_prompt():
     """ Remove prompts and whitespace before sending to ipython. """
     cmds = []
-    lines = 1
-    while lines <= len(vib) and isinput.match(vib[-lines]):
-        cmds.append(vib[-lines][3:]) # remove the last three characters
-        lines += 1
+    linen = len(vib)
+    while linen > 0:
+        # remove the last three characters
+        cmds.append(vib[linen - 1][4:]) 
+        if vib[linen - 1].startswith(r'>>>'):
+            break
+        else:
+            linen -= 1
     cmds.reverse()
     if debugging:
         vib.append('Commands being sent from command prompt:')
@@ -171,22 +186,31 @@ def shift_enter_at_prompt():
     cmds = '\n'.join(cmds)
     if cmds == 'cls':
         vib[:] = None # clear the buffer
-        vib[-1] = '>> '
+        vib[-1] = '>>> '
         vim.command('startinsert!')
     else:
         send(cmds)
 
-blankprompt = re.compile(r'^\>\> $')
+        # make vim wait for up to a second
+        ping_count = 0
+        while ping_count < 50 and not update_subchannel_msgs():
+            vim.command("sleep 20m")
+            ping_count += 1
+
+
+blankprompt = re.compile(r'^\>\>\> $')
 def send(cmds, *args, **kargs):
     """ Send commands to ipython kernel. 
 
     Format the input, then print the statements to the vim-ipython buffer.
     """
     formatted = None
+    if debugging:
+        vib.append('about to send ...')
     if not in_vim_ipython():
         # format and input text
-        formatted = re.sub(r'\n',r'\n   ',cmds).splitlines()
-        formatted[0] = '>> ' + formatted[0]
+        formatted = re.sub(r'\n',r'\n... ',cmds).splitlines()
+        formatted[0] = '>>> ' + formatted[0]
 
         # remove any prompts or blank lines
         while len(vib) > 1 and blankprompt.match(vib[-1]):
@@ -199,8 +223,10 @@ def send(cmds, *args, **kargs):
     if debugging and formatted:
         vib.append('formatted commands:')
         vib.append(cmds)
-
-    return km.shell_channel.execute(cmds, *args, **kargs)
+    val = km.shell_channel.execute(cmds, *args, **kargs)
+    if debugging:
+        vib.append('sent: return val was %r' % val)
+    return val
 
 def is_vim_ipython_open():
     """
@@ -259,6 +285,7 @@ def update_subchannel_msgs(debug=False, force=False):
     This function will do nothing if the vim-ipython shell is not visible,
     unless force=True argument is passed.
     """
+    global isidle
     if km is None or (not is_vim_ipython_open() and not force):
         return False
     newprompt = False
@@ -276,9 +303,12 @@ def update_subchannel_msgs(debug=False, force=False):
         s = None
         if msg_type == 'status':
             if m['content']['execution_state'] == 'idle':
+                isidle = True
                 newprompt = True
             else:
                 newprompt = False
+            if m['content']['execution_state'] == 'busy':
+                isidle = False
         elif msg_type == 'stream':
             s = strip_color_escapes(m['content']['data'])
         elif msg_type == 'pyout':
@@ -288,9 +318,8 @@ def update_subchannel_msgs(debug=False, force=False):
             continue
         elif msg_type == 'pyerr':
             c = m['content']
-            s = "ERROR >>\n" + "\n".join(map(strip_color_escapes,c['traceback']))
+            s = "\n".join(map(strip_color_escapes,c['traceback']))
             s += c['ename'] + ": " + c['evalue']
-            s += "\n<< ERROR"
         
         if s: # then update the vim-ipython buffer with the formatted text
             if s.find('\n') == -1: # then use ugly unicode workaround from 
@@ -309,17 +338,18 @@ def update_subchannel_msgs(debug=False, force=False):
     # move to the vim-ipython (so that the autocommand can scroll down)
     if in_vim_ipython():
         if newprompt:
-            vib.append('>> ')
+            vib.append('>>> ')
             vim.command('normal G')
             vim.command('startinsert!')
     else:
         vim.command('drop vim-ipython.py')
         if newprompt:
-            vib.append('>> ')
+            vib.append('>>> ')
         # then get out of insert mode and go back to the previous location
         vim.command('exe "normal \<C-w>p"')
     # make an arbitrary command, so that the cursorhold autocommand will be triggered again
     # vim.command("call feedkeys('f\e')")
+    return len(msgs)
             
 def get_child_msg(msg_id):
     # XXX: message handling should be split into its own process in the future
@@ -376,10 +406,6 @@ def run_these_lines():
     r = vim.current.range
     lines = "\n".join(vim.current.buffer[r.start:r.end+1])
     msg_id = send(lines)
-    # reselect the previously highlighted block
-    vim.command("normal gv")
-    if not reselect:
-        vim.command("normal ")
 
 # TODO: Add ability to run a selection
 
@@ -459,13 +485,75 @@ def startup():
 
     # Update the vim-ipython shell when the cursor is not moving, or vim regains focus
     vim.command("set updatetime=333") # will ping 3 times  a second
-    vim.command("au CursorHold *.py :python update_subchannel_msgs()")
+    vim.command("au CursorHold * :python update_subchannel_msgs()")
     vim.command("au FocusGained *.py :python update_subchannel_msgs()")
-    
+    vim.command("au filetype python setlocal completefunc=CompleteIPython")
+
+
+def get_doc(word):
+    if km is None:
+        return ["Not connected to IPython, cannot query: %s" % word]
+    msg_id = km.shell_channel.object_info(word)
+    doc = get_doc_msg(msg_id)
+    # get around unicode problems when interfacing with vim
+    return [d.encode(vim_encoding) for d in doc]
+
+def get_doc_msg(msg_id):
+    n = 13 # longest field name (empirically)
+    b=[]
+    try:
+        content = get_child_msg(msg_id)['content']
+    except Empty:
+        # timeout occurred
+        return ["no reply from IPython kernel"]
+
+    if not content['found']:
+        return b
+
+    for field in ['type_name','base_class','string_form','namespace',
+            'file','length','definition','source','docstring']:
+        c = content.get(field,None)
+        if c:
+            if field in ['definition']:
+                c = strip_color_escapes(c).rstrip()
+            s = field.replace('_',' ').title()+':'
+            s = s.ljust(n)
+            if c.find('\n')==-1:
+                b.append(s+c)
+            else:
+                b.append(s)
+                b.extend(c.splitlines())
+    return b
+
+def get_doc_buffer(level=0):
+    if not isidle:
+        echo("Can't query for Help When IPython is busy.  Do you have figures opened?")
+    # empty string in case vim.eval return None
+    word = vim.eval('expand("<cfile>")') or ''
+    doc = get_doc(word)
+    if len(doc) == 0 :
+        echo(repr(word) + " not found", "Error")
+        # TODO: revert to normal K
+        return
+    vim.command('new vim-ipython-help')
+    vim.command('setlocal modifiable noro nonumber')
+    # doc window quick quit keys: 'q' and 'escape'
+    vim.command('noremap <buffer> q :q<CR>')
+    # Known issue: to enable the use of arrow keys inside the terminal when
+    # viewing the documentation, comment out the next line
+    vim.command('map <buffer> <Esc> :q<CR>')
+    b = vim.current.buffer
+    b[:] = None
+    b[:] = doc
+    vim.command('setlocal nomodified bufhidden=wipe')
+    # max height of the buffer is 20
+    vim.command('resize %d' % min(len(b), 20))
+    vim.command('setlocal syntax=rst')
+
 EOF
 
 " MAPPINGS
-noremap <silent> <F5> :w<CR>:python run_this_file()<CR><ESC>
+noremap <silent> <F5> :wa<CR>:python run_this_file()<CR><ESC>
 noremap <silent> K :py get_doc_buffer()<CR>
 vnoremap <silent> <F9> :py run_these_lines()<CR><ESC>j
 nnoremap <silent> <F9> :py run_this_line()<CR><ESC>j
@@ -484,3 +572,55 @@ command! -nargs=0 IPythonXSelection :py km_from_string(vim.eval('@*'))
 command! -nargs=0 IPythonInterrupt :py interrupt_kernel_hack()
 
 
+fun! CompleteIPython(findstart, base)
+      if a:findstart
+        " locate the start of the word
+        let line = getline('.')
+        let start = col('.') - 1
+        while start > 0 && line[start-1] =~ '\k\|\.' "keyword
+          let start -= 1
+        endwhile
+        echo start
+        python << endpython
+current_line = vim.current.line
+endpython
+        return start
+      else
+        " find months matching with "a:base"
+        let res = []
+        python << endpython
+base = vim.eval("a:base")
+findstart = vim.eval("a:findstart")
+msg_id = km.shell_channel.complete(base, current_line, vim.eval("col('.')"))
+try:
+    m = get_child_msg(msg_id)
+    matches = m['content']['matches']
+    matches.insert(0,base) # the "no completion" version
+    # we need to be careful with unicode, because we can have unicode
+    # completions for filenames (for the %run magic, for example). So the next
+    # line will fail on those:
+    #completions= [str(u) for u in matches]
+    # because str() won't work for non-ascii characters
+    # and we also have problems with unicode in vim, hence the following:
+    completions = [s.encode(vim_encoding) for s in matches]
+except Empty:
+    echo("no reply from IPython kernel")
+    completions=['']
+## Additionally, we have no good way of communicating lists to vim, so we have
+## to turn in into one long string, which can be problematic if e.g. the
+## completions contain quotes. The next line will not work if some filenames
+## contain quotes - but if that's the case, the user's just asking for
+## it, right?
+#completions = '["'+ '", "'.join(completions)+'"]'
+#vim.command("let completions = %s" % completions)
+## An alternative for the above, which will insert matches one at a time, so
+## if there's a problem with turning a match into a string, it'll just not
+## include the problematic match, instead of not including anything. There's a
+## bit more indirection here, but I think it's worth it
+for c in completions:
+    vim.command('call add(res,"'+c+'")')
+endpython
+        "call extend(res,completions) 
+        return res
+      endif
+    endfun

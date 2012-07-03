@@ -56,6 +56,10 @@ autocmd FileType *
     \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
     \ endif
 
+" NETWORK
+" Disable matching parenthesise when on a network file
+autocmd BufReadPre //* :NoMatchParen
+
 " SESSIONS AND PROJECTS
 " Trigger file-explorer plugin Nerd tree
 noremap <silent> <F1> :NERDTreeToggle<CR>

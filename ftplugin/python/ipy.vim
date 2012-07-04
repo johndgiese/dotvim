@@ -29,6 +29,11 @@
 " much)
 " TODO figure out a way to display the In[nn] and Out[nn] displays (maybe use
 " the conceal feature?
+" TODO: figure out bug where it won't start properly after booting the
+" computer
+" FIXME: bug occurs where execution is lagging when you press shift-enter;
+" e.g. you run b = 3 <S-CR> print(b) <S-CR> (no output) a = 4 <S-CR> (output:
+" 3)
 "
 " TODO: better documentation
 " TODO: user options
@@ -321,6 +326,8 @@ def shift_enter_at_prompt():
             if debugging:
                 vib.append('a object info request was triggered')
             content = use_normal_highlighting(get_doc(cmds[:-1]))
+            if content == '':
+                return
             vib.append(content)
             new_prompt()
             return
@@ -541,6 +548,8 @@ def use_normal_highlighting(s):
             s[0] = vib_ns + s[0]
             s[-1] = s[-1] + vib_ne
     else: # if it is string
+        if s == '':
+            return ''
         if s[-1] == '\n':
             s = vib_ns + s[:-1] + vib_ne + '\n'
         else:
@@ -660,8 +669,11 @@ def shutdown():
 def get_doc(word):
     msg_id = km.shell_channel.object_info(word)
     doc = get_doc_msg(msg_id)
-    # get around unicode problems when interfacing with vim
-    return [d.encode(vim_encoding) for d in doc]
+    if len(doc) == 0:
+        return ''
+    else:
+        # get around unicode problems when interfacing with vim
+        return [d.encode(vim_encoding) for d in doc]
 
 def get_doc_msg(msg_id):
     n = 13 # longest field name (empirically)

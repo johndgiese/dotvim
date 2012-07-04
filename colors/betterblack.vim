@@ -34,12 +34,12 @@ hi TabLine guibg=#222222 guifg=#FFFFFF gui=NONE
 hi StatusLine guibg=#222222 guifg=#FFFFFF gui=NONE
 hi StatusLineNC guibg=#222222 guifg=#FFFFFF gui=NONE
 hi Search guibg=#FFFF22 guifg=#000000 gui=NONE
-hi IncSearch guibg=#CCCCFF guifg=#000000 gui=NONE
+hi IncSearch guibg=#AAAAFF guifg=#000000 gui=NONE
 hi CursorLine guibg=#252525  gui=NONE
 hi CursorColumn guibg=#252525 gui=NONE
 hi FoldColumn guibg=#000000 guifg=#FFFFFF gui=NONE
 hi Visual guibg=#222222 gui=NONE
-hi SignColumn guibg=#000000 guifg=#FFFFFF
+hi link SignColumn LineNr
 
 " VIM
 hi link vimCommentTitle Comment
@@ -69,6 +69,12 @@ hi link PythonEscape String
 hi link matlabSemicolon Normal
 hi link matlabImplicit Normal
 hi link matlabOperator Normal
+
+" Markdown
+hi link markdownItalic Normal
+hi markdownH1 guibg=#000000 guifg=#44FF44 gui=bold
+hi markdownH2 guibg=#000000 guifg=#BBFFBB gui=bold
+hi markdownHeadingDelimiter NONE
 
 " Javascript
 hi link Javascript Normal

@@ -39,6 +39,10 @@ hi CursorLine guibg=#252525  gui=NONE
 hi CursorColumn guibg=#252525 gui=NONE
 hi FoldColumn guibg=#000000 guifg=#FFFFFF gui=NONE
 hi Visual guibg=#222222 gui=NONE
+hi SignColumn guibg=#000000 guifg=#FFFFFF
+
+" VIM
+hi link vimCommentTitle Comment
 
 " NERDTree
 hi NERDTreeDir guibg=#000000 guifg=#0052FF gui=NONE

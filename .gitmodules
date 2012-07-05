@@ -50,3 +50,6 @@
 	path = bundle/javascript
 	url = https://github.com/pangloss/vim-javascript.git
     ignore = dirty
+[submodule "bundle\\syntastic"]
+	path = bundle\\syntastic
+	url = https://github.com/scrooloose/syntastic.git

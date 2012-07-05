@@ -39,7 +39,7 @@ hi CursorLine guibg=#252525  gui=NONE
 hi CursorColumn guibg=#252525 gui=NONE
 hi FoldColumn guibg=#000000 guifg=#FFFFFF gui=NONE
 hi Visual guibg=#222222 gui=NONE
-hi link SignColumn LineNr
+hi SignColumn guibg=#222222 guifg=#FFFFFF gui=NONE
 
 " VIM
 hi link vimCommentTitle Comment

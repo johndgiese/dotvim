@@ -54,6 +54,7 @@ import re
 from os.path import basename
 
 debugging = False
+in_debugger = False
 monitor_subchannel = True   # update vim-ipython 'shell' on every send?
 run_flags= "-i"             # flags to for IPython's run magic when using <F5>
 current_line = ''
@@ -177,9 +178,7 @@ def setup_vib():
     # mappings to control history
     vim.command("inoremap <buffer> <silent> <up> <ESC>:py up_at_prompt('up')<CR>GA")
     vim.command("inoremap <buffer> <silent> <down> <ESC>:py up_at_prompt('down')<CR>GA")
-    vim.command("inoremap <buffer> <silent> <right> <ESC>:py up_at_prompt('done')<CR>GA")
-    # TODO: add better backspace (won't delete past 4)
-    vim.command("inoremap <buffer> <silent> <BS> <ESC>:py new_hist_search = True<CR>a<BS>")
+    vim.command("inoremap <buffer> <silent> <right> <ESC>:py up_at_prompt('done')<CR>la")
 
     # make some normal vim commands convenient when in the vib
     vim.command("nnoremap <buffer> <silent> dd cc>>> ")
@@ -203,6 +202,58 @@ def setup_vib():
     else: # otherwise, turn of the ns, ne markers
         vib_ns = ''
         vib_ne = ''
+
+## DEBUGGING STUFF
+# TODO: figure out a way to know when you are out of the debugger
+vim.command("nnoremap <F10> :py db_step()<CR>")
+vim.command("nnoremap <F11> :py db_stepinto()<CR>")
+vim.command("nnoremap <F11> :py db_stepout()<CR>")
+vim.command("nnoremap <F5> :py db_continue()<CR>") # this is set below
+vim.command("nnoremap <S-F5> :py db_quit()<CR>")
+
+def db_check(fun):
+    """ Check whether in debug mode and print prompt. """
+    def wrapper():
+        global in_debugger
+        if in_debugger:
+            prompt = fun()
+        else:
+            return
+        vib[-1] = 'ipdb> ' + prompt
+
+    return wrapper
+
+@db_check
+def db_step():
+    km.stdin_channel.input('n')
+    return 'next'
+
+@db_check
+def db_stepinto():
+    km.stdin_channel.input('s')
+    return 'step'
+
+@db_check
+def db_stepout():
+    km.stdin_channel.input('unt')
+    return 'until'
+
+def db_continue():
+    global in_debugger
+    if not in_debugger:
+        msg_id = send("get_ipython().magic(u'run -d %s')" % (repr(vim.current.buffer.name)[1:-1]))
+        in_debugger = True
+    km.stdin_channel.input('c')
+    return 'continue'
+
+@db_check
+def db_quit():
+    km.stdin_channel.input('q')
+    in_debugger = False
+    return 'quit'
+
+    
+
 
 
 new_hist_search = True
@@ -531,8 +582,6 @@ def update_subchannel_msgs(debug=False, force=False):
     if in_vim_ipython():
         if newprompt:
             new_prompt()
-        if status == 'input requested':
-            goto_vib()
     else:
         if newprompt:
             new_prompt(goto=False)
@@ -620,6 +669,12 @@ def dedent_run_these_lines():
     vim.command("silent undo")
 
 def startup():
+    # TODO: make this an auto command group
+    # TODO: read about creating autocommands multiple times
+    vim.command("au CursorHold * :python update_subchannel_msgs()")
+    vim.command("au FocusGained *.py :python update_subchannel_msgs()")
+    vim.command("au filetype python setlocal completefunc=CompleteIPython")
+
     # TODO: make the startup more robust to the kernel being missing
     # e.g. make it poll a few times
     # TODO: make vim look for the kernel first, before making a new one
@@ -640,10 +695,6 @@ def startup():
     # Update the vim-ipython shell when the cursor is not moving, or vim regains focus
     vim.command("set updatetime=333") # the cursor hold is updated 3 times a second (maximum), but it doesn't update if you stop moving
 
-    # TODO: make this an auto command group
-    vim.command("au CursorHold * :python update_subchannel_msgs()")
-    vim.command("au FocusGained *.py :python update_subchannel_msgs()")
-    vim.command("au filetype python setlocal completefunc=CompleteIPython")
 
 def shutdown():
     global km
@@ -749,10 +800,11 @@ def goto_vib(insert_at_end=True):
     if insert_at_end:
         vim.command('normal G')
         vim.command('startinsert!')
+
 EOF
 
 " MAPPINGS
-noremap <silent> <F5> :wa<CR>:python run_this_file()<CR><ESC>
+nnoremap <silent> <C-F5> :wa<CR>:py run_this_file()<CR>
 noremap <silent> K :py get_doc_buffer()<CR>
 vnoremap <silent> <F9> :py run_these_lines()<CR><ESC>j
 nnoremap <silent> <F9> :py run_this_line()<CR><ESC>j

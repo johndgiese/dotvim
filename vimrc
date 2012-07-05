@@ -127,6 +127,7 @@ map \ ,
 " insert the very magic reg-ex mode every time
 set hlsearch incsearch
 nnoremap / /\v
+nnoremap ? ?\v
 nnoremap <leader>/ :noh<CR>
 
 " switch semi-colon and colon

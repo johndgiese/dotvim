@@ -194,6 +194,18 @@ set wrap linebreak
 " TODO: make search use regular expressions by default
 set statusline=%<%F%h%m%r\ [%{&ff}]\ (%{strftime(\"%H:%M\ %d/%m/%Y\",getftime(expand(\"%:p\")))})%=%l,%c%V\ %P
 
+" SYNTASTIC
+let g:syntastic_enable_signs=0
+let g:syntastic_enable_ballons=0
+let g:syntastic_enable_auto_jump=0
+let g:syntastic_enable_highlighting=0
+let g:syntastic_auto_loc_list=2
+let g:syntastic_quiet_warnings=1
+let g:syntastic_echo_current_error=0
+let g:syntastic_mode_map = { 'mode': 'passive',
+                            \ 'active_filetypes': [], 
+                            \ 'passive_filetypes': [] }
+
 " AUTOCOMPLETE
 set completeopt=longest,menuone
 

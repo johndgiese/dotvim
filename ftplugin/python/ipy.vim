@@ -170,23 +170,15 @@ def setup_vib():
     # turn of auto indent (there is some custom indenting that accounts
     # for the prompt).  See vim-tip 330
     vim.command("setl noai nocin nosi inde=") 
-
     vim.command("syn match Normal /^>>>/")
 
     # mappings to control sending stuff from vim-ipython
     vim.command("inoremap <buffer> <silent> <s-cr> <ESC>:py shift_enter_at_prompt()<CR>")
     vim.command("nnoremap <buffer> <silent> <s-cr> <ESC>:py shift_enter_at_prompt()<CR>")
     vim.command("inoremap <buffer> <silent> <cr> <ESC>:py enter_at_prompt()<CR>")
-    # mappings to control history
-    vim.command("inoremap <buffer> <silent> <up> <ESC>:py prompt_history('up')<CR>GA")
-    vim.command("inoremap <buffer> <silent> <down> <ESC>:py prompt_history('down')<CR>GA")
-    vim.command("inoremap <buffer> <silent> <right> <ESC>:py need_new_hist = True<CR>la")
 
-    # make some normal vim commands convenient when in the vib
-    vim.command("nnoremap <buffer> <silent> dd cc>>> ")
-    vim.command("noremap <buffer> <silent> <home> 0llll")
-    vim.command("inoremap <buffer> <silent> <home> <ESC>0llla")
-    vim.command("noremap <buffer> <silent> 0 0llll")
+    # setup history mappings etc.
+    enter_normal()
 
     # commands for escaping
     vim.command("noremap <buffer> <silent> <F12> <ESC><C-w>p")
@@ -207,6 +199,53 @@ def setup_vib():
         vib_ns = ''
         vib_ne = ''
 
+def enter_normal():
+    global vib_map, in_debugger
+    in_debugger = False
+    vib_map = "on"
+    in_debugger = False
+    # mappings to control history
+    vim.command("inoremap <buffer> <silent> <up> <ESC>:py prompt_history('up')<CR>GA")
+    vim.command("inoremap <buffer> <silent> <down> <ESC>:py prompt_history('down')<CR>GA")
+    vim.command("inoremap <buffer> <silent> <right> <ESC>:py need_new_hist = True<CR>la")
+
+    # make some normal vim commands convenient when in the vib
+    vim.command("nnoremap <buffer> <silent> dd cc>>> ")
+    vim.command("noremap <buffer> <silent> <home> 0llll")
+    vim.command("inoremap <buffer> <silent> <home> <ESC>0llla")
+    vim.command("noremap <buffer> <silent> 0 0llll")
+
+    # unmap debug codes
+    try:
+        vim.command("unmap <F10>")
+        vim.command("unmap <F11>")
+        vim.command("unmap <C-F11>")
+        vim.command("unmap <S-F5>")
+    except vim.error:
+        pass
+
+def enter_debug():
+    """ Remove all the convenience mappings. """
+    global vib_map, in_debugger
+    vib_map = "off"
+    in_debugger = True
+    try:
+        vim.command("iunmap <buffer> <silent> <up>")
+        vim.command("iunmap <buffer> <silent> <down>")
+        vim.command("iunmap <buffer> <silent> <right>")
+        vim.command("unmap <buffer> <silent> dd")
+        vim.command("unmap <buffer> <silent> <home>")
+        vim.command("iunmap <buffer> <silent> <home>")
+        vim.command("unmap <buffer> <silent> 0")
+    except vim.error:
+        pass
+
+    vim.command("nnoremap <F10> :py db_step()<CR>")
+    vim.command("nnoremap <F11> :py db_stepinto()<CR>")
+    vim.command("nnoremap <C-F11> :py db_stepout()<CR>")
+    vim.command("nnoremap <F5> :py db_continue()<CR>") # this is set below
+    vim.command("nnoremap <S-F5> :py db_quit()<CR>")
+
 ## DEBUGGING
 """ I think the best way to do visual debugging will be to use marks for break
 points.  Originally I wanted to use signs, but it doesn't seem like there is
@@ -216,11 +255,6 @@ setpos() vim function.  I think marks in combination with the showmarks
 plugin, will allow us to make a really good visual debugger that is laid on
 top of pdb. """
 # TODO: figure out a way to know when you are out of the debugger
-vim.command("nnoremap <F10> :py db_step()<CR>")
-vim.command("nnoremap <F11> :py db_stepinto()<CR>")
-vim.command("nnoremap <F11> :py db_stepout()<CR>")
-vim.command("nnoremap <F5> :py db_continue()<CR>") # this is set below
-vim.command("nnoremap <S-F5> :py db_quit()<CR>")
 
 vim.command("sign define pypc texthl=ProgCount text=>>")
 vim.command("hi ProgCount guibg=#000000 guifg=#00FE33 gui=bold")
@@ -244,7 +278,6 @@ def db_check(fun):
             prompt = fun()
         else:
             return
-        vib[-1] = 'ipdb> ' + prompt
 
     return wrapper
 
@@ -470,6 +503,7 @@ def update_subchannel_msgs(debug=False):
     if km is None:
         return False
     newprompt = False
+    gotoend = False # this is a hack for moving to the end of the prompt when new input is requested that should get cleaned up
 
     msgs = km.sub_channel.get_msgs()
     msgs += km.stdin_channel.get_msgs() # also handle messages from stdin
@@ -517,6 +551,7 @@ def update_subchannel_msgs(debug=False):
             status = 'input requested'
             vim.command('let g:ipy_status="' + status + '"')
             length_of_last_input_request = len(m['content']['prompt'])
+            gotoend = True
 
         elif msg_type == 'crash':
             s = "The IPython Kernel Crashed!"
@@ -543,6 +578,15 @@ def update_subchannel_msgs(debug=False):
     if in_vim_ipython():
         if newprompt:
             new_prompt()
+        if gotoend:
+            goto_vib()
+
+        # turn off some mappings when input is requested (e.g. the history search)
+        if status == "input requested" and vib_map == "on":
+            enter_debug()
+        if vib_map == "off" and status != "input requested":
+            enter_normal()
+
     else:
         if newprompt:
             new_prompt(goto=False)
@@ -589,15 +633,8 @@ def run_this_line():
 ws = re.compile(r'\s*')
 @with_subchannel
 def run_these_lines():
-    # run a selection if used little v
-    if vim.eval('visualmode()') == 'v':
-        vim.command('normal y')
-        lines = vim.eval("getreg('0')").splitlines()
-    # otherwise run all of the lines
-    else:
-        r = vim.current.range
-        lines = vim.current.buffer[r.start:r.end+1]
-    # remove white space
+    vim.command('normal y')
+    lines = vim.eval("getreg('0')").splitlines()
     ws_length = len(ws.match(lines[0]).group())
     lines = [line[ws_length:] for line in lines]
     msg_id = send("\n".join(lines))

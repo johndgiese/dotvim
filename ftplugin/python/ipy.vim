@@ -24,6 +24,8 @@
 " the conceal feature?
 " TODO: figure out bug where it won't start properly after booting the
 " computer
+" TODO: ipython won't close with S-F12 if figures are open; figure out why and
+" fix
 " FIXME: running a file with F5 places you in insert mode
 "
 " TODO: better documentation
@@ -330,15 +332,16 @@ def prompt_history(key):
     vim.command('normal G$')
 
 def hist_sort(hist_item):
-    """ hist_item is a tuple with: (session, line_number, input)
-    where session and line_number increase through time """
+    """ Sort history items such that the most recent sessions has highest
+    priority.
+    
+    hist_item is a tuple with: (session, line_number, input)
+    where session and line_number increase through time. """
     return hist_item[0]*10000 + hist_item[1]
 
 ## COMMAND LINE 
 numspace = re.compile(r'^[>.]{3}(\s*)')
 def enter_at_prompt():
-    global need_new_hist
-    need_new_hist = True # reset history search
     if at_end_of_prompt():
         match = numspace.match(vib[-1])
         if match:
@@ -355,8 +358,6 @@ def enter_at_prompt():
 
 def shift_enter_at_prompt():
     """ Remove prompts and whitespace before sending to ipython. """
-    global need_new_hist
-    need_new_hist = True # reset history search
     if status == 'input requested':
         km.stdin_channel.input(vib[-1][length_of_last_input_request:])
     else:
@@ -371,14 +372,9 @@ def shift_enter_at_prompt():
             else:
                 linen -= 1
         cmds.reverse()
-        if debugging:
-            vib.append('Commands being sent from command prompt:')
-            vib.append(cmds)
 
         cmds = '\n'.join(cmds)
         if cmds == 'cls' or cmds == 'clear':
-            if debugging:
-                vib.append('a vim-only command was triggered')
             vib[:] = None # clear the buffer
             new_prompt(append=False)
             return
@@ -395,8 +391,6 @@ def shift_enter_at_prompt():
                 echo("No object informat was found.  Make sure that the requested object has been executed and is in the interactive namespace, otherwise IPython won't be aware of it.")
             new_prompt()
         elif cmds.endswith('?'):
-            if debugging:
-                vib.append('a object info request was triggered')
             content = use_normal_highlighting(get_doc(cmds[:-1]))
             if content == '':
                 return
@@ -412,7 +406,7 @@ def shift_enter_at_prompt():
         vim.command("sleep 20m")
         ping_count += 1
 
-def new_prompt(goto=True,append=True):
+def new_prompt(goto=True, append=True):
     if append:
         vib.append('>>> ')
     else:
@@ -445,10 +439,12 @@ def send(cmds, *args, **kargs):
     Format the input, then print the statements to the vim-ipython buffer.
     """
     formatted = None
-    if debugging:
-        vib.append('about to send ...')
     if status == 'input requested':
-        echo('Can not send further commands until you respond to the input request')
+        echo('Can not send further commands until you respond to the input request.')
+        return 
+    elif status == 'busy':
+        echo('Can not send commands while the python kernel is busy.')
+        return
     if not in_vim_ipython():
         formatted = format_for_prompt(cmds, limit=True)
 
@@ -460,23 +456,18 @@ def send(cmds, *args, **kargs):
             vib[-1] = formatted[0]
         else:
             vib.append(formatted) 
-    if debugging and formatted:
-        vib.append('formatted commands:')
-        vib.append(cmds)
     val = km.shell_channel.execute(cmds, *args, **kargs)
-    if debugging:
-        vib.append('sent: return val was %r' % val)
     return val
 
 
-def update_subchannel_msgs(debug=False, force=False):
+def update_subchannel_msgs(debug=False):
     """ This function grabs messages from ipython and acts accordinly; note
     that communications are asynchronous, and furthermore there is no good way to
     repeatedly trigger a function in vim.  There is an autofunction that will
     trigger whenever the cursor moves, which is the next best thing.
     """
     global status, length_of_last_input_request
-    if km is None or (not is_vim_ipython_open() and not force):
+    if km is None:
         return False
     newprompt = False
 

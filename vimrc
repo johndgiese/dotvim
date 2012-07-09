@@ -207,6 +207,15 @@ let g:syntastic_mode_map = { 'mode': 'passive',
                             \ 'active_filetypes': [], 
                             \ 'passive_filetypes': [] }
 
+" INSERT MODE MAPPINGS
+inoremap <C-0> <C-S-o>$
+inoremap <C-9> <C-S-o>9
+
+" ABBREVIATIONS
+abbreviate jquery JQuery
+abbreviate labview LabVIEW
+abbreviate matlab MATLAB
+
 " AUTOCOMPLETE
 set completeopt=longest,menuone
 

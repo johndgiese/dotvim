@@ -53,3 +53,6 @@
 [submodule "bundle\\syntastic"]
 	path = bundle\\syntastic
 	url = https://github.com/scrooloose/syntastic.git
+[submodule "bundle/matchit"]
+	path = bundle/matchit
+	url = https://github.com/edsono/vim-matchit.git

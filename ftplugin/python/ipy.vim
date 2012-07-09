@@ -46,6 +46,43 @@ endif
 
 let g:ipy_status="idle"
 
+" TODO finish ascii escape codes
+"hi AnsiBlack guibg=NONE guifg=#000000 gui=NONE
+"sy region AnsiBlack matchgroup=Hidden start=+\%x1b\[0;30m+ end=+\%x1b\[1m+ concealends contains=ansiConceal
+"hi AnsiRed guibg=NONE guifg=#ee0000 gui=NONE
+"sy region AnsiBlack matchgroup=Hidden start=+\%x1b\[0;31m+ end=+\%x1b\[1m+ concealends contains=ansiConceal
+"hi AnsiGreen guibg=NONE guifg=#00FF00 gui=NONE
+"sy region AnsiGreen matchgroup=Hidden start=+\%x1b\[0;32m+ end=+\%x1b\[1m+ concealends contains=ansiConceal
+"hi AnsiYellow guibg=NONE guifg=#FFFF00 gui=NONE
+"sy region AnsiYellow matchgroup=Hidden start=+\%x1b\[0;33m+ end=+\%x1b\[1m+ concealends contains=ansiConceal
+"hi AnsiBlue guibg=NONE guifg=#0000FF gui=NONE
+"sy region AnsiBlue matchgroup=Hidden start=+\%x1b\[0;34m+ end=+\%x1b\[1m+ concealends contains=ansiConceal
+"hi AnsiPurple guibg=NONE guifg=#BB00FF gui=NONE
+"sy region AnsiPurple matchgroup=Hidden start=+\%x1b\[0;35m+ end=+\%x1b\[1m+ concealends contains=ansiConceal
+"hi AnsiCyan guibg=NONE guifg=#00FFFF gui=NONE
+"sy region AnsiCyan matchgroup=Hidden start=+\%x1b\[0;36m+ end=+\%x1b\[1m+ concealends contains=ansiConceal
+"hi AnsiLightGray guibg=NONE guifg=#999999 gui=NONE
+"sy region AnsiLightGray matchgroup=Hidden start=+\%x1b\[0;37m+ end=+\%x1b\[1m+ concealends contains=ansiConceal
+"hi AnsiDarkGray guibg=NONE guifg=#444444 gui=NONE
+
+"sy region AnsiDarkGray matchgroup=Hidden start=+\%x1b\[1;30m+ end=+\%x1b\[0m+ concealends contains=ansiConceal
+"hi AnsiBoldRed guibg=NONE guifg=#FF0000 gui=NONE
+"sy region AnsiBoldRed matchgroup=Hidden start=+\%x1b\[1;31m+ end=+\%x1b\[0m+ concealends contains=ansiConceal
+"hi AnsiBoldGreen guibg=NONE guifg=#0AFC37 gui=NONE
+"sy region AnsiBoldGreen matchgroup=Hidden start=+\%x1b\[1;32m+ end=+\%x1b\[0m+ concealends contains=ansiConceal
+"hi AnsiBoldYellow guibg=NONE guifg=#FFFF00 gui=NONE
+"sy region AnsiBoldYellow matchgroup=Hidden start=+\%x1b\[1;33m+ end=+\%x1b\[0m+ concealends contains=ansiConceal
+"hi AnsiBoldBlue guibg=NONE guifg=#0000FF gui=NONE
+"sy region AnsiBoldBlue matchgroup=Hidden start=+\%x1b\[1;34m+ end=+\%x1b\[0m+ concealends contains=ansiConceal
+"hi AnsiBoldPurple guibg=NONE guifg=#FF44FF gui=NONE
+"sy region AnsiBoldPurple matchgroup=Hidden start=+\%x1b\[1;35m+ end=+\%x1b\[0m+ concealends contains=ansiConceal
+"hi AnsiBoldCyan guibg=NONE guifg=#00FFFF gui=NONE
+"sy region AnsiBoldCyan matchgroup=Hidden start=+\%x1b\[1;36m+ end=+\%x1b\[0m+ concealends contains=ansiConceal
+"hi AnsiWhite guibg=NONE guifg=#FFFFFF gui=NONE
+"sy region AnsiWhite matchgroup=Hidden start=+\%x1b\[1;37m+ end=+\%x1b\[0m+ concealends contains=ansiConceal
+"syn match ansiConceal contained conceal "\e\[\(\d*;\)*\d*m"
+"sy match ansiSuppress conceal +\%x1b\[0m+
+
 
 python << EOF
 import vim
@@ -104,7 +141,12 @@ def startup():
     vim.command("au VimLeavePre :python shutdown()")
     vim.command("augroup END")
 
-    if not km:
+    # TODO: need a good way to ping the server, so that we can see
+    # when it is alive, and also tell when it is done booting up
+    try:
+        msg_id = km.shell_channel.execute('print("I am alive!")')
+        content = get_child_msg(msg_id)['content']
+    except:
         vim.command('!start /min ipython kernel')
         vim.command('sleep 2')
         km_from_connection_file()
@@ -178,7 +220,7 @@ def setup_vib():
     vim.command("inoremap <buffer> <silent> <cr> <ESC>:py enter_at_prompt()<CR>")
 
     # setup history mappings etc.
-    enter_normal()
+    enter_normal(first=True)
 
     # commands for escaping
     vim.command("noremap <buffer> <silent> <F12> <ESC><C-w>p")
@@ -199,7 +241,7 @@ def setup_vib():
         vib_ns = ''
         vib_ne = ''
 
-def enter_normal():
+def enter_normal(first=False):
     global vib_map, in_debugger
     in_debugger = False
     vib_map = "on"
@@ -216,13 +258,14 @@ def enter_normal():
     vim.command("noremap <buffer> <silent> 0 0llll")
 
     # unmap debug codes
-    try:
-        vim.command("unmap <F10>")
-        vim.command("unmap <F11>")
-        vim.command("unmap <C-F11>")
-        vim.command("unmap <S-F5>")
-    except vim.error:
-        pass
+    if not first:
+        try:
+            vim.command("unmap <buffer> <F10>")
+            vim.command("unmap <buffer> <F11>")
+            vim.command("unmap <buffer> <C-F11>")
+            vim.command("unmap <buffer> <S-F5>")
+        except vim.error:
+            pass
 
 def enter_debug():
     """ Remove all the convenience mappings. """
@@ -411,6 +454,19 @@ def shift_enter_at_prompt():
             vib[:] = None # clear the buffer
             new_prompt(append=False)
             return
+            # TODO: allow the user to start editing a file from command window
+            #        elif cmds.startswith('edit '):
+            #            fnames = cmds[5:].split(' ')
+            #            msg_id = km.shell_channel.execute('%pwd')
+            #            try:
+            #                pwd = get_child_msg(msg_id)['content']
+            #                vib.append(repr(pwd).splitlines())
+            #                pwd = pwd['data']['text/plain']
+            #            except Empty:
+            #                # timeout occurred
+            #                return echo("no reply from IPython kernel")
+            #            for fname in fnames:
+            #                vib.append(pwd + fname)
         elif cmds.endswith('??'):
             msg_id = km.shell_channel.object_info(cmds[:-2])
             try:

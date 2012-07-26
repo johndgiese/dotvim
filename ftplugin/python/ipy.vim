@@ -3,21 +3,18 @@
 " TODO: figure out what is wrong with ion()
 " TODO: better error display
 " TODO: finish adding ?
-" TODO: make ?? open the source file
 " TODO: make the edit a vim-only command that will open in a new buffer
 " TODO: use better syntax highlighting so that error messages and pydoc
 " # are colored correctly
-" TODO: handle multi-line input_requests
+" TODO: handle multi-line input_requests (is this ever possible anyways?)
 " TODO: test what happens when the vib is in a different window
 " TODO: find a way to prevent vib from showing up in buffer list
 " TODO: make vim-only commands work even if there are multiple entered
 " togethre
 " TODO: fix cursor issue
-" TODO: read about vim plugins (how do you add help, make them fast, etc.)
 " TODO: better tab complete which can tell if you are in a function call, and return arguments as appropriatey)
-" TODO: syntax coloring for python files ...
 " TODO: use the ipython color codes as syntax blocks in vib
-" TODO: make sure everything works on windows and linux
+" TODO: make sure everything works on mac and linux
 " TODO: when there is really long output, and the user is in the vib, then
 " make it act like less (so that you can scroll down)
 " TODO figure out a way to display the In[nn] and Out[nn] displays (maybe use
@@ -26,7 +23,16 @@
 " computer
 " TODO: ipython won't close with S-F12 if figures are open; figure out why and
 " fix
+" TODO: make a movement operator that runs code
 " FIXME: running a file with F5 places you in insert mode
+" FIXME: the color coding breaks sometimes when if 
+" TODO: prevent F9 and other mappings from throwing warnings when python is
+" not open
+" FIXME: there is a bug that will occur if the vim-ipython buffer isn't shown
+" in any window, and you press F12 (I think it only occurs if you have
+" changed the vim path using :cd new_directory) The bufexplorer doesn't work
+" when this bug occurs
+" TODO: handle copy-pasting into vib better
 "
 " TODO: better documentation
 " TODO: user options
@@ -148,7 +154,7 @@ def startup():
         content = get_child_msg(msg_id)['content']
     except:
         vim.command('!start /min ipython kernel')
-        vim.command('sleep 2')
+        vim.command('sleep 4')
         km_from_connection_file()
 
     vib = get_vim_ipython_buffer()
@@ -247,9 +253,8 @@ def enter_normal(first=False):
     vib_map = "on"
     in_debugger = False
     # mappings to control history
-    vim.command("inoremap <buffer> <silent> <up> <ESC>:py prompt_history('up')<CR>GA")
-    vim.command("inoremap <buffer> <silent> <down> <ESC>:py prompt_history('down')<CR>GA")
-    vim.command("inoremap <buffer> <silent> <right> <ESC>:py need_new_hist = True<CR>la")
+    vim.command("inoremap <buffer> <silent> <up> <ESC>:py prompt_history('up')<CR>")
+    vim.command("inoremap <buffer> <silent> <down> <ESC>:py prompt_history('down')<CR>")
 
     # make some normal vim commands convenient when in the vib
     vim.command("nnoremap <buffer> <silent> dd cc>>> ")
@@ -260,10 +265,10 @@ def enter_normal(first=False):
     # unmap debug codes
     if not first:
         try:
-            vim.command("unmap <buffer> <F10>")
-            vim.command("unmap <buffer> <F11>")
-            vim.command("unmap <buffer> <C-F11>")
-            vim.command("unmap <buffer> <S-F5>")
+            vim.command("nunmap <F10>")
+            vim.command("nunmap <F11>")
+            vim.command("nunmap <C-F11>")
+            vim.command("nunmap <S-F5>")
         except vim.error:
             pass
 
@@ -276,10 +281,10 @@ def enter_debug():
         vim.command("iunmap <buffer> <silent> <up>")
         vim.command("iunmap <buffer> <silent> <down>")
         vim.command("iunmap <buffer> <silent> <right>")
-        vim.command("unmap <buffer> <silent> dd")
-        vim.command("unmap <buffer> <silent> <home>")
+        vim.command("nunmap <buffer> <silent> dd")
+        vim.command("nunmap <buffer> <silent> <home>")
         vim.command("iunmap <buffer> <silent> <home>")
-        vim.command("unmap <buffer> <silent> 0")
+        vim.command("nunmap <buffer> <silent> 0")
     except vim.error:
         pass
 
@@ -368,26 +373,39 @@ def prompt_history(key):
     through matches. """
 
     global last_hist, hist_pos, need_new_hist, num_lines_added_last, hist_prompt, hist_last_appended
+    if not at_end_of_prompt():
+        r,c = vim.current.window.cursor
+        if key == "up":
+            if not r == 1:
+                vim.current.window.cursor = (r - 1, c)
+        elif key == "down":
+            if not r == len(vim.current.buffer):
+                vim.current.window.cursor = (r + 1, c)
+        return
+    if status == "busy":
+        # echo("No history available because the python server is busy.")
+        # the message gets overridden immedieatly when the mapping switches back to 
+        # insert mode
+        return
     if not vib[-1] == hist_last_appended:
         need_new_hist = True
     if need_new_hist:
         cl = vim.current.line
-        if at_end_of_prompt():
-            if len(cl) > 4: # search for everything starting with the current line
-                pat = cl[4:] + '*'
-                msg_id = km.shell_channel.history(hist_access_type='search', pattern=pat)
-            else: # return the last 100 inputs
-                pat = ' '
-                msg_id = km.shell_channel.history(hist_access_type='tail', n=50)
-            hist_prompt = cl[:4] if len(cl) >= 4 else '>>> '
-                
-            hist = get_child_msg(msg_id)['content']['history']
-            # sort the history by time
-            last_hist = sorted(hist, key=hist_sort, reverse=True)
-            last_hist = [hi[2].encode(vim_encoding) for hi in last_hist] + [pat[:-1]]
-            need_new_hist = False
-            hist_pos = 0
-            num_lines_added_last = 1
+        if len(cl) > 4: # search for everything starting with the current line
+            pat = cl[4:] + '*'
+            msg_id = km.shell_channel.history(hist_access_type='search', pattern=pat)
+        else: # return the last 100 inputs
+            pat = ' '
+            msg_id = km.shell_channel.history(hist_access_type='tail', n=50)
+        hist_prompt = cl[:4] if len(cl) >= 4 else '>>> '
+            
+        hist = get_child_msg(msg_id)['content']['history']
+        # sort the history by time
+        last_hist = sorted(hist, key=hist_sort, reverse=True)
+        last_hist = [hi[2].encode(vim_encoding) for hi in last_hist] + [pat[:-1]]
+        need_new_hist = False
+        hist_pos = 0
+        num_lines_added_last = 1
     else:
         if key == "up":
             hist_pos = (hist_pos + 1) % len(last_hist)
@@ -406,6 +424,7 @@ def prompt_history(key):
     hist_last_appended = toadd[-1]
 
     vim.command('normal G$')
+    vim.command('startinsert!')
 
 def hist_sort(hist_item):
     """ Sort history items such that the most recent sessions has highest
@@ -482,18 +501,17 @@ def shift_enter_at_prompt():
         elif cmds.endswith('?'):
             content = use_normal_highlighting(get_doc(cmds[:-1]))
             if content == '':
-                return
+                content =  'No matches found for: %s' % cmds[:-1]
             vib.append(content)
             new_prompt()
             return
         else:
             send(cmds)
-
-    # make vim wait for up to a second
-    ping_count = 0
-    while ping_count < 50 and not update_subchannel_msgs():
-        vim.command("sleep 20m")
-        ping_count += 1
+            # make vim poll for a while
+            ping_count = 0
+            while ping_count < 30 and not update_subchannel_msgs():
+                vim.command("sleep 20m")
+                ping_count += 1
 
 def new_prompt(goto=True, append=True):
     if append:
@@ -506,15 +524,16 @@ def new_prompt(goto=True, append=True):
 
 def format_for_prompt(cmds, firstline='>>> ', limit=False):
     # format and input text
-    lines_to_show = 10
+    max_lines = 10
+    lines_to_show_when_over = 4
     if debugging:
         vib.append('this is what is being formated for the prompt:')
         vib.append(cmds)
     if not cmds == '':
         formatted = re.sub(r'\n',r'\n... ',cmds).splitlines()
         lines = len(formatted)
-        if limit and lines > lines_to_show:
-            formatted = formatted[:lines_to_show] + ['... (%d more lines)' % (lines - lines_to_show)]
+        if limit and lines > max_lines:
+            formatted = formatted[:lines_to_show_when_over] + ['... (%d more lines)' % (lines - lines_to_show_when_over)]
         formatted[0] = firstline + formatted[0]
         return formatted
     else:
@@ -776,10 +795,17 @@ def get_doc_buffer(level=0):
 
 ## HELPER FUNCTIONS
 def goto_vib(insert_at_end=True):
-    vim.command('drop ' + vib.name)
-    if insert_at_end:
-        vim.command('normal G')
-        vim.command('startinsert!')
+    global vib
+    try:
+        name = vib.name
+        vim.command('drop ' + name)
+        if insert_at_end:
+            vim.command('normal G')
+            vim.command('startinsert!')
+    except vim.error:
+        echo("It appears that the Vim-IPython buffer was deleted.  You can create a new one without reseting the python server (and losing any variables in the interactive namespace) by running the command :python setup_vib(), or you can reset the server by pressing SHIFT-F12 to shutdown the server, and then CTRL-F12 to start it up again along with a new Vim-IPython buffer.")
+        vib = None
+
 
 def at_end_of_prompt():
     """ Is the cursor at the end of a prompt line? """
@@ -876,7 +902,8 @@ def strip_color_escapes(s):
 EOF
 
 " MAPPINGS
-nnoremap <silent> <C-F5> :wa<CR>:py run_this_file()<CR>
+nnoremap <silent> <C-F5> :wa<CR>:py run_this_file()<CR><ESC>
+inoremap <silent> <C-F5> <ESC>:wa<CR>:py run_this_file()<CR>
 noremap <silent> K :py get_doc_buffer()<CR>
 vnoremap <silent> <F9> y:py run_these_lines()<CR><ESC>
 nnoremap <silent> <F9> :py run_this_line()<CR><ESC>j
@@ -887,6 +914,8 @@ inoremap <silent> <F12> <ESC>:py goto_vib()<CR>
 inoremap <silent> <C-F12> <ESC>:py startup()<CR>
 inoremap <silent> <S-F12> <ESC>:py shutdown()<CR>
 inoremap <silent> <S-CR> <ESC>:set nohlsearch<CR>V?^\n<CR>:python run_these_lines()<CR>:let @/ = ""<CR>:set hlsearch<CR>Go<ESC>o
+
+" TODO: add back cell evaluation mappings (similar to matlab)
 "nnoremap <silent> <S-CR> :set nohlsearch<CR>/^\n<CR>V?^\n<CR>:python run_these_lines()<CR>:let @/ = ""<CR>:set hlsearch<CR>j
 "nnoremap <silent> <C-CR> :set nohlsearch<CR>/^##\\|\%$<CR>:let @/ = ""<CR>kV?^##\\|\%^<CR>:python run_these_lines()<CR>:let @/ = ""<CR>:set hlsearch<CR>
 "" same as above, except moves to the next cell

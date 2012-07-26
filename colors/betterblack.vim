@@ -76,6 +76,9 @@ hi markdownH1 guibg=#000000 guifg=#44FF44 gui=bold
 hi markdownH2 guibg=#000000 guifg=#BBFFBB gui=bold
 hi markdownHeadingDelimiter NONE
 
+" HTML
+hi link htmlLink Normal
+
 " Javascript
 hi link Javascript Normal
 hi link JavascriptSpecial String

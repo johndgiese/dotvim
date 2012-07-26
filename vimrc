@@ -128,7 +128,7 @@ map \ ,
 set hlsearch incsearch
 nnoremap / /\v
 nnoremap ? ?\v
-nnoremap <leader>/ :noh<CR>
+nnoremap <silent> <leader>/ :noh<CR>
 
 " switch semi-colon and colon
 nnoremap ; :

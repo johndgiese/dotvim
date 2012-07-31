@@ -47,14 +47,14 @@ let g:SuperTabLongestEnhanced = 1
 let g:SuperTabLongestHighlight = 1
 let g:SuperTabNoCompleteBefore = []
 let g:SuperTabNoCompleteAfter = []
-let g:SuperTabMappingForward = '<C-space>'
-let g:SuperTabMappingBackward = '<S-C-space>'
+"let g:SuperTabMappingForward = '<C-space>'
+"let g:SuperTabMappingBackward = '<S-C-space>'
 let g:SuperTabCrMapping = 0
 autocmd FileType *
-    \ if &omnifunc != '' |
-    \   call SuperTabChain(&omnifunc, "<c-p>") |
-    \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
-    \ endif
+   "\ if &omnifunc != '' |
+   "\   call SuperTabChain(&omnifunc, "<c-p>") |
+   "\   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+   "\ endif
 
 " NETWORK
 " Disable matching parenthesise when on a network file
@@ -206,6 +206,9 @@ let g:syntastic_echo_current_error=0
 let g:syntastic_mode_map = { 'mode': 'passive',
                             \ 'active_filetypes': [], 
                             \ 'passive_filetypes': [] }
+
+" PYTHON and VIPY
+let g:vipy_profile='david'
 
 " INSERT MODE MAPPINGS
 inoremap <C-0> <C-S-o>$

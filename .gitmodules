@@ -56,3 +56,6 @@
 [submodule "bundle/matchit"]
 	path = bundle/matchit
 	url = https://github.com/edsono/vim-matchit.git
+[submodule "bundle/vipy"]
+	path = bundle/vipy
+	url = https://github.com/johndgiese/vipy.git

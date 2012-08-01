@@ -64,6 +64,7 @@ hi TagbarHighlight guibg=#333333 guifg=NONE gui=bold
 
 " Python
 hi link PythonEscape String
+hi link pythonDocTestValue Normal
 
 " MATLAB
 hi link matlabSemicolon Normal
@@ -75,6 +76,9 @@ hi link markdownItalic Normal
 hi markdownH1 guibg=#000000 guifg=#44FF44 gui=bold
 hi markdownH2 guibg=#000000 guifg=#BBFFBB gui=bold
 hi markdownHeadingDelimiter NONE
+
+" HTML
+hi link htmlLink Normal
 
 " Javascript
 hi link Javascript Normal

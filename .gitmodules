@@ -46,16 +46,22 @@
 	path = bundle/tagbar
 	url = https://github.com/majutsushi/tagbar.git
     ignore = dirty
-[submodule "bundle/javascript"]
+[submodule "bundle\\javascript"]
 	path = bundle/javascript
 	url = https://github.com/pangloss/vim-javascript.git
     ignore = dirty
 [submodule "bundle\\syntastic"]
-	path = bundle\\syntastic
+	path = bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
-[submodule "bundle/matchit"]
+    ignore = dirty
+[submodule "bundle\\matchit"]
 	path = bundle/matchit
 	url = https://github.com/edsono/vim-matchit.git
 [submodule "bundle/unimpaired"]
 	path = bundle/unimpaired
 	url = git://github.com/tpope/vim-unimpaired.git
+    ignore = dirty
+[submodule "bundle\\vipy"]
+	path = bundle/vipy
+	url = https://github.com/johndgiese/vipy.git
+    ignore = dirty

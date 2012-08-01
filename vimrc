@@ -51,10 +51,10 @@ let g:SuperTabNoCompleteAfter = []
 "let g:SuperTabMappingBackward = '<S-C-space>'
 let g:SuperTabCrMapping = 0
 autocmd FileType *
-   "\ if &omnifunc != '' |
-   "\   call SuperTabChain(&omnifunc, "<c-p>") |
-   "\   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
-   "\ endif
+   \ if &omnifunc != '' |
+   \   call SuperTabChain(&omnifunc, "<c-p>") |
+   \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+   \ endif
 
 " NETWORK
 " Disable matching parenthesise when on a network file
@@ -209,6 +209,7 @@ let g:syntastic_mode_map = { 'mode': 'passive',
 
 " PYTHON and VIPY
 let g:vipy_profile='david'
+"let g:vipy_ipy_dir='C:\\Users\\jdgiese\\.ipython'
 
 " INSERT MODE MAPPINGS
 inoremap <C-0> <C-S-o>$

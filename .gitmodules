@@ -53,6 +53,9 @@
 [submodule "bundle\\matchit"]
 	path = bundle/matchit
 	url = https://github.com/edsono/vim-matchit.git
+[submodule "bundle/unimpaired"]
+	path = bundle/unimpaired
+	url = git://github.com/tpope/vim-unimpaired.git
     ignore = dirty
 [submodule "bundle\\vipy"]
 	path = bundle/vipy

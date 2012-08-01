@@ -51,10 +51,10 @@ let g:SuperTabNoCompleteAfter = []
 "let g:SuperTabMappingBackward = '<S-C-space>'
 let g:SuperTabCrMapping = 0
 autocmd FileType *
-   "\ if &omnifunc != '' |
-   "\   call SuperTabChain(&omnifunc, "<c-p>") |
-   "\   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
-   "\ endif
+   \ if &omnifunc != '' |
+   \   call SuperTabChain(&omnifunc, "<c-p>") |
+   \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+   \ endif
 
 " NETWORK
 " Disable matching parenthesise when on a network file

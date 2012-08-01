@@ -92,5 +92,7 @@ hi link Delimiter Normal
 hi link None String
 hi link phpStringSingle String
 hi link phpStringDouble String
-hi phpVarSelector guibg=NONE guifg=#00EF50 gui=NONE
-hi phpIdentifier guibg=NONE guifg=#00EF50 gui=NONE
+hi link phpVarSelector Normal
+hi link phpIdentifier Normal
+hi link phpOperator Normal
+hi link phpRelation Normal

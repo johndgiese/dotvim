@@ -47,8 +47,8 @@ let g:SuperTabLongestEnhanced = 1
 let g:SuperTabLongestHighlight = 1
 let g:SuperTabNoCompleteBefore = []
 let g:SuperTabNoCompleteAfter = []
-"let g:SuperTabMappingForward = '<C-space>'
-"let g:SuperTabMappingBackward = '<S-C-space>'
+let g:SuperTabMappingForward = '<C-space>'
+let g:SuperTabMappingBackward = '<S-C-space>'
 let g:SuperTabCrMapping = 0
 autocmd FileType *
    \ if &omnifunc != '' |
@@ -209,7 +209,6 @@ let g:syntastic_mode_map = { 'mode': 'passive',
 
 " PYTHON and VIPY
 let g:vipy_profile='david'
-"let g:vipy_ipy_dir='C:\\Users\\jdgiese\\.ipython'
 
 " INSERT MODE MAPPINGS
 inoremap <C-0> <C-S-o>$

@@ -212,6 +212,7 @@ let g:syntastic_mode_map = { 'mode': 'passive',
 
 " PYTHON and VIPY
 let g:vipy_profile='david'
+let g:vipy_ipy_dir='X:\.ipython'
 
 " INSERT MODE MAPPINGS
 inoremap <C-0> <C-S-o>$

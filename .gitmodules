@@ -50,14 +50,14 @@
 	path = bundle/javascript
 	url = https://github.com/pangloss/vim-javascript.git
     ignore = dirty
-[submodule "bundle\matchit"]
+[submodule "bundle/matchit"]
 	path = bundle/matchit
 	url = https://github.com/edsono/vim-matchit.git
 [submodule "bundle/unimpaired"]
 	path = bundle/unimpaired
 	url = git://github.com/tpope/vim-unimpaired.git
     ignore = dirty
-[submodule "bundle\vipy"]
+[submodule "bundle/vipy"]
 	path = bundle/vipy
 	url = https://github.com/johndgiese/vipy.git
     ignore = dirty

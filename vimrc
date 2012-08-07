@@ -29,26 +29,23 @@ set number		            	" turn on line numbers by default
 set noignorecase
 set history=100                 " remember the last 100 commands
 colorscheme betterblack
-set directory=C:\\opt\\vim\\tmp\\swap
-set noswapfile
-set backupdir=C:\\opt\\vim\\tmp\\backup
-set undofile
-set undodir=C:\\opt\\vim\\tmp\\undo
-set hidden
 if has('win32') || has('win64')
     set guifont=Consolas:h10
-    let $DV='C:\opt\vim\.vim'
+    let g:DV='C:\opt\vim\.vim'
 else
-    let $DV='~/.vim'
+    set guifont=Monospace\ 8
+    let g:DV='~/.vim'
 endif
+set noswapfile
+set undofile
+set hidden
+let &directory=g:DV.'/tmp/swap'
+let &backupdir=g:DV.'/tmp/backup'
+let &undodir=g:DV.'/tmp/undo'
 
 " SUPERTAB
 let g:SuperTabLongestEnhanced = 1
 let g:SuperTabLongestHighlight = 1
-let g:SuperTabNoCompleteBefore = []
-let g:SuperTabNoCompleteAfter = []
-"let g:SuperTabMappingForward = '<C-space>'
-"let g:SuperTabMappingBackward = '<S-C-space>'
 let g:SuperTabCrMapping = 0
 autocmd FileType *
    \ if &omnifunc != '' |
@@ -69,7 +66,7 @@ noremap <silent> <F3> :BufExplorer<CR>
 let Tlist_Use_Right_Window=1
 let g:session_autosave = 'no'
 let g:session_autoload = 'no'
-let g:session_directory = expand($VIM) . "\\tmp\\session"
+let g:session_directory = g:DV.'/tmp/session'
 " Gundo plugin
 nnoremap <silent> <F4> :GundoToggle<CR>
 let g:gundo_right = 1
@@ -114,7 +111,7 @@ if !exists("autocommands_loaded")
     au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 
     " Rerun vimrc upon editing
-    autocmd bufwritepost vimrc source $DV\vimrc
+    autocmd bufwritepost vimrc source %
 
     " update the colorscheme upon saving
     autocmd bufwritepost betterblack.vim :colorscheme betterblack
@@ -150,12 +147,12 @@ vmap <C-j> gj
 vmap <C-k> gk
 vmap <C-4> g$
 vmap <C-6> g^
-vmap <C-0> g^
+vmap <C-0> g0
 nmap <C-j> gj
 nmap <C-k> gk
 nmap <C-4> g$
 nmap <C-6> g^
-nmap <C-0> g^
+nmap <C-0> g0
 
 " buffer switching
 inoremap <C-tab> <ESC>:bn<CR>
@@ -185,8 +182,14 @@ inoremap <ESC> <nop>
 noremap <C-s> :w<CR>
 
 " Start editing the vimrc in a new buffer
-nnoremap <leader>v :e $DV\vimrc<CR>
-nnoremap <leader>o :e $DV\colors\betterblack.vim<CR>
+nnoremap <leader>v :call Edit_vimrc()<CR>
+function! Edit_vimrc()
+    exe 'edit ' . g:DV . '/vimrc'
+endfunction
+nnoremap <leader>o :call Edit_colorscheme()<CR>
+function! Edit_colorscheme()
+    exe 'edit ' . g:DV . '/colors/betterblack.vim'
+endfunction
 
 " VISUALIZATION STUFF
 " Show EOL type and last modified timestamp, right after the filename

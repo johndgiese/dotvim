@@ -47,6 +47,7 @@ let &undodir=g:DV.'/tmp/undo'
 let g:SuperTabLongestEnhanced = 1
 let g:SuperTabLongestHighlight = 1
 let g:SuperTabCrMapping = 0
+let g:SuperTabDefaultCompletionType = "<c-x><c-u>"
 autocmd FileType *
    \ if &omnifunc != '' |
    \   call SuperTabChain(&omnifunc, "<c-p>") |
@@ -212,7 +213,6 @@ let g:syntastic_mode_map = { 'mode': 'passive',
 
 " PYTHON and VIPY
 let g:vipy_profile='david'
-let g:vipy_ipy_dir='X:\.ipython'
 
 " INSERT MODE MAPPINGS
 inoremap <C-0> <C-S-o>$

@@ -37,11 +37,15 @@ else
     let g:DV='~/.vim'
 endif
 set noswapfile
-set undofile
 set hidden
 let &directory=g:DV.'/tmp/swap'
 let &backupdir=g:DV.'/tmp/backup'
-let &undodir=g:DV.'/tmp/undo'
+
+" branching undo is new in vim 7.3
+if v:version > 702
+    let &undodir=g:DV.'/tmp/undo'
+    set undofile
+endif
 
 " SUPERTAB
 let g:SuperTabLongestEnhanced = 1

@@ -64,6 +64,7 @@ hi TagbarHighlight guibg=#333333 guifg=NONE gui=bold
 
 " Python
 hi link PythonEscape String
+hi link PythonDecorator PythonFunction
 hi link pythonDocTestValue Normal
 
 " MATLAB

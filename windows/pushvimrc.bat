@@ -4,5 +4,6 @@ git commit -m "updated vipy"
 git push
 cd C:\opt\vim\.vim
 git add .
-git commit -m"updated vipy"
+git commit -m "updated vipy"
 git push
+PAUSE

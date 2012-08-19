@@ -1,13 +1,3 @@
-" TODO: add jslint and csslint
-" TODO: add smart commenting
-" TODO: add reference for HTML, CSS
-" TODO: add pydoc
-" TODO: add function to start debuging file in IPython
-" TODO: check that I am using autocommands correctly
-" TODO: add execute selection (in Pylab)
-" TODO: update autocomplete for CSS3 and HTML5
-" TODO: add python rope (autocomplete)
-" TODO: make a better status line
 set nocompatible                " vi compatible is LAME
 autocmd!
 filetype off

@@ -1,5 +1,6 @@
 WINDOWS INSTALLATION:
     This assumes that your vim directory is in: C:\opt\vim
+    If you installed vim in C:\Program Files\vim then make the appropriate changes below.
 
 	git clone git://github.com/johndgiese/dotvim.git C:\opt\vim\vimfiles
 

@@ -1,19 +1,19 @@
 # Installation on Windows
-    This assumes that your vim directory is in: C:\opt\vim, modify as necessary.
+This assumes that your vim directory is in: C:\opt\vim, modify as necessary.
 
 	git clone git://github.com/johndgiese/dotvim.git C:\opt\vim\.vim
 
 For some of the utilities (e.g. the ctags programs) to work, you will need to add the vimfiles\onpath 
 directory to the windows PATH:
 
-    setx PATH "%PATH%;C:\opt\vim\.vim\onpath" -M
+	setx PATH "%PATH%;C:\opt\vim\.vim\onpath" -M
 
 (Note: if you only want to add it to the current user's path, omit the -M)
         
 Run the uvrc.bat file.  This does a few things:
-# Creates a symbolic link: vimfiles <==> .vim
-# Creates a symbolic link: .vim/vimrc <==> _vimrc
-# Initializes and updates the git submodules with the vim plugins
+1. Creates a symbolic link: vimfiles <==> .vim
+2. Creates a symbolic link: .vim/vimrc <==> _vimrc
+3. Initializes and updates the git submodules with the vim plugins
 
 # How this vim setup differs from normal vim
 

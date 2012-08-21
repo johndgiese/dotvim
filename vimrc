@@ -40,8 +40,8 @@ endif
 " SUPERTAB
 let g:SuperTabLongestEnhanced = 1
 let g:SuperTabLongestHighlight = 1
-let g:SuperTabCrMapping = 0
 let g:SuperTabDefaultCompletionType = "<c-x><c-u>"
+let g:SuperTabCrMapping = 1
 autocmd FileType *
    \ if &omnifunc != '' |
    \   call SuperTabChain(&omnifunc, "<c-p>") |
@@ -131,7 +131,7 @@ vnoremap : ;
 " Remap block-visual mode to alt-V, and set paste-from-clipboard to C-v
 nnoremap <A-v> <C-v>
 nnoremap <C-v> "*p<CR>
-inoremap <C-v> <ESC>"*p<CR>
+inoremap <C-v> <ESC>"*p<CR>i
 vnoremap <C-v> d"*p<CR>
 nnoremap <C-c> "*y<CR>
 inoremap <C-c> <ESC>"*y<CR>
@@ -206,7 +206,7 @@ let g:syntastic_mode_map = { 'mode': 'passive',
                             \ 'passive_filetypes': [] }
 
 " PYTHON and VIPY
-let g:vipy_profile='david'
+let g:vipy_profile='test'
 
 " INSERT MODE MAPPINGS
 inoremap <C-0> <C-S-o>$

@@ -1,15 +1,9 @@
-cd C:\opt\vim\.vim
+set /p viminstallpath= What is the full path to your vim install (inlude the final slash)? (e.g. "C:\Program Files\vim\") 
+cd %viminstallpath%
 
 :: make symbolic links for .vim and the .vim/vimrc
-if not exist C:\opt\vim\vimfiles mklink /D C:\opt\vim\vimfiles C:\opt\vim\.vim
-if not exist C:\opt\vim\_vimrc mklink C:\opt\vim\_vimrc C:\opt\vim\vimfiles\vimrc
-if not exist C:\opt\vim\_gvimrc mklink C:\opt\vim\_gvimrc C:\opt\vim\vimfiles\gvimrc
-
-:: add temporary directories for undo, swap, session and backup files
-if not exist C:\opt\vim\tmp\undo mkdir C:\opt\vim\tmp\undo
-if not exist C:\opt\vim\tmp\backup mkdir C:\opt\vim\tmp\backup
-if not exist C:\opt\vim\tmp\swap mkdir C:\opt\vim\tmp\swap
-if not exist C:\opt\vim\tmp\session mkdir C:\opt\vim\tmp\session
+if not exist %viminstallpath%vimfiles mklink /D %viminstallpath%vimfiles %viminstallpath%.vim
+if not exist %viminstallpath%_vimrc mklink %viminstallpath%_vimrc %viminstallpath%vimfiles\vimrc
 
 :: pull changes from git
 call git pull

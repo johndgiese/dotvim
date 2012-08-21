@@ -1,9 +1,14 @@
-WINDOWS INSTALLATION:
+INSTALLATION:
     This assumes that your vim directory is in: C:\opt\vim
     If you installed vim in C:\Program Files\vim then make the appropriate changes below.
+    Similarly if you are on linux, you need to 
 
+
+Clone the files to the correct directory
 	git clone git://github.com/johndgiese/dotvim.git C:\opt\vim\vimfiles
 
+or if you are on linux or mac:
+	git clone git://github.com/johndgiese/dotvim.git C:\opt\vim\.vim
 Copy the _vimrc file up one directory:
 
     copy C:\opt\vim\vimfiles\_vimrc C:\opt\vim\_vimrc

@@ -21,6 +21,8 @@ set history=100                 " remember the last 100 commands
 colorscheme betterblack
 if has('win32') || has('win64')
     set guifont=Consolas:h10
+    " If you are cloning this file you need to update the next line to your
+    " .vim directory
     let g:DV='C:\opt\vim\.vim'
 else
     set guifont=Monospace\ 8
@@ -245,3 +247,11 @@ if has("autocmd")
 
       autocmd Syntax gitcommit setlocal textwidth=74
 endif " has("autocmd")
+
+" SETTINGS FOR GVIM
+set guioptions-=m 		" remove menu bar
+set guioptions-=T		" remove toolbar
+set guioptions+=LlRrb   " remove all scrollbars
+set guioptions-=LlRrb
+set guioptions-=e
+set noscrollbind

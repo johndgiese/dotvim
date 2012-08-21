@@ -1,0 +1,1 @@
+This directory contains a number of items for my own personal use on windows; I doubt they are of general interest, so you can ignore them.

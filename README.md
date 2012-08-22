@@ -1,3 +1,10 @@
+# Thoughts
+I love vim because it is FAST, lightweight, powerful, works in the commandline, and is mostly OS independent. That being said, some of the default settings are no good, and there is a lot of missing functionality.  I have developed a set of customizations to vim that fix these problems.  In order to sync these changes across computers using various operating systems some additional complexity must be added in the installation process.
+
+Everyone has their own tastes, and will probably want to customize their setup further, so my vimrc is just a starting point.  I hope that you will be able to clone my repository and then make your own from there.
+
+Please let me know if you get stuck in the install process (make a github issue) and I will try to help out.
+
 # Installation on Windows
 Note these install instructions assume that your vim directory is in: C:\opt\vim, modify as necessary.
 
@@ -30,6 +37,9 @@ You need to update a single directory in your vimrc (the line is towards the top
 
 ### 5. Add any necessary dependencies for the vipy plugin
 Finally, if you want to use the vipy plugin you will need to run another batch script, as described in the install instructions [here](https://github.com/johndgiese/vipy)
+
+# Install instructions on Linux/Mac
+... coming soon (I have tested it so it at least mostly works)
 
 # How this vim setup differs from normal vim
 

@@ -208,7 +208,7 @@ let g:syntastic_mode_map = { 'mode': 'passive',
                             \ 'passive_filetypes': [] }
 
 " PYTHON and VIPY
-let g:vipy_profile='test'
+let g:vipy_profile='david'
 
 " INSERT MODE MAPPINGS
 inoremap <C-0> <C-S-o>$

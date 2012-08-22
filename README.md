@@ -1,5 +1,5 @@
 # Thoughts
-I love vim because it is FAST, lightweight, powerful, works in the commandline, and is mostly OS independent. That being said, some of the default settings are no good, and there is a lot of missing functionality.  I have developed a set of customizations to vim that fix these problems.  In order to sync these changes across computers using various operating systems some additional complexity must be added in the installation process.
+I love vim because it is FAST, lightweight, powerful, works in the commandline, and is mostly OS independent. That being said, some of the default settings are no good, and there is a lot of missing functionality.  I have developed a set of customizations to vim that fix these problems.  In order to sync these changes across computers using various operating systems some additional complexity must be added in the installation process (see [here](http://vimcasts.org/episodes/synchronizing-plugins-with-git-submodules-and-pathogen/)).
 
 Everyone has their own tastes, and will probably want to customize their setup further, so my vimrc is just a starting point.  I hope that you will be able to clone my repository and then make your own from there.
 

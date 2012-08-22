@@ -61,3 +61,6 @@
 	path = bundle/vipy
 	url = https://github.com/johndgiese/vipy.git
     ignore = dirty
+[submodule "bundle/greplace"]
+	path = bundle/greplace
+	url = https://github.com/vim-scripts/greplace.vim

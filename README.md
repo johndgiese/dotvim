@@ -91,7 +91,6 @@ These three shorcuts will save you a lot of time, and keep your hands more comfo
 * Searches (pressing / or ? in normal mode) now have \v prepended so that vim uses the verymagic mode (i.e. it uses normal python/perl regular expressions instead of its own version)
 * ,/ clears search highlighting
 * ,s (i.e. ,s) starts spell search
-
 * Much better colorscheme
 * ,o opens the colorscheme file for easy updating if you use different languages
 * ,h will highlight the colors of all hex keys

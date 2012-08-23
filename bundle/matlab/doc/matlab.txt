@@ -1,0 +1,111 @@
+MatlabEditionFiles			 	*matlab* *MatlabEditionFiles*
+A set of files useful to edit Matlab files.
+
+Included is : 
+1. Syntax highlighting 					|matlab-syntax| 
+2. Using the matchit.vim script 			|matlab-matchit|
+3. Correct indentation 					|matlab-indent| 
+4. Integration of the mlint Matlab code checker 	|matlab-compiler|
+5. Tag support 						|matlab-tags|
+6. Installation details 				|matlab-instal|
+
+================================================================================
+1. Syntax highlighting						*matlab-syntax*
+
+syntax/matlab.vim : Updates the matlab.vim syntax file provided in the vim
+distribution :
+- highlights keywords dealing with exceptions : try / catch / rethrow
+- highlights keywords dealing with class definitions : classdef / properties /
+  methods / events
+
+================================================================================
+2. Correct settings in order to use the matchit.vim script	*matlab-matchit*
+
+The matchit.vim extends the % matching and enables to jump through matching
+groups such as "if/end" or "switch/end" blocks (see :help matchit in vim)
+
+ftplugin/matlab.m provides the suitable definition for b:match_words in order
+to jump between if/end, classdef/end, methods/end, events/end, properties/end,
+while/end, for/end, switch/end, try/end, function/end blocks
+
+================================================================================
+3. Correct indentation 						*matlab-indent*
+
+ indent/matlab.vim : Updates the matlab.vim indention file
+provided in the vim distribution.  This script provides a correct indentation
+for :
+- switch / end, try / catch blocks
+- classdef / methods / properties / events
+- mutli-line (lines with line continuation operator (...))
+
+This script has been tested with the Matlab R2008a release on many files and
+the result of indentation compared to the one provided by the Matlab Editor
+(using the 'indent all functions' option).
+
+NOTE : to work correctly, this script need the matchit.vim (vimscript#39) to
+be installed. (see also |matchit|)
+
+================================================================================
+4. Integration of the mlint Matlab code checker		 	*matlab-compiler*
+
+compiler/mlint.m provides the settings to use mlint (Matlab code ckecker) and
+puts the messages reported in the quickfix buffer.
+
+Whenever you want to check your code, just type :make and then :copen and vim
+opens a quickfix buffer which enables to jump to errors (using :cn, :cp or
+Enter to jump to the error under the cursor : see |quickfix| in vim)
+
+================================================================================
+5. Tag support							*matlab-tags* 
+The .ctags file (in the matlab.zip) defines the Matlab language so that the
+exuberant ctags (http://ctags.sourceforge.net ) can construct the tag file :
+you can now jump to tags (using CTRL-] (or CTRL-$ if using Windows) and go
+back again (CTRL-T) See |tags| in vim.
+
+These scripts have been tested using gvim 7.2 and Matlab R2008a on Windows.
+
+================================================================================
+6. Installation details					 	*matlab-instal*
+ 
+The package is matlab.zip : just unzip it to extract the files.
+
+- help file
+
+  Copy doc/matlab.txt to your $HOME/vimfiles/doc directory.
+  And then run the command to create help for matlab : >
+	:helptags $HOME/vimfiles/doc
+< Then the command >
+	:help matlab
+< is available
+
+- Syntax highlighting 
+  Copy syntax/matlab.vim to your $HOME/vimfiles/syntax
+  directory
+
+- Correct settings in order to use the matchit.vim script
+  In your vimrc file, add the following line : >
+	source $VIMRUNTIME/macros/matchit.vim
+<
+  And copy ftplugin/matlab.vim to your $HOME/vimfiles/ftplugin directory
+
+- Correct indentation 
+  In your vimrc file, add the following lines : >
+	source $VIMRUNTIME/macros/matchit.vim
+    filetype indent on
+<
+  And copy indent/matlab.vim to your $HOME/vimfiles/indent directory
+
+- Integration of the mlint Matlab code checker with the :make command
+
+  Add the following line to your vimrc file : >
+	autocmd BufEnter *.m    compiler mlint
+<
+  And copy compiler/mlint.vim to your $HOME/vimfiles/compiler directory
+
+- Tag support
+
+  Copy the .ctags to your $HOME directory.  And then run the
+  command to create your tags file : for example : >
+	ctags -R * 
+
+

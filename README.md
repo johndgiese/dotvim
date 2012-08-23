@@ -58,14 +58,22 @@ Ctags is a program that parses your code and generates links between files.  Cta
 You may wonder why not just copy vimrc up a directory and name it .vimrc?  By moving it up a directory we would take it out of the repository, and would no longer be able to track changes.
 Note that I don't use a gvimrc file, instead I use an if statement in my vimrc; this keeps all my settings in a single file.
 
-### 4. Update a global variable in the vimrc
+### 4. Download the submodules
+
+Nearly all of the plugins are stored in submodules (see the section on maintenance for more details).  This means you need to download them as a separate step.  Browse to the top of the repository (~/.vim) and run:
+
+	git submodule init
+	git submodule update
+	
+You should see a bunch of files get downloaded.
+
+### 5. Update a global variable in the vimrc
 You need to update a single directory in your vimrc (the line is towards the top of the file)
 
-### 5. Add any necessary dependencies for the vipy plugin
+### 6. Add any necessary dependencies for the vipy plugin
 Finally, if you want to use the vipy plug, you will have to install a few additional dependencies as described [here](https://github.com/johndgiese/vipy)
 
 # How this vim setup differs from normal vim
-
 
 * ESC in insert mode is now jk (quickly, one after another).  This mapping allows you to keep your hands still.
 * Swaps the semicolon and colon, because you use colon a lot and almost never use semicolon
@@ -73,7 +81,7 @@ Finally, if you want to use the vipy plug, you will have to install a few additi
 * F2 opens the ctag viewer (SHIFT-F2 opens an alternate viewer)
 * F3 is the mini-buffer explorer
 * F4 opens the gundo plugin
-* The new <leader> key is , instead of /
+* The new leader key is , instead of /
 * Searches (pressing / or ? in normal mode) now have \v prepended so that vim uses the verymagic mode (i.e. it uses normal python/perl regular expressions instead of its own version)
 * ,/ clears search highlighting
 * ,s (i.e. ,s) starts spell search
@@ -83,11 +91,12 @@ Finally, if you want to use the vipy plug, you will have to install a few additi
 * ,h will highlight the colors of all hex keys
 * ,g will do a google search on the current selection
 * ,w will highlight whitespace at the ends of lines, and ,W will delete it.
-* F11 will maximize the window
-* Autocomplete uses <tab> unless there is white space before the cursor
+* F11 will maximize the window (only on windows)
+* Autocomplete uses TAB unless there is white space before the cursor
 * Tabs are replaced with four spaces
 
 The following other plugins are installed:
+* Pathogen - lets you manage plugins more easily (look in the bundle directory)
 * Nerdtree - browse files inside vim
 * Tagbar/Taglist - view the structure of your files using ctags
 * Gundo - graphical view of undo branches; see the (vimcast)[http://vimcasts.org/episodes/undo-branching-and-gundo-vim/]
@@ -100,3 +109,35 @@ The following other plugins are installed:
 * Unimpaired
 * Supertab - tab autocompletion
 * ... a few other little ones
+
+# Maintaining your repo
+The structure of this vimrc setup allows easy cross platform use and easy updating of your plugins.  This comes at a cost of it being a little more complicated to maintain (but overall much faster and stable).  Here are a few notes that may help you.
+
+### Commiting changes
+If you modify your vimrc file you will likely want to commit these changes to your repository.  Do this like you would for any git repository:
+
+	git add .
+	git commit -m "brief description of changes"
+
+finally, if you are hosting your vim setup online you would push to the remote repository:
+
+	git push origin master
+	
+Note that you may need to update the origin url for the repo (google online if you don't know how to do this)
+
+### Managing plugins
+I use fugitive to manage plugins; it is much better than the default way.  Google online if you don't beleive me.  Basically, you place all of your plugins into the .vim/bundle directory
+
+I use git submodules to keep all the plugins (or most - snipmate is actually a hardcopy for some complicated reasons) up to date.  Git submodules are basically pointers to other git repositories; because almost all vim plugins have a github repository, this is easy to do.  It also lets me avoid duplicataing all this code, and allows me to update the plugins very easily with:
+
+	git submodule foreach git pull origin master
+	
+If you want to add a new submodule into fugitive's, cd to .vim and use:
+	
+	git clone http://url/to/the/repo bundle/pluginname
+	
+Note that the plugin name doesn't need to be the actual plugin's name, but whatever you want to call it.
+
+After the submodule downloads, you will want to modify the .gitmodules file to ignore dirty files (like the help tags that fugitive will generate for you).  Open .gitmodules and you will see how to do this (it is obvious).
+
+

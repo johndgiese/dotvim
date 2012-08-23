@@ -41,8 +41,7 @@ You need to update a single directory in your vimrc (the line is towards the top
 Finally, if you want to use the vipy plugin you will need to run another batch script, as described in the install instructions [here](https://github.com/johndgiese/vipy)
 
 # Install instructions on Linux/Mac
-... coming soon (I have tested it so it at least mostly works)
-Note these install instructions assume that your vim directory is in: C:\opt\vim, modify as necessary.
+Note that I haven't fully tested this, so be careful!
 
 ### 1. Downlod the repository into your .vim folder
 
@@ -67,11 +66,11 @@ Finally, if you want to use the vipy plug, you will have to install a few additi
 
 # How this vim setup differs from normal vim
 
-* Much better colorscheme.
+
 * ESC in insert mode is now jk (quickly, one after another).  This mapping allows you to keep your hands still.
 * Swaps the semicolon and colon, because you use colon a lot and almost never use semicolon
 * F1 opens nerdtree
-* F2 opens the ctag viewer
+* F2 opens the ctag viewer (SHIFT-F2 opens an alternate viewer)
 * F3 is the mini-buffer explorer
 * F4 opens the gundo plugin
 * The new <leader> key is , instead of /
@@ -79,20 +78,25 @@ Finally, if you want to use the vipy plug, you will have to install a few additi
 * ,/ clears search highlighting
 * ,s (i.e. ,s) starts spell search
 * ,v opens the vimrc (which auto runs upon saving)
-* ,o opens the colorscheme file for easy updating
+* Much better colorscheme
+* ,o opens the colorscheme file for easy updating if you use different languages
 * ,h will highlight the colors of all hex keys
 * ,g will do a google search on the current selection
+* ,w will highlight whitespace at the ends of lines, and ,W will delete it.
 * F11 will maximize the window
 * Autocomplete uses <tab> unless there is white space before the cursor
 * Tabs are replaced with four spaces
 
 The following other plugins are installed:
-* Fugitive
-* Surround 
-* Vipy
-* Autoclose
-* Snipmate
-* Session
+* Nerdtree - browse files inside vim
+* Tagbar/Taglist - view the structure of your files using ctags
+* Gundo - graphical view of undo branches; see the (vimcast)[http://vimcasts.org/episodes/undo-branching-and-gundo-vim/]
+* Fugitive - use git inside vim!  See the [vimcasts](http://vimcasts.org/episodes/archive) about it.
+* Surround - work better with parenthesis and other nesting structures.  Type :h surround
+* Vipy - use ipython inside vim!  python code completion, etc. see [the repo](https://github.com/johndgiese/vipy/blob/master/README.md)
+* Autoclose - autoclose parenthesis
+* Snipmate - add snippets of commonly usedcode
+* Session - save the window structure and files opened, for easy switching between projects
 * Unimpaired
-* Supertab
+* Supertab - tab autocompletion
 * ... a few other little ones

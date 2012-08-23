@@ -104,7 +104,7 @@ The following other plugins are installed:
 * Pathogen - lets you manage plugins more easily (look in the bundle directory)
 * Nerdtree - browse files inside vim
 * Tagbar/Taglist - view the structure of your files using ctags
-* Gundo - graphical view of undo branches; see the (vimcast)[http://vimcasts.org/episodes/undo-branching-and-gundo-vim/]
+* Gundo - graphical view of undo branches; see the [vimcast](http://vimcasts.org/episodes/undo-branching-and-gundo-vim/)
 * Fugitive - use git inside vim!  See the [vimcasts](http://vimcasts.org/episodes/archive) about it.
 * Surround - work better with parenthesis and other nesting structures.  Type :h surround
 * Vipy - use ipython inside vim!  python code completion, etc. see [the repo](https://github.com/johndgiese/vipy/blob/master/README.md)

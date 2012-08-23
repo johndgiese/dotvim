@@ -75,8 +75,14 @@ Finally, if you want to use the vipy plug, you will have to install a few additi
 
 # How this vim setup differs from normal vim
 
-* ESC in insert mode is now jk (quickly, one after another).  This mapping allows you to keep your hands still.
+The most important three changes are:
+
+* ESC in insert mode is now jk (quickly, one after another)
 * Swaps the semicolon and colon, because you use colon a lot and almost never use semicolon
+* ,v opens the vimrc (which auto runs upon saving)
+
+These three shorcuts will save you a lot of time, and keep your hands more comfortable when typing.  I believe one of the main benefits of vim is that it allows you to keep your hands on the keyboard so you can type more faster.
+
 * F1 opens nerdtree
 * F2 opens the ctag viewer (SHIFT-F2 opens an alternate viewer)
 * F3 is the mini-buffer explorer
@@ -85,7 +91,7 @@ Finally, if you want to use the vipy plug, you will have to install a few additi
 * Searches (pressing / or ? in normal mode) now have \v prepended so that vim uses the verymagic mode (i.e. it uses normal python/perl regular expressions instead of its own version)
 * ,/ clears search highlighting
 * ,s (i.e. ,s) starts spell search
-* ,v opens the vimrc (which auto runs upon saving)
+
 * Much better colorscheme
 * ,o opens the colorscheme file for easy updating if you use different languages
 * ,h will highlight the colors of all hex keys
@@ -107,6 +113,7 @@ The following other plugins are installed:
 * Snipmate - add snippets of commonly usedcode
 * Session - save the window structure and files opened, for easy switching between projects
 * Unimpaired
+* Tabular - for aligning stuff (see [this vimcast](http://vimcasts.org/episodes/aligning-text-with-tabular-vim/))
 * Supertab - tab autocompletion
 * ... a few other little ones
 
@@ -146,6 +153,6 @@ You can quickly update the vimrc by pressing ,v in normal mode.  When you save i
 ### Updating the Colorscheme
 Everyone likes a different colorscheme, so you will probably want to make some updates to mine or change it completely.  To do this you can use type ,o to go staright to the file to start editing.  When in the file you can type ,h to see all the hex colors (only available in gvim).
 
-If you want to change the name of the colorscheme, you will have to go into your vimrc file and change the name in two places: 1 for actually loading the colorscheme, and one for enabling the ,o shortcut.
+If you want to change the name of the colorscheme, you will have to go into your vimrc file and change the name in two places: one for actually loading the colorscheme, and one for enabling the ,o shortcut.
 
 See [this vimcast](http://vimcasts.org/episodes/creating-colorschemes-for-vim/) for details about colorschemes.

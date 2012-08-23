@@ -140,4 +140,12 @@ Note that the plugin name doesn't need to be the actual plugin's name, but whate
 
 After the submodule downloads, you will want to modify the .gitmodules file to ignore dirty files (like the help tags that fugitive will generate for you).  Open .gitmodules and you will see how to do this (it is obvious).
 
+### Updating the VIMRC
+You can quickly update the vimrc by pressing ,v in normal mode.  When you save it, it will source the changes so that you can see the effects immediatly.  Note that this doesn't always work as expected, so you may have to fully reset vim to use this.  See [this vimcast](http://vimcasts.org/episodes/updating-your-vimrc-file-on-the-fly/) for some details about this.
 
+### Updating the Colorscheme
+Everyone likes a different colorscheme, so you will probably want to make some updates to mine or change it completely.  To do this you can use type ,o to go staright to the file to start editing.  When in the file you can type ,h to see all the hex colors (only available in gvim).
+
+If you want to change the name of the colorscheme, you will have to go into your vimrc file and change the name in two places: 1 for actually loading the colorscheme, and one for enabling the ,o shortcut.
+
+See [this vimcast](http://vimcasts.org/episodes/creating-colorschemes-for-vim/) for details about colorschemes.

@@ -40,6 +40,7 @@ hi CursorColumn guibg=#252525 gui=NONE ctermbg=NONE ctermfg=DarkGray cterm=NONE
 hi FoldColumn guibg=#000000 guifg=#FFFFFF gui=NONE ctermbg=NONE ctermfg=White cterm=NONE
 hi Visual guibg=#222222 gui=NONE ctermbg=NONE ctermfg=DarkGray cterm=NONE
 hi SignColumn guibg=#222222 guifg=#FFFFFF gui=NONE ctermbg=DarkGray ctermfg=White cterm=NONE
+hi helpSpecial guibg=NONE guifg=#FFFF71
 
 " VIM
 hi link vimCommentTitle Comment

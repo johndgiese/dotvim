@@ -90,6 +90,7 @@ let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
 " Some salesforce stuff
+au BufNewFile,BufRead *.less set filetype=less
 au BufRead,BufNewFile *.cls set filetype=apex
 au BufRead,BufNewFile *.page set filetype=page
 au BufRead,BufNewFile *.json set filetype=javascript

@@ -32,6 +32,8 @@ You can also just navigate to the directory and double click the batch file.  It
 
 You may wonder why not just rename .vim vimfiles?  Well, by keeping it named .vim and linking to it, the repository will work also on linux and mac.  You may also wonder why not just copy vimrc up a directory and name it _vimrc?  Well, by moving it up a directory we would take it out of the repository, and would no longer be able to track changes.
 
+Note that I don't use a gvimrc file, instead I use an if statement in my vimrc; this keeps all my settings in a single file.
+
 ### 4. Update a global variable in the vimrc
 You need to update a single directory in your vimrc (the line is towards the top of the file)
 
@@ -40,6 +42,28 @@ Finally, if you want to use the vipy plugin you will need to run another batch s
 
 # Install instructions on Linux/Mac
 ... coming soon (I have tested it so it at least mostly works)
+Note these install instructions assume that your vim directory is in: C:\opt\vim, modify as necessary.
+
+### 1. Downlod the repository into your .vim folder
+
+	git clone git://github.com/johndgiese/dotvim.git ~/.vim
+
+### 2. Install ctags
+
+Ctags is a program that parses your code and generates links between files.  You can read about it [here](http://ctags.sourceforge.net/)
+
+### 3. Create a symbolic link to your vimrc
+
+	n -s ~/.vim/vimrc ~/.vimrc
+	
+You may wonder why not just copy vimrc up a directory and name it .vimrcl, by moving it up a directory we would take it out of the repository, and would no longer be able to track changes.
+Note that I don't use a gvimrc file, instead I use an if statement in my vimrc; this keeps all my settings in a single file.
+
+### 4. Update a global variable in the vimrc
+You need to update a single directory in your vimrc (the line is towards the top of the file)
+
+### 5. Add any necessary dependencies for the vipy plugin
+Finally, if you want to use the vipy plug, you will have to insta[here](https://github.com/johndgiese/vipy)
 
 # How this vim setup differs from normal vim
 

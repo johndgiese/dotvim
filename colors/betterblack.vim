@@ -31,8 +31,8 @@ hi MatchParen guibg=#555555 guifg=#FFFFFF gui=NONE ctermbg=DarkGray ctermfg=Whit
 hi TabLineFill guibg=#000000 guifg=#FFFFFF gui=NONE ctermbg=Black ctermfg=White cterm=NONE
 hi TabLineSel guibg=#666666 guifg=#FFFFFF gui=NONE ctermbg=DarkGray ctermfg=White cterm=NONE
 hi TabLine guibg=#222222 guifg=#FFFFFF gui=NONE ctermbg=DarkGray ctermfg=White cterm=NONE
-hi StatusLine guibg=#222222 guifg=#FFFFFF gui=NONE ctermbg=DarkGray ctermfg=White cterm=NONE
-hi StatusLineNC guibg=#222222 guifg=#FFFFFF gui=NONE ctermbg=DarkGray ctermfg=White cterm=NONE
+" hi StatusLine guibg=#222222 guifg=#FFFFFF gui=NONE ctermbg=DarkGray ctermfg=White cterm=NONE
+" hi StatusLineNC guibg=#222222 guifg=#FFFFFF gui=NONE ctermbg=DarkGray ctermfg=White cterm=NONE
 hi Search guibg=#FFFF22 guifg=#000000 gui=NONE ctermbg=Yellow ctermfg=Black cterm=NONE
 hi IncSearch guibg=#AAAAFF guifg=#000000 gui=NONE ctermbg=Blue ctermfg=Black cterm=NONE
 hi CursorLine guibg=#252525  gui=NONE ctermbg=NONE ctermfg=DarkGray cterm=NONE

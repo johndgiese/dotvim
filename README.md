@@ -34,7 +34,7 @@ You may wonder why not just rename .vim vimfiles?  Well, by keeping it named .vi
 
 Note that I don't use a gvimrc file, instead I use an if statement in my vimrc; this keeps all my settings in a single file.
 
-### 4. Update a global variable in the vimrc
+### 4. Update a directory in the vimrc
 You need to update a single directory in your vimrc (the line is towards the top of the file)
 
 ### 5. Add any necessary dependencies for the vipy plugin
@@ -73,6 +73,10 @@ You need to update a single directory in your vimrc (the line is towards the top
 ### 6. Add any necessary dependencies for the vipy plugin
 Finally, if you want to use the vipy plug, you will have to install a few additional dependencies as described [here](https://github.com/johndgiese/vipy)
 
+### 7. Install better version of Consolas font for commandline
+Navigate to the .vim/windows folder and double click each font to install it.  If you don't or can't do this, then go to the vimrc and follow the comment there to disable powerlines fancy font feature.
+Read abou this feature [here](http://enegue.com/consolas-font-in-vim-powerline-windows/).
+
 # How this vim setup differs from normal vim
 
 The most important three changes are:
@@ -93,7 +97,6 @@ These three shorcuts will save you a lot of time, and keep your hands more comfo
 * ,s (i.e. ,s) starts spell search
 * Much better colorscheme
 * ,o opens the colorscheme file for easy updating if you use different languages
-* ,h will highlight the colors of all hex keys
 * ,g will do a google search on the current selection
 * ,w will highlight whitespace at the ends of lines, and ,W will delete it.
 * F11 will maximize the window (only on windows)
@@ -112,6 +115,8 @@ The following other plugins are installed:
 * Snipmate - add snippets of commonly usedcode
 * Session - save the window structure and files opened, for easy switching between projects
 * Unimpaired
+* Powerline - a colorful and useful statusline
+* Csscolor - css color highlighting
 * Tabular - for aligning stuff (see [this vimcast](http://vimcasts.org/episodes/aligning-text-with-tabular-vim/))
 * Supertab - tab autocompletion
 * ... a few other little ones

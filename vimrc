@@ -18,15 +18,24 @@ syntax enable                   " turn syntax highlighting
 set number		            	" turn on line numbers by default
 set noignorecase
 set history=100                 " remember the last 100 commands
+set encoding=utf-8 
 colorscheme betterblack
 if has('win32') || has('win64')
-    set guifont=Consolas:h10
     " If you are cloning this file you need to update the next line to your
     " .vim directory
     let g:DV='C:\opt\vim\.vim'
+
+    " Swap the comment out lines if you don't want to install better consolas
+    " if you want to update your fonts, go to .vim/windows and double click
+    " all of the font files there to install them
+    set guifont=Consolas\ for\ Powerline\ FixedD:h10
+    let g:Powerline_symbols = 'fancy'
+    " set guifont=Consolas:h10
+    " let g:Powerline_symbols = 'compatible'
 else
     set guifont=Monospace\ 8
     let g:DV='~/.vim'
+    let g:Powerline_symbols = 'compatible'
 endif
 set noswapfile
 set hidden
@@ -188,14 +197,13 @@ endfunction
 nnoremap <leader>o :call Edit_colorscheme()<CR>
 function! Edit_colorscheme()
     exe 'edit ' . g:DV . '/colors/betterblack.vim'
+    exe 'source ' . g:DV . '/bundle/csscolor/after/css.vim'
 endfunction
 
 " VISUALIZATION STUFF
 " Show EOL type and last modified timestamp, right after the filename
 set numberwidth=3
 set wrap linebreak
-" TODO: make search use regular expressions by default
-set statusline=%<%F%h%m%r\ [%{&ff}]\ (%{strftime(\"%H:%M\ %d/%m/%Y\",getftime(expand(\"%:p\")))})%=%l,%c%V\ %P
 
 " SYNTASTIC
 let g:syntastic_enable_signs=0

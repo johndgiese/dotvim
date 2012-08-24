@@ -39,7 +39,8 @@ if v:version > 702
     set undofile
 endif
 
-" SUPERTAB
+" SUPERTAB AND AUTOCOMPLETE
+set completeopt=longest,menuone
 let g:SuperTabLongestEnhanced = 1
 let g:SuperTabLongestHighlight = 1
 let g:SuperTabDefaultCompletionType = "<c-x><c-u>"
@@ -95,7 +96,7 @@ au BufRead,BufNewFile *.cls set filetype=apex
 au BufRead,BufNewFile *.page set filetype=page
 au BufRead,BufNewFile *.json set filetype=javascript
 
-" Add google searching capability
+" GOOGLE SEARCH
 function! GoogleSearch()
     let searchterm = getreg("g")
     silent! exec "silent! !chrome \"http://google.com/search?q=" . searchterm . "\" &"
@@ -221,9 +222,6 @@ abbreviate jquery JQuery
 abbreviate labview LabVIEW
 abbreviate matlab MATLAB
 
-" AUTOCOMPLETE
-set completeopt=longest,menuone
-
 " SOME GIT SPECIFIC SETTINGS
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
@@ -251,9 +249,11 @@ if has("autocmd")
 endif " has("autocmd")
 
 " SETTINGS FOR GVIM
-set guioptions-=m 		" remove menu bar
-set guioptions-=T		" remove toolbar
-set guioptions+=LlRrb   " remove all scrollbars
-set guioptions-=LlRrb
-set guioptions-=e
-set noscrollbind
+if has('gui_running')
+    set guioptions-=m 		" remove menu bar
+    set guioptions-=T		" remove toolbar
+    set guioptions+=LlRrb   " remove all scrollbars
+    set guioptions-=LlRrb
+    set guioptions-=e
+    set noscrollbind
+endif

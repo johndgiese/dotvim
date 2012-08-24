@@ -29,14 +29,15 @@ if has('win32') || has('win64')
     " if you want to update your fonts, go to .vim/windows and double click
     " all of the font files there to install them
     set guifont=Consolas\ for\ Powerline\ FixedD:h10
-    let g:Powerline_symbols = 'fancy'
+    let g:Powerline_symbols='fancy'
     " set guifont=Consolas:h10
     " let g:Powerline_symbols = 'compatible'
 else
     set guifont=Monospace\ 8
     let g:DV='~/.vim'
-    let g:Powerline_symbols = 'compatible'
+    let g:Powerline_symbols='compatible'
 endif
+let g:Powerline_stl_path_style='short'
 set noswapfile
 set hidden
 let &directory=g:DV.'/tmp/swap'

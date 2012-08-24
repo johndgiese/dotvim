@@ -102,6 +102,7 @@ These three shorcuts will save you a lot of time, and keep your hands more comfo
 * F11 will maximize the window (only on windows)
 * Autocomplete uses TAB unless there is white space before the cursor
 * Tabs are replaced with four spaces
+* CTRL-P opens the super awesome fuzzy file browser (:h ctrlp for details)
 
 The following other plugins are installed:
 * Pathogen - lets you manage plugins more easily (look in the bundle directory)
@@ -119,6 +120,7 @@ The following other plugins are installed:
 * Csscolor - css color highlighting
 * Tabular - for aligning stuff (see [this vimcast](http://vimcasts.org/episodes/aligning-text-with-tabular-vim/))
 * Supertab - tab autocompletion
+* CTRLp - lets you browse files really quickly
 * ... a few other little ones
 
 # Maintaining your repo

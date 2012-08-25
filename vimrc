@@ -32,6 +32,11 @@ if has('win32') || has('win64')
     let g:Powerline_symbols='fancy'
     " set guifont=Consolas:h10
     " let g:Powerline_symbols = 'compatible'
+elseif has('mac')
+    " I don't know which mac font to use
+    " set guifont=Monospace\ 8
+    let g:DV='~/.vim'
+    let g:Powerline_symbols='compatible'
 else
     set guifont=Monospace\ 8
     let g:DV='~/.vim'
@@ -64,6 +69,13 @@ autocmd FileType *
 " NETWORK
 " Disable matching parenthesise when on a network file
 autocmd BufReadPre //* :NoMatchParen
+
+" CTRL-P
+let g:ctrlp_custom_ignore = '\v\.py[co]$'
+let g:ctrlp_clear_cache_on_exit = 0
+  let g:ctrlp_custom_ignore = {
+    \ 'file': '\v(\.pyc|\.pyo)@<!$'
+    \ }
 
 " SESSIONS AND PROJECTS
 " Trigger file-explorer plugin Nerd tree

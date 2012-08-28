@@ -1,25 +1,6 @@
 set nocompatible                " vi compatible is LAME
 autocmd!
 filetype off
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
-filetype plugin indent on
-filetype plugin on
-let mapleader = ","
-set ai                          " set auto-indenting on for programming
-set showmatch                   " automatically show matching brackets
-set vb                          " turn on the "visual bell" - quieter than the "audio blink"
-set ruler                       " show the cursor position all the time
-set laststatus=2                
-set backspace=indent,eol,start  " make that backspace key work the way it should
-set showmode                    " show the current mode
-set ts=4 sts=4 sw=4 expandtab   " default indentation settings
-syntax enable                   " turn syntax highlighting
-set number		            	" turn on line numbers by default
-set noignorecase
-set history=100                 " remember the last 100 commands
-set encoding=utf-8 
-colorscheme betterblack
 if has('win32') || has('win64')
     " If you are cloning this file you need to update the next line to your
     " .vim directory
@@ -38,11 +19,53 @@ elseif has('mac')
     let g:DV='~/.vim'
     let g:Powerline_symbols='compatible'
 else
-    set guifont=Monospace\ 8
+    set guifont=Monospace\ 9
     let g:DV='~/.vim'
-    let g:Powerline_symbols='compatible'
+    let g:Powerline_symbols='fancy'
 endif
-let g:Powerline_stl_path_style='short'
+
+" All of my favorite plugins
+set rtp+=~/.vim/bundle/vundle
+call vundle#rc()
+Bundle 'gmarik/vundle'
+Bundle 'tpope/vim-fugitive.git'
+Bundle 'Townk/vim-autoclose.git'
+Bundle 'sjl/gundo.vim.git'
+Bundle 'ervandew/supertab.git'
+Bundle 'scrooloose/nerdcommenter.git'
+Bundle 'tpope/vim-surround.git'
+Bundle 'vim-scripts/taglist.vim.git'
+Bundle 'scrooloose/nerdtree.git'
+Bundle 'corntrace/bufexplorer'
+Bundle 'xolox/vim-session.git'
+Bundle 'godlygeek/tabular.git'
+Bundle 'majutsushi/tagbar.git'
+Bundle 'pangloss/vim-javascript.git'
+Bundle 'edsono/vim-matchit.git'
+Bundle 'tope/vim-unimpaired.git'
+Bundle 'johndgiese/vipy.git'
+Bundle 'vim-scripts/greplace.vim'
+Bundle 'ap/vim-css-color.git'
+Bundle 'Lokaltog/vim-powerline.git'
+Bundle 'kien/ctrlp.vim.git'
+
+filetype plugin indent on
+filetype plugin on
+let mapleader = ","
+set ai                          " set auto-indenting on for programming
+set showmatch                   " automatically show matching brackets
+set vb                          " turn on the "visual bell" - quieter than the "audio blink"
+set ruler                       " show the cursor position all the time
+set laststatus=2                
+set backspace=indent,eol,start  " make that backspace key work the way it should
+set showmode                    " show the current mode
+set ts=4 sts=4 sw=4 expandtab   " default indentation settings
+syntax enable                   " turn syntax highlighting
+set number		            	" turn on line numbers by default
+set noignorecase
+set history=100                 " remember the last 100 commands
+set encoding=utf-8 
+colorscheme betterblack
 set noswapfile
 set hidden
 let &directory=g:DV.'/tmp/swap'
@@ -71,13 +94,15 @@ autocmd FileType *
 autocmd BufReadPre //* :NoMatchParen
 
 " CTRL-P
-let g:ctrlp_custom_ignore = '\v\.py[co]$'
 let g:ctrlp_clear_cache_on_exit = 0
   let g:ctrlp_custom_ignore = {
     \ 'file': '\v(\.pyc|\.pyo)@<!$'
     \ }
 
 " SESSIONS AND PROJECTS
+
+let g:Powerline_stl_path_style='short'
+
 " Trigger file-explorer plugin Nerd tree
 noremap <silent> <F1> :NERDTreeToggle<CR>
 noremap <silent> <S-F2> :TlistToggle<CR>

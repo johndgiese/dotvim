@@ -19,14 +19,15 @@ elseif has('mac')
     let g:DV='~/.vim'
     let g:Powerline_symbols='compatible'
 else
-    set guifont=Monospace\ 9
-    let g:DV='~/.vim'
+    set guifont=Inconsolata\ 11
+    let g:DV='~//.vim'
     let g:Powerline_symbols='fancy'
 endif
 
 " All of my favorite plugins
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
+Bundle 'altercation/vim-colors-solarized'
 Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive.git'
 Bundle 'Townk/vim-autoclose.git'
@@ -42,12 +43,13 @@ Bundle 'godlygeek/tabular.git'
 Bundle 'majutsushi/tagbar.git'
 Bundle 'pangloss/vim-javascript.git'
 Bundle 'edsono/vim-matchit.git'
-Bundle 'tope/vim-unimpaired.git'
+Bundle 'tpope/vim-unimpaired.git'
 Bundle 'johndgiese/vipy.git'
 Bundle 'vim-scripts/greplace.vim'
 Bundle 'ap/vim-css-color.git'
 Bundle 'Lokaltog/vim-powerline.git'
 Bundle 'kien/ctrlp.vim.git'
+Bundle 'scrooloose/syntastic.git'
 
 filetype plugin indent on
 filetype plugin on
@@ -60,20 +62,26 @@ set laststatus=2
 set backspace=indent,eol,start  " make that backspace key work the way it should
 set showmode                    " show the current mode
 set ts=4 sts=4 sw=4 expandtab   " default indentation settings
-syntax enable                   " turn syntax highlighting
 set number		            	" turn on line numbers by default
 set noignorecase
 set history=100                 " remember the last 100 commands
 set encoding=utf-8 
-colorscheme betterblack
 set noswapfile
 set hidden
-let &directory=g:DV.'/tmp/swap'
-let &backupdir=g:DV.'/tmp/backup'
+
+" Code that I only want to run once
+if !exists('g:vimrc_has_run')
+    let g:vimrc_has_run='True'
+    syntax enable                   " turn syntax highlighting
+    set background=light
+    let g:solarized_termcolors=256
+    colorscheme solarized
+    " colorscheme betterblack
+endif
 
 " branching undo is new in vim 7.3
 if v:version > 702
-    let &undodir=g:DV.'/tmp/undo'
+    let &undodir=g:DV.'//tmp//undo'
     set undofile
 endif
 
@@ -257,7 +265,7 @@ let g:syntastic_mode_map = { 'mode': 'passive',
 
 " PYTHON and VIPY
 let g:vipy_profile='david'
-let g:vipy_position='vertical'
+let g:vipy_position='right vertical'
 
 " INSERT MODE MAPPINGS
 inoremap <C-0> <C-S-o>$

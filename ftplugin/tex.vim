@@ -6,6 +6,9 @@ if has('win32') || has ('win64')
     "
     " TODO: fix the full latex command
 "    nnoremap  <leader>L :w<CR> :!start latex %:p -output-directory=%:p:h<CR> :!start bibtex %:p:r.aux<CR>:!start latex %:p -output-directory=%:p:h<CR> :!start latex %:p -output-directory=%:p:h<CR> :!start yap -1 %:p:r.dvi<CR>
+else
+    nnoremap <silent> <F5> :w!<CR> :silent !latex % -output-directory=%:p:h<CR><CR>: silent !evince %:p:r.dvi &<CR><CR>
+    nnoremap <silent> <S-F5> :w!<CR> :!latex %<CR>
 endif
 set dictionary-=$DV\ftplugin\latex\dictionary dictionary+=$DV\ftplugin\latex\dictionary
 set complete-=k complete+=k

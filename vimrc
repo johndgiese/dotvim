@@ -20,7 +20,7 @@ elseif has('mac')
     let g:Powerline_symbols='compatible'
 else
     set guifont=Inconsolata\ 10
-    let g:DV='~//.vim'
+    let g:DV='~/.vim'
     let g:Powerline_symbols='fancy'
 endif
 
@@ -47,9 +47,15 @@ Bundle 'tpope/vim-unimpaired.git'
 Bundle 'johndgiese/vipy.git'
 Bundle 'vim-scripts/greplace.vim'
 Bundle 'ap/vim-css-color.git'
-Bundle 'Lokaltog/vim-powerline.git'
+" Bundle 'Lokaltog/vim-powerline.git'
 Bundle 'kien/ctrlp.vim.git'
 Bundle 'scrooloose/syntastic.git'
+
+" Snipmate and three dependencies
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle "honza/snipmate-snippets"
+Bundle "garbas/vim-snipmate"
 
 filetype plugin indent on
 filetype plugin on
@@ -89,7 +95,7 @@ endif
 set completeopt=longest,menuone
 let g:SuperTabLongestEnhanced = 1
 let g:SuperTabLongestHighlight = 1
-let g:SuperTabDefaultCompletionType = "<c-x><c-u>"
+let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:SuperTabCrMapping = 1
 autocmd FileType *
    \ if &omnifunc != '' |
@@ -110,6 +116,8 @@ let g:ctrlp_clear_cache_on_exit = 0
 " SESSIONS AND PROJECTS
 
 let g:Powerline_stl_path_style='short'
+
+nnoremap <C-S-P> :CtrlPMRU<CR>
 
 " Trigger file-explorer plugin Nerd tree
 noremap <silent> <F1> :NERDTreeToggle<CR>
@@ -252,20 +260,18 @@ set numberwidth=3
 set wrap linebreak
 
 " SYNTASTIC
-let g:syntastic_enable_signs=0
+let g:syntastic_enable_signs=1
 let g:syntastic_enable_ballons=0
-let g:syntastic_enable_auto_jump=0
+let g:syntastic_enable_auto_jump=1
 let g:syntastic_enable_highlighting=0
-let g:syntastic_auto_loc_list=2
-let g:syntastic_quiet_warnings=1
-let g:syntastic_echo_current_error=0
-let g:syntastic_mode_map = { 'mode': 'passive',
+let g:syntastic_auto_loc_list=0
+let g:syntastic_mode_map = { 'mode': 'active',
                             \ 'active_filetypes': [], 
                             \ 'passive_filetypes': [] }
 
 " PYTHON and VIPY
 let g:vipy_profile='david'
-let g:vipy_position='right vertical'
+let g:vipy_position='vertical'
 
 " INSERT MODE MAPPINGS
 inoremap <C-0> <C-S-o>$

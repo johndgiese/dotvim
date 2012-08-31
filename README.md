@@ -1,81 +1,96 @@
 # Thoughts
-I love vim because it is FAST, lightweight, powerful, works in the commandline, and is mostly OS independent. That being said, some of the default settings are no good, and there is a lot of missing functionality.  I have developed a set of customizations to vim that fix these problems.  In order to sync these changes across computers using various operating systems some additional complexity must be added in the installation process (see [here](http://vimcasts.org/episodes/synchronizing-plugins-with-git-submodules-and-pathogen/)).
+I love vim because it is FAST, lightweight, powerful, works in the commandline, and is mostly OS independent. That being said, some of the default settings are no good, and there is a lot of missing functionality.  I have developed a set of customizations to vim that fix these problems.  In order to sync these changes across computers using various operating systems some additional complexity must be added in the installation process.
 
 Everyone has their own tastes, and will probably want to customize their setup further, so my vimrc is just a starting point.  I hope that you will be able to clone my repository and then make your own from there.
 
 Please let me know if you get stuck in the install process (make a github issue) and I will try to help out.
 
 # Installation on Windows
+
+
 Note these install instructions assume that your vim directory is in: C:\opt\vim, modify as necessary.
 
 ### 1. Downlod the repository into your .vim folder
 
 	git clone git://github.com/johndgiese/dotvim.git C:\opt\vim\.vim
 
-### 2. Add some executables that are used by plugins
-For some of the utilities (e.g. the ctags programs) to work, you will need to add the vimfiles\onpath 
-directory to the windows PATH:
+### 2. Create symbolic links
+
+Create a symbolic link: vimfiles <==> .vim
+
+    mklink /D _vimfiles .vim
+
+Create a symbolic link: .vim/vimrc <==> _vimrc
+
+    mklink .vimrc .vim/vimrc
+
+You may wonder why not just rename .vim vimfiles?  Well, by keeping it named .vim and linking to it, the repository will work also on linux and mac.  You may also wonder why not just copy vimrc up a directory and name it _vimrc?  Well, by moving it up a directory we would take it out of the repository, and would no longer be able to track changes.
+
+Note that I don't use a gvimrc file, instead I use an if statement in my vimrc that allows me to run gui stuff when appropriate, this keeps all my settings in a single file.
+
+### 3. Update a directory in the vimrc
+You need to update a single directory in your vimrc (the line is towards the top of the file)
+
+### 4. Add any necessary dependencies for plugins, or comment them out in the vimrc
+If you want to use powerline with fancy fonts, you will need to install a patched font.  I have my favorite stored in the windows directoy.  You can double click on each of them to install the fonts.  Read about this feature [here](http://enegue.com/consolas-font-in-vim-powerline-windows/).
+
+A few plugins use ctags.  You can install it online, or for convenience go to the .vim/windows directory and get it there.  You will need to place it on the $PATH, you can do this as follows:
 
 	setx PATH "%PATH%;C:\opt\vim\.vim\windows" -M
 
 (Note: if you only want to add it to the current user's path, omit the -M)
 
-### 3. Create symbolic links
+If you want to use the vipy plugin you will need to install ipython and pyzmq, and finally run another batch script, as described in the install instructions [here](https://github.com/johndgiese/vipy)
 
-	C:\opt\vim\.vim\setup.bat
-	
-You can also just navigate to the directory and double click the batch file.  It should prompt you for your install directory (make sure you include double quotes if you installed in Program Files or Program Files (x86)).  This does a few things:
+If any of the plugins give you trouble, you can comment them out in your vimrc.
 
-1. Creates a symbolic link: vimfiles <==> .vim
-2. Creates a symbolic link: .vim/vimrc <==> _vimrc
-3. Initializes and updates the git submodules with the vim plugins
+### 5. Run BundleInstall
+You will need to get [Vundle for Windows](https://github.com/gmarik/vundle/wiki/Vundle-for-Windows), note that the vundle files are already in bundle so you can skip that step.
 
-You may wonder why not just rename .vim vimfiles?  Well, by keeping it named .vim and linking to it, the repository will work also on linux and mac.  You may also wonder why not just copy vimrc up a directory and name it _vimrc?  Well, by moving it up a directory we would take it out of the repository, and would no longer be able to track changes.
+Go into vim and type:
 
-Note that I don't use a gvimrc file, instead I use an if statement in my vimrc; this keeps all my settings in a single file.
+    :BundleInstall
 
-### 4. Update a directory in the vimrc
-You need to update a single directory in your vimrc (the line is towards the top of the file)
-
-### 5. Add any necessary dependencies for the vipy plugin
-Finally, if you want to use the vipy plugin you will need to run another batch script, as described in the install instructions [here](https://github.com/johndgiese/vipy)
+If you setup Vundle correctly, this will now download all the plugins!
 
 # Install instructions on Linux/Mac
-Note that I haven't fully tested this, so be careful!
 
 ### 1. Downlod the repository into your .vim folder
 
 	git clone git://github.com/johndgiese/dotvim.git ~/.vim
 
-### 2. Install ctags
+
+### 2. Create a symbolic link to your vimrc
+
+	ln -s ~/.vim/vimrc ~/.vimrc
+	
+You may wonder why not just copy vimrc up a directory and name it .vimrc?  By moving it up a directory we would take it out of the repository, and would no longer be able to track changes.
+
+Note that I don't use a gvimrc file, instead I use an if statement in my vimrc that allows me to run gui stuff when appropriate, this keeps all my settings in a single file.
+
+### 3. Update a directory in the vimrc
+You need to update a single directory in your vimrc (the line is towards the top of the file)
+
+
+### 4. Run BundleInstall
+You should already have vundle installed, go into vim and type:
+
+    :BundleInstall
+
+If you setup Vundle correctly, this will now download all the plugins!
+
+### 5. Plugin Dependencies
 
 Ctags is a program that parses your code and generates links between files.  Ctags is used by a few plugins that I have, and they will complain if you don't have them installed.  You can remove the plugins, but I reccomend trying to install ctags.  It is super useful.  You can read about it [here](http://ctags.sourceforge.net/)
 
-### 3. Create a symbolic link to your vimrc
+    sudo get-apt install ctags
 
-	n -s ~/.vim/vimrc ~/.vimrc
-	
-You may wonder why not just copy vimrc up a directory and name it .vimrc?  By moving it up a directory we would take it out of the repository, and would no longer be able to track changes.
-Note that I don't use a gvimrc file, instead I use an if statement in my vimrc; this keeps all my settings in a single file.
+If you want to use the vipy plugin you will need to install ipython and pyzmq, and finally run another batch script, as described in the install instructions [here](https://github.com/johndgiese/vipy).  Basically it is:
 
-### 4. Download the submodules
+    sudo apt-get install python-ipython
+    sudo apt-get install python-pyzmq
 
-Nearly all of the plugins are stored in submodules (see the section on maintenance for more details).  This means you need to download them as a separate step.  Browse to the top of the repository (~/.vim) and run:
-
-	git submodule init
-	git submodule update
-	
-You should see a bunch of files get downloaded.
-
-### 5. Update a global variable in the vimrc
-You need to update a single directory in your vimrc (the line is towards the top of the file)
-
-### 6. Add any necessary dependencies for the vipy plugin
-Finally, if you want to use the vipy plug, you will have to install a few additional dependencies as described [here](https://github.com/johndgiese/vipy)
-
-### 7. Install better version of Consolas font for commandline
-Navigate to the .vim/windows folder and double click each font to install it.  If you don't or can't do this, then go to the vimrc and follow the comment there to disable powerlines fancy font feature.
-Read abou this feature [here](http://enegue.com/consolas-font-in-vim-powerline-windows/).
+If any of the plugins give you trouble, you can comment them out in your vimrc.
 
 # How this vim setup differs from normal vim
 
@@ -139,22 +154,10 @@ finally, if you are hosting your vim setup online you would push to the remote r
 Note that you may need to update the origin url for the repo (google online if you don't know how to do this)
 
 ### Managing plugins
-I use fugitive to manage plugins; it is much better than the default way.  Google online if you don't beleive me.  Basically, you place all of your plugins into the .vim/bundle directory
-
-I use git submodules to keep all the plugins (or most - snipmate is actually a hardcopy for some complicated reasons) up to date.  Git submodules are basically pointers to other git repositories; because almost all vim plugins have a github repository, this is easy to do.  It also lets me avoid duplicataing all this code, and allows me to update the plugins very easily with:
-
-	git submodule foreach git pull origin master
-	
-If you want to add a new submodule into fugitive's, cd to .vim and use:
-	
-	git clone http://url/to/the/repo bundle/pluginname
-	
-Note that the plugin name doesn't need to be the actual plugin's name, but whatever you want to call it.
-
-After the submodule downloads, you will want to modify the .gitmodules file to ignore dirty files (like the help tags that fugitive will generate for you).  Open .gitmodules and you will see how to do this (it is obvious).
+I use Vundle to manage plugins; it is much better than the default way.  Google online if you don't believe me.  Instructions on how to use it [here](https://github.com/gmarik/vundle).
 
 ### Updating the VIMRC
-You can quickly update the vimrc by pressing ,v in normal mode.  When you save it, it will source the changes so that you can see the effects immediatly.  Note that this doesn't always work as expected, so you may have to fully reset vim to use this.  See [this vimcast](http://vimcasts.org/episodes/updating-your-vimrc-file-on-the-fly/) for some details about this.
+You can quickly update the vimrc by pressing ,v in normal mode.  When you save it, it will source the changes so that you can see the effects immediatly.  Note that this doesn't always work as expected, so you may have to fully reset vim to use this.
 
 ### Updating the Colorscheme
 Everyone likes a different colorscheme, so you will probably want to make some updates to mine or change it completely.  To do this you can use type ,o to go staright to the file to start editing.  When in the file you can type ,h to see all the hex colors (only available in gvim).

@@ -19,7 +19,7 @@ elseif has('mac')
     let g:DV='~/.vim'
     let g:Powerline_symbols='compatible'
 else
-    set guifont=Inconsolata\ 10
+    set guifont=Inconsolata\ 11
     let g:DV='~/.vim'
     let g:Powerline_symbols='fancy'
 endif
@@ -47,7 +47,7 @@ Bundle 'tpope/vim-unimpaired.git'
 Bundle 'johndgiese/vipy.git'
 Bundle 'vim-scripts/greplace.vim'
 Bundle 'ap/vim-css-color.git'
-" Bundle 'Lokaltog/vim-powerline.git'
+Bundle 'Lokaltog/vim-powerline.git'
 Bundle 'kien/ctrlp.vim.git'
 Bundle 'scrooloose/syntastic.git'
 
@@ -109,9 +109,10 @@ autocmd BufReadPre //* :NoMatchParen
 
 " CTRL-P
 let g:ctrlp_clear_cache_on_exit = 0
-  let g:ctrlp_custom_ignore = {
-    \ 'file': '\v(\.pyc|\.pyo)@<!$'
-    \ }
+let g:ctrlp_working_path_mode = 'rc'
+let g:ctrlp_custom_ignore = {
+\ 'file': '\v(\.pyc|\.pyo)@<!$'
+\ }
 
 " SESSIONS AND PROJECTS
 

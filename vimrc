@@ -31,25 +31,81 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive.git'
 Bundle 'Townk/vim-autoclose.git'
-Bundle 'sjl/gundo.vim.git'
-Bundle 'ervandew/supertab.git'
 Bundle 'scrooloose/nerdcommenter.git'
 Bundle 'tpope/vim-surround.git'
 Bundle 'vim-scripts/taglist.vim.git'
-Bundle 'scrooloose/nerdtree.git'
-Bundle 'corntrace/bufexplorer'
-Bundle 'xolox/vim-session.git'
-Bundle 'godlygeek/tabular.git'
-Bundle 'majutsushi/tagbar.git'
 Bundle 'pangloss/vim-javascript.git'
 Bundle 'edsono/vim-matchit.git'
 Bundle 'tpope/vim-unimpaired.git'
-Bundle 'johndgiese/vipy.git'
 Bundle 'vim-scripts/greplace.vim'
 Bundle 'ap/vim-css-color.git'
+
+Bundle 'sjl/gundo.vim.git'
+nnoremap <silent> <F4> :GundoToggle<CR>
+let g:gundo_right = 1
+let g:gundo_help  = 0
+
+Bundle 'scrooloose/nerdtree.git'
+noremap <silent> <F1> :NERDTreeToggle<CR>
+
+Bundle 'corntrace/bufexplorer'
+noremap <silent> <F3> :BufExplorer<CR>
+let g:bufExplorerDefaultHelp=0
+
+Bundle 'xolox/vim-session.git'
+let g:session_autosave = 'no'
+let g:session_autoload = 'no'
+
+Bundle 'godlygeek/tabular.git'
+noremap <silent> <S-F2> :TlistToggle<CR>
+let Tlist_Use_Right_Window=1
+
+Bundle 'majutsushi/tagbar.git'
+noremap <silent> <F2> :TagbarToggle<CR>
+
+Bundle 'ervandew/supertab.git'
+set completeopt=longest,menuone
+let g:SuperTabLongestEnhanced = 1
+let g:SuperTabLongestHighlight = 1
+let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabCrMapping = 1
+autocmd FileType *
+   \ if &omnifunc != '' |
+   \   call SuperTabChain(&omnifunc, "<c-p>") |
+   \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+   \ endif
+
 Bundle 'Lokaltog/vim-powerline.git'
+let g:Powerline_stl_path_style='short'
+
+Bundle 'johndgiese/vipy.git'
+let g:vipy_profile='david'
+let g:vipy_position='vertical'
+
 Bundle 'kien/ctrlp.vim.git'
+let g:ctrlp_cmd='CtrlPRoot'
+
 Bundle 'scrooloose/syntastic.git'
+let g:locliststate=0
+function! ToggleLocationList()
+    if g:locliststate==0
+        Errors
+        let g:locliststate==1
+    else
+        lclose
+        let g:locliststate==0
+    endif
+endfunction
+nnoremap <leader>e :ToggleLocationList()<CR>
+
+let g:syntastic_enable_signs=1
+let g:syntastic_enable_ballons=0
+let g:syntastic_enable_auto_jump=1
+let g:syntastic_enable_highlighting=0
+let g:syntastic_auto_loc_list=0
+let g:syntastic_mode_map = { 'mode': 'active',
+                            \ 'active_filetypes': [], 
+                            \ 'passive_filetypes': [] }
 
 " Snipmate and three dependencies
 Bundle "MarcWeber/vim-addon-mw-utils"
@@ -75,6 +131,10 @@ set encoding=utf-8
 set noswapfile
 set hidden
 
+"set backup
+"let &backupdir=g:DV."/tmp/backup"
+"call mkdir(backupdir, 'p')
+
 " Code that I only want to run once
 if !exists('g:vimrc_has_run')
     let g:vimrc_has_run='True'
@@ -87,67 +147,16 @@ endif
 
 " branching undo is new in vim 7.3
 if v:version > 702
-    let &undodir=g:DV.'//tmp//undo'
+    let &undodir=g:DV."/tmp/undo"
     set undofile
 endif
-
-" SUPERTAB AND AUTOCOMPLETE
-set completeopt=longest,menuone
-let g:SuperTabLongestEnhanced = 1
-let g:SuperTabLongestHighlight = 1
-let g:SuperTabDefaultCompletionType = "<c-n>"
-let g:SuperTabCrMapping = 1
-autocmd FileType *
-   \ if &omnifunc != '' |
-   \   call SuperTabChain(&omnifunc, "<c-p>") |
-   \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
-   \ endif
 
 " NETWORK
 " Disable matching parenthesise when on a network file
 autocmd BufReadPre //* :NoMatchParen
 
-" CTRL-P
-let g:ctrlp_clear_cache_on_exit = 0
-let g:ctrlp_working_path_mode = 'rc'
-let g:ctrlp_custom_ignore = {
-\ 'file': '\v(\.pyc|\.pyo)@<!$'
-\ }
-
-" SESSIONS AND PROJECTS
-
-let g:Powerline_stl_path_style='short'
-
-nnoremap <C-S-P> :CtrlPMRU<CR>
-
-" Trigger file-explorer plugin Nerd tree
-noremap <silent> <F1> :NERDTreeToggle<CR>
-noremap <silent> <S-F2> :TlistToggle<CR>
-noremap <silent> <F2> :TagbarToggle<CR>
-noremap <silent> <F3> :BufExplorer<CR>
-let Tlist_Use_Right_Window=1
-let g:session_autosave = 'no'
-let g:session_autoload = 'no'
-let g:session_directory = g:DV.'/tmp/session'
-" Gundo plugin
-nnoremap <silent> <F4> :GundoToggle<CR>
-let g:gundo_right = 1
-let g:gundo_help  = 0
-" bufexplorer plugin
-let g:bufExplorerDefaultHelp=0
 " Fullscreen
 noremap <F11> <ESC>:call libcallnr("gvimfullscreen.dll","ToggleFullScreen",0)<CR>
-
-
-" show syntax highlighting groups for word under cursor
-nnoremap <C-S-p> :call <SID>SynStack()<CR>
-function! <SID>SynStack()
-    if !exists("*synstack")
-        return
-    endif
-    echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-endfunc
-
 
 " WEB DEVELOPMENT
 " better html/javascript syntax/indenting (see javascript plugin)
@@ -169,9 +178,6 @@ vnoremap <leader>g "gy<Esc>:call GoogleSearch()<CR>
 
 if !exists("autocommands_loaded")
     let autocommands_loaded=1
-
-    " This beauty remembers where you were the last time you edited the file, and returns to the same position.
-    au BufReadPost * if line("'\"") > 0|if line("'\"") <= line("$")|exe("norm '\"")|else|exe "norm $"|endif|endif
 
     " Rerun vimrc upon editing
     autocmd bufwritepost vimrc source %
@@ -259,20 +265,6 @@ endfunction
 " Show EOL type and last modified timestamp, right after the filename
 set numberwidth=3
 set wrap linebreak
-
-" SYNTASTIC
-let g:syntastic_enable_signs=1
-let g:syntastic_enable_ballons=0
-let g:syntastic_enable_auto_jump=1
-let g:syntastic_enable_highlighting=0
-let g:syntastic_auto_loc_list=0
-let g:syntastic_mode_map = { 'mode': 'active',
-                            \ 'active_filetypes': [], 
-                            \ 'passive_filetypes': [] }
-
-" PYTHON and VIPY
-let g:vipy_profile='david'
-let g:vipy_position='vertical'
 
 " INSERT MODE MAPPINGS
 inoremap <C-0> <C-S-o>$

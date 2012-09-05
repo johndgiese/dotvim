@@ -23,6 +23,7 @@ else
     " set guifont=Inconsolata\ 11
     " set guifont=ProggyCleanTT\ 12
     set guifont=CodingFontTobi\ 12
+    " set guifont=ProggyTinyTTSZ\ 12
     let g:DV='~/.vim'
     let g:Powerline_symbols='fancy'
 endif
@@ -33,7 +34,7 @@ call vundle#rc()
 " Bundle 'altercation/vim-colors-solarized'
 Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive.git'
-Bundle 'Townk/vim-autoclose.git'
+" Bundle 'Townk/vim-autoclose.git'
 Bundle 'scrooloose/nerdcommenter.git'
 Bundle 'tpope/vim-surround.git'
 Bundle 'vim-scripts/taglist.vim.git'

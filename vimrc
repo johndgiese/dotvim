@@ -86,23 +86,13 @@ Bundle 'kien/ctrlp.vim.git'
 let g:ctrlp_cmd='CtrlPRoot'
 
 Bundle 'scrooloose/syntastic.git'
-let g:locliststate=0
-function! ToggleLocationList()
-    if g:locliststate==0
-        Errors
-        let g:locliststate==1
-    else
-        lclose
-        let g:locliststate==0
-    endif
-endfunction
-nnoremap <leader>e :ToggleLocationList()<CR>
+nnoremap <leader>e :SyntasticToggleMode()<CR>
 
-let g:syntastic_enable_signs=1
+let g:locliststate=1
 let g:syntastic_enable_ballons=0
 let g:syntastic_enable_auto_jump=1
-let g:syntastic_enable_highlighting=0
-let g:syntastic_auto_loc_list=0
+let g:syntastic_enable_highlighting=1
+let g:syntastic_auto_loc_list=1
 let g:syntastic_mode_map = { 'mode': 'active',
                             \ 'active_filetypes': [], 
                             \ 'passive_filetypes': [] }
@@ -112,6 +102,7 @@ Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
 Bundle "honza/snipmate-snippets"
 Bundle "garbas/vim-snipmate"
+let g:snips_trigger_key='<c-space>'
 
 filetype plugin indent on
 filetype plugin on

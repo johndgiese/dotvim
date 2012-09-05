@@ -20,7 +20,9 @@ elseif has('mac')
     let g:Powerline_symbols='compatible'
 else
     " set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
-    set guifont=Inconsolata\ 11
+    " set guifont=Inconsolata\ 11
+    " set guifont=ProggyCleanTT\ 12
+    set guifont=CodingFontTobi\ 12
     let g:DV='~/.vim'
     let g:Powerline_symbols='fancy'
 endif

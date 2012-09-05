@@ -19,6 +19,7 @@ elseif has('mac')
     let g:DV='~/.vim'
     let g:Powerline_symbols='compatible'
 else
+    " set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
     set guifont=Inconsolata\ 11
     let g:DV='~/.vim'
     let g:Powerline_symbols='fancy'
@@ -27,7 +28,7 @@ endif
 " All of my favorite plugins
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
-Bundle 'altercation/vim-colors-solarized'
+" Bundle 'altercation/vim-colors-solarized'
 Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive.git'
 Bundle 'Townk/vim-autoclose.git'
@@ -47,6 +48,7 @@ let g:gundo_help  = 0
 
 Bundle 'scrooloose/nerdtree.git'
 noremap <silent> <F1> :NERDTreeToggle<CR>
+let NERDTreeIgnore = ['\~$', '\.pyc']
 
 Bundle 'corntrace/bufexplorer'
 noremap <silent> <F3> :BufExplorer<CR>
@@ -86,14 +88,13 @@ Bundle 'kien/ctrlp.vim.git'
 let g:ctrlp_cmd='CtrlPRoot'
 
 Bundle 'scrooloose/syntastic.git'
-nnoremap <leader>e :SyntasticToggleMode()<CR>
-
+nnoremap <leader>e :SyntasticCheck<CR>
 let g:locliststate=1
 let g:syntastic_enable_ballons=0
 let g:syntastic_enable_auto_jump=1
 let g:syntastic_enable_highlighting=1
 let g:syntastic_auto_loc_list=1
-let g:syntastic_mode_map = { 'mode': 'active',
+let g:syntastic_mode_map = { 'mode': 'passive',
                             \ 'active_filetypes': [], 
                             \ 'passive_filetypes': [] }
 
@@ -132,8 +133,7 @@ if !exists('g:vimrc_has_run')
     syntax enable                   " turn syntax highlighting
     set background=light
     let g:solarized_termcolors=256
-    colorscheme solarized
-    " colorscheme betterblack
+    colorscheme betterblack
 endif
 
 " branching undo is new in vim 7.3

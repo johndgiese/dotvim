@@ -9,23 +9,23 @@ hi Normal guibg=#000000 guifg=#FFFFFF gui=NONE ctermbg=Black ctermfg=White cterm
 " Coding 
 hi String guibg=NONE guifg=#FF0000 gui=NONE ctermbg=NONE ctermfg=Red cterm=NONE
 hi Comment guibg=NONE guifg=#FF7300 gui=NONE ctermbg=NONE ctermfg=Yellow cterm=NONE
-hi Number guibg=NONE guifg=#C92040 gui=bold ctermbg=NONE ctermfg=Red cterm=NONE
+hi Number guibg=NONE guifg=#C92040 gui=NONE ctermbg=NONE ctermfg=Red cterm=NONE
 hi Function guibg=NONE guifg=#0Fef33 gui=NONE ctermbg=NONE ctermfg=Green cterm=NONE
 hi Keyword guibg=NONE guifg=#0051FF gui=NONE ctermbg=NONE ctermfg=Blue cterm=NONE
 hi Statement guibg=NONE guifg=#0052FF gui=NONE ctermbg=NONE ctermfg=Blue cterm=NONE
 hi Identifier guibg=NONE guifg=#00ED45 gui=NONE ctermbg=NONE ctermfg=Green cterm=NONE
 hi Type guibg=NONE guifg=#0052FF gui=NONE ctermbg=NONE ctermfg=Blue cterm=NONE
-hi Todo guibg=#151515 guifg=#FF7300 gui=bold ctermbg=NONE ctermfg=Yellow cterm=NONE
-hi Title guibg=#000000 guifg=#FFFFFF gui=bold ctermbg=NONE ctermfg=White cterm=NONE
+hi Todo guibg=#151515 guifg=#FF7300 gui=NONE ctermbg=NONE ctermfg=Yellow cterm=NONE
+hi Title guibg=#000000 guifg=#FFFFFF gui=NONE ctermbg=NONE ctermfg=White cterm=NONE
 
 " VIM gui 
 hi LineNr guibg=#222222 guifg=#FFFFFF gui=NONE ctermbg=DarkGray ctermfg=White cterm=NONE
 hi NonText guibg=#000000 guifg=#333333 gui=NONE ctermbg=Black ctermfg=DarkGray cterm=NONE
 hi PMenu guibg=#252525 guifg=#FFFFFF gui=NONE ctermbg=DarkGray ctermfg=White cterm=NONE
 hi PMenuSelect guibg=#151515 guifg=#FFFFFF gui=NONE ctermbg=Black ctermfg=White cterm=NONE
-hi VertSplit guibg=#000000 guifg=#333333 gui=bold ctermbg=Black ctermfg=DarkGray cterm=NONE
-hi Folded guibg=#000000 guifg=#AAFFAA gui=bold ctermbg=Black ctermfg=White cterm=NONE
-hi FoldColumn guibg=#000000 guifg=#EEFFAA gui=bold ctermbg=Black ctermfg=Yellow cterm=NONE
+hi VertSplit guibg=#000000 guifg=#333333 gui=NONE ctermbg=Black ctermfg=DarkGray cterm=NONE
+hi Folded guibg=#000000 guifg=#AAFFAA gui=NONE ctermbg=Black ctermfg=White cterm=NONE
+hi FoldColumn guibg=#000000 guifg=#EEFFAA gui=NONE ctermbg=Black ctermfg=Yellow cterm=NONE
 hi PMenuThumb guibg=#000000 guifg=#EEFFAA gui=NONE ctermbg=Black ctermfg=Yellow cterm=NONE
 hi MatchParen guibg=#555555 guifg=#FFFFFF gui=NONE ctermbg=DarkGray ctermfg=White cterm=NONE
 hi TabLineFill guibg=#000000 guifg=#FFFFFF gui=NONE ctermbg=Black ctermfg=White cterm=NONE
@@ -61,7 +61,7 @@ hi TaglistTitle guibg=#000000 guifg=#FF0000 gui=NONE ctermbg=Black ctermfg=Red c
 hi link TagListComment Comment
 
 " TagBar
-hi TagbarHighlight guibg=#333333 guifg=NONE gui=bold  ctermbg=DarkGray ctermfg=NONE cterm=NONE
+hi TagbarHighlight guibg=#333333 guifg=NONE gui=NONE  ctermbg=DarkGray ctermfg=NONE cterm=NONE
 
 " Python
 hi link PythonEscape String
@@ -75,8 +75,8 @@ hi link matlabOperator Normal
 
 " Markdown
 hi link markdownItalic Normal
-hi markdownH1 guibg=#000000 guifg=#44FF44 gui=bold ctermbg=Black ctermfg=Green cterm=NONE
-hi markdownH2 guibg=#000000 guifg=#BBFFBB gui=bold ctermbg=Black ctermfg=Green cterm=NONE
+hi markdownH1 guibg=#000000 guifg=#44FF44 gui=NONE ctermbg=Black ctermfg=Green cterm=NONE
+hi markdownH2 guibg=#000000 guifg=#BBFFBB gui=NONE ctermbg=Black ctermfg=Green cterm=NONE
 hi markdownHeadingDelimiter NONE
 
 " HTML

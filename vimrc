@@ -85,7 +85,7 @@ let g:Powerline_stl_path_style='short'
 
 Bundle 'johndgiese/vipy.git'
 let g:vipy_profile='david'
-let g:vipy_position='vertical'
+let g:vipy_position='rightbelow'
 
 Bundle 'kien/ctrlp.vim.git'
 let g:ctrlp_cmd='CtrlPRoot'
@@ -106,6 +106,9 @@ Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
 Bundle "honza/snipmate-snippets"
 Bundle "garbas/vim-snipmate"
+
+" Python Debugger
+" Bundle 'joonty/vdebug.git'
 
 filetype plugin indent on
 filetype plugin on

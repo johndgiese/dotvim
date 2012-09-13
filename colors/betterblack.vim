@@ -1,9 +1,4 @@
 set background=dark
-highlight clear
-if exists("syntax_on")
-    syntax reset
-endif
-let g:colors_name = "betterblack"
 
 hi Normal guibg=#000000 guifg=#FFFFFF gui=NONE ctermbg=Black ctermfg=White cterm=NONE
 " Coding 

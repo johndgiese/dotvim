@@ -125,8 +125,10 @@ The following other plugins are installed:
 
 F5 is my universal "run file" key, and "SHIFT-F5" is my debug file key.  These are loose terms.  Here is a list of files and what F5 does for each of them.
 * python -- F5 runs file (in vipy plugin)
-* xml -- S-F5 formats using xmllint
-* html -- F5 opens in a browser
+* xml    -- S-F5 formats using xmllint
+* html   -- F5 opens in a browser
+* latex  -- F5 converts to a dvi and opens it in a viewer (requires Miketex)
+* c      -- F5 compiles code with make (Linux only), S-F5 runs a.out
 
 # Maintaining your repo
 The structure of this vimrc setup allows easy cross platform use and easy updating of your plugins.  This comes at a cost of it being a little more complicated to maintain (but overall much faster and stable).  Here are a few notes that may help you.

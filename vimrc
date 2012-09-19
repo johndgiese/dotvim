@@ -64,6 +64,21 @@ Bundle 'tpope/vim-unimpaired.git'
 " colors are highlighted in css files
 Bundle 'ap/vim-css-color.git'
 
+" File browsing
+Bundle 'scrooloose/nerdtree.git'
+noremap <silent> <F1> :NERDTreeToggle<CR>
+let NERDTreeIgnore = ['\~$', '\.pyc']
+
+" Ctag viewer
+Bundle 'majutsushi/tagbar.git'
+let g:tagbar_iconchars = ['+', '-']
+noremap <silent> <F2> :TagbarToggle<CR>
+
+" Nice buffer browsers/switcher
+Bundle 'corntrace/bufexplorer'
+noremap <silent> <F3> :BufExplorer<CR>
+let g:bufExplorerDefaultHelp=0
+
 " branching undo is new in vim 7.3
 if v:version > 702
     let &undodir=g:DV."/tmp/undo"
@@ -79,29 +94,11 @@ if v:version > 702
     let g:gundo_help  = 0
 endif
 
-" File browsing
-Bundle 'scrooloose/nerdtree.git'
-noremap <silent> <F1> :NERDTreeToggle<CR>
-let NERDTreeIgnore = ['\~$', '\.pyc']
-
-" Nice buffer browsers/switcher
-Bundle 'corntrace/bufexplorer'
-noremap <silent> <F3> :BufExplorer<CR>
-let g:bufExplorerDefaultHelp=0
-
 " Save the vim state and reload when you come back
 Bundle 'xolox/vim-session.git'
 let g:session_autosave = 'no'
 let g:session_autoload = 'no'
 
-" Ctag viewer
-Bundle 'vim-scripts/taglist.vim.git'
-noremap <silent> <S-F2> :TlistToggle<CR>
-let Tlist_Use_Right_Window=1
-
-" Another slightly different ctag viewer
-Bundle 'majutsushi/tagbar.git'
-noremap <silent> <F2> :TagbarToggle<CR>
 
 " Autocomplete using tab instead of <C-x><C-o>
 Bundle 'ervandew/supertab.git'
@@ -328,7 +325,9 @@ abbreviate matlab MATLAB
 " I don't like all the scrollbars etc -- I think the clutter
 " Vim's elegant simplicity
 if has('gui_running')
-    set columns=130 lines=50
+    if !exists('g:vimrc_has_run')
+        set columns=130 lines=50
+    endif
     set guioptions-=m 		" remove menu bar
     set guioptions-=T		" remove toolbar
     set guioptions+=LlRrb   " remove all scrollbars

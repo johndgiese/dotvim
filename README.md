@@ -7,7 +7,9 @@ Please let me know if you get stuck in the install process (make a github issue)
 
 # Installation on Windows
 
-Note these install instructions assume that your vim directory is in: C:\Users\Yourname\, modify as necessary.
+Note: these instructions assume that you have git-scm installed (git-scm comes with curl--which Vundle requires to use!).
+
+Also note these install instructions assume that your vim directory is in: C:\Users\Yourname\, modify as necessary.
 
 ### 1. Downlod the repository into your .vim folder
 
@@ -63,18 +65,14 @@ You may wonder why not just copy vimrc up a directory and name it .vimrc?  By mo
 
 Note that I don't use a gvimrc file, instead I use an if statement in my vimrc that allows me to run gui stuff when appropriate, this keeps all my settings in a single file.
 
-### 3. Update a directory in the vimrc
-You need to update a single directory in your vimrc (the line is towards the top of the file)
-
-
-### 4. Run BundleInstall
+### 3. Run BundleInstall
 You should already have vundle installed, go into vim and type:
 
     :BundleInstall
 
 If you setup Vundle correctly, this will now download all the plugins!
 
-### 5. Plugin Dependencies
+### Optional
 
 Ctags is a program that parses your code and generates links between files.  Ctags is used by a few plugins that I have, and they will complain if you don't have them installed.  You can remove the plugins, but I reccomend trying to install ctags.  It is super useful.  You can read about it [here](http://ctags.sourceforge.net/)
 

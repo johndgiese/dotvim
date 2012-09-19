@@ -8,17 +8,13 @@ Please let me know if you get stuck in the install process (make a github issue)
 # Installation on Windows
 
 
-Note these install instructions assume that your vim directory is in: C:\opt\vim, modify as necessary.
+Note these install instructions assume that your vim directory is in: C:\Users\Yourname\, modify as necessary.
 
 ### 1. Downlod the repository into your .vim folder
 
-	git clone git://github.com/johndgiese/dotvim.git C:\opt\vim\.vim
+	git clone git://github.com/johndgiese/dotvim.git C:\Users\YourName\.vim
 
 ### 2. Create symbolic links
-
-Create a symbolic link: vimfiles <==> .vim
-
-    mklink /D _vimfiles .vim
 
 Create a symbolic link: .vim/vimrc <==> _vimrc
 
@@ -26,25 +22,7 @@ Create a symbolic link: .vim/vimrc <==> _vimrc
 
 You may wonder why not just rename .vim vimfiles?  Well, by keeping it named .vim and linking to it, the repository will work also on linux and mac.  You may also wonder why not just copy vimrc up a directory and name it _vimrc?  Well, by moving it up a directory we would take it out of the repository, and would no longer be able to track changes.
 
-Note that I don't use a gvimrc file, instead I use an if statement in my vimrc that allows me to run gui stuff when appropriate, this keeps all my settings in a single file.
-
-### 3. Update a directory in the vimrc
-You need to update a single directory in your vimrc (the line is towards the top of the file)
-
-### 4. Add any necessary dependencies for plugins, or comment them out in the vimrc
-If you want to use powerline with fancy fonts, you will need to install a patched font.  I have my favorite stored in the windows directoy.  You can double click on each of them to install the fonts.  Read about this feature [here](http://enegue.com/consolas-font-in-vim-powerline-windows/).
-
-A few plugins use ctags.  You can install it online, or for convenience go to the .vim/windows directory and get it there.  You will need to place it on the $PATH, you can do this as follows:
-
-	setx PATH "%PATH%;C:\opt\vim\.vim\windows" -M
-
-(Note: if you only want to add it to the current user's path, omit the -M)
-
-If you want to use the vipy plugin you will need to install ipython and pyzmq, and finally run another batch script, as described in the install instructions [here](https://github.com/johndgiese/vipy)
-
-If any of the plugins give you trouble, you can comment them out in your vimrc.
-
-### 5. Run BundleInstall
+### 3. Run BundleInstall
 You will need to get [Vundle for Windows](https://github.com/gmarik/vundle/wiki/Vundle-for-Windows), note that the vundle files are already in bundle so you can skip that step.
 
 Go into vim and type:
@@ -53,9 +31,24 @@ Go into vim and type:
 
 If you setup Vundle correctly, this will now download all the plugins!
 
+### Optional
+If your vimrc is installed in somewhere besides C:\Users\YourName then you may need to adjust a directory name towards the top of the vimrc file.
+
+If you want to use powerline with fancy fonts, you will need to install a patched font.  I have my favorites stored in the fonts directoy, the ConsolasForPowerline is great on windows.  You can double click on each of them to install the fonts.  Read about this feature [here](http://enegue.com/consolas-font-in-vim-powerline-windows/).  After you are done installing the font, uncomment the lines towards the top of the vimrc
+
+If you want to use the vipy plugin you will need to install ipython and pyzmq, and finally run another batch script, as described in the install instructions [here](https://github.com/johndgiese/vipy)
+
+If any of the plugins give you trouble, you can comment them out in your vimrc.
+
+A few plugins use ctags.  You can install it online, or for convenience go to the .vim/windows directory and get it there.  You will need to place it on the $PATH, you can do this as follows:
+
+	setx PATH "%PATH%;C:\opt\vim\.vim\windows" -M
+
+(Note: if you only want to add it to the current user's path, omit the -M)
+
 # Install instructions on Linux/Mac
 
-### 1. Downlod the repository into your .vim folder
+### 1. Download the repository into your .vim folder
 
 	git clone git://github.com/johndgiese/dotvim.git ~/.vim
 
@@ -120,7 +113,7 @@ These three shorcuts will save you a lot of time, and keep your hands more comfo
 * CTRL-P opens the super awesome fuzzy file browser (:h ctrlp for details)
 
 The following other plugins are installed:
-* Pathogen - lets you manage plugins more easily (look in the bundle directory)
+* Vundle - lets you manage plugins more easily (look in the bundle directory)
 * Nerdtree - browse files inside vim
 * Tagbar/Taglist - view the structure of your files using ctags
 * Gundo - graphical view of undo branches; see the [vimcast](http://vimcasts.org/episodes/undo-branching-and-gundo-vim/)

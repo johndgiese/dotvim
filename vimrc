@@ -21,6 +21,7 @@ else
     let g:DV='~/.vim'
     let g:Powerline_symbols='compatible'
 endif
+let g:DV=expand(g:DV)
 
 " SETUP PLUGINS (AND THEIR SETTINGS) WITH VUNDLE
 set nocompatible
@@ -65,6 +66,9 @@ Bundle 'ap/vim-css-color.git'
 " branching undo is new in vim 7.3
 if v:version > 702
     let &undodir=g:DV."/tmp/undo"
+    if !isdirectory(g:DV."/tmp/undo")
+        call mkdir(g:DV."/tmp/undo", 'p', 0755)
+    endif
     set undofile
 
     " Graphical interface for the vim's branching undo stuff
@@ -172,7 +176,9 @@ set hidden
 
 "set backup
 let &backupdir=g:DV."/tmp/backup"
-call mkdir(backupdir, 'p')
+if !isdirectory(g:DV."/tmp/backup")
+    call mkdir(g:DV."/tmp/backup", 'p', 0755)
+endif
 
 " Code that I only want to run once
 if !exists('g:vimrc_has_run')

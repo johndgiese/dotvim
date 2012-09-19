@@ -15,26 +15,17 @@ Also note these install instructions assume that your vim directory is in: C:\Us
 
 	git clone git://github.com/johndgiese/dotvim.git C:\Users\YourName\.vim
 
-### 2. Create symbolic links
+### 2. Create symbolic links in the command prompt
 
-Create a symbolic link: .vim/vimrc <==> _vimrc
-
-    mklink .vimrc .vim/vimrc
-
-You may wonder why not just rename .vim vimfiles?  Well, by keeping it named .vim and linking to it, the repository will work also on linux and mac.  You may also wonder why not just copy vimrc up a directory and name it _vimrc?  Well, by moving it up a directory we would take it out of the repository, and would no longer be able to track changes.
+    mklink C:\Users\YourName\.vimrc C:\Users\YourName\.vim\vimrc
 
 ### 3. Add some scripts to the $PATH
 
-A curl script and ctags (and a few other things) are in the window directory.  Open a cmd window as administrator and add this directory to the path.
-
 	setx PATH "%PATH%;C:\opt\vim\.vim\windows" -M
 
-(Note: if you only want to add it to the current user's path, omit the -M)
-
 ### 4. Run BundleInstall
-You will need to get [Vundle for Windows](https://github.com/gmarik/vundle/wiki/Vundle-for-Windows), note that the vundle files are already in bundle so you can skip that step.
 
-Go into vim and type:
+Go into vim and execute:
 
     :BundleInstall
 
@@ -49,6 +40,12 @@ If your vimrc is installed in somewhere besides C:\Users\YourName then you may n
 If you want to use powerline with fancy fonts, you will need to install a patched font.  I have my favorites stored in the fonts directoy, the ConsolasForPowerline is great on windows.  You can double click on each of them to install the fonts.  Read about this feature [here](http://enegue.com/consolas-font-in-vim-powerline-windows/).  After you are done installing the font, uncomment the lines towards the top of the vimrc
 
 If you want to use the vipy plugin you will need to install ipython and pyzmq, and finally run another batch script, as described in the install instructions [here](https://github.com/johndgiese/vipy)
+
+### Rational
+
+You may wonder why not just rename .vim vimfiles?  Well, by keeping it named .vim and linking to it, the repository will work also on linux and mac.  You may also wonder why not just copy vimrc up a directory and name it _vimrc?  Well, by moving it up a directory we would take it out of the repository, and would no longer be able to track changes.
+
+Note: if you only want to add the .vim/windows directory to the current user's path, omit the -M
 
 # Install instructions on Linux/Mac
 

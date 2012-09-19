@@ -2,7 +2,7 @@
 if has('win32') || has('win64')
     " If you are cloning this file you need to update the next line to your
     " .vim directory
-    let g:DV=$USERPROFILE\.vim
+    let g:DV=$USERPROFILE.'\vimfiles'
 
     " Swap the commented out lines if you want to install the better consolas
     " go to .vim/windows and double click the font files to install
@@ -35,6 +35,7 @@ Bundle 'gmarik/vundle'
 
 " The solarized color theme
 " Bundle 'altercation/vim-colors-solarized'
+" let g:solarized_termcolors=256
 
 " Use Git inside vim
 Bundle 'tpope/vim-fugitive.git'
@@ -184,9 +185,10 @@ endif
 if !exists('g:vimrc_has_run')
     let g:vimrc_has_run='True'
     syntax enable                   " turn syntax highlighting
-    set background=light
-    let g:solarized_termcolors=256
     colorscheme betterblack
+    if has('gui_running')
+        set columns=130 lines=50
+    endif
 endif
 
 
@@ -301,6 +303,8 @@ nnoremap <leader>v :call Edit_vimrc()<CR>
 function! Edit_vimrc()
     exe 'edit ' . g:DV . '/vimrc'
 endfunction
+
+" Edit your colorscheme on the fly!
 nnoremap <leader>o :call Edit_colorscheme()<CR>
 function! Edit_colorscheme()
     exe 'edit ' . g:DV . '/colors/betterblack.vim'

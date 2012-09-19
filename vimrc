@@ -2,7 +2,7 @@
 if has('win32') || has('win64')
     " If you are cloning this file you need to update the next line to your
     " .vim directory
-    let g:DV=$USERPROFILE.'\vimfiles'
+    let g:DV=$HOME.'\vimfiles'
 
     " Swap the commented out lines if you want to install the better consolas
     " go to .vim/windows and double click the font files to install
@@ -29,7 +29,7 @@ autocmd!
 filetype off
 " All of my favorite plugins
 let &rtp.=','.g:DV.'/bundle/vundle'
-call vundle#rc()
+call vundle#rc(g:DV.'/bundle/')
 " The plugin manager
 Bundle 'gmarik/vundle'
 

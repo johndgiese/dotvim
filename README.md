@@ -1,7 +1,7 @@
-# Thoughts
-I love vim because it is FAST, lightweight, powerful, works in the commandline, and is mostly OS independent. That being said, some of the default settings are no good, and there is a lot of missing functionality.  I have developed a set of customizations to vim that fix these problems and allows one to sync their vim customizations across the major operating systems.
+# This is just a starting point...
+I love vim because it is FAST, lightweight, powerful, works in the commandline, and is mostly OS independent. That being said, some of the default settings are no good, and there is a lot of missing functionality.  I have developed a set of customizations to vim that fix these problems and will allow you to sync your vim customizations across the major operating systems.
 
-Everyone has their own tastes, and will probably want to customize their setup further, so my vimrc is just a starting point.  I hope that you will be able to fork my repository and customize your own from there!  By examining my vimrc you should be able to save yourself some unnecessary frustration.
+Everyone has their own tastes, and will probably want to customize their setup further, so my vimrc is just a starting point.  I hope that you will be able to fork my repository and customize your own from there!  By using my vimrc as a starting place, you will save yourself a good deal of unnecessary frustration and more quickly be able to harness the full power of vim.
 
 Please let me know if you get stuck in the install process (make a github issue) and I will try to help out.
 
@@ -9,27 +9,41 @@ Please let me know if you get stuck in the install process (make a github issue)
 
 Note: these instructions assume that you have git-scm installed (git-scm comes with curl--which Vundle requires to use!).
 
-Also note these install instructions assume that your vim directory is in: C:\Users\Yourname\, modify as necessary.
+### 1. Check that the $HOME environment variable is set correctly
 
-### 1. Downlod the repository into the vimfiles folder
+The simplest way to make sure vim finds your customization files is to put them in your $HOME directory, which is usually: C:\Users\Yourname\ .  You can check what the $HOME environment variable is in the command prompt:
 
-	git clone git://github.com/johndgiese/dotvim.git C:\Users\YourName\vimfiles
+    echo %HOME%
 
-### 2. Create symbolic links in the command prompt
+You can change the $HOME environment variable as follows:
+
+    setx HOME "C:\Users\YourName"
+
+When you are running the commands below, make sure to replace "YourName" everytime it occurs
+
+### 2. Downlod the repository into the vimfiles folder
+
+	git clone https://github.com/johndgiese/dotvim.git C:\Users\YourName\vimfiles
+
+### 3. Create symbolic links in the command prompt
 
     mklink C:\Users\YourName\_vimrc C:\Users\YourName\vimfiles\vimrc
 
-### 3. Add some scripts to the $PATH
+### 4. Add some scripts to the $PATH
 
-	setx PATH "%PATH%;C:\Users\YourName\vimfiles\windows" -M
+	setx PATH "%PATH%;C:\Users\YourName\vimfiles\windows"
+	
+NOTE: if there is a warning about truncation after this command, then you will need to remove some directories from your $PATH (windows only allows 1024 characters!).
+	
+Now close the command prompt to reset the environment variables.
 
-### 4. Run BundleInstall
+### 5. Run BundleInstall
 
 Go into vim and execute:
 
     :BundleInstall
 
-If you setup Vundle correctly, this will now download all the plugins and you will be good to go!
+This should now download and install all the plugins! (note it may appear that there is an error on Vundle itself--this doesn't seem to matter)
 
 ### Optional
 
@@ -41,17 +55,11 @@ If you want to use powerline with fancy fonts, you will need to install a patche
 
 If you want to use the vipy plugin you will need to install ipython and pyzmq, and finally run another batch script, as described in the install instructions [here](https://github.com/johndgiese/vipy)
 
-### Rational
-
-You may wonder why not just rename .vim vimfiles?  Well, by keeping it named .vim and linking to it, the repository will work also on linux and mac.  You may also wonder why not just copy vimrc up a directory and name it _vimrc?  Well, by moving it up a directory we would take it out of the repository, and would no longer be able to track changes.
-
-Note: if you only want to add the .vim/windows directory to the current user's path, omit the -M
-
 # Install instructions on Linux/Mac
 
 ### 1. Download the repository into your .vim folder
 
-	git clone git://github.com/johndgiese/dotvim.git ~/.vim
+	git clone https://github.com/johndgiese/dotvim.git ~/.vim
 
 ### 2. Create a symbolic link to your vimrc
 
@@ -62,7 +70,7 @@ Open vim and execute:
 
     :BundleInstall
 
-This should now download all the plugins!
+This should now download and install all the plugins! (note it may appear that there is an error on Vundle itself--this doesn't seem to matter)
 
 ### Optional
 

@@ -33,6 +33,8 @@ When you are running the commands below, make sure to replace "YourName" everyti
 
 	setx PATH "%PATH%;C:\Users\YourName\vimfiles\windows"
 	
+NOTE: if there is a warning about truncation after this command, then you will need to remove some directories from your $PATH (windows only allows 1024 characters!).
+	
 Now close the command prompt to reset the environment variables.
 
 ### 5. Run BundleInstall

@@ -11,7 +11,7 @@ Note: these instructions assume that you have git-scm installed (git-scm comes w
 
 ### 1. Check that the $HOME environment variable is set correctly
 
-Also note these install instructions assume that your vim directory is in your $HOME directory, which is usually: C:\Users\Yourname\ .  You can check what the $HOME environment variable is in the command prompt:
+The simplest way to make sure vim finds your customization files is to put them in your $HOME directory, which is usually: C:\Users\Yourname\ .  You can check what the $HOME environment variable is in the command prompt:
 
     echo %HOME%
 

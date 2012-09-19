@@ -33,8 +33,6 @@ When you are running the commands below, make sure to replace "YourName" everyti
 
 	setx PATH "%PATH%;C:\Users\YourName\vimfiles\windows"
 
-Note: add a -M to set it for all users.
-
 ### 5. Run BundleInstall
 
 Go into vim and execute:

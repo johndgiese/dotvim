@@ -29,7 +29,7 @@ Go into vim and execute:
 
     :BundleInstall
 
-If you setup Vundle correctly, this will now download all the plugins and you will be good to go!
+This should now download and install all the plugins! (note it may appear that there is an error on Vundle itself--this doesn't seem to matter)
 
 ### Optional
 
@@ -56,7 +56,7 @@ Open vim and execute:
 
     :BundleInstall
 
-This should now download all the plugins!
+This should now download and install all the plugins! (note it may appear that there is an error on Vundle itself--this doesn't seem to matter)
 
 ### Optional
 

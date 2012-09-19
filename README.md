@@ -11,17 +11,17 @@ Note: these instructions assume that you have git-scm installed (git-scm comes w
 
 Also note these install instructions assume that your vim directory is in: C:\Users\Yourname\, modify as necessary.
 
-### 1. Downlod the repository into your .vim folder
+### 1. Downlod the repository into the vimfiles folder
 
-	git clone git://github.com/johndgiese/dotvim.git C:\Users\YourName\.vim
+	git clone git://github.com/johndgiese/dotvim.git C:\Users\YourName\vimfiles
 
 ### 2. Create symbolic links in the command prompt
 
-    mklink C:\Users\YourName\.vimrc C:\Users\YourName\.vim\vimrc
+    mklink C:\Users\YourName\_vimrc C:\Users\YourName\vimfiles\vimrc
 
 ### 3. Add some scripts to the $PATH
 
-	setx PATH "%PATH%;C:\opt\vim\.vim\windows" -M
+	setx PATH "%PATH%;C:\opt\vim\_vim\windows" -M
 
 ### 4. Run BundleInstall
 

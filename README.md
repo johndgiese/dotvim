@@ -95,10 +95,10 @@ The most important three changes are:
 
 These three shorcuts will save you a lot of time, and keep your hands more comfortable when typing.  I believe one of the main benefits of vim is that it allows you to keep your hands on the keyboard so you can type more faster.
 
-* F1 opens nerdtree
-* F2 opens the ctag viewer
-* F3 is the mini-buffer explorer
-* F4 opens the gundo plugin
+* F1 lets you browse files
+* F2 lets you view the structure of your file
+* F3 lets you see all the open buffers
+* F4 lets you navigate the undo history (required vim 7.3)
 * The new leader key is , instead of /
 * Searches (pressing / or ? in normal mode) now have \v prepended so that vim uses the verymagic mode (i.e. it uses normal python/perl regular expressions instead of its own version)
 * ,/ clears search highlighting
@@ -123,7 +123,7 @@ The following other plugins are installed:
 * Autoclose - autoclose parenthesis
 * Snipmate - add snippets of commonly usedcode
 * Session - save the window structure and files opened, for easy switching between projects
-* Unimpaired
+* Unimpaired - provides various mappings for operating with pairs
 * Powerline - a colorful and useful statusline
 * Csscolor - css color highlighting
 * Tabular - for aligning stuff (see [this vimcast](http://vimcasts.org/episodes/aligning-text-with-tabular-vim/))
@@ -133,8 +133,8 @@ The following other plugins are installed:
 
 F5 is my universal "run file" key, and "SHIFT-F5" is my debug file key.  These are loose terms.  Here is a list of files and what F5 does for each of them.
 * python -- F5 runs file (in vipy plugin)
-* xml    -- S-F5 formats using xmllint
-* html   -- F5 opens in a browser
+* xml    -- S-F5 formats using xmllint (requires xmllint)
+* html   -- F5 opens in a browser (requires xmllint)
 * latex  -- F5 converts to a dvi and opens it in a viewer (requires Miketex)
 * c      -- F5 compiles code with make (Linux only), S-F5 runs a.out
 

@@ -41,6 +41,12 @@ If you want to use powerline with fancy fonts, you will need to install a patche
 
 If you want to use the vipy plugin you will need to install ipython and pyzmq, and finally run another batch script, as described in the install instructions [here](https://github.com/johndgiese/vipy)
 
+### Rational
+
+You may wonder why not just rename .vim vimfiles?  Well, by keeping it named .vim and linking to it, the repository will work also on linux and mac.  You may also wonder why not just copy vimrc up a directory and name it _vimrc?  Well, by moving it up a directory we would take it out of the repository, and would no longer be able to track changes.
+
+Note: if you only want to add the .vim/windows directory to the current user's path, omit the -M
+
 # Install instructions on Linux/Mac
 
 ### 1. Download the repository into your .vim folder
@@ -52,15 +58,15 @@ If you want to use the vipy plugin you will need to install ipython and pyzmq, a
 	ln -s ~/.vim/vimrc ~/.vimrc
 
 ### 3. Run BundleInstall
-You should already have vundle installed, go into vim and type:
+Open vim and execute:
 
     :BundleInstall
 
-If you setup Vundle correctly, this will now download all the plugins!
+This should now download all the plugins!
 
 ### Optional
 
-Ctags is a program that parses your code and generates links between files.  Ctags is used by a few plugins that I have, and they will complain if you don't have them installed.  You can remove the plugins, but I reccomend trying to install ctags.  It is super useful.  You can read about it [here](http://ctags.sourceforge.net/)
+Ctags is a program that parses your code and generates links between files.  Ctags is used by a few plugins that I have, and they will complain if you don't have them installed.  You can comment out the plugins in the vimrc file, but I reccomend trying to install ctags.  It is super useful.  You can read about it [here](http://ctags.sourceforge.net/)
 
     sudo get-apt install ctags
 
@@ -70,12 +76,6 @@ If you want to use the vipy plugin you will need to install ipython and pyzmq, a
     sudo apt-get install python-pyzmq
 
 If any of the plugins give you trouble, you can comment them out in your vimrc.
-
-## Rational
-
-You may wonder why not just rename .vim vimfiles?  Well, by keeping it named .vim and linking to it, the repository will work also on linux and mac.  You may also wonder why not just copy vimrc up a directory and name it _vimrc?  Well, by moving it up a directory we would take it out of the repository, and would no longer be able to track changes.
-
-Note: if you only want to add the .vim/windows directory to the current user's path, omit the -M
 
 # How this vim setup differs from normal vim
 

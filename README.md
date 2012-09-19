@@ -21,7 +21,7 @@ When you are running the commands below, make sure to replace "YourName" everyti
 
 ### 1. Downlod the repository into the vimfiles folder
 
-	git clone git://github.com/johndgiese/dotvim.git C:\Users\YourName\vimfiles
+	git clone https://github.com/johndgiese/dotvim.git C:\Users\YourName\vimfiles
 
 ### 2. Create symbolic links in the command prompt
 
@@ -55,7 +55,7 @@ If you want to use the vipy plugin you will need to install ipython and pyzmq, a
 
 ### 1. Download the repository into your .vim folder
 
-	git clone git://github.com/johndgiese/dotvim.git ~/.vim
+	git clone https://github.com/johndgiese/dotvim.git ~/.vim
 
 ### 2. Create a symbolic link to your vimrc
 

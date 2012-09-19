@@ -308,7 +308,6 @@ endfunction
 nnoremap <leader>o :call Edit_colorscheme()<CR>
 function! Edit_colorscheme()
     exe 'edit ' . g:DV . '/colors/betterblack.vim'
-    exe 'source ' . g:DV . '/bundle/csscolor/after/css.vim'
 endfunction
 
 " VISUALIZATION STUFF

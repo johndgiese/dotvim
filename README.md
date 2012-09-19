@@ -1,7 +1,7 @@
 # Thoughts
 I love vim because it is FAST, lightweight, powerful, works in the commandline, and is mostly OS independent. That being said, some of the default settings are no good, and there is a lot of missing functionality.  I have developed a set of customizations to vim that fix these problems and allows one to sync their vim customizations across the major operating systems.
 
-Everyone has their own tastes, and will probably want to customize their setup further, so my vimrc is just a starting point.  I hope that you will be able to clone my repository and then make your own from there.
+Everyone has their own tastes, and will probably want to customize their setup further, so my vimrc is just a starting point.  I hope that you will be able to fork my repository and customize your own from there!  By examining my vimrc you should be able to save yourself some unnecessary frustration.
 
 Please let me know if you get stuck in the install process (make a github issue) and I will try to help out.
 

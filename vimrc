@@ -1,73 +1,104 @@
-set nocompatible                " vi compatible is LAME
-autocmd!
-filetype off
+" SETUP THE BASE DIRECTORY (referenced in some mappings)
 if has('win32') || has('win64')
     " If you are cloning this file you need to update the next line to your
     " .vim directory
-    let g:DV='C:\opt\vim\.vim'
+    let g:DV=$USERPROFILE\.vim
 
-    " Swap the comment out lines if you don't want to install better consolas
-    " if you want to update your fonts, go to .vim/windows and double click
-    " all of the font files there to install them
-    set guifont=Consolas\ for\ Powerline\ FixedD:h10
-    let g:Powerline_symbols='fancy'
-    " set guifont=Consolas:h10
-    " let g:Powerline_symbols = 'compatible'
+    " Swap the commented out lines if you want to install the better consolas
+    " go to .vim/windows and double click the font files to install
+    " set guifont=Consolas\ for\ Powerline\ FixedD:h10
+    " let g:Powerline_symbols='fancy'
+    set guifont=Consolas:h10
+    let g:Powerline_symbols='compatible'
 elseif has('mac')
     " I don't know which mac font to use
     " set guifont=Monospace\ 8
     let g:DV='~/.vim'
     let g:Powerline_symbols='compatible'
 else
-    " set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
     " set guifont=Inconsolata\ 12
-    " set guifont=ProggyCleanTT\ 12
     set guifont=CodingFontTobi\ 12
-    " set guifont=ProggyTinyTTSZ\ 12
     let g:DV='~/.vim'
-    let g:Powerline_symbols='fancy'
+    let g:Powerline_symbols='compatible'
 endif
 
+" SETUP PLUGINS (AND THEIR SETTINGS) WITH VUNDLE
+set nocompatible
+autocmd!
+filetype off
 " All of my favorite plugins
-set rtp+=~/.vim/bundle/vundle
+let &rtp.=','.g:DV.'/bundle/vundle'
 call vundle#rc()
-" Bundle 'altercation/vim-colors-solarized'
+" The plugin manager
 Bundle 'gmarik/vundle'
+
+" The solarized color theme
+" Bundle 'altercation/vim-colors-solarized'
+
+" Use Git inside vim
 Bundle 'tpope/vim-fugitive.git'
+
+" Put in closing brackets automatically
 " Bundle 'Townk/vim-autoclose.git'
+
+" Commenting tools
 Bundle 'scrooloose/nerdcommenter.git'
+
+" Lets you deal with braket pairs etc.
 Bundle 'tpope/vim-surround.git'
-Bundle 'vim-scripts/taglist.vim.git'
+
+" Align code usint :Tab/someregexp
+Bundle 'godlygeek/tabular.git'
+
+" Better javascript indenting etc.
 Bundle 'pangloss/vim-javascript.git'
+
+" extended matching with %
 Bundle 'edsono/vim-matchit.git'
+
+" various mappings related to pairs
 Bundle 'tpope/vim-unimpaired.git'
-Bundle 'vim-scripts/greplace.vim'
+
+" colors are highlighted in css files
 Bundle 'ap/vim-css-color.git'
 
-Bundle 'sjl/gundo.vim.git'
-nnoremap <silent> <F4> :GundoToggle<CR>
-let g:gundo_right = 1
-let g:gundo_help  = 0
+" branching undo is new in vim 7.3
+if v:version > 702
+    let &undodir=g:DV."/tmp/undo"
+    set undofile
 
+    " Graphical interface for the vim's branching undo stuff
+    Bundle 'sjl/gundo.vim.git'
+    nnoremap <silent> <F4> :GundoToggle<CR>
+    let g:gundo_right = 1
+    let g:gundo_help  = 0
+endif
+
+" File browsing
 Bundle 'scrooloose/nerdtree.git'
 noremap <silent> <F1> :NERDTreeToggle<CR>
 let NERDTreeIgnore = ['\~$', '\.pyc']
 
+" Nice buffer browsers/switcher
 Bundle 'corntrace/bufexplorer'
 noremap <silent> <F3> :BufExplorer<CR>
 let g:bufExplorerDefaultHelp=0
 
+" Save the vim state and reload when you come back
 Bundle 'xolox/vim-session.git'
 let g:session_autosave = 'no'
 let g:session_autoload = 'no'
 
-Bundle 'godlygeek/tabular.git'
+" Ctag viewer
+Bundle 'vim-scripts/taglist.vim.git'
 noremap <silent> <S-F2> :TlistToggle<CR>
 let Tlist_Use_Right_Window=1
 
+" Another slightly different ctag viewer
 Bundle 'majutsushi/tagbar.git'
 noremap <silent> <F2> :TagbarToggle<CR>
 
+" Autocomplete using tab instead of <C-x><C-o>
 Bundle 'ervandew/supertab.git'
 set completeopt=longest,menuone
 let g:SuperTabLongestEnhanced = 1
@@ -80,16 +111,22 @@ autocmd FileType *
    \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
    \ endif
 
+" A better status line
 Bundle 'Lokaltog/vim-powerline.git'
 let g:Powerline_stl_path_style='short'
 
+" Use ipython inside vim
 Bundle 'johndgiese/vipy.git'
 let g:vipy_profile='david'
 let g:vipy_position='rightbelow'
 
+" A fuzzy file finder-- really great just press CTRL-P!
 Bundle 'kien/ctrlp.vim.git'
 let g:ctrlp_cmd='CtrlPRoot'
 
+" Syntax highlighting interface
+" NOTE: to use it with various file-types you need to have the respective
+" syntax program installed
 Bundle 'scrooloose/syntastic.git'
 nnoremap <leader>e :SyntasticCheck<CR>
 let g:locliststate=1
@@ -101,15 +138,20 @@ let g:syntastic_mode_map = { 'mode': 'passive',
                             \ 'active_filetypes': [], 
                             \ 'passive_filetypes': [] }
 
-" Snipmate and three dependencies
+" Snipmate provides lots of snippets
+" Press <C-r><tab> to see potential completions!
+" <tab> will expand
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
 Bundle "honza/snipmate-snippets"
 Bundle "garbas/vim-snipmate"
 
-" Python Debugger
-" Bundle 'joonty/vdebug.git'
+" Fullscreen
+if has('win32') || has('win64')
+    noremap <F11> <ESC>:call libcallnr("gvimfullscreen.dll","ToggleFullScreen",0)<CR>
+end
 
+" GENERAL SETTINGS
 filetype plugin indent on
 filetype plugin on
 let mapleader = ","
@@ -129,8 +171,8 @@ set noswapfile
 set hidden
 
 "set backup
-"let &backupdir=g:DV."/tmp/backup"
-"call mkdir(backupdir, 'p')
+let &backupdir=g:DV."/tmp/backup"
+call mkdir(backupdir, 'p')
 
 " Code that I only want to run once
 if !exists('g:vimrc_has_run')
@@ -141,18 +183,11 @@ if !exists('g:vimrc_has_run')
     colorscheme betterblack
 endif
 
-" branching undo is new in vim 7.3
-if v:version > 702
-    let &undodir=g:DV."/tmp/undo"
-    set undofile
-endif
 
 " NETWORK
 " Disable matching parenthesise when on a network file
 autocmd BufReadPre //* :NoMatchParen
 
-" Fullscreen
-noremap <F11> <ESC>:call libcallnr("gvimfullscreen.dll","ToggleFullScreen",0)<CR>
 
 " WEB DEVELOPMENT
 " better html/javascript syntax/indenting (see javascript plugin)
@@ -183,8 +218,19 @@ if !exists("autocommands_loaded")
 endif
 
 " CUSTOM KEYCOMMANDS
-" use comma instead of \ for leader, because it is closer
-map \ ,
+" The first three blocks of mappings are the most 'important' they are 
+" setup for speed and minimal finger movement
+
+" Better <ESC> (to go back to normal mode from insert mode)
+inoremap jk <ESC>
+inoremap <ESC> <nop>
+noremap <C-s> :w<CR>
+
+" switch semi-colon and colon
+nnoremap ; :
+vnoremap ; :
+nnoremap : ;
+vnoremap : ;
 
 " insert the very magic reg-ex mode every time
 set hlsearch incsearch
@@ -192,11 +238,8 @@ nnoremap / /\v
 nnoremap ? ?\v
 nnoremap <silent> <leader>/ :noh<CR>
 
-" switch semi-colon and colon
-nnoremap ; :
-vnoremap ; :
-nnoremap : ;
-vnoremap : ;
+" use comma instead of \ for leader, because it is closer
+map \ ,
 
 " Remap block-visual mode to alt-V, and set paste-from-clipboard to C-v
 nnoremap <A-v> <C-v>
@@ -219,6 +262,12 @@ nmap <C-4> g$
 nmap <C-6> g^
 nmap <C-0> g0
 
+" convenience mappings for moving insert mode
+imap <C-j> <up>
+imap <C-k> <down>
+imap <C-h> <left>
+imap <C-l> <right>
+
 " buffer switching
 inoremap <C-tab> <ESC>:bn<CR>
 inoremap <C-S-tab> <ESC>:bp<CR>
@@ -240,11 +289,6 @@ nnoremap <leader>D 0i# <ESC>"=strftime("%a %b %d, %Y (%I:%M %p)")<CR>po<ESC>xxi
 " Toggle spell checking on and off with `,s`
 nnoremap <silent> <leader>s :set spell!<CR>
 set spelllang=en_us " Set region to US English
-
-" Better <ESC> (to go back to normal mode from insert mode)
-inoremap jk <ESC>
-inoremap <ESC> <nop>
-noremap <C-s> :w<CR>
 
 " Start editing the vimrc in a new buffer
 nnoremap <leader>v :call Edit_vimrc()<CR>
@@ -271,34 +315,11 @@ abbreviate jquery JQuery
 abbreviate labview LabVIEW
 abbreviate matlab MATLAB
 
-" SOME GIT SPECIFIC SETTINGS
-" Only do this part when compiled with support for autocommands.
-if has("autocmd")
-    "Set UTF-8 as the default encoding for commit messages
-    autocmd BufReadPre COMMIT_EDITMSG,git-rebase-todo setlocal fileencodings=utf-8
-
-    "Remember the positions in files with some git-specific exceptions"
-    autocmd BufReadPost *
-      \ if line("'\"") > 0 && line("'\"") <= line("$")
-      \           && expand("%") !~ "COMMIT_EDITMSG"
-      \           && expand("%") !~ "ADD_EDIT.patch"
-      \           && expand("%") !~ "addp-hunk-edit.diff"
-      \           && expand("%") !~ "git-rebase-todo" |
-      \   exe "normal g`\"" |
-      \ endif
-
-      autocmd BufNewFile,BufRead *.patch set filetype=diff
-      autocmd BufNewFile,BufRead *.diff set filetype=diff
-
-      autocmd Syntax diff
-      \ highlight WhiteSpaceEOL ctermbg=red |
-      \ match WhiteSpaceEOL /\(^+.*\)\@<=\s\+$/
-
-      autocmd Syntax gitcommit setlocal textwidth=74
-endif " has("autocmd")
-
 " SETTINGS FOR GVIM
+" I don't like all the scrollbars etc -- I think the clutter
+" Vim's elegant simplicity
 if has('gui_running')
+    set columns=130 lines=50
     set guioptions-=m 		" remove menu bar
     set guioptions-=T		" remove toolbar
     set guioptions+=LlRrb   " remove all scrollbars

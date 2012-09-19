@@ -1,7 +1,7 @@
 # Thoughts
 I love vim because it is FAST, lightweight, powerful, works in the commandline, and is mostly OS independent. That being said, some of the default settings are no good, and there is a lot of missing functionality.  I have developed a set of customizations to vim that fix these problems and allows one to sync their vim customizations across the major operating systems.
 
-Everyone has their own tastes, and will probably want to customize their setup further, so my vimrc is just a starting point.  I hope that you will be able to clone my repository and then make your own from there.
+Everyone has their own tastes, and will probably want to customize their setup further, so my vimrc is just a starting point.  I hope that you will be able to fork my repository and customize your own from there!  By examining my vimrc you should be able to save yourself some unnecessary frustration.
 
 Please let me know if you get stuck in the install process (make a github issue) and I will try to help out.
 
@@ -41,6 +41,12 @@ If you want to use powerline with fancy fonts, you will need to install a patche
 
 If you want to use the vipy plugin you will need to install ipython and pyzmq, and finally run another batch script, as described in the install instructions [here](https://github.com/johndgiese/vipy)
 
+### Rational
+
+You may wonder why not just rename .vim vimfiles?  Well, by keeping it named .vim and linking to it, the repository will work also on linux and mac.  You may also wonder why not just copy vimrc up a directory and name it _vimrc?  Well, by moving it up a directory we would take it out of the repository, and would no longer be able to track changes.
+
+Note: if you only want to add the .vim/windows directory to the current user's path, omit the -M
+
 # Install instructions on Linux/Mac
 
 ### 1. Download the repository into your .vim folder
@@ -52,15 +58,15 @@ If you want to use the vipy plugin you will need to install ipython and pyzmq, a
 	ln -s ~/.vim/vimrc ~/.vimrc
 
 ### 3. Run BundleInstall
-You should already have vundle installed, go into vim and type:
+Open vim and execute:
 
     :BundleInstall
 
-If you setup Vundle correctly, this will now download all the plugins!
+This should now download all the plugins!
 
 ### Optional
 
-Ctags is a program that parses your code and generates links between files.  Ctags is used by a few plugins that I have, and they will complain if you don't have them installed.  You can remove the plugins, but I reccomend trying to install ctags.  It is super useful.  You can read about it [here](http://ctags.sourceforge.net/)
+Ctags is a program that parses your code and generates links between files.  Ctags is used by a few plugins that I have, and they will complain if you don't have them installed.  You can comment out the plugins in the vimrc file, but I reccomend trying to install ctags.  It is super useful.  You can read about it [here](http://ctags.sourceforge.net/)
 
     sudo get-apt install ctags
 
@@ -70,12 +76,6 @@ If you want to use the vipy plugin you will need to install ipython and pyzmq, a
     sudo apt-get install python-pyzmq
 
 If any of the plugins give you trouble, you can comment them out in your vimrc.
-
-## Rational
-
-You may wonder why not just rename .vim vimfiles?  Well, by keeping it named .vim and linking to it, the repository will work also on linux and mac.  You may also wonder why not just copy vimrc up a directory and name it _vimrc?  Well, by moving it up a directory we would take it out of the repository, and would no longer be able to track changes.
-
-Note: if you only want to add the .vim/windows directory to the current user's path, omit the -M
 
 # How this vim setup differs from normal vim
 
@@ -125,8 +125,10 @@ The following other plugins are installed:
 
 F5 is my universal "run file" key, and "SHIFT-F5" is my debug file key.  These are loose terms.  Here is a list of files and what F5 does for each of them.
 * python -- F5 runs file (in vipy plugin)
-* xml -- S-F5 formats using xmllint
-* html -- F5 opens in a browser
+* xml    -- S-F5 formats using xmllint
+* html   -- F5 opens in a browser
+* latex  -- F5 converts to a dvi and opens it in a viewer (requires Miketex)
+* c      -- F5 compiles code with make (Linux only), S-F5 runs a.out
 
 # Maintaining your repo
 The structure of this vimrc setup allows easy cross platform use and easy updating of your plugins.  This comes at a cost of it being a little more complicated to maintain (but overall much faster and stable).  Here are a few notes that may help you.

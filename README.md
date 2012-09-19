@@ -32,6 +32,8 @@ When you are running the commands below, make sure to replace "YourName" everyti
 ### 4. Add some scripts to the $PATH
 
 	setx PATH "%PATH%;C:\Users\YourName\vimfiles\windows"
+	
+Now close the command prompt to reset the environment variables.
 
 ### 5. Run BundleInstall
 

@@ -41,12 +41,6 @@ If you want to use powerline with fancy fonts, you will need to install a patche
 
 If you want to use the vipy plugin you will need to install ipython and pyzmq, and finally run another batch script, as described in the install instructions [here](https://github.com/johndgiese/vipy)
 
-### Rational
-
-You may wonder why not just rename .vim vimfiles?  Well, by keeping it named .vim and linking to it, the repository will work also on linux and mac.  You may also wonder why not just copy vimrc up a directory and name it _vimrc?  Well, by moving it up a directory we would take it out of the repository, and would no longer be able to track changes.
-
-Note: if you only want to add the .vim/windows directory to the current user's path, omit the -M
-
 # Install instructions on Linux/Mac
 
 ### 1. Download the repository into your .vim folder

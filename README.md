@@ -9,6 +9,8 @@ Please let me know if you get stuck in the install process (make a github issue)
 
 Note: these instructions assume that you have git-scm installed (git-scm comes with curl--which Vundle requires to use!).
 
+### 1. Check that the $HOME environment variable is set correctly
+
 Also note these install instructions assume that your vim directory is in your $HOME directory, which is usually: C:\Users\Yourname\ .  You can check what the $HOME environment variable is in the command prompt:
 
     echo %HOME%
@@ -19,21 +21,21 @@ You can change the $HOME environment variable as follows:
 
 When you are running the commands below, make sure to replace "YourName" everytime it occurs
 
-### 1. Downlod the repository into the vimfiles folder
+### 2. Downlod the repository into the vimfiles folder
 
 	git clone https://github.com/johndgiese/dotvim.git C:\Users\YourName\vimfiles
 
-### 2. Create symbolic links in the command prompt
+### 3. Create symbolic links in the command prompt
 
     mklink C:\Users\YourName\_vimrc C:\Users\YourName\vimfiles\vimrc
 
-### 3. Add some scripts to the $PATH
+### 4. Add some scripts to the $PATH
 
 	setx PATH "%PATH%;C:\Users\YourName\vimfiles\windows"
 
 Note: add a -M to set it for all users.
 
-### 4. Run BundleInstall
+### 5. Run BundleInstall
 
 Go into vim and execute:
 

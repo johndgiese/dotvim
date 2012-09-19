@@ -88,7 +88,7 @@ The most important three changes are:
 These three shorcuts will save you a lot of time, and keep your hands more comfortable when typing.  I believe one of the main benefits of vim is that it allows you to keep your hands on the keyboard so you can type more faster.
 
 * F1 opens nerdtree
-* F2 opens the ctag viewer (SHIFT-F2 opens an alternate viewer)
+* F2 opens the ctag viewer
 * F3 is the mini-buffer explorer
 * F4 opens the gundo plugin
 * The new leader key is , instead of /
@@ -107,7 +107,7 @@ These three shorcuts will save you a lot of time, and keep your hands more comfo
 The following other plugins are installed:
 * Vundle - lets you manage plugins more easily (look in the bundle directory)
 * Nerdtree - browse files inside vim
-* Tagbar/Taglist - view the structure of your files using ctags
+* Tagbar - view the structure of your files using ctags
 * Gundo - graphical view of undo branches; see the [vimcast](http://vimcasts.org/episodes/undo-branching-and-gundo-vim/)
 * Fugitive - use git inside vim!  See the [vimcasts](http://vimcasts.org/episodes/archive) about it.
 * Surround - work better with parenthesis and other nesting structures.  Type :h surround

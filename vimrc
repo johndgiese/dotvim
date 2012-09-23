@@ -66,17 +66,17 @@ Bundle 'ap/vim-css-color.git'
 
 " File browsing
 Bundle 'scrooloose/nerdtree.git'
-noremap <silent> <F1> :NERDTreeToggle<CR>
+noremap <silent> <leader>1 :NERDTreeToggle<CR>
 let NERDTreeIgnore = ['\~$', '\.pyc']
 
 " Ctag viewer
 Bundle 'majutsushi/tagbar.git'
 let g:tagbar_iconchars = ['+', '-']
-noremap <silent> <F2> :TagbarToggle<CR>
+noremap <silent> <leader>2 :TagbarToggle<CR>
 
 " Nice buffer browsers/switcher
 Bundle 'corntrace/bufexplorer'
-noremap <silent> <F3> :BufExplorer<CR>
+noremap <silent> <leader>3 :BufExplorer<CR>
 let g:bufExplorerDefaultHelp=0
 
 " branching undo is new in vim 7.3
@@ -89,7 +89,7 @@ if v:version > 702
 
     " Graphical interface for the vim's branching undo stuff
     Bundle 'sjl/gundo.vim.git'
-    nnoremap <silent> <F4> :GundoToggle<CR>
+    nnoremap <silent> <leader>4 :GundoToggle<CR>
     let g:gundo_right = 1
     let g:gundo_help  = 0
 endif
@@ -154,6 +154,7 @@ if has('win32') || has('win64')
 end
 
 " GENERAL SETTINGS
+colorscheme betterblack
 filetype plugin indent on
 filetype plugin on
 let mapleader = ","

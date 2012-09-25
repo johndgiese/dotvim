@@ -95,11 +95,11 @@ The most important three changes are:
 
 These three shorcuts will save you a lot of time, and keep your hands more comfortable when typing.  I believe one of the main benefits of vim is that it allows you to keep your hands on the keyboard so you can type more faster.
 
-* F1 lets you browse files
-* F2 lets you view the structure of your file
-* F3 lets you see all the open buffers
-* F4 lets you navigate the undo history (required vim 7.3)
 * The new leader key is , instead of /
+* ,1 lets you browse files
+* ,2 lets you view the structure of your file
+* ,3 lets you see all the open buffers
+* ,4 lets you navigate the undo history (required vim 7.3)
 * Searches (pressing / or ? in normal mode) now have \v prepended so that vim uses the verymagic mode (i.e. it uses normal python/perl regular expressions instead of its own version)
 * ,/ clears search highlighting
 * ,s (i.e. ,s) starts spell search

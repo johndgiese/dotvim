@@ -22,6 +22,7 @@ else
     let g:Powerline_symbols='compatible'
 endif
 let g:DV=expand(g:DV)
+let mapleader = ","
 
 " SETUP PLUGINS (AND THEIR SETTINGS) WITH VUNDLE
 set nocompatible
@@ -157,7 +158,6 @@ end
 colorscheme betterblack
 filetype plugin indent on
 filetype plugin on
-let mapleader = ","
 set ai                          " set auto-indenting on for programming
 set showmatch                   " automatically show matching brackets
 set vb                          " turn on the "visual bell" - quieter than the "audio blink"
@@ -269,8 +269,6 @@ nmap <C-6> g^
 nmap <C-0> g0
 
 " convenience mappings for moving insert mode
-imap <C-j> <up>
-imap <C-k> <down>
 imap <C-h> <left>
 imap <C-l> <right>
 
@@ -326,9 +324,7 @@ abbreviate matlab MATLAB
 " I don't like all the scrollbars etc -- I think the clutter
 " Vim's elegant simplicity
 if has('gui_running')
-    if !exists('g:vimrc_has_run')
-        set columns=130 lines=50
-    endif
+    set columns=130 lines=50
     set guioptions-=m 		" remove menu bar
     set guioptions-=T		" remove toolbar
     set guioptions+=LlRrb   " remove all scrollbars

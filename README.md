@@ -28,6 +28,7 @@ When you are running the commands below, make sure to replace "YourName" everyti
 ### 3. Create symbolic links in the command prompt
 
     mklink C:\Users\YourName\_vimrc C:\Users\YourName\vimfiles\vimrc
+    mklink C:\Users\YourName\_gvimrc C:\Users\YourName\vimfiles\gvimrc
 
 ### 4. Add some scripts to the $PATH
 
@@ -64,6 +65,7 @@ If you want to use the vipy plugin you will need to install ipython and pyzmq, a
 ### 2. Create a symbolic link to your vimrc
 
 	ln -s ~/.vim/vimrc ~/.vimrc
+	ln -s ~/.vim/gimrc ~/.gvimrc
 
 ### 3. Run BundleInstall
 Open vim and execute:

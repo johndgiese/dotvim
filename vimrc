@@ -172,6 +172,7 @@ set history=100                 " remember the last 100 commands
 set encoding=utf-8 
 set noswapfile
 set hidden
+let loaded_matchparen = 1       " I find that the match parenthesis standard plugin is slow
 
 "set backup
 let &backupdir=g:DV."/tmp/backup"

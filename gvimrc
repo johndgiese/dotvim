@@ -7,3 +7,4 @@ set guioptions+=LlRrb   " remove all scrollbars
 set guioptions-=LlRrb
 set guioptions-=e
 set noscrollbind
+winpos 100 100 " set initial vim position

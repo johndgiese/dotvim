@@ -6,8 +6,8 @@ hi String guibg=NONE guifg=#FF0000 gui=NONE ctermbg=NONE ctermfg=Red cterm=NONE
 hi Comment guibg=NONE guifg=#FF7300 gui=NONE ctermbg=NONE ctermfg=Yellow cterm=NONE
 hi Number guibg=NONE guifg=#C92040 gui=NONE ctermbg=NONE ctermfg=Red cterm=NONE
 hi Function guibg=NONE guifg=#0Fef33 gui=NONE ctermbg=NONE ctermfg=Green cterm=NONE
-hi Keyword guibg=NONE guifg=#0051FF gui=NONE ctermbg=NONE ctermfg=Blue cterm=NONE
-hi Statement guibg=NONE guifg=#0052FF gui=NONE ctermbg=NONE ctermfg=Blue cterm=NONE
+hi Keyword guibg=NONE guifg=#3381FF gui=NONE ctermbg=NONE ctermfg=Blue cterm=NONE
+hi Statement guibg=NONE guifg=#3381FF gui=NONE ctermbg=NONE ctermfg=Blue cterm=NONE
 hi Identifier guibg=NONE guifg=#00ED45 gui=NONE ctermbg=NONE ctermfg=Green cterm=NONE
 hi Type guibg=NONE guifg=#0052FF gui=NONE ctermbg=NONE ctermfg=Blue cterm=NONE
 hi Todo guibg=#151515 guifg=#FF7300 gui=NONE ctermbg=NONE ctermfg=Yellow cterm=NONE

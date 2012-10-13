@@ -157,7 +157,6 @@ end
 " GENERAL SETTINGS
 colorscheme betterblack
 filetype plugin indent on
-filetype plugin on
 set ai                          " set auto-indenting on for programming
 set showmatch                   " automatically show matching brackets
 set vb                          " turn on the "visual bell" - quieter than the "audio blink"

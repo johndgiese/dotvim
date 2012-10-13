@@ -249,12 +249,11 @@ map \ ,
 
 " Remap block-visual mode to alt-V, and set paste-from-clipboard to C-v
 nnoremap <A-v> <C-v>
-nnoremap <C-v> "*p<CR>
-inoremap <C-v> <ESC>"*p<CR>i
-vnoremap <C-v> d"*p<CR>
-nnoremap <C-c> "*y<CR>
-inoremap <C-c> <ESC>"*y<CR>
-vnoremap <C-c> "*y<CR>
+nnoremap <C-v> "+gp
+inoremap <C-v> <ESC>"+gpi
+vnoremap <C-v> d"+p
+vnoremap <C-c> "+y
+vnoremap <C-x> "+ygvd
 
 " Move between editor lines (instead of actual lines) when holding CTRL 
 vmap <C-j> gj

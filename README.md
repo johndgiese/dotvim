@@ -82,8 +82,9 @@ Ctags is a program that parses your code and generates links between files.  Cta
 
 If you want to use the vipy plugin you will need to install ipython and pyzmq, and finally run another batch script, as described in the install instructions [here](https://github.com/johndgiese/vipy).  Basically it is:
 
-    sudo apt-get install python-ipython
-    sudo apt-get install python-pyzmq
+    sudo apt-get update
+    sudo apt-get install libzmq-dev
+    sudo apt-get install python-zmq
 
 If any of the plugins give you trouble, you can comment them out in your vimrc.
 

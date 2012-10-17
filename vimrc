@@ -289,8 +289,10 @@ nnoremap <leader>T 0i## <ESC>gUU$"=strftime(" (%I:%M %p)")<CR>po<ESC>xxi
 nnoremap <leader>d "=strftime("%a %b %d, %Y")<CR>
 nnoremap <leader>D 0i# <ESC>"=strftime("%a %b %d, %Y (%I:%M %p)")<CR>po<ESC>xxi
 
-" Toggle spell checking on and off with `,s`
+" Toggle spell checking on and off with ,s
+" correct the current word and move to the next one using ,S
 nnoremap <silent> <leader>s :set spell!<CR>
+nnoremap <silent> <leader>S 1z=]s 
 set spelllang=en_us " Set region to US English
 
 " Start editing the vimrc in a new buffer

@@ -115,8 +115,10 @@ autocmd FileType *
    \ endif
 
 " A better status line
-Bundle 'Lokaltog/vim-powerline.git'
-let g:Powerline_stl_path_style='short'
+if has('gui_running')
+    Bundle 'Lokaltog/vim-powerline.git'
+    let g:Powerline_stl_path_style='short'
+endif
 
 " Use ipython inside vim
 Bundle 'johndgiese/vipy.git'
@@ -305,6 +307,14 @@ endfunction
 nnoremap <leader>o :call Edit_colorscheme()<CR>
 function! Edit_colorscheme()
     exe 'edit ' . g:DV . '/colors/betterblack.vim'
+endfunction
+
+nnoremap <leader>O :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+    if !exists("*synstack")
+        return
+    endif
+    echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunction
 
 " VISUALIZATION STUFF

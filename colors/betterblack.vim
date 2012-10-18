@@ -69,7 +69,8 @@ hi link matlabOperator Normal
 " Markdown
 hi link markdownItalic Normal
 hi markdownH1 guibg=#000000 guifg=#44FF44 gui=NONE ctermbg=Black ctermfg=Green cterm=NONE
-hi markdownH2 guibg=#000000 guifg=#BBFFBB gui=NONE ctermbg=Black ctermfg=Green cterm=NONE
+hi markdownH2 guibg=#000000 guifg=#77FFBB gui=NONE ctermbg=Black ctermfg=Green cterm=NONE
+hi markdownH3 guibg=#000000 guifg=#AAFFBB gui=NONE ctermbg=Black ctermfg=Green cterm=NONE
 hi markdownHeadingDelimiter NONE
 
 " HTML

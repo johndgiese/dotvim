@@ -1,14 +1,19 @@
 # right left (
-snippet rl(
-	\left(${1:content}\right)
+snippet (
+	\left(${1:content}\right)${2}
 
 # right left [
-snippet rl[
-	\left[${1:content}\right]
+snippet [
+	\left[${1:content}\right]${2}
 
 # right left {
-snippet rl{
-	\left\{${1:content}\right\}
+snippet {
+	\left\{${1:content}\right\}${2}
+
 # intertext
 snippet int
 	\intertext{${1:content}}
+
+# textrm
+snippet _t
+	_\textrm{${1:content}}${2}

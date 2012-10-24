@@ -296,6 +296,7 @@ nnoremap <leader>D 0i# <ESC>"=strftime("%a %b %d, %Y (%I:%M %p)")<CR>po<ESC>xxi
 nnoremap <silent> <leader>s :set spell!<CR>
 nnoremap <silent> <leader>S 1z=]s 
 set spelllang=en_us " Set region to US English
+let &spellfile=g:DV."/spell/en.latin1.add"
 
 " Start editing the vimrc in a new buffer
 nnoremap <leader>v :call Edit_vimrc()<CR>

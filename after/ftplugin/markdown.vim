@@ -8,3 +8,5 @@ set shiftwidth=4
 set expandtab
 
 set textwidth=80
+
+let g:snipMate.scope_aliases['markdown'] = 'markdown,tex'

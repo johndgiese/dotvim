@@ -1,14 +1,19 @@
 # right left (
-snippet rl(
-	\left(${1:content}\right)
+snippet lr(
+	\left(${1:content}\right)${2}
 
 # right left [
-snippet rl[
-	\left[${1:content}\right]
+snippet lr[
+	\left[${1:content}\right]${2}
 
 # right left {
-snippet rl{
-	\left\{${1:content}\right\}
-# intertext
+snippet lr{
+	\left\{${1:content}\right\}${2}
+
+# intertext inside ams align environment
 snippet int
-	\intertext{${1:content}}
+	\intertext{${1:content}}${2}
+
+# textrm
+snippet t
+	\textrm{${1:text}}${2}

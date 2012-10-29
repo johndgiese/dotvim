@@ -11,3 +11,4 @@ else
 endif
 
 abbr simga sigma
+set textwidth=80

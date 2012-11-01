@@ -17,3 +17,63 @@ snippet int
 # textrm
 snippet \t
 	\textrm{${1:content}}${2}
+
+# multiple figures
+snippet mfig
+	\begin{figure}
+	    \centering
+	    \begin{subfigure}[b]{0.3\textwidth}
+	        \centering
+	        \includegraphics[width=\textwidth]{${2:example1.pdf}}
+	        \caption{${3:This is the first figure.}}
+	        \label{fig:$1_1}
+	    \end{subfigure}%
+	    ~ 
+	    \begin{subfigure}[b]{0.3\textwidth}
+	        \centering
+	        \includegraphics[width=\textwidth]{${4:example2.pdf}}
+	        \caption{${5:This is the second figure.}}
+	        \label{fig:$1_2}
+	    \end{subfigure}
+	    ~   
+	    \begin{subfigure}[b]{0.3\textwidth}
+	        \centering
+	        \includegraphics[width=\textwidth]{${6:example3.pdf}}
+	        \caption{${7:This is the third figure.}}
+	        \label{fig:$1_3}
+	    \end{subfigure}
+	    \caption{${8:The caption for the entire figure goes here. Don't forget the subcaption package!}}
+	    \label{fig:${1:label}}
+	\end{figure}
+
+# sidecaption figure
+snippet scfig
+	\begin{SCfigure}
+	    \centering
+	    \includegraphics[width=\textwidth]{${2:example.pdf}}
+	    \caption{${3:This is a side caption; make sure to include sidecap package!}}
+	    \label{fig:${1:label}}
+	\end{SCfigure}
+
+# inkscape latex+figure
+snippet inkfig
+	\begin{SCfigure}
+	    \centering
+	    \def\svgwidth{6in}
+	    \input{${2:example.pdf_tex}}
+	    \caption{${3:Save pdf file in inkscape with latex in it so that you can have consisten latex in your figures!}}
+	    \label{fig:${1:label}}
+	\end{SCfigure}
+
+# wrapped figure
+snippet wfig
+	\begin{wrapfigure}{r}{0.5\textwidth}
+	    \vspace{-20pt}
+	    \begin{center}
+	        \includegraphics[width=\textwidth]{${2:example1.pdf}}
+	    \end{center}
+	    \vspace{-20pt}
+	    \caption{${3:Caption goes here; don't forget the wrapfig package!}}
+	    \vspace{-10pt}
+	    \label{fig:${1:label}}
+	\end{wrapfigure}

@@ -161,7 +161,6 @@ colorscheme betterblack
 filetype plugin indent on
 set ai                          " set auto-indenting on for programming
 set showmatch                   " automatically show matching brackets
-set vb                          " turn on the "visual bell" - quieter than the "audio blink"
 set ruler                       " show the cursor position all the time
 set laststatus=2                
 set backspace=indent,eol,start  " make that backspace key work the way it should

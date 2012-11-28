@@ -23,7 +23,7 @@ snippet pd
 	\frac{\partial}{\partial${1}}${2}
 
 # multiple figures
-snippet mfig
+snippet subfig
 	\begin{figure}
 	    \centering
 	    \begin{subfigure}[b]{0.3\textwidth}
@@ -51,10 +51,10 @@ snippet mfig
 	\end{figure}
 
 # sidecaption figure
-snippet scfig
+snippet SCfig
 	\begin{SCfigure}
 	    \centering
-	    \includegraphics[width=\textwidth]{${2:example.pdf}}
+	    \includegraphics[width=0.5\textwidth]{${2:example.pdf}}
 	    \caption{${3:This is a side caption; make sure to include sidecap package!}}
 	    \label{fig:${1:label}}
 	\end{SCfigure}
@@ -70,7 +70,7 @@ snippet inkfig
 	\end{SCfigure}
 
 # wrapped figure
-snippet wfig
+snippet wrapfig
 	\begin{wrapfigure}{r}{0.5\textwidth}
 	    \vspace{-20pt}
 	    \begin{center}
@@ -81,3 +81,18 @@ snippet wfig
 	    \vspace{-10pt}
 	    \label{fig:${1:label}}
 	\end{wrapfigure}
+
+# simple bibliography
+snippet thebib
+	\begin{thebibliography}{9}
+	    ${1}
+	\end{thebibliography}
+
+# standard reference
+snippet bibitem
+	\bibitem{${1:author2012}}
+	    ${2:First Authors 1}, and ${3:Author 3}.
+	    ${4:Year}.
+	    ${5:Title goes here}.
+	    \emph{${6:Jour. Abbr. Here.}}.
+	    ${7:Volume}:${8:PageStart}-${9:PageEnd}.

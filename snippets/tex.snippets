@@ -22,8 +22,8 @@ snippet \t
 snippet pd
 	\frac{\partial}{\partial${1}}${2}
 
-# multiple figures
-snippet subfig
+# multiple figures (3)
+snippet mfig3
 	\begin{figure}
 	    \centering
 	    \begin{subfigure}[b]{0.3\textwidth}
@@ -45,6 +45,27 @@ snippet subfig
 	        \includegraphics[width=\textwidth]{${6:example3.pdf}}
 	        \caption{${7:This is the third figure.}}
 	        \label{fig:$1_3}
+	    \end{subfigure}
+	    \caption{${8:The caption for the entire figure goes here. Don't forget the subcaption package!}}
+	    \label{fig:${1:label}}
+	\end{figure}
+
+# multiple figures (2)
+snippet mfig2
+	\begin{figure}
+	    \centering
+	    \begin{subfigure}[b]{0.48\textwidth}
+	        \centering
+	        \includegraphics[width=\textwidth]{${2:example1.pdf}}
+	        \caption{${3:This is the first figure.}}
+	        \label{fig:$1_1}
+	    \end{subfigure}%
+	    ~ 
+	    \begin{subfigure}[b]{0.48\textwidth}
+	        \centering
+	        \includegraphics[width=\textwidth]{${4:example2.pdf}}
+	        \caption{${5:This is the second figure.}}
+	        \label{fig:$1_2}
 	    \end{subfigure}
 	    \caption{${8:The caption for the entire figure goes here. Don't forget the subcaption package!}}
 	    \label{fig:${1:label}}

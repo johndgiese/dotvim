@@ -186,7 +186,7 @@ if !exists('g:vimrc_has_run')
     syntax enable                   " turn syntax highlighting
     colorscheme betterblack
     if has('gui_running')
-        set columns=130 lines=50
+        set columns=130 lines=70
     endif
 endif
 

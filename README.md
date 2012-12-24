@@ -134,13 +134,22 @@ The following other plugins are installed:
 * CTRLp - lets you browse files really quickly
 * ... a few other little ones
 
-,5 is my universal "run file" key, and "SHIFT-,5" is my debug file key.  These are loose terms.  Here is a list of files and what ,5 does for each of them.
-* python   -- ,5 runs file (in vipy plugin)
-* xml      -- S-,5 formats using xmllint (requires xmllint)
-* html     -- ,5 opens in a browser (requires xmllint)
-* latex    -- ,5 converts to a dvi and opens it in a viewer (requires Miketex)
-* c        -- ,5 compiles code with make (Linux only), S-,5 runs a.out
-* markdown -- ,5 generates an html file with the same name (i.e. test.mkd -- > test.html) and then opens it in chrome (linux only, need markdown filter [sudo apt-get install markdown])
+## Run and Debug various file types
+,5 is my universal "run file" key, and "SHIFT-,5" is my debug file key.  These
+are loose terms.  Not all files have an
+
+### Running a file
+* python   -- runs file (in vipy plugin)
+* html     -- opens in a browser (requires xmllint)
+* latex    -- converts to a dvi and opens it in a viewer (requires Miketex)
+* c        -- compiles code with make (Linux only), 
+* markdown -- generates an html file with the same name (i.e. test.mkd -- > test.html) and then opens it in chrome (linux only, need markdown filter [sudo apt-get install markdown])
+
+### Debuggin a file
+* xml      -- formats using xmllint (requires xmllint)
+* c        -- runs a.out
+* json     -- lint for json (requires node package manager and jsonlint package;
+  sudo apt-get install npm && sudo npm install jsonlint -g)
 
 # Maintaining your repo
 The structure of this vimrc setup allows easy cross platform use and easy updating of your plugins.  This comes at a cost of it being a little more complicated to maintain (but overall much faster and stable).  Here are a few notes that may help you.

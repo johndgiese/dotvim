@@ -11,4 +11,8 @@ else
 endif
 
 abbr simga sigma
-set textwidth=80
+setlocal textwidth=80
+setlocal noautoindent nocindent nosmartindent indentexpr=
+
+" turn off indenting to ampersands
+setlocal indentexpr=""

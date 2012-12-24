@@ -162,7 +162,6 @@ colorscheme betterblack
 filetype plugin indent on
 set ai                          " set auto-indenting on for programming
 set showmatch                   " automatically show matching brackets
-set vb                          " turn on the "visual bell" - quieter than the "audio blink"
 set ruler                       " show the cursor position all the time
 set laststatus=2                
 set backspace=indent,eol,start  " make that backspace key work the way it should
@@ -207,7 +206,7 @@ let g:html_indent_style1 = "inc"
 au BufNewFile,BufRead *.less set filetype=less
 au BufRead,BufNewFile *.cls set filetype=apex
 au BufRead,BufNewFile *.page set filetype=page
-au BufRead,BufNewFile *.json set filetype=javascript
+au BufRead,BufNewFile *.json set filetype=json
 
 " GOOGLE SEARCH
 function! GoogleSearch()
@@ -283,7 +282,7 @@ nnoremap <leader>w :/\s\+$<CR>
 nnoremap <leader>W :%s/\s\+$//e<CR><silent>:noh<CR>
 
 " Insert Data
-nnoremap <leader>t "=strftime(" (%I:%M %p)")<CR>p
+nnoremap <leader>t 0i*<ESC>"=strftime(" (%I:%M %p)")<CR>p
 nnoremap <leader>T 0i## <ESC>gUU$"=strftime(" (%I:%M %p)")<CR>po<ESC>xxi
 nnoremap <leader>d "=strftime("%a %b %d, %Y")<CR>
 nnoremap <leader>D 0i# <ESC>"=strftime("%a %b %d, %Y (%I:%M %p)")<CR>po<ESC>xxi
@@ -328,3 +327,13 @@ inoremap <C-9> <C-S-o>9
 abbreviate jquery JQuery
 abbreviate labview LabVIEW
 abbreviate matlab MATLAB
+
+" testing
+
+autocmd BufWriteCmd *.html :call Refresh_browser()
+function! Refresh_browser()
+    if &modified
+        write
+        silent !xdotool search --class google-chrome key ctrl+r
+    endif
+endfunction

@@ -28,8 +28,8 @@ hi TabLineSel guibg=#666666 guifg=#FFFFFF gui=NONE ctermbg=DarkGray ctermfg=Whit
 hi TabLine guibg=#222222 guifg=#FFFFFF gui=NONE ctermbg=DarkGray ctermfg=White cterm=NONE
 hi Search guibg=#FFFF22 guifg=#000000 gui=NONE ctermbg=Yellow ctermfg=Black cterm=NONE
 hi IncSearch guibg=#AAAAFF guifg=#000000 gui=NONE ctermbg=Blue ctermfg=Black cterm=NONE
-hi CursorLine guibg=#252525  gui=NONE ctermbg=NONE ctermfg=DarkGray cterm=NONE
-hi CursorColumn guibg=#252525 gui=NONE ctermbg=NONE ctermfg=DarkGray cterm=NONE
+hi CursorLine guibg=#252525  gui=NONE ctermbg=NONE ctermfg=Gray cterm=NONE
+hi CursorColumn guibg=#252525 gui=NONE ctermbg=NONE ctermfg=Gray cterm=NONE
 hi FoldColumn guibg=#000000 guifg=#FFFFFF gui=NONE ctermbg=NONE ctermfg=White cterm=NONE
 hi Visual guibg=#404040 gui=NONE ctermbg=White ctermfg=DarkGray cterm=bold
 hi SignColumn guibg=#222222 guifg=#FFFFFF gui=NONE ctermbg=DarkGray ctermfg=White cterm=NONE

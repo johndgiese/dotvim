@@ -12,7 +12,8 @@ if has('win32') || has('win64')
     let g:Powerline_symbols='compatible'
 elseif has('mac')
     " I don't know which mac font to use
-    " set guifont=Monospace\ 8
+    set noantialias
+    set guifont=CodingFontTob:h12,\ Monaco:h10
     let g:DV='~/.vim'
     let g:Powerline_symbols='compatible'
 else
@@ -121,7 +122,7 @@ if has('gui_running')
 endif
 
 " Use ipython inside vim
-Bundle 'johndgiese/vipy.git'
+" Bundle 'johndgiese/vipy.git'
 let g:vipy_profile='david'
 let g:vipy_position='rightbelow'
 

@@ -201,11 +201,15 @@ autocmd BufReadPre //* :NoMatchParen
 let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
+
 " Some salesforce stuff
 au BufNewFile,BufRead *.less set filetype=less
 au BufRead,BufNewFile *.cls set filetype=apex
 au BufRead,BufNewFile *.page set filetype=page
+
+" General web stuff
 au BufRead,BufNewFile *.json set filetype=json
+au FileType htmldjango set ft=htmldjango.html
 
 " GOOGLE SEARCH
 function! GoogleSearch()

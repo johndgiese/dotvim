@@ -6,10 +6,10 @@ hi String guibg=NONE guifg=#FF0000 gui=NONE ctermbg=NONE ctermfg=Red cterm=NONE
 hi Comment guibg=NONE guifg=#FF7300 gui=NONE ctermbg=NONE ctermfg=Yellow cterm=NONE
 hi Number guibg=NONE guifg=#C92040 gui=NONE ctermbg=NONE ctermfg=Red cterm=NONE
 hi Function guibg=NONE guifg=#0Fef33 gui=NONE ctermbg=NONE ctermfg=Green cterm=NONE
-hi Keyword guibg=NONE guifg=#3381FF gui=NONE ctermbg=NONE ctermfg=4 cterm=bold
-hi Statement guibg=NONE guifg=#3381FF gui=NONE ctermbg=NONE ctermfg=4 cterm=bold
+hi Keyword guibg=NONE guifg=#3381FF gui=NONE ctermbg=NONE ctermfg=4 cterm=NONE
+hi Statement guibg=NONE guifg=#3381FF gui=NONE ctermbg=NONE ctermfg=4 cterm=NONE
 hi Identifier guibg=NONE guifg=#00ED45 gui=NONE ctermbg=NONE ctermfg=Green cterm=NONE
-hi Type guibg=NONE guifg=#0052FF gui=NONE ctermbg=NONE ctermfg=4 cterm=bold
+hi Type guibg=NONE guifg=#0052FF gui=NONE ctermbg=NONE ctermfg=4 cterm=NONE
 hi Todo guibg=#151515 guifg=#FF7300 gui=NONE ctermbg=NONE ctermfg=Yellow cterm=NONE
 hi Title guibg=#000000 guifg=#FFFFFF gui=NONE ctermbg=NONE ctermfg=White cterm=NONE
 
@@ -31,7 +31,7 @@ hi IncSearch guibg=#AAAAFF guifg=#000000 gui=NONE ctermbg=Blue ctermfg=Black cte
 hi CursorLine guibg=#252525  gui=NONE ctermbg=NONE ctermfg=Gray cterm=NONE
 hi CursorColumn guibg=#252525 gui=NONE ctermbg=NONE ctermfg=Gray cterm=NONE
 hi FoldColumn guibg=#000000 guifg=#FFFFFF gui=NONE ctermbg=NONE ctermfg=White cterm=NONE
-hi Visual guibg=#404040 gui=NONE ctermbg=White ctermfg=DarkGray cterm=bold
+hi Visual guibg=#404040 gui=NONE ctermbg=White ctermfg=DarkGray cterm=NONE
 hi SignColumn guibg=#222222 guifg=#FFFFFF gui=NONE ctermbg=DarkGray ctermfg=White cterm=NONE
 hi helpSpecial guibg=NONE guifg=#FFFF71
 

@@ -122,7 +122,7 @@ if has('gui_running')
 endif
 
 " Use ipython inside vim
-" Bundle 'johndgiese/vipy.git'
+Bundle 'johndgiese/vipy.git'
 let g:vipy_profile='david'
 let g:vipy_position='rightbelow'
 

@@ -16,6 +16,10 @@ elseif has('mac')
     set guifont=CodingFontTob:h12,\ Monaco:h10
     let g:DV='~/.vim'
     let g:Powerline_symbols='compatible'
+    let macvim_skip_cmd_opt_movement = 1
+    let macvim_skip_colorscheme = 1
+    let macvim_hig_shift_movement = 1
+    set macmeta
 else
     " set guifont=Inconsolata\ 12
     set guifont=CodingFontTobi\ 12
@@ -122,27 +126,27 @@ if has('gui_running')
 endif
 
 " Use ipython inside vim
-" Bundle 'johndgiese/vipy.git'
+Bundle 'johndgiese/vipy.git'
 let g:vipy_profile='david'
 let g:vipy_position='rightbelow'
 
 " A fuzzy file finder-- really great just press CTRL-P!
-Bundle 'kien/ctrlp.vim.git'
-let g:ctrlp_cmd='CtrlPRoot'
+" Bundle 'kien/ctrlp.vim.git'
+" let g:ctrlp_cmd='CtrlPRoot'
 
 " Syntax highlighting interface
 " NOTE: to use it with various file-types you need to have the respective
 " syntax program installed
-Bundle 'scrooloose/syntastic.git'
-nnoremap <leader>e :SyntasticCheck<CR>
-let g:locliststate=1
-let g:syntastic_enable_ballons=0
-let g:syntastic_enable_auto_jump=1
-let g:syntastic_enable_highlighting=1
-let g:syntastic_auto_loc_list=1
-let g:syntastic_mode_map = { 'mode': 'passive',
-                            \ 'active_filetypes': [], 
-                            \ 'passive_filetypes': [] }
+" Bundle 'scrooloose/syntastic.git'
+" nnoremap <leader>e :SyntasticCheck<CR>
+" let g:locliststate=1
+" let g:syntastic_enable_ballons=0
+" let g:syntastic_enable_auto_jump=1
+" let g:syntastic_enable_highlighting=1
+" let g:syntastic_auto_loc_list=1
+" let g:syntastic_mode_map = { 'mode': 'passive',
+"                             \ 'active_filetypes': [], 
+"                             \ 'passive_filetypes': [] }
 
 " Snipmate provides lots of snippets
 " Press <C-r><tab> to see potential completions!
@@ -151,11 +155,6 @@ Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
 Bundle "honza/snipmate-snippets"
 Bundle "garbas/vim-snipmate"
-
-" Fullscreen
-if has('win32') || has('win64')
-    noremap <F11> <ESC>:call libcallnr("gvimfullscreen.dll","ToggleFullScreen",0)<CR>
-end
 
 " GENERAL SETTINGS
 colorscheme betterblack
@@ -274,8 +273,8 @@ imap <C-h> <left>
 imap <C-l> <right>
 
 " buffer switching
-nnoremap <M-j> :bn<CR>
-nnoremap <M-k> :bp<CR>
+nnoremap <A-j> :bn<CR>
+nnoremap <A-k> :bp<CR>
 
 " Highlight whitespace with <leader>w, and remove with <leader>W
 nnoremap <leader>w :/\s\+$<CR>

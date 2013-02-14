@@ -78,7 +78,9 @@ hi link htmlLink Normal
 
 " Javascript
 hi link Javascript Normal
-hi link JavascriptSpecial String
+hi JavascriptRegexpString guibg=NONE guifg=#21C6EB gui=NONE ctermbg=NONE ctermfg=Blue cterm=NONE
+hi link JavascriptSpecial JavascriptRegexpString
+hi JavascriptRegexpCharClass guibg=NONE guifg=#98E4F5 gui=NONE ctermbg=NONE ctermfg=Blue cterm=NONE
 
 " Vimdiff
 hi DiffAdd guibg=#22FF22 guifg=#000000 gui=None ctermbg=DarkGreen ctermfg=Black cterm=NONE

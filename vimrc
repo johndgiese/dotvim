@@ -276,9 +276,11 @@ nmap <C-0> g0
 imap <C-h> <left>
 imap <C-l> <right>
 
-" buffer switching
-nnoremap <A-j> :bn<CR>
-nnoremap <A-k> :bp<CR>
+" window switching
+nnoremap <M-j> <C-w>j
+nnoremap <M-k> <C-w>k
+nnoremap <M-h> <C-w>h
+nnoremap <M-l> <C-w>l
 
 " Highlight whitespace with <leader>w, and remove with <leader>W
 nnoremap <leader>w :/\s\+$<CR>

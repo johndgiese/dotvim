@@ -8,12 +8,14 @@ if has('win32') || has('win64')
     " go to .vim/windows and double click the font files to install
     " set guifont=Consolas\ for\ Powerline\ FixedD:h10
     " let g:Powerline_symbols='fancy'
-    set guifont=Consolas:h10
+    "set guifont=CodingFontTobi:h12
+    set guifont=ProggyTinyTTSZ:h12
+    "set guifont=Consolas:h10
     let g:Powerline_symbols='compatible'
 elseif has('mac')
     " I don't know which mac font to use
     set noantialias
-    set guifont=CodingFontTob:h12,\ Monaco:h10
+    set guifont=CodingFontTobi:h12,\ Monaco:h10
     let g:DV='~/.vim'
     let g:Powerline_symbols='compatible'
 else
@@ -152,11 +154,6 @@ Bundle "tomtom/tlib_vim"
 Bundle "honza/snipmate-snippets"
 Bundle "garbas/vim-snipmate"
 
-" Fullscreen
-if has('win32') || has('win64')
-    noremap <F11> <ESC>:call libcallnr("gvimfullscreen.dll","ToggleFullScreen",0)<CR>
-end
-
 " GENERAL SETTINGS
 colorscheme betterblack
 filetype plugin indent on
@@ -250,7 +247,7 @@ nnoremap / /\v
 nnoremap ? ?\v
 nnoremap <silent> <leader>/ :noh<CR>
 
-" use comma instead of \ for leader, because it is closer
+" use comma instead of \ for leader, because it is easier to reach
 map \ ,
 
 " Remap block-visual mode to alt-V, and set paste-from-clipboard to C-v

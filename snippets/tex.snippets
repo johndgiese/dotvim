@@ -10,6 +10,10 @@ snippet [
 snippet {
 	\left\{${1:content}\right\}${2}
 
+# langle rangle
+snippet <
+	\left\langle ${1:content} \right\rangle${2}
+
 # intertext
 snippet int
 	\intertext{${1:content}}
@@ -32,14 +36,14 @@ snippet mfig3
 	        \caption{${3:This is the first figure.}}
 	        \label{fig:$1_1}
 	    \end{subfigure}%
-	    ~ 
+	    ~
 	    \begin{subfigure}[b]{0.3\textwidth}
 	        \centering
 	        \includegraphics[width=\textwidth]{${4:example2.pdf}}
 	        \caption{${5:This is the second figure.}}
 	        \label{fig:$1_2}
 	    \end{subfigure}
-	    ~   
+	    ~
 	    \begin{subfigure}[b]{0.3\textwidth}
 	        \centering
 	        \includegraphics[width=\textwidth]{${6:example3.pdf}}
@@ -60,7 +64,7 @@ snippet mfig2
 	        \caption{${3:This is the first figure.}}
 	        \label{fig:$1_1}
 	    \end{subfigure}%
-	    ~ 
+	    ~
 	    \begin{subfigure}[b]{0.48\textwidth}
 	        \centering
 	        \includegraphics[width=\textwidth]{${4:example2.pdf}}

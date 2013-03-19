@@ -65,7 +65,7 @@ If you want to use the vipy plugin you will need to install ipython and pyzmq, a
 ### 2. Create a symbolic link to your vimrc
 
 	ln -s ~/.vim/vimrc ~/.vimrc
-	ln -s ~/.vim/gimrc ~/.gvimrc
+	ln -s ~/.vim/gvimrc ~/.gvimrc
 
 ### 3. Run BundleInstall
 Open vim and execute:
@@ -110,7 +110,6 @@ These three shorcuts will save you a lot of time, and keep your hands more comfo
 * ,o opens the colorscheme file for easy updating if you use different languages
 * ,g will do a google search on the current selection
 * ,w will highlight whitespace at the ends of lines, and ,W will delete it.
-* F11 will maximize the window (only on windows)
 * Autocomplete uses TAB unless there is white space before the cursor
 * Tabs are replaced with four spaces
 * CTRL-P opens the super awesome fuzzy file browser (:h ctrlp for details)

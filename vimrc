@@ -278,6 +278,12 @@ nmap <C-0> g0
 imap <C-h> <left>
 imap <C-l> <right>
 
+" buffer switching
+nnoremap <silent> [b :bprevious<CR>
+nnoremap <silent> ]b :bnext<CR>
+nnoremap <silent> [B :bfirst<CR>
+nnoremap <silent> ]B :blast<CR>
+
 " window switching
 nnoremap <M-j> <C-w>j
 nnoremap <M-k> <C-w>k

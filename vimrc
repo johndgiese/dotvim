@@ -49,7 +49,7 @@ Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-fugitive.git'
 
 " Put in closing brackets automatically
-Bundle 'Townk/vim-autoclose.git'
+" Bundle 'Townk/vim-autoclose.git'
 
 " Commenting tools
 Bundle 'scrooloose/nerdcommenter.git'

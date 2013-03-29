@@ -46,8 +46,14 @@ Bundle 'gmarik/vundle'
 " Use Git inside vim
 Bundle 'tpope/vim-fugitive.git'
 
+" A nice indicator for git
+"Bundle 'airblade/vim-gitgutter'
+
 " Put in closing brackets automatically
 " Bundle 'Townk/vim-autoclose.git'
+
+" Conque Shell
+Bundle 'vim-scripts/Conque-Shell'
 
 " Commenting tools
 Bundle 'scrooloose/nerdcommenter.git'
@@ -125,10 +131,13 @@ if has('gui_running')
     let g:Powerline_stl_path_style='short'
 endif
 
+
+Bundle 'johndgiese/vipy2'
+"
 " Use ipython inside vim
-Bundle 'johndgiese/vipy.git'
-let g:vipy_profile='david'
-let g:vipy_position='rightbelow'
+"Bundle 'johndgiese/vipy.git'
+"let g:vipy_profile='david'
+"let g:vipy_position='rightbelow'
 
 " A fuzzy file finder-- really great just press CTRL-P!
 " Bundle 'kien/ctrlp.vim.git'
@@ -275,6 +284,16 @@ nmap <C-0> g0
 " convenience mappings for moving insert mode
 imap <C-h> <left>
 imap <C-l> <right>
+
+" making vim command line more like bash
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
+cnoremap <M-b> <S-Left>
+cnoremap <M-f> <S-Right>
 
 " window switching
 nnoremap <M-j> <C-w>j

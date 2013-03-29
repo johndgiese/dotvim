@@ -65,7 +65,7 @@ If you want to use the vipy plugin you will need to install ipython and pyzmq, a
 ### 2. Create a symbolic link to your vimrc
 
 	ln -s ~/.vim/vimrc ~/.vimrc
-	ln -s ~/.vim/gimrc ~/.gvimrc
+	ln -s ~/.vim/gvimrc ~/.gvimrc
 
 ### 3. Run BundleInstall
 Open vim and execute:

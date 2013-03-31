@@ -47,6 +47,11 @@ hi NERDTreePart guibg=#000000 guifg=#FFFFFF gui=NONE ctermbg=Black ctermfg=White
 hi NERDTreeDirSlash guibg=#000000 guifg=#0052FF gui=NONE ctermbg=Black ctermfg=White cterm=NONE
 hi link NERDTreeHelp Comment
 
+" Syntastic
+hi SyntasticErrorSign guibg=#222222 guifg=#FF0000 gui=NONE ctermbg=White ctermfg=DarkGray cterm=NONE
+hi SyntasticWarningSign guibg=#222222 guifg=#0000FF gui=NONE ctermbg=White ctermfg=DarkGray cterm=NONE
+hi SyntasticErrorLine guibg=#2f0000
+
 " Taglist
 hi TaglistFileName guibg=#000000 guifg=#FFFFFF gui=italic ctermbg=Black ctermfg=White cterm=NONE
 hi TaglistTagName guibg=#000000 guifg=#00ED45 gui=NONE ctermbg=Black ctermfg=Green cterm=NONE

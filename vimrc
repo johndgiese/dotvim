@@ -1,24 +1,22 @@
 " GENERAL SETTINGS
-colorscheme betterblack
-filetype plugin indent on
-set ai                          " set auto-indenting on for programming
-set showmatch                   " automatically show matching brackets
-set ruler                       " show the cursor position all the time
-set laststatus=2                
-set backspace=indent,eol,start  " make that backspace key work the way it should
-set showmode                    " show the current mode
-set ts=4 sts=4 sw=4 expandtab   " default indentation settings
-set number		            	" turn on line numbers by default
-set noignorecase
-set history=100                 " remember the last 100 commands
-set encoding=utf-8 
+set autoindent
+set showmatch
+set ruler
+set laststatus=2
+set backspace=indent,eol,start
+set showmode
+set ts=4 sts=4 sw=4 expandtab
+set history=1000
+set encoding=utf-8
 set noswapfile
 set hidden
-set numberwidth=3
+set number numberwidth=3
 set wrap linebreak
+set nocompatible
+let mapleader = ","
 
 
-" BASE DIRECTORY
+" DIRECTORIES
 if has('win32') || has('win64')
     let g:DV=$HOME.'\vimfiles'
 else
@@ -26,21 +24,24 @@ else
 endif
 let g:DV=expand(g:DV)
 
+" backup
+let &backupdir=g:DV."/tmp/backup"
+if !isdirectory(g:DV."/tmp/backup")
+    call mkdir(g:DV."/tmp/backup", 'p', 0755)
+endif
+
 
 " PLUGINS
 " Set everything so vundle can load
-set nocompatible
 autocmd!
 filetype off
 let &rtp.=','.g:DV.'/bundle/vundle'
 call vundle#rc(g:DV.'/bundle/')
 Bundle 'gmarik/vundle'
 
-" Use Git inside vim
+" Use Git inside vim easily
 Bundle 'tpope/vim-fugitive.git'
-
-" Conque Shell
-Bundle 'vim-scripts/Conque-Shell'
+Bundle 'tpope/vim-git.git'
 
 " Commenting tools
 Bundle 'scrooloose/nerdcommenter.git'
@@ -56,6 +57,15 @@ Bundle 'pangloss/vim-javascript.git'
 
 " extended matching with %
 Bundle 'edsono/vim-matchit.git'
+
+" make more commands work with repate
+Bundle 'tpope/vim-repeat'
+
+" handle word variants
+Bundle 'tpope/vim-abolish'
+
+" visual selection search with # and *
+Bundle 'nelstrom/vim-visual-star-search'
 
 " various mappings related to pairs
 Bundle 'tpope/vim-unimpaired.git'
@@ -77,6 +87,9 @@ noremap <silent> <leader>2 :TagbarToggle<CR>
 Bundle 'corntrace/bufexplorer'
 noremap <silent> <leader>3 :BufExplorer<CR>
 let g:bufExplorerDefaultHelp=0
+
+" Vim sugar for unix shell commands that need it
+Bundle 'tpope/vim-eunuch.git'
 
 " branching undo is new in vim 7.3
 if v:version > 702
@@ -109,20 +122,23 @@ autocmd FileType *
 " A better status line
 if has('gui_running')
     Bundle 'Lokaltog/vim-powerline.git'
-    let g:Powerline_stl_path_style='short'
+    let g:Powerline_stl_path_style='relative'
+    let g:Powerline_symbols='compatible'
 endif
 
-
-Bundle 'johndgiese/vipy2'
-"
 " Use ipython inside vim
-"Bundle 'johndgiese/vipy.git'
-"let g:vipy_profile='david'
-"let g:vipy_position='rightbelow'
+Bundle 'johndgiese/vipy.git'
+let g:vipy_profile='david'
+let g:vipy_position='rightbelow'
 
 " A fuzzy file finder-- really great just press CTRL-P!
 Bundle 'kien/ctrlp.vim.git'
-let g:ctrlp_cmd='CtrlPRoot'
+let g:ctrlp_working_path_mode = 'ar'
+let g:ctrlp_extensions = ['mixed']
+let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_custom_ignore = {
+    \ 'file': '\v\.(pyc)$',
+    \ }
 
 " Snipmate
 Bundle "MarcWeber/vim-addon-mw-utils"
@@ -130,9 +146,33 @@ Bundle "tomtom/tlib_vim"
 Bundle "honza/snipmate-snippets"
 Bundle "garbas/vim-snipmate"
 
+" Syntax highlighting interface
+Bundle 'scrooloose/syntastic.git'
+let g:locliststate=1
+let g:syntastic_enable_ballons=0
+let g:syntastic_check_on_open=1
+let g:syntastic_enable_signs=0
+let g:syntastic_enable_auto_jump=1
+let g:syntastic_mode_map = { 'mode': 'passive',
+                            \ 'active_filetypes': [],
+                            \ 'passive_filetypes': ['python', 'javascript'] }
+let g:syntastic_python_checkers=['pyflakes']
+
+let g:syntastic_enable_highlighting=0
+let g:syntastic_on=0
+function! SyntasticToggle()
+    let g:syntastic_enable_highlighting=g:syntastic_on
+    let g:syntastic_on=!g:syntastic_on
+    SyntasticCheck
+endfunction
+nnoremap <leader>e :call SyntasticToggle()<CR>
+
 
 " OTHER GOOD PLUGINS
 " Uncomment and run BundleInstall! to use
+
+" Conque Shell
+" Bundle 'vim-scripts/Conque-Shell'
 
 " The solarized color theme
 " Bundle 'altercation/vim-colors-solarized'
@@ -147,27 +187,6 @@ Bundle "garbas/vim-snipmate"
 " Put in closing brackets automatically
 " Bundle 'Townk/vim-autoclose.git'
 
-" Syntax highlighting interface
-" NOTE: to use it with various file-types you need to have the respective
-" syntax program installed
-" Bundle 'scrooloose/syntastic.git'
-" nnoremap <leader>e :SyntasticCheck<CR>
-" let g:locliststate=1
-" let g:syntastic_enable_ballons=0
-" let g:syntastic_enable_auto_jump=1
-" let g:syntastic_enable_highlighting=1
-" let g:syntastic_auto_loc_list=1
-" let g:syntastic_mode_map = { 'mode': 'passive',
-"                             \ 'active_filetypes': [], 
-"                             \ 'passive_filetypes': [] }
-
-
-"set backup
-let &backupdir=g:DV."/tmp/backup"
-if !isdirectory(g:DV."/tmp/backup")
-    call mkdir(g:DV."/tmp/backup", 'p', 0755)
-endif
-
 
 " GOOGLE SEARCH
 function! GoogleSearch()
@@ -177,8 +196,6 @@ endfunction
 vnoremap <leader>g "gy<Esc>:call GoogleSearch()<CR>
 
 " MAPPINGS
-" use comma instead of \ for leader, because it is easier to reach
-let mapleader = ","
 
 " better <ESC> (to go back to normal mode from insert mode)
 inoremap jk <ESC>
@@ -204,7 +221,7 @@ vnoremap <C-v> d"+p
 vnoremap <C-c> "+y
 vnoremap <C-x> "+ygvd
 
-" Move between editor lines (instead of actual lines) when holding CTRL 
+" Move between editor lines (instead of actual lines) when holding CTRL
 vnoremap j gj
 vnoremap k gk
 vnoremap $ g$
@@ -225,8 +242,6 @@ inoremap <C-9> <C-S-o>9
 " making vim command line more like bash
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
-cnoremap <C-p> <Up>
-cnoremap <C-n> <Down>
 cnoremap <C-b> <Left>
 cnoremap <C-f> <Right>
 cnoremap <M-b> <S-Left>
@@ -239,10 +254,16 @@ nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
 
 " window switching
+" moving using M-direction
+" open new windows ugin M-S-direction
 nnoremap <M-j> <C-w>j
 nnoremap <M-k> <C-w>k
 nnoremap <M-h> <C-w>h
 nnoremap <M-l> <C-w>l
+nnoremap <M-S-j> :sbn<CR> <C-w>j
+nnoremap <M-S-k> :sbn<CR>
+nnoremap <M-S-h> :vertical sbn<CR>
+nnoremap <M-S-l> :vertical sbn<CR> <C-W>l
 
 " Highlight whitespace with <leader>w, and remove with <leader>W
 nnoremap <leader>w :/\s\+$<CR>
@@ -261,7 +282,7 @@ nnoremap <leader>D 0i# <ESC>"=strftime("%a %b %d, %Y (%I:%M %p)")<CR>po<ESC>xxi
 nnoremap <silent> <leader>s :set spell!<CR>
 
 " correct the current word and move to the next one using ,S
-nnoremap <silent> <leader>S 1z=]s 
+nnoremap <silent> <leader>S 1z=]s
 set spelllang=en_us " Set region to US English
 let &spellfile=g:DV."/spell/en.latin1.add"
 
@@ -327,7 +348,6 @@ if has('win32') || has('win64')
     " set guifont=CodingFontTobi:h12
     set guifont=ProggyTinyTTSZ:h12
     " set guifont=Consolas:h10
-    let g:Powerline_symbols='compatible'
 elseif has('mac')
     let macvim_skip_cmd_opt_movement = 1
     let macvim_skip_colorscheme = 1
@@ -335,19 +355,18 @@ elseif has('mac')
     set macmeta
     set noantialias
     set guifont=CodingFontTobi:h12,\ Monaco:h10
-    let g:Powerline_symbols='compatible'
 else
     set guifont=CodingFontTobi\ 12
-    let g:Powerline_symbols='compatible'
 endif
 
 " Code that I only want to run once
 if !exists('g:vimrc_has_run')
     let g:vimrc_has_run='True'
-    syntax enable                   " turn syntax highlighting
-    colorscheme betterblack
     if has('gui_running')
         set columns=130 lines=70
     endif
 endif
 
+colorscheme betterblack
+syntax enable
+filetype plugin indent on

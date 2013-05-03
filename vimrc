@@ -138,7 +138,7 @@ let g:ctrlp_extensions = ['mixed']
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_custom_ignore = {
     \ 'file': '\v\.(pyc)$',
-    \ }
+    \ 'dir': '\v[\/]evn$'}
 
 " Snipmate
 Bundle "MarcWeber/vim-addon-mw-utils"

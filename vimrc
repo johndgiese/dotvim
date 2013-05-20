@@ -138,12 +138,13 @@ let g:ctrlp_extensions = ['mixed']
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_custom_ignore = {
     \ 'file': '\v\.(pyc)$',
-    \ 'dir': '\v[\/]evn$'}
+    \ 'dir': '\v[\/](env|collected_static)$',
+    \ }
 
 " Snipmate
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
-Bundle "honza/snipmate-snippets"
+Bundle "vim-scripts/snipmate-snippets"
 Bundle "garbas/vim-snipmate"
 
 " Syntax highlighting interface

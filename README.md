@@ -58,19 +58,21 @@ If you want to use the vipy plugin you will need to install ipython and pyzmq, a
 
 # Install instructions on Linux/Mac
 
-### 1. Download the repository into your .vim folder
+### 1. Download the repository and run install script
 
-	git clone https://github.com/johndgiese/dotvim.git ~/.vim
-
-### 2. Run the installation Script
-
-    sh ~/.vim/install.sh
+	git clone https://github.com/johndgiese/dotvim.git ~/.vim && sh ~/.vim/install.sh
 
 ### Optional
 
-Ctags is a program that parses your code and generates links between files.  Ctags is used by a few plugins that I have, and they will complain if you don't have them installed.  You can comment out the plugins in the vimrc file, but I reccomend trying to install ctags.  It is super useful.  You can read about it [here](http://ctags.sourceforge.net/)
+Ctags is a program that parses your code and generates links between files.  Ctags is used by a few plugins that I have, and they will complain if you don't have them installed.  You can comment out the plugins in the vimrc file, but I reccomend trying to install ctags.  It is super useful.  You can read about it [here](http://ctags.sourceforge.net/).
+
+On Ubuntu this is:
 
     sudo get-apt install ctags
+
+On Mac OSX with homebrew this is:
+  
+    brew install ctags-exuberant
 
 If you want to use the vipy plugin you will need to install ipython and pyzmq, and finally run another batch script, as described in the install instructions [here](https://github.com/johndgiese/vipy).  Basically it is:
 

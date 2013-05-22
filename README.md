@@ -62,17 +62,9 @@ If you want to use the vipy plugin you will need to install ipython and pyzmq, a
 
 	git clone https://github.com/johndgiese/dotvim.git ~/.vim
 
-### 2. Create a symbolic link to your vimrc
+### 2. Run the installation Script
 
-	ln -s ~/.vim/vimrc ~/.vimrc
-	ln -s ~/.vim/gvimrc ~/.gvimrc
-
-### 3. Run BundleInstall
-Open vim and execute:
-
-    :BundleInstall
-
-This should now download and install all the plugins! (note it may appear that there is an error on Vundle itself--this doesn't seem to matter)
+    sh ~/.vim/install.sh
 
 ### Optional
 

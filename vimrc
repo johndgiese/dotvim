@@ -36,7 +36,7 @@ endif
 autocmd!
 filetype off
 let &rtp.=','.g:DV.'/bundle/vundle'
-call vundle#rc(g:DV.'/bundle/')
+call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " Use Git inside vim easily

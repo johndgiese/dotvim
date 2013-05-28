@@ -120,11 +120,9 @@ autocmd FileType *
    \ endif
 
 " A better status line
-if has('gui_running')
-    Bundle 'Lokaltog/vim-powerline.git'
-    let g:Powerline_stl_path_style='relative'
-    let g:Powerline_symbols='compatible'
-endif
+Bundle 'Lokaltog/vim-powerline.git'
+let g:Powerline_stl_path_style='relative'
+let g:Powerline_symbols='compatible'
 
 " Use ipython inside vim
 Bundle 'johndgiese/vipy.git'

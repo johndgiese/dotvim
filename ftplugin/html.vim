@@ -7,3 +7,6 @@ endif
 setlocal expandtab
 setlocal shiftwidth=2
 setlocal softtabstop=2
+
+setlocal equalprg=tidy\ -quiet\ --show-errors\ 0
+setlocal makeprg=tidy\ -quiet\ -e\ %

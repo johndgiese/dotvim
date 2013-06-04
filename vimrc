@@ -5,7 +5,7 @@ set ruler
 set laststatus=2
 set backspace=indent,eol,start
 set showmode
-set ts=4 sts=4 sw=4 expandtab
+set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 set history=1000
 set encoding=utf-8
 set noswapfile
@@ -330,15 +330,9 @@ let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
 
-" Some salesforce stuff
-au BufNewFile,BufRead *.less set filetype=less
-au BufRead,BufNewFile *.cls set filetype=apex
-au BufRead,BufNewFile *.page set filetype=page
-
 " General web stuff
 au BufRead,BufNewFile *.json set filetype=json
 au FileType htmldjango set ft=htmldjango.html
-
 
 " OS DEPENDENT STUFF
 if has('win32') || has('win64')
@@ -354,7 +348,7 @@ elseif has('mac')
     let macvim_hig_shift_movement = 1
     set macmeta
     set noantialias
-    set guifont=CodingFontTobi:h12,\ Monaco:h10
+    set guifont=CodingFontTobi:h12,\ Monaco:h14
 else
     set guifont=CodingFontTobi\ 12
 endif

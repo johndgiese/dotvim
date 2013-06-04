@@ -1,18 +1,21 @@
 #!/bin/bash
 
 while true; do
-    echo "The current user's vim customization directory is:"
-    if [ -d "~/.vim" ]; then
-        $DOTVIM = ~/.vim
-        $OS = "NOT WINDOWS"
-    elif [ -d "~/vimfiles" ]; then
-        $DOTVIM = ~/vimfiles
-        $OS = "WINDOWS"
-    else
-        echo "\nNo vim customization directory found!"
+    if [ ! -d "$HOME" ]; then
+        echo "No \$HOME directory found."
         exit 1
     fi
-    echo "\nFound vim customization directory : $DOTVIM."
+
+    if [ -d ~/.vim ]; then
+        IS_WINDOWS= "FALSE"
+        echo "Found vim customization directory : $HOME/.vim."
+    elif [ -d ~/vimfiles ]; then
+        IS_WINDOWS= "TRUE"
+        echo "Found vim customization directory : $HOME/vimfiles."
+    else
+        echo "No vim customization directory found!"
+        exit 1
+    fi
 
     read -p "Uninstall all custom vim files for the current user [yes or no]? " yn
     case $yn in
@@ -32,8 +35,8 @@ else
 fi
 
 echo "Removing all vim files..."
-if [ $OS == "WINDOWS" ]; then
-    rm -rf ~/_vim
+if [ $IS_WINDOWS == "TRUE" ]; then
+    rm -rf ~/vimfiles
 else
-    rm -rf ~/_vim
+    rm -rf ~/vimfiles
 fi

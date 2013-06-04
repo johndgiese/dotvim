@@ -212,6 +212,10 @@ nnoremap / /\v
 nnoremap ? ?\v
 nnoremap <silent> <leader>/ :noh<CR>
 
+" set make program shortcut
+nnoremap <leader>5 :make<CR><CR>:cope<CR>
+vnoremap <leader>5 :make
+
 " Remap block-visual mode to alt-V, and set paste-from-clipboard to C-v
 nnoremap <A-v> <C-v>
 nnoremap <C-v> "+gp
@@ -347,7 +351,7 @@ elseif has('mac')
     let macvim_hig_shift_movement = 1
     set macmeta
     set noantialias
-    set guifont=CodingFontTobi:h12,\ Monaco:h14
+    set guifont=Monaco:h14
 else
     set guifont=CodingFontTobi\ 12
 endif

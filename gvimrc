@@ -10,3 +10,5 @@ set noscrollbind
 set novb                " turn off the visual bell
 winpos 100 100          " set initial vim position
 colorscheme betterblack
+
+

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "LOOKING FOR VIM CUSTOMIZATION FOLDER..."
+echo "LOOKING FOR VIM CUSTOMIZATION DIRECTORY..."
 if [ -d ".vim" ]; then
     $DOTVIM = ".vim"
     $OS = "NOT WINDOWS"
@@ -8,10 +8,10 @@ elif [ -d "vimfiles" ]; then
     $DOTVIM = "vimfiles"
     $OS = "WINDOWS"
 else
-    echo "\nNo '.vim' or 'vimfiles' directories found!"
+    echo "\nNo vim customization directory found!"
     exit 1
 fi
-echo "\nFound vim customization folder: $DOTVIM."
+echo "\nFound vim customization directory: $DOTVIM."
 
 echo "SETTING UP SYMBOLIC LINKS..."
 if [ $OS == "WINDOWS"]; then

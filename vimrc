@@ -36,7 +36,7 @@ endif
 autocmd!
 filetype off
 let &rtp.=','.g:DV.'/bundle/vundle'
-call vundle#rc(g:DV.'/bundle/')
+call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " Use Git inside vim easily
@@ -120,11 +120,9 @@ autocmd FileType *
    \ endif
 
 " A better status line
-if has('gui_running')
-    Bundle 'Lokaltog/vim-powerline.git'
-    let g:Powerline_stl_path_style='relative'
-    let g:Powerline_symbols='compatible'
-endif
+Bundle 'Lokaltog/vim-powerline.git'
+let g:Powerline_stl_path_style='relative'
+let g:Powerline_symbols='compatible'
 
 " Use ipython inside vim
 Bundle 'johndgiese/vipy.git'
@@ -138,12 +136,13 @@ let g:ctrlp_extensions = ['mixed']
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_custom_ignore = {
     \ 'file': '\v\.(pyc)$',
+    \ 'dir': '\v[\/](env|collected_static)$',
     \ }
 
 " Snipmate
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
-Bundle "honza/snipmate-snippets"
+Bundle "vim-scripts/snipmate-snippets"
 Bundle "garbas/vim-snipmate"
 
 " Syntax highlighting interface

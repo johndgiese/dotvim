@@ -7,54 +7,7 @@ Please let me know if you get stuck in the install process (make a github issue)
 
 # Installation on Windows
 
-Note: these instructions assume that you have git-scm installed (git-scm comes with curl--which Vundle requires to use!).
-
-### 1. Check that the $HOME environment variable is set correctly
-
-The simplest way to make sure vim finds your customization files is to put them in your $HOME directory, which is usually: C:\Users\Yourname\ .  You can check what the $HOME environment variable is in the command prompt:
-
-    echo %HOME%
-
-You can change the $HOME environment variable as follows:
-
-    setx HOME "C:\Users\YourName"
-
-When you are running the commands below, make sure to replace "YourName" everytime it occurs
-
-### 2. Downlod the repository into the vimfiles folder
-
-	git clone https://github.com/johndgiese/dotvim.git C:\Users\YourName\vimfiles
-
-### 3. Create symbolic links in the command prompt
-
-    mklink C:\Users\YourName\_vimrc C:\Users\YourName\vimfiles\vimrc
-    mklink C:\Users\YourName\_gvimrc C:\Users\YourName\vimfiles\gvimrc
-
-### 4. Add some scripts to the $PATH
-
-	setx PATH "%PATH%;C:\Users\YourName\vimfiles\windows"
-	
-NOTE: if there is a warning about truncation after this command, then you will need to remove some directories from your $PATH (windows only allows 1024 characters!).
-	
-Now close the command prompt to reset the environment variables.
-
-### 5. Run BundleInstall
-
-Go into vim and execute:
-
-    :BundleInstall
-
-This should now download and install all the plugins! (note it may appear that there is an error on Vundle itself--this doesn't seem to matter)
-
-### Optional
-
-If any of the plugins give you trouble, you can comment them out in your vimrc and Vundle won't load them!
-
-If your vimrc is installed in somewhere besides C:\Users\YourName then you may need to adjust a directory name towards the top of the vimrc file.
-
-If you want to use powerline with fancy fonts, you will need to install a patched font.  I have my favorites stored in the fonts directoy, the ConsolasForPowerline is great on windows.  You can double click on each of them to install the fonts.  Read about this feature [here](http://enegue.com/consolas-font-in-vim-powerline-windows/).  After you are done installing the font, uncomment the lines towards the top of the vimrc
-
-If you want to use the vipy plugin you will need to install ipython and pyzmq, and finally run another batch script, as described in the install instructions [here](https://github.com/johndgiese/vipy)
+Still working on this.
 
 # Install instructions on Linux/Mac
 
@@ -62,7 +15,7 @@ If you want to use the vipy plugin you will need to install ipython and pyzmq, a
 
 	git clone https://github.com/johndgiese/dotvim.git ~/.vim && sh ~/.vim/install.sh
 
-### Optional
+### 2. Install optional programs used by plugins
 
 Ctags is a program that parses your code and generates links between files.  Ctags is used by a few plugins that I have, and they will complain if you don't have them installed.  You can comment out the plugins in the vimrc file, but I reccomend trying to install ctags.  It is super useful.  You can read about it [here](http://ctags.sourceforge.net/).
 
@@ -73,6 +26,7 @@ On Ubuntu this is:
 On Mac OSX with homebrew this is:
   
     brew install ctags-exuberant
+    brew install ptidy
 
 If you want to use the vipy plugin you will need to install ipython and pyzmq, and finally run another batch script, as described in the install instructions [here](https://github.com/johndgiese/vipy).  Basically it is:
 
@@ -97,6 +51,7 @@ These three shorcuts will save you a lot of time, and keep your hands more comfo
 * ,2 lets you view the structure of your file
 * ,3 lets you see all the open buffers
 * ,4 lets you navigate the undo history (required vim 7.3)
+* ,5 runs your make program, which is file-type dependent (see below)
 * Searches (pressing / or ? in normal mode) now have \v prepended so that vim uses the verymagic mode (i.e. it uses normal python/perl regular expressions instead of its own version)
 * ,/ clears search highlighting
 * ,s (i.e. ,s) starts spell search
@@ -125,6 +80,7 @@ The following other plugins are installed:
 * Tabular - for aligning stuff (see [this vimcast](http://vimcasts.org/episodes/aligning-text-with-tabular-vim/))
 * Supertab - tab autocompletion
 * CTRLp - lets you browse files really quickly
+* Syntastic - syntax highlighting for a variety of different files
 * ... a few other little ones
 
 ## Run and Debug various file types
@@ -133,7 +89,7 @@ are loose terms.  Not all files have an
 
 ### Running a file
 * python   -- runs file (in vipy plugin)
-* html     -- opens in a browser (requires xmllint)
+* html     -- run tidy, filling the quickfix list with bugs in your html
 * latex    -- converts to a dvi and opens it in a viewer (requires Miketex)
 * c        -- compiles code with make (Linux only), 
 * markdown -- generates an html file with the same name (i.e. test.mkd -- > test.html) and then opens it in chrome (linux only, need markdown filter [sudo apt-get install markdown])

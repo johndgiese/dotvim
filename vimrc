@@ -20,7 +20,7 @@ let mapleader = ","
 if has('win32') || has('win64')
     let g:DV=$HOME.'\vimfiles'
 else
-    let g:DV='~/.vim'
+    let g:DV=$HOME.'/.vim'
 endif
 let g:DV=expand(g:DV)
 
@@ -36,7 +36,7 @@ endif
 autocmd!
 filetype off
 let &rtp.=','.g:DV.'/bundle/vundle'
-call vundle#rc()
+call vundle#rc(g:DV.'/bundle/')
 Bundle 'gmarik/vundle'
 
 " Use Git inside vim easily
@@ -272,14 +272,6 @@ nnoremap <M-S-l> :vertical sbn<CR> <C-W>l
 nnoremap <leader>w :/\s\+$<CR>
 nnoremap <leader>W :%s/\s\+$//e<CR><silent>:noh<CR>
 
-
-" INSERT SNIPPETS
-nnoremap <leader>t 0i*<ESC>"=strftime(" (%I:%M %p)")<CR>p
-nnoremap <leader>T 0i## <ESC>gUU$"=strftime(" (%I:%M %p)")<CR>po<ESC>xxi
-nnoremap <leader>d "=strftime("%a %b %d, %Y")<CR>
-nnoremap <leader>D 0i# <ESC>"=strftime("%a %b %d, %Y (%I:%M %p)")<CR>po<ESC>xxi
-
-
 " SPELLING
 " toggle spell checking
 nnoremap <silent> <leader>s :set spell!<CR>
@@ -303,6 +295,7 @@ function! Edit_colorscheme()
     exe 'edit ' . g:DV . '/colors/betterblack.vim'
 endfunction
 
+" See what syntax groups are under the cursor
 nnoremap <leader>O :call <SID>SynStack()<CR>
 function! <SID>SynStack()
     if !exists("*synstack")
@@ -326,7 +319,6 @@ endif
 " Disable matching parenthesise when on a network file
 autocmd BufReadPre //* :NoMatchParen
 
-
 " WEB DEVELOPMENT
 " better html/javascript syntax/indenting (see javascript plugin)
 let g:html_indent_inctags = "html,body,head,tbody"
@@ -339,12 +331,7 @@ au FileType htmldjango set ft=htmldjango.html
 
 " OS DEPENDENT STUFF
 if has('win32') || has('win64')
-    " Swap the commented out lines if you want to install the better consolas
-    " go to .vim/windows and double click the font files to install
-    " set guifont=Consolas\ for\ Powerline\ FixedD:h10
-    " set guifont=CodingFontTobi:h12
-    set guifont=ProggyTinyTTSZ:h12
-    " set guifont=Consolas:h10
+    set guifont=Consolas:h10
 elseif has('mac')
     let macvim_skip_cmd_opt_movement = 1
     let macvim_skip_colorscheme = 1
@@ -352,8 +339,6 @@ elseif has('mac')
     set macmeta
     set noantialias
     set guifont=Monaco:h14
-else
-    set guifont=CodingFontTobi\ 12
 endif
 
 " Code that I only want to run once

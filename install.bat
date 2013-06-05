@@ -7,6 +7,7 @@ mklink %HOME%\_gvimrc %HOME%\vimfiles\gvimrc
 
 echo.
 echo "INSTALLING VUNDLE, THE VIM PLUGIN MANAGER, ..."
+mkdir %HOME%\vimfiles\bundle
 git clone -v https://github.com/gmarik/vundle.git %HOME%\vimfiles\bundle\vundle
 
 echo.

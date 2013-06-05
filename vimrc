@@ -341,13 +341,7 @@ elseif has('mac')
     set guifont=Monaco:h14
 endif
 
-" Code that I only want to run once
-if !exists('g:vimrc_has_run')
-    let g:vimrc_has_run='True'
-    if has('gui_running')
-        set columns=130 lines=70
-    endif
-endif
+set columns=100 lines=30
 
 colorscheme betterblack
 syntax enable

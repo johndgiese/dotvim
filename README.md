@@ -9,7 +9,7 @@ Please let me know if you get stuck in the install process (make a github issue)
 
 ### 1. Download the repository and run install script
 
-IMPORTANT: We assume that you have bash installed and that you want your vimfiles should be installed in your $HOME folder.  If either of these isn't the case, then I suggest oppening up the install.sh script and trying to duplicate the commands by hand (it isn't complicated at all).
+REQUIREMENT 1: We assume that you have bash and curl installed and on the $PATH, and that you want your vimfiles installed in your $HOME folder.  If either of these isn't the case, then I suggest opening up the install.sh script and trying to duplicate the commands by hand (it isn't complicated at all).
 
 If you are on a Mac or Linux Machine, run
 
@@ -29,7 +29,7 @@ start with Bundle).
 
 #### Ctags
 
-Ctags is a program that parses your code and generates links between files.  Ctags is used by a few plugins that I have, and they will complain if you don't have them installed.  You can comment out the plugins in the vimrc file, but I reccomend trying to install ctags.  It is super useful.  You can read about it [here](http://ctags.sourceforge.net/).
+Ctags is a program that parses your code and generates links between files.  Ctags is used by a few plugins that I have, and they will complain if you don't have them installed.  You can comment out the plugins in the vimrc file, but I recommend trying to install ctags.  It is super useful.  You can read about it [here](http://ctags.sourceforge.net/).
 
 On Ubuntu this is:
 
@@ -63,7 +63,7 @@ The most important three changes are:
 * Swaps the semicolon and colon, because you use colon a lot and almost never use semicolon
 * The new <leader> key is "," instead of "/"
 
-These three shorcuts will save you a lot of time, and keep your hands more comfortable when typing.  I believe one of the main benefits of vim is that it allows you to keep your hands on the keyboard so you can type more faster.
+These three shortcuts will save you a lot of time, and keep your hands more comfortable when typing.  I believe one of the main benefits of vim is that it allows you to keep your hands on the keyboard so you can type more faster.
 
 * <leader>v opens the vimrc (which auto runs upon saving)
 * <leader>1 lets you browse files
@@ -77,7 +77,7 @@ These three shorcuts will save you a lot of time, and keep your hands more comfo
 * Much better colorscheme
 * <leader>o opens the colorscheme file for easy updating if you use different languages
 * <leader>O shows the syntax groups below the cursor
-* <leader>g will do a google search on the current selection
+* <leader>g will do a Google search on the current selection
 * <leader>w will highlight whitespace at the ends of lines, and ,W will delete it.
 * <leader>e toggles syntastic plugin (see below) on and off
 * Autocomplete uses TAB unless there is white space before the cursor
@@ -126,7 +126,7 @@ make suggestions!)
 The structure of this vimrc setup allows easy cross platform use and easy updating of your plugins.  This comes at a cost of it being a little more complicated to maintain (but overall much faster and stable).  Here are a few notes that may help you.
 
 ### Commiting changes
-If you modify your vimrc file you will likely want to commit these changes to your repository.  Do this like you would for any git repository:
+If you modify your vimrc file you will likely want to commit these changes to your repository.  Do this like you would for any git repository
 
 	git add .
 	git commit -m "brief description of changes"
@@ -135,13 +135,13 @@ finally, if you are hosting your vim setup online you would push to the remote r
 
 	git push origin master
 	
-Note that you may need to update the origin url for the repo (google online if you don't know how to do this)
+Note that you may need to update the origin url for the repo (Google online if you don't know how to do this)
 
 ### Managing plugins
 I use Vundle to manage plugins; it is much better than the default way.  Google online if you don't believe me.  Instructions on how to use it [here](https://github.com/gmarik/vundle).
 
 ### Updating the VIMRC
-You can quickly update the vimrc by pressing <leader>v in normal mode.  When you save it, it will source the changes so that you can see the effects immediatly.  Note that this doesn't always work as expected, so you may have to fully reset vim to use this.
+You can quickly update the vimrc by pressing <leader>v in normal mode.  When you save it, it will source the changes so that you can see the effects immediately.  Note that this doesn't always work as expected, so you may have to fully reset vim to use this.
 
 ### Updating the Colorscheme
 Everyone likes a different colorscheme, so you will probably want to make some updates to mine or change it completely.  To do this you can use type <leader>o to go straight to the file to start editing.  You can use <leader>O to see what syntax groups below the cursor.

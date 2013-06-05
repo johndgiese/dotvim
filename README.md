@@ -5,17 +5,29 @@ Everyone has their own tastes, and will probably want to customize their setup f
 
 Please let me know if you get stuck in the install process (make a github issue) and I will try to help out.
 
-# Installation on Windows
-
-Still working on this.
-
-# Install instructions on Linux/Mac
+# Installation
 
 ### 1. Download the repository and run install script
 
-	git clone https://github.com/johndgiese/dotvim.git ~/.vim && sh ~/.vim/install.sh
+IMPORTANT: We assume that you have bash installed and that you want your vimfiles should be installed in your $HOME folder.  If either of these isn't the case, then I suggest oppening up the install.sh script and trying to duplicate the commands by hand (it isn't complicated at all).
+
+If you are on a Mac or Linux Machine, run
+
+	git clone https://github.com/johndgiese/dotvim.git ~/.vim
+    sh ~/.vim/install.sh
+
+if you are on a windows machine run
+
+	git clone https://github.com/johndgiese/dotvim.git ~/vimfiles
+    sh ~/vimfiles/install.sh
 
 ### 2. Install optional programs used by plugins
+
+My setup uses the vundle plugin manager.  If any of the plugins give you
+trouble, you can comment them out in your vimrc (just look for the lines that
+start with Bundle).
+
+#### Ctags
 
 Ctags is a program that parses your code and generates links between files.  Ctags is used by a few plugins that I have, and they will complain if you don't have them installed.  You can comment out the plugins in the vimrc file, but I reccomend trying to install ctags.  It is super useful.  You can read about it [here](http://ctags.sourceforge.net/).
 
@@ -23,10 +35,13 @@ On Ubuntu this is:
 
     sudo get-apt install ctags
 
-On Mac OSX with homebrew this is:
+On Mac OSX with homebrew:
   
     brew install ctags-exuberant
-    brew install ptidy
+
+On Windows you will have to find the executable online.
+
+#### Vipy Plugin
 
 If you want to use the vipy plugin you will need to install ipython and pyzmq, and finally run another batch script, as described in the install instructions [here](https://github.com/johndgiese/vipy).  Basically it is:
 
@@ -34,7 +49,11 @@ If you want to use the vipy plugin you will need to install ipython and pyzmq, a
     sudo apt-get install libzmq-dev
     sudo apt-get install python-zmq
 
-If any of the plugins give you trouble, you can comment them out in your vimrc.
+#### Make Programs for various File Types
+
+On Mac OSX with homebrew:
+
+    brew install ptidy
 
 # How this vim setup differs from normal vim
 
@@ -119,10 +138,10 @@ Note that you may need to update the origin url for the repo (google online if y
 I use Vundle to manage plugins; it is much better than the default way.  Google online if you don't believe me.  Instructions on how to use it [here](https://github.com/gmarik/vundle).
 
 ### Updating the VIMRC
-You can quickly update the vimrc by pressing ,v in normal mode.  When you save it, it will source the changes so that you can see the effects immediatly.  Note that this doesn't always work as expected, so you may have to fully reset vim to use this.
+You can quickly update the vimrc by pressing <leader>v in normal mode.  When you save it, it will source the changes so that you can see the effects immediatly.  Note that this doesn't always work as expected, so you may have to fully reset vim to use this.
 
 ### Updating the Colorscheme
-Everyone likes a different colorscheme, so you will probably want to make some updates to mine or change it completely.  To do this you can use type ,o to go staright to the file to start editing.  When in the file you can type ,h to see all the hex colors (only available in gvim).
+Everyone likes a different colorscheme, so you will probably want to make some updates to mine or change it completely.  To do this you can use type <leader>o to go straight to the file to start editing.  You can use <leader>O to see what syntax groups below the cursor.
 
 If you want to change the name of the colorscheme, you will have to go into your vimrc file and change the name in two places: one for actually loading the colorscheme, and one for enabling the ,o shortcut.
 

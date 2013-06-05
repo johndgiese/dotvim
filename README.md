@@ -61,23 +61,25 @@ The most important three changes are:
 
 * ESC in insert mode is now jk (quickly, one after another)
 * Swaps the semicolon and colon, because you use colon a lot and almost never use semicolon
-* ,v opens the vimrc (which auto runs upon saving)
+* The new <leader> key is "," instead of "/"
 
 These three shorcuts will save you a lot of time, and keep your hands more comfortable when typing.  I believe one of the main benefits of vim is that it allows you to keep your hands on the keyboard so you can type more faster.
 
-* The new leader key is , instead of /
-* ,1 lets you browse files
-* ,2 lets you view the structure of your file
-* ,3 lets you see all the open buffers
-* ,4 lets you navigate the undo history (required vim 7.3)
-* ,5 runs your make program, which is file-type dependent (see below)
+* <leader>v opens the vimrc (which auto runs upon saving)
+* <leader>1 lets you browse files
+* <leader>2 lets you view the structure of your file
+* <leader>3 lets you see all the open buffers
+* <leader>4 lets you navigate the undo history (required vim 7.3)
+* <leader>5 runs your make program, which is file-type dependent (see below)
 * Searches (pressing / or ? in normal mode) now have \v prepended so that vim uses the verymagic mode (i.e. it uses normal python/perl regular expressions instead of its own version)
-* ,/ clears search highlighting
-* ,s (i.e. ,s) starts spell search
+* <leader>/ clears search highlighting
+* <leader>s (i.e. ,s) starts spell search
 * Much better colorscheme
-* ,o opens the colorscheme file for easy updating if you use different languages
-* ,g will do a google search on the current selection
-* ,w will highlight whitespace at the ends of lines, and ,W will delete it.
+* <leader>o opens the colorscheme file for easy updating if you use different languages
+* <leader>O shows the syntax groups below the cursor
+* <leader>g will do a google search on the current selection
+* <leader>w will highlight whitespace at the ends of lines, and ,W will delete it.
+* <leader>e toggles syntastic plugin (see below) on and off
 * Autocomplete uses TAB unless there is white space before the cursor
 * Tabs are replaced with four spaces
 * CTRL-P opens the super awesome fuzzy file browser (:h ctrlp for details)
@@ -103,8 +105,9 @@ The following other plugins are installed:
 * ... a few other little ones
 
 ## Run and Debug various file types
-,5 is my universal "run file" key, and "SHIFT-,5" is my debug file key.  These
-are loose terms.  Not all files have an
+<leader>5 is my universal "run file" key, and <leader>% is my debug file key.  These
+are loose terms.  Not all files have this functionality (please feel free to
+make suggestions!)
 
 ### Running a file
 * python   -- runs file (in vipy plugin)

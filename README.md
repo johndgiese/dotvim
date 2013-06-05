@@ -18,8 +18,8 @@ If you are on a Mac or Linux Machine, run
 
 if you are on a windows machine run
 
-	git clone https://github.com/johndgiese/dotvim.git ~/vimfiles
-    vimfiles/install
+	git clone https://github.com/johndgiese/dotvim.git ~\vimfiles
+    vimfiles\install
 
 ### 2. Install optional programs used by plugins
 

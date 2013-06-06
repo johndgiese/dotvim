@@ -227,6 +227,8 @@ function! QuickFixToggle()
     let g:quickfix_open=!g:quickfix_open
 endfunction
 nnoremap <silent> <leader>q :call QuickFixToggle()<CR>
+nnoremap <A-]> :cnext<CR>
+nnoremap <A-[> :cprev<CR>
 
 " Remap block-visual mode to alt-V, and set paste-from-clipboard to C-v
 nnoremap <A-v> <C-v>

@@ -73,17 +73,18 @@ These three shortcuts will save you a lot of time, and keep your hands more comf
 * \<leader\>5 runs your make program, which is file-type dependent (see below)
 * Searches (pressing / or ? in normal mode) now have \v prepended so that vim uses the verymagic mode (i.e. it uses normal python/perl regular expressions instead of its own version)
 * \<leader\>/ clears search highlighting
-* \<leader\>s (i.e. ,s) starts spell search
+* \<leader\>s toggles spell-check
 * Much better colorscheme
 * \<leader\>o opens the colorscheme file for easy updating if you use different languages
 * \<leader\>O shows the syntax groups below the cursor
 * \<leader\>g will do a Google search on the current selection
 * \<leader\>w will highlight whitespace at the ends of lines, and ,W will delete it.
 * \<leader\>e toggles syntastic plugin (see below) on and off
-* \<leader\>q toggles the quickfix open and closed
-* Autocomplete uses TAB unless there is white space before the cursor
+* \<leader\>q toggles the quickfix open and closed, and \<A-]\> and \<A-]\>
+  navigates through the list
+* Autocomplete uses \<tab\> unless there is white space before the cursor
 * Tabs are replaced with four spaces
-* CTRL-P opens the super awesome fuzzy file browser (:h ctrlp for details)
+* \<C-p\> opens the super awesome fuzzy file browser (:h ctrlp for details)
 
 The following other plugins are installed:
 * Vundle - lets you manage plugins more easily (look in the bundle directory)
@@ -95,7 +96,6 @@ The following other plugins are installed:
 * Vipy - use ipython inside vim!  python code completion, etc. see [the repo](https://github.com/johndgiese/vipy/blob/master/README.md)
 * Autoclose - autoclose parenthesis
 * Snipmate - add snippets of commonly usedcode
-* Session - save the window structure and files opened, for easy switching between projects
 * Unimpaired - provides various mappings for operating with pairs
 * Powerline - a colorful and useful statusline
 * Csscolor - css color highlighting

@@ -61,26 +61,26 @@ The most important three changes are:
 
 * ESC in insert mode is now jk (quickly, one after another)
 * Swaps the semicolon and colon, because you use colon a lot and almost never use semicolon
-* The new <leader> key is "," instead of "/"
+* The new \<leader\> key is "," instead of "/"
 
 These three shortcuts will save you a lot of time, and keep your hands more comfortable when typing.  I believe one of the main benefits of vim is that it allows you to keep your hands on the keyboard so you can type more faster.
 
-* <leader>v opens the vimrc (which auto runs upon saving)
-* <leader>1 lets you browse files
-* <leader>2 lets you view the structure of your file
-* <leader>3 lets you see all the open buffers
-* <leader>4 lets you navigate the undo history (required vim 7.3)
-* <leader>5 runs your make program, which is file-type dependent (see below)
+* \<leader\>v opens the vimrc (which auto runs upon saving)
+* \<leader\>1 lets you browse files
+* \<leader\>2 lets you view the structure of your file
+* \<leader\>3 lets you see all the open buffers
+* \<leader\>4 lets you navigate the undo history (required vim 7.3)
+* \<leader\>5 runs your make program, which is file-type dependent (see below)
 * Searches (pressing / or ? in normal mode) now have \v prepended so that vim uses the verymagic mode (i.e. it uses normal python/perl regular expressions instead of its own version)
-* <leader>/ clears search highlighting
-* <leader>s (i.e. ,s) starts spell search
+* \<leader\>/ clears search highlighting
+* \<leader\>s (i.e. ,s) starts spell search
 * Much better colorscheme
-* <leader>o opens the colorscheme file for easy updating if you use different languages
-* <leader>O shows the syntax groups below the cursor
-* <leader>g will do a Google search on the current selection
-* <leader>w will highlight whitespace at the ends of lines, and ,W will delete it.
-* <leader>e toggles syntastic plugin (see below) on and off
-* <leader>q toggles the quickfix open and closed
+* \<leader\>o opens the colorscheme file for easy updating if you use different languages
+* \<leader\>O shows the syntax groups below the cursor
+* \<leader\>g will do a Google search on the current selection
+* \<leader\>w will highlight whitespace at the ends of lines, and ,W will delete it.
+* \<leader\>e toggles syntastic plugin (see below) on and off
+* \<leader\>q toggles the quickfix open and closed
 * Autocomplete uses TAB unless there is white space before the cursor
 * Tabs are replaced with four spaces
 * CTRL-P opens the super awesome fuzzy file browser (:h ctrlp for details)
@@ -106,7 +106,7 @@ The following other plugins are installed:
 * ... a few other little ones
 
 ## Run and Debug various file types
-<leader>5 is my universal "run file" key, and <leader>% is my debug file key.  These
+\<leader\>5 is my universal "run file" key, and \<leader\>% is my debug file key.  These
 are loose terms.  Not all files have this functionality (please feel free to
 make suggestions!)
 
@@ -142,10 +142,10 @@ Note that you may need to update the origin url for the repo (Google online if y
 I use Vundle to manage plugins; it is much better than the default way.  Google online if you don't believe me.  Instructions on how to use it [here](https://github.com/gmarik/vundle).
 
 ### Updating the VIMRC
-You can quickly update the vimrc by pressing <leader>v in normal mode.  When you save it, it will source the changes so that you can see the effects immediately.  Note that this doesn't always work as expected, so you may have to fully reset vim to use this.
+You can quickly update the vimrc by pressing \<leader\>v in normal mode.  When you save it, it will source the changes so that you can see the effects immediately.  Note that this doesn't always work as expected, so you may have to fully reset vim to use this.
 
 ### Updating the Colorscheme
-Everyone likes a different colorscheme, so you will probably want to make some updates to mine or change it completely.  To do this you can use type <leader>o to go straight to the file to start editing.  You can use <leader>O to see what syntax groups below the cursor.
+Everyone likes a different colorscheme, so you will probably want to make some updates to mine or change it completely.  To do this you can use type \<leader\>o to go straight to the file to start editing.  You can use \<leader\>O to see what syntax groups below the cursor.
 
 If you want to change the name of the colorscheme, you will have to go into your vimrc file and change the name in two places: one for actually loading the colorscheme, and one for enabling the ,o shortcut.
 

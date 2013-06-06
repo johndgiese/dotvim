@@ -80,6 +80,7 @@ These three shortcuts will save you a lot of time, and keep your hands more comf
 * <leader>g will do a Google search on the current selection
 * <leader>w will highlight whitespace at the ends of lines, and ,W will delete it.
 * <leader>e toggles syntastic plugin (see below) on and off
+* <leader>q toggles the quickfix open and closed
 * Autocomplete uses TAB unless there is white space before the cursor
 * Tabs are replaced with four spaces
 * CTRL-P opens the super awesome fuzzy file browser (:h ctrlp for details)

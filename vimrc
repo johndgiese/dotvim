@@ -216,6 +216,18 @@ nnoremap <silent> <leader>/ :noh<CR>
 nnoremap <leader>5 :make<CR><CR>:cope<CR>
 vnoremap <leader>5 :make
 
+" conveniently open quickfix
+let g:quickfix_open=0
+function! QuickFixToggle()
+    if g:quickfix_open
+        cclose
+    else
+        copen
+    end
+    let g:quickfix_open=!g:quickfix_open
+endfunction
+nnoremap <silent> <leader>q :call QuickFixToggle()<CR>
+
 " Remap block-visual mode to alt-V, and set paste-from-clipboard to C-v
 nnoremap <A-v> <C-v>
 nnoremap <C-v> "+gp

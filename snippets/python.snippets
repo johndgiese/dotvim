@@ -1,0 +1,27 @@
+snippet unittest
+	import unittest
+
+	
+	class ${1}(unittest.TestCase):
+		def setUp(self):
+			pass
+
+		def tearDown(self):
+			pass
+
+		def test_${2}(self):
+			${3}
+
+	if __name__ == '__main__':
+		unittest.main()
+
+snippet testcase
+	class ${1}(unittest.TestCase):
+		def setUp(self):
+			pass
+
+		def tearDown(self):
+			pass
+
+		def test_${2}(self):
+			${3}

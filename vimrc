@@ -30,6 +30,12 @@ if !isdirectory(g:DV."/tmp/backup")
     call mkdir(g:DV."/tmp/backup", 'p', 0755)
 endif
 
+" tags
+let &tags=g:DV."/tmp/tags/"
+if !isdirectory(g:DV."/tmp/tags")
+    call mkdir(g:DV."/tmp/tags", 'p', 0755)
+endif
+
 
 " PLUGINS
 " Set everything so vundle can load

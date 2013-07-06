@@ -149,7 +149,7 @@ Bundle "garbas/vim-snipmate"
 Bundle 'scrooloose/syntastic.git'
 let g:locliststate=1
 let g:syntastic_enable_ballons=0
-let g:syntastic_check_on_open=1
+let g:syntastic_auto_loc_list=1
 let g:syntastic_enable_signs=0
 let g:syntastic_enable_auto_jump=1
 let g:syntastic_mode_map = { 'mode': 'passive',
@@ -161,10 +161,13 @@ let g:syntastic_enable_highlighting=0
 let g:syntastic_on=0
 function! SyntasticToggle()
     let g:syntastic_enable_highlighting=g:syntastic_on
-    let g:syntastic_on=!g:syntastic_on
     SyntasticCheck
+    if g:syntastic_on
+        lclose
+    end
+    let g:syntastic_on=!g:syntastic_on
 endfunction
-nnoremap <leader>e :call SyntasticToggle()<CR>
+nnoremap <silent> <leader>e :call SyntasticToggle()<CR>
 
 
 " OTHER GOOD PLUGINS
@@ -223,12 +226,26 @@ function! QuickFixToggle()
         cclose
     else
         copen
+        execute "normal \<C-w>p"
     end
     let g:quickfix_open=!g:quickfix_open
 endfunction
 nnoremap <silent> <leader>q :call QuickFixToggle()<CR>
 nnoremap <A-]> :cnext<CR>
 nnoremap <A-[> :cprev<CR>
+
+" conveniently open locationlist
+let g:loclist_open=0
+function! LocationListToggle()
+    if g:loclist_open
+        lclose
+    else
+        lopen
+        execute "normal \<C-w>p"
+    end
+    let g:loclist_open=!g:loclist_open
+endfunction
+nnoremap <silent> <leader>l :call LocationListToggle()<CR>
 
 " Remap block-visual mode to alt-V, and set paste-from-clipboard to C-v
 nnoremap <A-v> <C-v>
@@ -344,6 +361,22 @@ let g:html_indent_style1 = "inc"
 au BufRead,BufNewFile *.json set filetype=json
 au FileType htmldjango set ft=htmldjango.html
 
+" Cscope stuff
+if has("cscope")
+    set csprg=/usr/local/bin/cscope
+    set csto=0
+    set cst
+    set nocsverb
+    " add any database in current directory
+    if filereadable("cscope.out")
+        cs add cscope.out
+    " else add database pointed to by environment
+    elseif $CSCOPE_DB != ""
+        cs add $CSCOPE_DB
+    endif
+    set csverb
+endif
+
 " OS DEPENDENT STUFF
 if has('win32') || has('win64')
     set guifont=Consolas:h10
@@ -353,7 +386,7 @@ elseif has('mac')
     let macvim_hig_shift_movement = 1
     set macmeta
     set noantialias
-    set guifont=Monaco:h14
+    set guifont=Monaco:h13
 else
     set guifont=CodingFontTobi\ 12
 endif

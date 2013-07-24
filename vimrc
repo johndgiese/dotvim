@@ -397,8 +397,6 @@ else
     set guifont=CodingFontTobi\ 12
 endif
 
-set columns=100 lines=30
-
 colorscheme betterblack
 syntax enable
 filetype plugin indent on

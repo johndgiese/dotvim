@@ -15,6 +15,9 @@ set wrap linebreak
 set nocompatible
 let mapleader = ","
 
+" keep vim from prompting when a file changes in the background, just re-read
+" it; this is a contencious setting, make sure you know what it does
+set autoread 
 
 " DIRECTORIES
 if has('win32') || has('win64')

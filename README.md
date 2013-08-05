@@ -71,6 +71,7 @@ These three shortcuts will save you a lot of time, and keep your hands more comf
 * \<leader\>3 lets you see all the open buffers
 * \<leader\>4 lets you navigate the undo history (required vim 7.3)
 * \<leader\>5 runs your make program, which is file-type dependent (see below)
+* \<leader\>6 toggles the fugitive Gstatus buffer
 * Searches (pressing / or ? in normal mode) now have \v prepended so that vim uses the verymagic mode (i.e. it uses normal python/perl regular expressions instead of its own version)
 * \<leader\>/ clears search highlighting
 * \<leader\>s toggles spell-check

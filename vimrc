@@ -222,6 +222,18 @@ nnoremap <silent> <leader>/ :noh<CR>
 nnoremap <leader>5 :make<CR><CR>:cope<CR>
 vnoremap <leader>5 :make
 
+" toggle fugivite status
+let g:gstatus_open=0
+function! GStatusToggle()
+    if g:gstatus_open
+        bdelete index
+    else
+        Gstatus
+    end
+    let g:gstatus_open=!g:gstatus_open
+endfunction
+nnoremap <silent> <leader>6 :call GStatusToggle()<CR>
+
 " conveniently open quickfix
 let g:quickfix_open=0
 function! QuickFixToggle()

@@ -39,7 +39,7 @@ hi helpSpecial guibg=NONE guifg=#FFFF71
 hi link vimCommentTitle Comment
 
 " NERDTree
-hi NERDTreeDir guibg=#060609 guifg=#0052FF gui=NONE ctermbg=Black ctermfg=Blue cterm=NONE
+hi NERDTreeDir guibg=#060609 guifg=#3372FF gui=NONE ctermbg=Black ctermfg=Blue cterm=NONE
 hi NERDTreeLink guibg=#060609 guifg=#00FFFF gui=NONE ctermbg=Black ctermfg=Cyan cterm=NONE
 hi NERDTreePartFile guibg=#060609 guifg=#FFFFFF gui=NONE ctermbg=Black ctermfg=White cterm=NONE
 hi NERDTreeOpenable guibg=#060609 guifg=#FFFFFF gui=NONE ctermbg=Black ctermfg=White cterm=NONE
@@ -51,6 +51,7 @@ hi link NERDTreeHelp Comment
 hi SyntasticErrorSign guibg=#222222 guifg=#FF0000 gui=NONE ctermbg=White ctermfg=DarkGray cterm=NONE
 hi SyntasticWarningSign guibg=#222222 guifg=#0000FF gui=NONE ctermbg=White ctermfg=DarkGray cterm=NONE
 hi SyntasticErrorLine guibg=#2f0000
+hi SpellCap guibg=NONE guifg=NONE gui=undercurl ctermbg=Black ctermfg=NONE cterm=NONE guisp=#FF1234 
 
 " Taglist
 hi TaglistFileName guibg=#060609 guifg=#FFFFFF gui=italic ctermbg=Black ctermfg=White cterm=NONE

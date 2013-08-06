@@ -1,8 +1,8 @@
 set background=dark
 
-hi Normal guibg=#060609 guifg=#FFFFFF gui=NONE ctermbg=Black ctermfg=White cterm=NONE
+hi Normal guibg=#060609 guifg=#e3e3e4 gui=NONE ctermbg=Black ctermfg=White cterm=NONE
 " Coding 
-hi String guibg=NONE guifg=#FF0000 gui=NONE ctermbg=NONE ctermfg=Red cterm=NONE
+hi String guibg=NONE guifg=#FF2020 gui=NONE ctermbg=NONE ctermfg=Red cterm=NONE
 hi Comment guibg=NONE guifg=#FF7300 gui=NONE ctermbg=NONE ctermfg=Yellow cterm=NONE
 hi Number guibg=NONE guifg=#C92040 gui=NONE ctermbg=NONE ctermfg=Red cterm=NONE
 hi Function guibg=NONE guifg=#0Fef33 gui=NONE ctermbg=NONE ctermfg=Green cterm=NONE
@@ -15,23 +15,23 @@ hi Title guibg=#060609 guifg=#FFFFFF gui=NONE ctermbg=NONE ctermfg=White cterm=N
 
 " VIM gui 
 hi LineNr guibg=NONE guifg=#323242 gui=NONE ctermbg=White ctermfg=DarkGray cterm=NONE
-hi NonText guibg=#060609 guifg=#323242 gui=NONE ctermbg=Black ctermfg=DarkGray cterm=NONE
-hi PMenu guibg=#252525 guifg=#FFFFFF gui=NONE ctermbg=DarkGray ctermfg=White cterm=NONE
-hi PMenuSelect guibg=#151515 guifg=#FFFFFF gui=NONE ctermbg=Black ctermfg=White cterm=NONE
-hi VertSplit guibg=#060609 guifg=#333333 gui=NONE ctermbg=Black ctermfg=DarkGray cterm=NONE
+hi NonText guibg=#060609 guifg=#181828 gui=NONE ctermbg=Black ctermfg=DarkGray cterm=NONE
+hi PMenu guibg=#181828 guifg=#FFFFFF gui=NONE ctermbg=DarkGray ctermfg=White cterm=NONE
+hi PMenuSelect guibg=#282838 guifg=#FFFFFF gui=NONE ctermbg=Black ctermfg=White cterm=NONE
+hi PMenuThumb guibg=#060609 guifg=#EEFFAA gui=NONE ctermbg=Black ctermfg=Yellow cterm=NONE
+hi VertSplit guibg=#060609 guifg=#181222 gui=NONE ctermbg=Black ctermfg=DarkGray cterm=NONE
 hi Folded guibg=#060609 guifg=#AAFFAA gui=NONE ctermbg=Black ctermfg=White cterm=NONE
 hi FoldColumn guibg=#060609 guifg=#EEFFAA gui=NONE ctermbg=Black ctermfg=Yellow cterm=NONE
-hi PMenuThumb guibg=#060609 guifg=#EEFFAA gui=NONE ctermbg=Black ctermfg=Yellow cterm=NONE
 hi MatchParen guibg=#555555 guifg=#FFFFFF gui=NONE ctermbg=DarkGray ctermfg=White cterm=NONE
 hi TabLineFill guibg=#060609 guifg=#FFFFFF gui=NONE ctermbg=Black ctermfg=White cterm=NONE
 hi TabLineSel guibg=#666666 guifg=#FFFFFF gui=NONE ctermbg=DarkGray ctermfg=White cterm=NONE
 hi TabLine guibg=#222222 guifg=#FFFFFF gui=NONE ctermbg=DarkGray ctermfg=White cterm=NONE
-hi Search guibg=#FFD900 guifg=#060609 gui=NONE ctermbg=Yellow ctermfg=Black cterm=NONE
-hi IncSearch guibg=#FFD900 guifg=#060609 gui=NONE ctermbg=Blue ctermfg=Black cterm=NONE
+hi Search guibg=#FFFF00 guifg=#060609 gui=NONE ctermbg=Yellow ctermfg=Black cterm=NONE
+hi link IncSearch Search
 hi CursorLine guibg=#252525  gui=NONE ctermbg=NONE ctermfg=Gray cterm=NONE
 hi CursorColumn guibg=#252525 gui=NONE ctermbg=NONE ctermfg=Gray cterm=NONE
 hi FoldColumn guibg=#060609 guifg=#FFFFFF gui=NONE ctermbg=NONE ctermfg=White cterm=NONE
-hi Visual guibg=#404040 gui=NONE ctermbg=White ctermfg=DarkGray cterm=NONE
+hi Visual guibg=#28282B gui=NONE ctermbg=White ctermfg=DarkGray cterm=NONE
 hi SignColumn guibg=#222222 guifg=#FFFFFF gui=NONE ctermbg=DarkGray ctermfg=White cterm=NONE
 hi helpSpecial guibg=NONE guifg=#FFFF71
 

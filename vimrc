@@ -154,6 +154,9 @@ Bundle "tomtom/tlib_vim"
 Bundle "vim-scripts/snipmate-snippets"
 Bundle "garbas/vim-snipmate"
 
+" Alternative Snippet Plugin
+"Bundle "SirVer/ultisnips"
+
 " Syntax highlighting interface
 Bundle 'scrooloose/syntastic.git'
 let g:locliststate=1

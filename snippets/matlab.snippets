@@ -1,0 +1,22 @@
+snippet class
+	classdef ${1} < ${2:Parent}
+		% $1 A short summary
+		% 
+		% A longer description here.
+
+		properties
+
+		end
+		properties (Hidden, SetAccess = private)
+
+		end
+
+		methods
+			function obj = $1($3)
+
+			end
+			function output = methodname(self, data)
+
+			end
+		end
+	end

@@ -31,7 +31,7 @@ hi link IncSearch Search
 hi CursorLine guibg=#252525  gui=NONE ctermbg=NONE ctermfg=Gray cterm=NONE
 hi CursorColumn guibg=#252525 gui=NONE ctermbg=NONE ctermfg=Gray cterm=NONE
 hi FoldColumn guibg=#060609 guifg=#FFFFFF gui=NONE ctermbg=NONE ctermfg=White cterm=NONE
-hi Visual guibg=#28282B gui=NONE ctermbg=White ctermfg=DarkGray cterm=NONE
+hi Visual guibg=#303040 gui=NONE ctermbg=White ctermfg=DarkGray cterm=NONE
 hi SignColumn guibg=#222222 guifg=#FFFFFF gui=NONE ctermbg=DarkGray ctermfg=White cterm=NONE
 hi helpSpecial guibg=NONE guifg=#FFFF71
 

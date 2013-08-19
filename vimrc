@@ -82,6 +82,9 @@ Bundle 'tpope/vim-unimpaired.git'
 " colors are highlighted in css files
 Bundle 'ap/vim-css-color.git'
 
+" less syntax highlighting
+Bundle 'groenewege/vim-less'
+
 " File browsing
 Bundle 'scrooloose/nerdtree.git'
 noremap <silent> <leader>1 :NERDTreeToggle<CR>
@@ -383,6 +386,7 @@ let g:html_indent_style1 = "inc"
 
 " General web stuff
 au BufRead,BufNewFile *.json set filetype=json
+au BufRead,BufNewFile *.md set filetype=markdown
 au FileType htmldjango set ft=htmldjango.html
 
 " Cscope stuff
@@ -410,7 +414,7 @@ elseif has('mac')
     let macvim_hig_shift_movement = 1
     set macmeta
     set noantialias
-    set guifont=Monaco:h13
+    set guifont=Monaco:h10
 else
     set guifont=CodingFontTobi\ 12
 endif

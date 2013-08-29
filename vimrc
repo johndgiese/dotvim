@@ -238,11 +238,17 @@ vnoremap <leader>5 :make
 let g:gstatus_open=0
 function! GStatusToggle()
     if g:gstatus_open
-        bdelete index
+        try
+            bdelete index
+            let g:gstatus_open=0
+        catch
+            Gstatus
+            let g:gstatus_open=1
+        endtry
     else
         Gstatus
+        let g:gstatus_open=1
     end
-    let g:gstatus_open=!g:gstatus_open
 endfunction
 nnoremap <silent> <leader>6 :call GStatusToggle()<CR>
 

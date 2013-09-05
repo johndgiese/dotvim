@@ -33,7 +33,7 @@ Ctags is a program that parses your code and generates links between files.  Cta
 
 On Ubuntu this is:
 
-    sudo get-apt install ctags
+    sudo apt-get install ctags
 
 On Mac OSX with homebrew:
   
@@ -41,13 +41,11 @@ On Mac OSX with homebrew:
 
 On Windows you will have to find the executable online.
 
-#### Vipy Plugin
+#### Python-Jedi
 
-If you want to use the vipy plugin you will need to install ipython and pyzmq, and finally run another batch script, as described in the install instructions [here](https://github.com/johndgiese/vipy).  Basically it is:
+If you do much python work, then you absolutely need the [vim-jedi plugin](https://github.com/davidhalter/jedi-vim)!  This is the most amazing plugin ever!  You need to install a python dependency using:
 
-    sudo apt-get update
-    sudo apt-get install libzmq-dev
-    sudo apt-get install python-zmq
+    pip install jedi
 
 #### Make Programs for various File Types
 
@@ -94,7 +92,7 @@ The following other plugins are installed:
 * Gundo - graphical view of undo branches; see the [vimcast](http://vimcasts.org/episodes/undo-branching-and-gundo-vim/)
 * Fugitive - use git inside vim!  See the [vimcasts](http://vimcasts.org/episodes/archive) about it.
 * Surround - work better with parenthesis and other nesting structures.  Type :h surround
-* Vipy - use ipython inside vim!  python code completion, etc. see [the repo](https://github.com/johndgiese/vipy/blob/master/README.md)
+* Vim Jedi - amazing python IDE-like capabilities
 * Autoclose - autoclose parenthesis
 * Snipmate - add snippets of commonly usedcode
 * Unimpaired - provides various mappings for operating with pairs
@@ -112,7 +110,7 @@ are loose terms.  Not all files have this functionality (please feel free to
 make suggestions!)
 
 ### Running a file
-* python   -- runs file (in vipy plugin)
+* python   -- runs file 
 * html     -- run tidy, filling the quickfix list with bugs in your html
 * latex    -- converts to a dvi and opens it in a viewer (requires Miketex)
 * c        -- compiles code with make (Linux only), 

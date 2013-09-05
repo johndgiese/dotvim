@@ -118,6 +118,11 @@ if v:version > 702
     let g:gundo_help  = 0
 endif
 
+" Python tab-completeion with jedi
+Bundle 'davidhalter/jedi-vim'
+let g:jedi#use_tabs_not_buffers = 0
+autocmd FileType python setlocal completeopt-=preview
+
 " Autocomplete using tab instead of <C-x><C-o>
 Bundle 'ervandew/supertab.git'
 set completeopt=longest,menuone
@@ -135,11 +140,6 @@ autocmd FileType *
 Bundle 'Lokaltog/vim-powerline.git'
 let g:Powerline_stl_path_style='relative'
 let g:Powerline_symbols='compatible'
-
-" Use ipython inside vim
-Bundle 'johndgiese/vipy.git'
-let g:vipy_profile='david'
-let g:vipy_position='rightbelow'
 
 " A fuzzy file finder-- really great just press CTRL-P!
 Bundle 'kien/ctrlp.vim.git'
@@ -282,9 +282,9 @@ nnoremap <silent> <leader>l :call LocationListToggle()<CR>
 
 " Remap block-visual mode to alt-V, and set paste-from-clipboard to C-v
 nnoremap <A-v> <C-v>
-nnoremap <C-v> "+gp
-inoremap <C-v> <ESC>"+gpi
-vnoremap <C-v> d"+p
+"nnoremap <C-v> "+gp
+"inoremap <C-v> <ESC>"+gpi
+"vnoremap <C-v> d"+p
 vnoremap <C-c> "+y
 vnoremap <C-x> "+ygvd
 

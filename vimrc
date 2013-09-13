@@ -82,6 +82,9 @@ Bundle 'tpope/vim-unimpaired.git'
 " colors are highlighted in css files
 Bundle 'ap/vim-css-color.git'
 
+" less syntax highlighting
+Bundle 'groenewege/vim-less'
+
 " File browsing
 Bundle 'scrooloose/nerdtree.git'
 noremap <silent> <leader>1 :NERDTreeToggle<CR>
@@ -115,6 +118,11 @@ if v:version > 702
     let g:gundo_help  = 0
 endif
 
+" Python tab-completeion with jedi
+Bundle 'davidhalter/jedi-vim'
+let g:jedi#use_tabs_not_buffers = 0
+autocmd FileType python setlocal completeopt-=preview
+
 " Autocomplete using tab instead of <C-x><C-o>
 Bundle 'ervandew/supertab.git'
 set completeopt=longest,menuone
@@ -132,11 +140,6 @@ autocmd FileType *
 Bundle 'Lokaltog/vim-powerline.git'
 let g:Powerline_stl_path_style='relative'
 let g:Powerline_symbols='compatible'
-
-" Use ipython inside vim
-Bundle 'johndgiese/vipy.git'
-let g:vipy_profile='david'
-let g:vipy_position='rightbelow'
 
 " A fuzzy file finder-- really great just press CTRL-P!
 Bundle 'kien/ctrlp.vim.git'
@@ -235,11 +238,17 @@ vnoremap <leader>5 :make
 let g:gstatus_open=0
 function! GStatusToggle()
     if g:gstatus_open
-        bdelete index
+        try
+            bdelete index
+            let g:gstatus_open=0
+        catch
+            Gstatus
+            let g:gstatus_open=1
+        endtry
     else
         Gstatus
+        let g:gstatus_open=1
     end
-    let g:gstatus_open=!g:gstatus_open
 endfunction
 nnoremap <silent> <leader>6 :call GStatusToggle()<CR>
 
@@ -273,9 +282,9 @@ nnoremap <silent> <leader>l :call LocationListToggle()<CR>
 
 " Remap block-visual mode to alt-V, and set paste-from-clipboard to C-v
 nnoremap <A-v> <C-v>
-nnoremap <C-v> "+gp
-inoremap <C-v> <ESC>"+gpi
-vnoremap <C-v> d"+p
+"nnoremap <C-v> "+gp
+"inoremap <C-v> <ESC>"+gpi
+"vnoremap <C-v> d"+p
 vnoremap <C-c> "+y
 vnoremap <C-x> "+ygvd
 
@@ -383,6 +392,7 @@ let g:html_indent_style1 = "inc"
 
 " General web stuff
 au BufRead,BufNewFile *.json set filetype=json
+au BufRead,BufNewFile *.md set filetype=markdown
 au FileType htmldjango set ft=htmldjango.html
 
 " Cscope stuff
@@ -410,7 +420,7 @@ elseif has('mac')
     let macvim_hig_shift_movement = 1
     set macmeta
     set noantialias
-    set guifont=Monaco:h13
+    set guifont=Monaco:h10
 else
     set guifont=CodingFontTobi\ 12
 endif

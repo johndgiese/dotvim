@@ -121,11 +121,11 @@ endif
 " Python tab-completeion with jedi
 Bundle 'davidhalter/jedi-vim'
 let g:jedi#use_tabs_not_buffers = 0
-autocmd FileType python setlocal completeopt-=preview
+set completeopt-=preview
 
 " Autocomplete using tab instead of <C-x><C-o>
 Bundle 'ervandew/supertab.git'
-set completeopt=longest,menuone
+set completeopt+=longest,menuone
 let g:SuperTabLongestEnhanced = 1
 let g:SuperTabLongestHighlight = 1
 let g:SuperTabDefaultCompletionType = "<c-n>"

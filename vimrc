@@ -391,8 +391,6 @@ let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
 
 " General web stuff
-au BufRead,BufNewFile *.json set filetype=json
-au BufRead,BufNewFile *.md set filetype=markdown
 au FileType htmldjango set ft=htmldjango.html
 
 " Cscope stuff

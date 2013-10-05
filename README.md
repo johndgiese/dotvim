@@ -53,6 +53,16 @@ On Mac OSX with homebrew:
 
     brew install ptidy
 
+
+#### Install tern for javascript auto-complete
+
+Assuming you have the node package manager (npm) installed:
+
+    cd ~/.vim/bundle/tern_for_vim
+    npm install
+
+to install tern.
+
 # How this vim setup differs from normal vim
 
 The most important three changes are:

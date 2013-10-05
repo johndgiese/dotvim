@@ -67,6 +67,9 @@ Bundle 'pangloss/vim-javascript.git'
 " Javascript autocompletion and code navigation
 Bundle 'marijnh/tern_for_vim'
 
+" Node.js tools
+Bundle 'moll/vim-node'
+
 " extended matching with %
 Bundle 'edsono/vim-matchit.git'
 

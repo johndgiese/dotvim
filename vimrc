@@ -64,6 +64,9 @@ Bundle 'godlygeek/tabular.git'
 " Better javascript indenting etc.
 Bundle 'pangloss/vim-javascript.git'
 
+" Better javascript syntax
+Bundle 'jelera/vim-javascript-syntax.git'
+
 " Javascript autocompletion and code navigation
 Bundle 'marijnh/tern_for_vim'
 

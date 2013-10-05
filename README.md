@@ -76,6 +76,7 @@ These three shortcuts will save you a lot of time, and keep your hands more comf
 * Much better colorscheme
 * \<leader\>o opens the colorscheme file for easy updating if you use different languages
 * \<leader\>O shows the syntax groups below the cursor
+* \<leader\>c toggles color highlighting
 * \<leader\>g will do a Google search on the current selection
 * \<leader\>w will highlight whitespace at the ends of lines, and ,W will delete it.
 * \<leader\>e toggles syntastic plugin (see below) on and off
@@ -97,7 +98,6 @@ The following other plugins are installed:
 * Snipmate - add snippets of commonly usedcode
 * Unimpaired - provides various mappings for operating with pairs
 * Powerline - a colorful and useful statusline
-* Csscolor - css color highlighting
 * Tabular - for aligning stuff (see [this vimcast](http://vimcasts.org/episodes/aligning-text-with-tabular-vim/))
 * Supertab - tab autocompletion
 * CTRLp - lets you browse files really quickly

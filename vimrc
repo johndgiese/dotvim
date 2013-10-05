@@ -64,6 +64,9 @@ Bundle 'godlygeek/tabular.git'
 " Better javascript indenting etc.
 Bundle 'pangloss/vim-javascript.git'
 
+" Javascript autocompletion and code navigation
+Bundle 'marihnh/tern_for_vim'
+
 " extended matching with %
 Bundle 'edsono/vim-matchit.git'
 
@@ -79,8 +82,9 @@ Bundle 'nelstrom/vim-visual-star-search'
 " various mappings related to pairs
 Bundle 'tpope/vim-unimpaired.git'
 
-" colors are highlighted in css files
-Bundle 'ap/vim-css-color.git'
+" colors can be highlighed using <leader>c
+Bundle 'chrisbra/color_highlight'
+nmap <leader>c <Plug>Colorizer<CR>
 
 " less syntax highlighting
 Bundle 'groenewege/vim-less'

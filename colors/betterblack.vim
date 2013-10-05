@@ -14,7 +14,7 @@ hi Todo guibg=#151515 guifg=#FF7300 gui=NONE ctermbg=NONE ctermfg=Yellow cterm=N
 hi Title guibg=#060609 guifg=#FFFFFF gui=NONE ctermbg=NONE ctermfg=White cterm=NONE
 
 " VIM gui 
-hi LineNr guibg=NONE guifg=#323242 gui=NONE ctermbg=White ctermfg=DarkGray cterm=NONE
+hi LineNr guibg=NONE guifg=#424252 gui=NONE ctermbg=White ctermfg=DarkGray cterm=NONE
 hi NonText guibg=#060609 guifg=#181828 gui=NONE ctermbg=Black ctermfg=DarkGray cterm=NONE
 hi PMenu guibg=#181828 guifg=#FFFFFF gui=NONE ctermbg=DarkGray ctermfg=White cterm=NONE
 hi PMenuSelect guibg=#282838 guifg=#FFFFFF gui=NONE ctermbg=Black ctermfg=White cterm=NONE

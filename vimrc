@@ -65,7 +65,7 @@ Bundle 'godlygeek/tabular.git'
 Bundle 'pangloss/vim-javascript.git'
 
 " Javascript autocompletion and code navigation
-Bundle 'marihnh/tern_for_vim'
+Bundle 'marijnh/tern_for_vim'
 
 " extended matching with %
 Bundle 'edsono/vim-matchit.git'
@@ -125,7 +125,9 @@ endif
 " Python tab-completeion with jedi
 Bundle 'davidhalter/jedi-vim'
 let g:jedi#use_tabs_not_buffers = 0
-set completeopt-=preview
+let g:jedi#goto_definitions_command = "gd"
+let g:jedi#popup_on_dot = 0
+let g:jedi#show_call_signatures = 0
 
 " Autocomplete using tab instead of <C-x><C-o>
 Bundle 'ervandew/supertab.git'

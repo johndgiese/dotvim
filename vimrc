@@ -17,7 +17,7 @@ let mapleader = ","
 
 " keep vim from prompting when a file changes in the background, just re-read
 " it; this is a contencious setting, make sure you know what it does
-set autoread 
+set autoread
 
 " DIRECTORIES
 if has('win32') || has('win64')
@@ -60,6 +60,10 @@ Bundle 'tpope/vim-surround.git'
 
 " Align code usint :Tab/someregexp
 Bundle 'godlygeek/tabular.git'
+
+" Autocomplete
+Bundle 'Valloric/YouCompleteMe'
+let g:ycm_key_invoke_completion = '<C-Tab>'
 
 " Better javascript indenting etc.
 Bundle 'pangloss/vim-javascript.git'
@@ -136,17 +140,17 @@ let g:jedi#popup_on_dot = 0
 let g:jedi#show_call_signatures = 0
 
 " Autocomplete using tab instead of <C-x><C-o>
-Bundle 'ervandew/supertab.git'
-set completeopt+=longest,menuone
-let g:SuperTabLongestEnhanced = 1
-let g:SuperTabLongestHighlight = 1
-let g:SuperTabDefaultCompletionType = "<c-n>"
-let g:SuperTabCrMapping = 1
-autocmd FileType *
-   \ if &omnifunc != '' |
-   \   call SuperTabChain(&omnifunc, "<c-p>") |
-   \   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
-   \ endif
+"Bundle 'ervandew/supertab.git'
+"set completeopt+=longest,menuone
+"let g:SuperTabLongestEnhanced = 1
+"let g:SuperTabLongestHighlight = 1
+"let g:SuperTabDefaultCompletionType = "<c-n>"
+"let g:SuperTabCrMapping = 1
+"autocmd FileType *
+   "\ if &omnifunc != '' |
+   "\   call SuperTabChain(&omnifunc, "<c-p>") |
+   "\   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
+   "\ endif
 
 " A better status line
 Bundle 'Lokaltog/vim-powerline.git'
@@ -168,6 +172,9 @@ Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
 Bundle "vim-scripts/snipmate-snippets"
 Bundle "garbas/vim-snipmate"
+smap <C-Space> <Plug>snipMateNextOrTrigger
+imap <C-Space> <Plug>snipMateNextOrTrigger
+" TODO: figure out why this isn't working with YouCompleteMe
 
 " Alternative Snippet Plugin
 "Bundle "SirVer/ultisnips"

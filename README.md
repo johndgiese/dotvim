@@ -33,7 +33,7 @@ Ctags is a program that parses your code and generates links between files.  Cta
 
 On Ubuntu this is:
 
-    sudo get-apt install ctags
+    sudo apt-get install ctags
 
 On Mac OSX with homebrew:
   
@@ -41,19 +41,27 @@ On Mac OSX with homebrew:
 
 On Windows you will have to find the executable online.
 
-#### Vipy Plugin
+#### Python-Jedi
 
-If you want to use the vipy plugin you will need to install ipython and pyzmq, and finally run another batch script, as described in the install instructions [here](https://github.com/johndgiese/vipy).  Basically it is:
+If you do much python work, then you absolutely need the [vim-jedi plugin](https://github.com/davidhalter/jedi-vim)!  This is the most amazing plugin ever!  You need to install a python dependency using:
 
-    sudo apt-get update
-    sudo apt-get install libzmq-dev
-    sudo apt-get install python-zmq
+    pip install jedi
 
 #### Make Programs for various File Types
 
 On Mac OSX with homebrew:
 
     brew install ptidy
+
+
+#### Install tern for javascript auto-complete
+
+Assuming you have the node package manager (npm) installed:
+
+    cd ~/.vim/bundle/tern_for_vim
+    npm install
+
+to install tern.
 
 # How this vim setup differs from normal vim
 
@@ -71,12 +79,14 @@ These three shortcuts will save you a lot of time, and keep your hands more comf
 * \<leader\>3 lets you see all the open buffers
 * \<leader\>4 lets you navigate the undo history (required vim 7.3)
 * \<leader\>5 runs your make program, which is file-type dependent (see below)
+* \<leader\>6 toggles the fugitive Gstatus buffer
 * Searches (pressing / or ? in normal mode) now have \v prepended so that vim uses the verymagic mode (i.e. it uses normal python/perl regular expressions instead of its own version)
 * \<leader\>/ clears search highlighting
 * \<leader\>s toggles spell-check
 * Much better colorscheme
 * \<leader\>o opens the colorscheme file for easy updating if you use different languages
 * \<leader\>O shows the syntax groups below the cursor
+* \<leader\>c toggles color highlighting
 * \<leader\>g will do a Google search on the current selection
 * \<leader\>w will highlight whitespace at the ends of lines, and ,W will delete it.
 * \<leader\>e toggles syntastic plugin (see below) on and off
@@ -93,12 +103,11 @@ The following other plugins are installed:
 * Gundo - graphical view of undo branches; see the [vimcast](http://vimcasts.org/episodes/undo-branching-and-gundo-vim/)
 * Fugitive - use git inside vim!  See the [vimcasts](http://vimcasts.org/episodes/archive) about it.
 * Surround - work better with parenthesis and other nesting structures.  Type :h surround
-* Vipy - use ipython inside vim!  python code completion, etc. see [the repo](https://github.com/johndgiese/vipy/blob/master/README.md)
+* Vim Jedi - amazing python IDE-like capabilities
 * Autoclose - autoclose parenthesis
 * Snipmate - add snippets of commonly usedcode
 * Unimpaired - provides various mappings for operating with pairs
 * Powerline - a colorful and useful statusline
-* Csscolor - css color highlighting
 * Tabular - for aligning stuff (see [this vimcast](http://vimcasts.org/episodes/aligning-text-with-tabular-vim/))
 * Supertab - tab autocompletion
 * CTRLp - lets you browse files really quickly
@@ -111,7 +120,7 @@ are loose terms.  Not all files have this functionality (please feel free to
 make suggestions!)
 
 ### Running a file
-* python   -- runs file (in vipy plugin)
+* python   -- runs file 
 * html     -- run tidy, filling the quickfix list with bugs in your html
 * latex    -- converts to a dvi and opens it in a viewer (requires Miketex)
 * c        -- compiles code with make (Linux only), 

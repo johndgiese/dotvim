@@ -94,6 +94,9 @@ hi DiffDelete guibg=#FF2222 guifg=#060609 gui=None ctermbg=DarkRed ctermfg=Black
 hi DiffChange guibg=#4444FF guifg=#060609 gui=None ctermbg=DarkBlue ctermfg=Black cterm=NONE
 hi DiffText guibg=#8888FF guifg=#060609 gui=None ctermbg=Blue ctermfg=Black cterm=NONE
 
+" Make
+hi makeTarget guibg=#060609 guifg=#3646F9 gui=None ctermbg=Blue ctermfg=Black cterm=NONE
+
 " PHP
 hi link phpRegion Normal
 hi link Delimiter Normal

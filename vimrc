@@ -63,6 +63,7 @@ Bundle 'godlygeek/tabular.git'
 
 " Autocomplete
 Bundle 'Valloric/YouCompleteMe'
+let g:ycm_key_list_previous_completion=['<Up>']
 let g:ycm_key_invoke_completion = '<C-Tab>'
 
 " Better javascript indenting etc.
@@ -104,6 +105,12 @@ Bundle 'scrooloose/nerdtree.git'
 noremap <silent> <leader>1 :NERDTreeToggle<CR>
 let NERDTreeIgnore = ['\~$', '\.pyc']
 
+" Ack search integration
+Bundle 'mileszs/ack.vim.git'
+
+" Add Cdo and Ldo (similar to argdo but for the quickfix list)
+Bundle 'Peeja/vim-cdo'
+
 " Ctag viewer
 Bundle 'majutsushi/tagbar.git'
 let g:tagbar_iconchars = ['+', '-']
@@ -139,19 +146,6 @@ let g:jedi#goto_definitions_command = "gd"
 let g:jedi#popup_on_dot = 0
 let g:jedi#show_call_signatures = 0
 
-" Autocomplete using tab instead of <C-x><C-o>
-"Bundle 'ervandew/supertab.git'
-"set completeopt+=longest,menuone
-"let g:SuperTabLongestEnhanced = 1
-"let g:SuperTabLongestHighlight = 1
-"let g:SuperTabDefaultCompletionType = "<c-n>"
-"let g:SuperTabCrMapping = 1
-"autocmd FileType *
-   "\ if &omnifunc != '' |
-   "\   call SuperTabChain(&omnifunc, "<c-p>") |
-   "\   call SuperTabSetDefaultCompletionType("<c-x><c-u>") |
-   "\ endif
-
 " A better status line
 Bundle 'Lokaltog/vim-powerline.git'
 let g:Powerline_stl_path_style='relative'
@@ -167,17 +161,13 @@ let g:ctrlp_custom_ignore = {
     \ 'dir': '\v[\/](env|collected_static)$',
     \ }
 
-" Snipmate
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "vim-scripts/snipmate-snippets"
-Bundle "garbas/vim-snipmate"
-smap <C-Space> <Plug>snipMateNextOrTrigger
-imap <C-Space> <Plug>snipMateNextOrTrigger
-" TODO: figure out why this isn't working with YouCompleteMe
-
-" Alternative Snippet Plugin
-"Bundle "SirVer/ultisnips"
+" Snippets Plugin
+" Note: snipmate has more snippets, but fewer features---I think ultisnips
+" will win out pretty soon
+Bundle "SirVer/ultisnips"
+set runtimepath+=~/.vim/ultisnips_rep
+let g:UltiSnipsExpandTrigger="<c-space>"
+let g:UltiSnipsListSnippets="<c-s-space>"
 
 " Syntax highlighting interface
 Bundle 'scrooloose/syntastic.git'
@@ -250,8 +240,18 @@ nnoremap ? ?\v
 nnoremap <silent> <leader>/ :noh<CR>
 
 " set make program shortcut
-nnoremap <leader>5 :make<CR><CR>:cope<CR>
-vnoremap <leader>5 :make
+nnoremap <leader>5 :call Make()<CR>
+vnoremap <leader>5 :call Make()<CR>
+
+function! Make()
+    make
+    if !g:quickfix_open
+        if (len(getqflist()) > 1)
+            copen
+            let g:quickfix_open=1
+        end
+    end
+endfunction
 
 " toggle fugivite status
 let g:gstatus_open=0

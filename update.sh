@@ -1,16 +1,18 @@
-function section {
-    echo $1
-}
+#!/bin/sh
 
 function errcheck {
-    if [ !$? ]; then
-        echo "ERROR"
-        exit
+    if [ $? -ne 0 ]; then 
+        echo -e "\nERROR, quitting"
+        exit 1 
     fi
 }
 
-section "Compiling YouCompleteMe"
-cd bundle/YouCompleteMe
+
+echo -e "\nCompiling YouCompleteMe"
+cd $HOME/.vim/bundle/YouCompleteMe
 sh install.sh
-cd ../..
+errcheck
+
+echo -e "\nUPDATING PLUGINS, MAY TAKE A WHILE ..."
+vim -c "execute 'BundleInstall!' | quitall!"
 errcheck

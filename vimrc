@@ -111,6 +111,9 @@ Bundle 'mileszs/ack.vim.git'
 " Add Cdo and Ldo (similar to argdo but for the quickfix list)
 Bundle 'Peeja/vim-cdo'
 
+" Toggle quickfix and localist
+Bundle 'milkypostman/vim-togglelist'
+
 " Ctag viewer
 Bundle 'majutsushi/tagbar.git'
 let g:tagbar_iconchars = ['+', '-']
@@ -271,33 +274,8 @@ function! GStatusToggle()
 endfunction
 nnoremap <silent> <leader>6 :call GStatusToggle()<CR>
 
-" conveniently open quickfix
-let g:quickfix_open=0
-function! QuickFixToggle()
-    if g:quickfix_open
-        cclose
-    else
-        copen
-        execute "normal \<C-w>p"
-    end
-    let g:quickfix_open=!g:quickfix_open
-endfunction
-nnoremap <silent> <leader>q :call QuickFixToggle()<CR>
 nnoremap <A-]> :cnext<CR>
 nnoremap <A-[> :cprev<CR>
-
-" conveniently open locationlist
-let g:loclist_open=0
-function! LocationListToggle()
-    if g:loclist_open
-        lclose
-    else
-        lopen
-        execute "normal \<C-w>p"
-    end
-    let g:loclist_open=!g:loclist_open
-endfunction
-nnoremap <silent> <leader>l :call LocationListToggle()<CR>
 
 " Remap block-visual mode to alt-V, and set paste-from-clipboard to C-v
 nnoremap <A-v> <C-v>

@@ -127,7 +127,7 @@ syn keyword phpCoreConstant PHP_VERSION PHP_OS DEFAULT_INCLUDE_PATH PEAR_INSTALL
 
 syn case ignore
 
-syn keyword phpConstant  __LINE__ __FILE__ __FUNCTION__ __METHOD__ __CLASS__ __DIR__ __NAMESPACE__  contained
+syn keyword phpConstant  __LINE__ __FILE__ __FUNCTION__ __TRAIT__ __METHOD__ __CLASS__ __DIR__ __NAMESPACE__  contained
 
 
 " Function and Methods ripped from php_manual_de.tar.gz Jan 2003

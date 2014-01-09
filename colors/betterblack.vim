@@ -103,7 +103,7 @@ hi link Delimiter Normal
 hi link None String
 hi link phpStringSingle String
 hi link phpStringDouble String
-hi link phpVarSelector Normal
-hi link phpIdentifier Normal
+hi link phpVarSelector Identifier
+hi link phpIdentifier Identifier
 hi link phpOperator Normal
 hi link phpRelation Normal

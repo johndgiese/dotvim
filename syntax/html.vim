@@ -47,20 +47,30 @@ syn match   htmlTagError contained "[^>]<"ms=s+1
 
 
 " tag names
-syn keyword htmlTagName contained address applet area a base basefont
-syn keyword htmlTagName contained big blockquote br caption center
-syn keyword htmlTagName contained cite code dd dfn dir div dl dt font
+syn keyword htmlTagName contained address area a base
+syn keyword htmlTagName contained blockquote br caption
+syn keyword htmlTagName contained cite code dd dfn div dl dt
 syn keyword htmlTagName contained form hr html img
 syn keyword htmlTagName contained input isindex kbd li link map menu
 syn keyword htmlTagName contained meta ol option param pre p samp span
-syn keyword htmlTagName contained select small strike sub sup
-syn keyword htmlTagName contained table td textarea th tr tt ul var xmp
+syn keyword htmlTagName contained select small sub sup
+syn keyword htmlTagName contained table td textarea th tr ul var xmp
 syn match htmlTagName contained "\<\(b\|i\|u\|h[1-6]\|em\|strong\|head\|body\|title\)\>"
 
 " new html 4.0 tags
-syn keyword htmlTagName contained abbr acronym bdo button col label
+syn keyword htmlTagName contained abbr bdo button col label
 syn keyword htmlTagName contained colgroup del fieldset iframe ins legend
 syn keyword htmlTagName contained object optgroup q s tbody tfoot thead
+
+" added tags in html 5.0
+syn keyword htmlTagName contained canvas audio video source embed track datalist
+syn keyword htmlTagName contained keygen output article aside bdi command details
+syn keyword htmlTagName contained dialog summary figure figcaption footer header
+syn keyword htmlTagName contained mark meter nav progress ruby rt rp section time wbr
+
+" removed in html 5.0 tags
+syn keyword htmlDeprecatedTagName contained acronym applet basefont big center
+syn keyword htmlDeprecatedTagName contained dir font frame frameset noframes strike tt
 
 " legal arg names
 syn keyword htmlArg contained action
@@ -77,7 +87,7 @@ syn keyword htmlArg contained usemap ismap valign value vlink vspace width wrap
 syn match   htmlArg contained "\<\(http-equiv\|href\|title\)="me=e-1
 
 " Netscape extensions
-syn keyword htmlTagName contained frame noframes frameset nobr blink
+syn keyword htmlTagName contained nobr blink
 syn keyword htmlTagName contained layer ilayer nolayer spacer
 syn keyword htmlArg     contained frameborder noresize pagex pagey above below
 syn keyword htmlArg     contained left top visibility clip id noshade

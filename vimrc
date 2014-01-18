@@ -297,6 +297,17 @@ nnoremap $ g$
 nnoremap ^ g^
 nnoremap 0 g0
 
+" jumping to definitions
+
+" goto definition
+nnoremap gd <C-]>zz
+
+" go back
+nnoremap gb <C-t>
+
+" see uses
+nnoremap gu vawy:tselect <C-r>0<CR>
+
 " convenience mappings for moving insert mode
 inoremap <C-h> <left>
 inoremap <C-l> <right>

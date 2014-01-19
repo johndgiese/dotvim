@@ -65,6 +65,7 @@ Bundle 'godlygeek/tabular.git'
 Bundle 'Valloric/YouCompleteMe'
 let g:ycm_key_list_previous_completion=['<Up>']
 let g:ycm_key_invoke_completion = '<C-Tab>'
+let g:ycm_use_ultisnips_completer = 1
 
 " Better javascript indenting etc.
 Bundle 'pangloss/vim-javascript.git'
@@ -171,6 +172,8 @@ Bundle "SirVer/ultisnips"
 set runtimepath+=~/.vim/ultisnips_rep
 let g:UltiSnipsExpandTrigger="<c-space>"
 let g:UltiSnipsListSnippets="<c-s-space>"
+let g:UltiSnipsJumpForwardTrigger="<c-space>"
+let g:UltiSnipsJumpBackwardTrigger="<c-s-space>"
 
 " Syntax highlighting interface
 Bundle 'scrooloose/syntastic.git'
@@ -296,6 +299,17 @@ nnoremap k gk
 nnoremap $ g$
 nnoremap ^ g^
 nnoremap 0 g0
+
+" jumping to definitions
+
+" goto definition
+nnoremap gd <C-]>zz
+
+" go back
+nnoremap gb <C-t>
+
+" see uses
+nnoremap gu vawy:tselect <C-r>0<CR>
 
 " convenience mappings for moving insert mode
 inoremap <C-h> <left>

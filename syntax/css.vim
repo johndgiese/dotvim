@@ -139,7 +139,7 @@ syn keyword cssPagingAttr contained landscape portrait crop cross always avoid
 
 syn keyword cssUIProp contained cursor
 syn match cssUIAttr contained "\<[ns]\=[ew]\=-resize\>"
-syn keyword cssUIAttr contained default crosshair pointer move wait help
+syn keyword cssUIAttr contained default crosshair pointer move wait help hand
 syn keyword cssUIAttr contained thin thick
 syn keyword cssUIAttr contained dotted dashed solid double groove ridge inset outset
 syn keyword cssUIAttr contained invert
@@ -148,7 +148,7 @@ syn match cssRenderAttr contained "\<marker\>"
 syn match cssRenderProp contained "\<\(display\|marker-offset\|unicode-bidi\|white-space\|list-item\|run-in\|inline-table\)\>\(:\)\@="
 syn keyword cssRenderProp contained position top bottom direction
 syn match cssRenderProp contained "\<\(left\|right\)\>"
-syn keyword cssRenderAttr contained block inline compact
+syn keyword cssRenderAttr contained block inline compact inline-block
 syn match cssRenderAttr contained "\<table\(-\(row-gorup\|\(header\|footer\)-group\|row\|column\(-group\)\=\|cell\|caption\)\)\=\>"
 syn keyword cssRenderAttr contained static relative absolute fixed
 syn keyword cssRenderAttr contained ltr rtl embed bidi-override pre nowrap

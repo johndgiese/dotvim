@@ -1,0 +1,96 @@
+snippet func "javascript function"
+function($1) {
+	$0
+}
+endsnippet
+
+# testing snippets
+
+snippet desc "testing describe"
+describe('$1', function() {
+	$0
+});
+endsnippet
+
+snippet runs "jasmine runs function"
+runs(function() {
+	$1
+});
+$0
+endsnippet
+
+snippet waits "jasmine waits for"
+waitsFor(function() {
+	$1
+});
+$0
+endsnippet
+
+snippet befm "ng before each load module"
+beforeEach(module("$1"));
+$0
+endsnippet
+
+snippet befi "ng before each inject"
+beforeEach(inject(function($1) {
+	$2
+}));
+$0
+endsnippet
+
+snippet dir "ng directive" i
+directive('$1', function() {
+	return {
+		restrict: 'AE',
+		require: 'ctrl|^parentCtrl|?optionalCtrl|?^optionalParentCtrl',
+		transclude: false|true|"element",
+		link: function(\$scope, \$element, \$attrs, ctrl, \$transclude) {
+			$3
+		},
+		controller: function(\$scope, \$element, \$attrs) {
+			$4
+		},
+	};
+});
+$0
+endsnippet
+
+snippet .factory "ng factory" i
+.factory('${1:serviceName}', [
+	${2:dependicies},
+	function(`!p deps = t[2].split(','); snip.rv = ", ".join([d.strip(' \'"') for d in deps])`) {
+		$0
+	}
+]);
+endsnippet
+
+snippet { "open braket" i
+{
+	$1
+}$0
+endsnippet
+
+snippet [ "open braket" i
+[
+	$1
+]$0
+endsnippet
+
+snippet .controller "ng controller" i
+.controller('${1:serviceName}Ctrl', [
+	'\$scope', ${2:dependencies},
+	function($scope, `!p deps = t[2].split(','); snip.rv = ", ".join([d.strip(' \'"') for d in deps])`) {
+		$0
+	}
+]);
+endsnippet
+
+snippet switch "switch"
+switch($1) {
+	case $2:
+		$3
+		break;
+	default:
+		// default case
+}
+endsnippet

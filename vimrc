@@ -79,6 +79,9 @@ Bundle 'marijnh/tern_for_vim'
 " Node.js tools
 Bundle 'moll/vim-node'
 
+" Arduino syntax highlighting
+Bundle "sudar/vim-arduino-syntax"
+
 " extended matching with %
 Bundle 'edsono/vim-matchit.git'
 
@@ -174,6 +177,7 @@ let g:UltiSnipsExpandTrigger="<c-space>"
 let g:UltiSnipsListSnippets="<c-s-space>"
 let g:UltiSnipsJumpForwardTrigger="<c-space>"
 let g:UltiSnipsJumpBackwardTrigger="<c-s-space>"
+nnoremap <leader>u :UltiSnipsEdit<CR>
 
 " Syntax highlighting interface
 Bundle 'scrooloose/syntastic.git'
@@ -186,6 +190,7 @@ let g:syntastic_mode_map = { 'mode': 'passive',
                             \ 'active_filetypes': [],
                             \ 'passive_filetypes': ['python', 'javascript'] }
 let g:syntastic_python_checkers=['pyflakes']
+let g:syntastic_javascript_checkers=['jshint']
 
 let g:syntastic_enable_highlighting=0
 let g:syntastic_on=0

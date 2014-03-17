@@ -85,6 +85,15 @@ snippet .controller "ng controller" i
 ]);
 endsnippet
 
+snippet .config "ng module config block" i
+.config([
+	'${2:dependencies}',
+	function(`!p deps = t[2].split(','); snip.rv = ", ".join([d.strip(' \'"') for d in deps])`) {
+		$0
+	}
+]);
+endsnippet
+
 snippet switch "switch"
 switch($1) {
 	case $2:
@@ -93,4 +102,10 @@ switch($1) {
 	default:
 		// default case
 }
+endsnippet
+
+snippet then "promise.then" i
+then(function(result) {
+	$1
+})$0
 endsnippet

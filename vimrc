@@ -51,6 +51,8 @@ Bundle 'gmarik/vundle'
 " Use Git inside vim easily
 Bundle 'tpope/vim-fugitive.git'
 Bundle 'tpope/vim-git.git'
+nnoremap dp dp]c
+nnoremap do do]c
 
 " Move back and forth through commits while staying on the same line
 nnoremap <A-right> :call GlogForward()<CR>
@@ -86,7 +88,7 @@ Bundle 'tpope/vim-surround.git'
 Bundle 'godlygeek/tabular.git'
 
 " Autocomplete
-Bundle 'Valloric/YouCompleteMe'
+"Bundle 'Valloric/YouCompleteMe'
 let g:ycm_key_list_previous_completion=['<Up>']
 let g:ycm_key_invoke_completion = '<C-Tab>'
 let g:ycm_use_ultisnips_completer = 1
@@ -98,7 +100,7 @@ Bundle 'pangloss/vim-javascript.git'
 Bundle 'jelera/vim-javascript-syntax.git'
 
 " Javascript autocompletion and code navigation
-Bundle 'marijnh/tern_for_vim'
+"Bundle 'marijnh/tern_for_vim'
 
 " Node.js tools
 Bundle 'moll/vim-node'
@@ -171,7 +173,7 @@ if v:version > 702
 endif
 
 " Python tab-completeion with jedi
-Bundle 'davidhalter/jedi-vim'
+"Bundle 'davidhalter/jedi-vim'
 let g:jedi#use_tabs_not_buffers = 0
 let g:jedi#goto_definitions_command = "gd"
 let g:jedi#popup_on_dot = 0

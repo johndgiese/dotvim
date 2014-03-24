@@ -4,6 +4,43 @@ function($1) {
 }
 endsnippet
 
+snippet mod "module pattern"
+(function(${1}) {
+	'use strict';
+	$0
+	${VISUAL}
+})($1);
+endsnippet
+
+snippet { "open braket" i
+{
+	$1
+}$0
+endsnippet
+
+snippet [ "open braket" i
+[
+	$1
+]$0
+endsnippet
+
+snippet switch "switch"
+switch($1) {
+	case $2:
+		$3
+		break;
+	default:
+		// default case
+}
+endsnippet
+
+snippet then "promise.then" i
+then(function(result) {
+	$1
+})$0
+endsnippet
+
+
 # testing snippets
 
 snippet desc "testing describe"
@@ -64,18 +101,6 @@ snippet .factory "ng factory" i
 ]);
 endsnippet
 
-snippet { "open braket" i
-{
-	$1
-}$0
-endsnippet
-
-snippet [ "open braket" i
-[
-	$1
-]$0
-endsnippet
-
 snippet .controller "ng controller" i
 .controller('${1:serviceName}Ctrl', [
 	'\$scope', ${2:dependencies},
@@ -92,20 +117,4 @@ snippet .config "ng module config block" i
 		$0
 	}
 ]);
-endsnippet
-
-snippet switch "switch"
-switch($1) {
-	case $2:
-		$3
-		break;
-	default:
-		// default case
-}
-endsnippet
-
-snippet then "promise.then" i
-then(function(result) {
-	$1
-})$0
 endsnippet

@@ -133,6 +133,9 @@ Bundle 'scrooloose/nerdtree.git'
 noremap <silent> <leader>1 :NERDTreeToggle<CR>
 let NERDTreeIgnore = ['\~$', '\.pyc']
 
+" open nerd tree automatically
+au VimEnter *  NERDTree
+
 " Ack search integration
 Bundle 'mileszs/ack.vim.git'
 
@@ -213,7 +216,8 @@ let g:syntastic_enable_auto_jump=1
 let g:syntastic_mode_map = { 'mode': 'passive',
                             \ 'active_filetypes': [],
                             \ 'passive_filetypes': ['python', 'javascript'] }
-let g:syntastic_python_checkers=['pyflakes']
+let g:syntastic_python_checkers=['flake8', 'pylint']
+let g:syntastic_python_pylint_args = "--errors-only"
 let g:syntastic_javascript_checkers=['jshint']
 
 let g:syntastic_enable_highlighting=0

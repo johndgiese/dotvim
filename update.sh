@@ -13,6 +13,11 @@ cd $HOME/.vim/bundle/YouCompleteMe
 sh install.sh
 errcheck
 
+echo -e "\nInstalling Tern's NPM dependencies"
+cd $HOME/.vim/bundle/tern_for_vim
+npm install
+errcheck
+
 echo -e "\nUPDATING PLUGINS, MAY TAKE A WHILE ..."
 vim -c "execute 'BundleInstall!' | quitall!"
 errcheck

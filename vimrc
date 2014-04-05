@@ -464,6 +464,8 @@ else
     set guifont=CodingFontTobi\ 12
 endif
 
-colorscheme betterblack
 syntax enable
 filetype plugin indent on
+
+set t_Co=256
+colorscheme betterblack

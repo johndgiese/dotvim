@@ -133,9 +133,6 @@ Bundle 'scrooloose/nerdtree.git'
 noremap <silent> <leader>1 :NERDTreeToggle<CR>
 let NERDTreeIgnore = ['\~$', '\.pyc']
 
-" open nerd tree automatically
-au VimEnter *  NERDTree
-
 " Ack search integration
 Bundle 'mileszs/ack.vim.git'
 

@@ -10,9 +10,10 @@ hi Keyword guibg=NONE guifg=#3381FF gui=NONE ctermbg=NONE ctermfg=4 cterm=NONE
 hi Statement guibg=NONE guifg=#3381FF gui=NONE ctermbg=NONE ctermfg=4 cterm=NONE
 hi Identifier guibg=NONE guifg=#00ED45 gui=NONE ctermbg=NONE ctermfg=Green cterm=NONE
 hi Type guibg=NONE guifg=#0052FF gui=NONE ctermbg=NONE ctermfg=4 cterm=NONE
-hi Todo guibg=#151515 guifg=#FF7300 gui=NONE ctermbg=NONE ctermfg=Yellow cterm=NONE
+hi Todo guibg=#151515 guifg=#FF7300 gui=NONE ctermbg=233 ctermfg=166 cterm=NONE
 hi Title guibg=#060609 guifg=#FFFFFF gui=NONE ctermbg=NONE ctermfg=White cterm=NONE
 hi PreProc ctermfg=176
+hi SpecialComment guibg=NONE guifg=#FF8310 gui=NONE ctermbg=NONE ctermfg=178 cterm=NONE
 
 " VIM gui 
 hi LineNr guibg=NONE guifg=#424252 gui=NONE ctermbg=Black ctermfg=235 cterm=NONE
@@ -88,6 +89,7 @@ hi link Javascript Normal
 hi JavascriptRegexpString guibg=NONE guifg=#21C6EB gui=NONE ctermbg=NONE ctermfg=Blue cterm=NONE
 hi link JavascriptSpecial JavascriptRegexpString
 hi JavascriptRegexpCharClass guibg=NONE guifg=#98E4F5 gui=NONE ctermbg=NONE ctermfg=Blue cterm=NONE
+hi link jsDocTags SpecialComment
 
 " Vimdiff
 hi DiffAdd guibg=#22FF22 guifg=#060609 gui=None ctermbg=DarkGreen ctermfg=Black cterm=NONE

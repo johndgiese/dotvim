@@ -80,6 +80,7 @@ hi markdownH1 guibg=#060609 guifg=#44FF44 gui=NONE ctermbg=Black ctermfg=Green c
 hi markdownH2 guibg=#060609 guifg=#77FFBB gui=NONE ctermbg=Black ctermfg=Green cterm=NONE
 hi markdownH3 guibg=#060609 guifg=#AAFFBB gui=NONE ctermbg=Black ctermfg=Green cterm=NONE
 hi markdownHeadingDelimiter NONE
+hi markdownListMarker guibg=#EEEEEE ctermfg=242
 
 " HTML
 hi link htmlLink Normal

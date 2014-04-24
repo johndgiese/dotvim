@@ -15,6 +15,9 @@ set wrap linebreak
 set nocompatible
 let mapleader = ","
 
+" allow scrolling in vim
+set mouse=a
+
 " keep vim from prompting when a file changes in the background, just re-read
 " it; this is a contencious setting, make sure you know what it does
 set autoread
@@ -88,7 +91,7 @@ Bundle 'tpope/vim-surround.git'
 Bundle 'godlygeek/tabular.git'
 
 " Autocomplete
-"Bundle 'Valloric/YouCompleteMe'
+Bundle 'Valloric/YouCompleteMe'
 let g:ycm_key_list_previous_completion=['<Up>']
 let g:ycm_key_invoke_completion = '<C-Tab>'
 let g:ycm_use_ultisnips_completer = 1
@@ -217,7 +220,7 @@ let g:syntastic_mode_map = { 'mode': 'passive',
                             \ 'passive_filetypes': ['python', 'javascript'] }
 let g:syntastic_python_checkers=['flake8', 'pylint']
 let g:syntastic_python_pylint_args = "--errors-only"
-let g:syntastic_javascript_checkers=['jshint']
+let g:syntastic_javascript_checkers=['jshint', 'jslint']
 
 let g:syntastic_enable_highlighting=0
 let g:syntastic_on=0
@@ -276,6 +279,9 @@ set hlsearch incsearch
 nnoremap / /\v
 nnoremap ? ?\v
 nnoremap <silent> <leader>/ :noh<CR>
+
+" set paste toggle
+set pastetoggle=<leader>p
 
 " set make program shortcut
 nnoremap <leader>5 :call Make()<CR>
@@ -343,12 +349,6 @@ nnoremap gb <C-t>
 " see uses
 nnoremap gu vawy:tselect <C-r>0<CR>
 
-" convenience mappings for moving insert mode
-inoremap <C-h> <left>
-inoremap <C-l> <right>
-inoremap <C-0> <C-S-o>$
-inoremap <C-9> <C-S-o>9
-
 " making vim command line more like bash
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
@@ -366,14 +366,10 @@ nnoremap <silent> ]B :blast<CR>
 " window switching
 " moving using M-direction
 " open new windows ugin M-S-direction
-nnoremap <M-j> <C-w>j
-nnoremap <M-k> <C-w>k
-nnoremap <M-h> <C-w>h
-nnoremap <M-l> <C-w>l
-nnoremap <M-S-j> :sbn<CR> <C-w>j
-nnoremap <M-S-k> :sbn<CR>
-nnoremap <M-S-h> :vertical sbn<CR>
-nnoremap <M-S-l> :vertical sbn<CR> <C-W>l
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
 
 " Highlight whitespace with <leader>w, and remove with <leader>W
 nnoremap <leader>w :/\s\+$<CR>

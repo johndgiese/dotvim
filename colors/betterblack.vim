@@ -84,6 +84,7 @@ hi markdownListMarker guibg=#EEEEEE ctermfg=242
 
 " HTML
 hi link htmlLink Normal
+hi! link htmlItalic Normal
 
 " Javascript
 hi link Javascript Normal

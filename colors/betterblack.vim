@@ -3,6 +3,7 @@ set background=dark
 hi Normal guibg=#060609 guifg=#e3e3e4 gui=NONE ctermbg=Black ctermfg=White cterm=NONE
 " Coding 
 hi String guibg=NONE guifg=#FF2020 gui=NONE ctermbg=NONE ctermfg=160 cterm=NONE
+hi Special guibg=NONE guifg=#FF3030 gui=NONE ctermbg=NONE ctermfg=174 cterm=NONE
 hi Comment guibg=NONE guifg=#FF7300 gui=NONE ctermbg=NONE ctermfg=166 cterm=NONE
 hi Number guibg=NONE guifg=#C92040 gui=NONE ctermbg=NONE ctermfg=161 cterm=NONE
 hi Function guibg=NONE guifg=#0Fef33 gui=NONE ctermbg=NONE ctermfg=Green cterm=NONE

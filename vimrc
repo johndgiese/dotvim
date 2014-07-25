@@ -89,9 +89,9 @@ Bundle 'tpope/vim-surround.git'
 
 " Autocomplete
 Bundle 'Valloric/YouCompleteMe'
-let g:ycm_key_list_previous_completion=['<Up>']
-let g:ycm_key_invoke_completion = '<C-Tab>'
-let g:ycm_use_ultisnips_completer = 1
+"let g:ycm_key_list_previous_completion=['<Up>']
+"let g:ycm_key_invoke_completion = '<C-Tab>'
+"let g:ycm_use_ultisnips_completer = 1
 
 " Better javascript indenting etc.
 Bundle 'pangloss/vim-javascript.git'
@@ -196,11 +196,30 @@ let g:ctrlp_custom_ignore = {
 " will win out pretty soon
 Bundle "SirVer/ultisnips"
 set runtimepath+=~/.vim/ultisnips_rep
-let g:UltiSnipsExpandTrigger="<c-space>"
-let g:UltiSnipsListSnippets="<c-s-space>"
-let g:UltiSnipsJumpForwardTrigger="<c-space>"
-let g:UltiSnipsJumpBackwardTrigger="<c-s-space>"
 nnoremap <leader>u :UltiSnipsEdit<CR>
+
+function! g:UltiSnips_Complete()
+    call UltiSnips#ExpandSnippet()
+    if g:ulti_expand_res == 0
+        if pumvisible()
+            return "\<C-n>"
+        else
+            call UltiSnips#JumpForwards()
+            if g:ulti_jump_forwards_res == 0
+               return "\<TAB>"
+            endif
+        endif
+    endif
+    return ""
+endfunction
+
+au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsListSnippets="<c-e>"
+" this mapping Enter key to <C-y> to chose the current highlight item 
+" and close the selection list, same as other IDEs.
+" CONFLICT with some plugins like tpope/Endwise
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Syntax highlighting interface
 Bundle 'scrooloose/syntastic.git'

@@ -87,9 +87,6 @@ Bundle 'scrooloose/nerdcommenter.git'
 " Lets you deal with braket pairs etc.
 Bundle 'tpope/vim-surround.git'
 
-" Align code usint :Tab/someregexp
-Bundle 'godlygeek/tabular.git'
-
 " Autocomplete
 Bundle 'Valloric/YouCompleteMe'
 let g:ycm_key_list_previous_completion=['<Up>']
@@ -99,9 +96,6 @@ let g:ycm_use_ultisnips_completer = 1
 " Better javascript indenting etc.
 Bundle 'pangloss/vim-javascript.git'
 
-" Better javascript syntax
-Bundle 'jelera/vim-javascript-syntax.git'
-
 " Javascript autocompletion and code navigation
 "Bundle 'marijnh/tern_for_vim'
 
@@ -109,7 +103,7 @@ Bundle 'jelera/vim-javascript-syntax.git'
 Bundle 'moll/vim-node'
 
 " Arduino syntax highlighting
-Bundle "sudar/vim-arduino-syntax"
+"Bundle "sudar/vim-arduino-syntax"
 
 " extended matching with %
 Bundle 'edsono/vim-matchit.git'

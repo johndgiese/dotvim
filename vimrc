@@ -184,8 +184,8 @@ let g:Powerline_symbols='compatible'
 " A fuzzy file finder-- really great just press CTRL-P!
 Bundle 'kien/ctrlp.vim.git'
 let g:ctrlp_working_path_mode = 'ar'
-let g:ctrlp_extensions = ['mixed']
-let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_extensions = ['dir']
+let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_custom_ignore = {
     \ 'file': '\v\.(pyc)$',
     \ 'dir': '\v[\/](env|collected_static)$',

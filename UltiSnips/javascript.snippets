@@ -1,3 +1,9 @@
+snippet for( "javascript for loop"
+for(var $1; $1 < $2; $1++) {
+	$0
+}
+endsnippet
+
 snippet func "javascript function"
 function($1) {
 	$0
@@ -34,9 +40,9 @@ switch($1) {
 }
 endsnippet
 
-snippet then "promise.then" i
-then(function(result) {
-	$1
+snippet .then "promise.then" i
+.then(function($1) {
+	$2
 })$0
 endsnippet
 
@@ -45,6 +51,12 @@ endsnippet
 
 snippet desc "testing describe"
 describe('$1', function() {
+	$0
+});
+endsnippet
+
+snippet it "testing it"
+it('$1', function(${2:done}) {
 	$0
 });
 endsnippet
@@ -117,4 +129,8 @@ snippet .config "ng module config block" i
 		$0
 	}
 ]);
+endsnippet
+
+snippet debug "debug line"
+console.log($1);
 endsnippet

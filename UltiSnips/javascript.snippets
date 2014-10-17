@@ -4,7 +4,7 @@ for(var $1; $1 < $2; $1++) {
 }
 endsnippet
 
-snippet func "javascript function"
+snippet f "javascript function"
 function($1) {
 	$0
 }
@@ -16,6 +16,11 @@ snippet mod "module pattern"
 	$0
 	${VISUAL}
 })($1);
+endsnippet
+
+snippet req "node require"
+var ${1} = require('$1');
+$0
 endsnippet
 
 snippet { "open braket" i

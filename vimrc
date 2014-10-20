@@ -119,7 +119,7 @@ Bundle 'tpope/vim-unimpaired.git'
 
 " colors can be highlighed using <leader>c
 Bundle 'chrisbra/color_highlight'
-nmap <leader>c <Plug>Colorizer<CR>
+nnoremap <leader>c <Plug>Colorizer<CR>
 
 " less syntax highlighting
 Bundle 'groenewege/vim-less'
@@ -226,11 +226,18 @@ let g:syntastic_auto_loc_list=1
 let g:syntastic_enable_signs=0
 let g:syntastic_enable_auto_jump=1
 let g:syntastic_mode_map = { 'mode': 'passive',
-                            \ 'active_filetypes': [],
+                            \ 'active_filetypes': ['cpp', 'c'],
                             \ 'passive_filetypes': ['python', 'javascript'] }
+
 let g:syntastic_python_checkers=['flake8', 'pylint']
 let g:syntastic_python_pylint_args = "--errors-only"
-let g:syntastic_javascript_checkers=['jshint', 'jslint']
+
+let g:syntastic_javascript_checkers=['jshint']
+
+let g:syntastic_cpp_checkers=['gcc']
+
+let g:syntastic_c_checkers=['gcc']
+
 
 let g:syntastic_enable_highlighting=0
 let g:syntastic_on=0
@@ -289,6 +296,10 @@ set hlsearch incsearch
 nnoremap / /\v
 nnoremap ? ?\v
 nnoremap <silent> <leader>/ :noh<CR>
+
+" disable Ex mode
+nnoremap Q <nop>
+vnoremap Q <nop>
 
 " set paste toggle
 set pastetoggle=<leader>p

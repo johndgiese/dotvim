@@ -131,6 +131,7 @@ let NERDTreeIgnore = ['\~$', '\.pyc']
 
 " Ack search integration
 Bundle 'mileszs/ack.vim.git'
+let g:ack_default_options = " -H --nocolor --nogroup --column --smart-case --follow"
 
 " Add Cdo and Ldo (similar to argdo but for the quickfix list)
 Bundle 'Peeja/vim-cdo'

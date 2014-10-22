@@ -93,9 +93,6 @@ Bundle 'Valloric/YouCompleteMe'
 " Better javascript indenting etc.
 Bundle 'pangloss/vim-javascript.git'
 
-" Javascript autocompletion and code navigation
-"Bundle 'marijnh/tern_for_vim'
-
 " Node.js tools
 Bundle 'moll/vim-node'
 
@@ -166,13 +163,6 @@ if v:version > 702
     let g:gundo_right = 1
     let g:gundo_help  = 0
 endif
-
-" Python tab-completeion with jedi
-"Bundle 'davidhalter/jedi-vim'
-let g:jedi#use_tabs_not_buffers = 0
-let g:jedi#goto_definitions_command = "gd"
-let g:jedi#popup_on_dot = 0
-let g:jedi#show_call_signatures = 0
 
 " A better status line
 Bundle 'Lokaltog/vim-powerline.git'

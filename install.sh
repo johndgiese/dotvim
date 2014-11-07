@@ -5,7 +5,7 @@ ln -sv $HOME/.vim/vimrc $HOME/.vimrc
 ln -sv $HOME/.vim/gvimrc $HOME/.gvimrc
 
 echo -e "\nINSTALLING VUNDLE, THE VIM PLUGIN MANAGER, ..."
-git clone -v https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+git clone -v https://github.com/gmarik/vundle.git ~/.vim/bundle/Vundle.vim
 
 echo -e "\nINSTALLING PLUGINS, MAY TAKE A WHILE ..."
 vim -c "execute 'BundleInstall' | quitall!"

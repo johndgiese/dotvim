@@ -47,13 +47,13 @@ endif
 " Set everything so vundle can load
 autocmd!
 filetype off
-let &rtp.=','.g:DV.'/bundle/vundle'
-call vundle#rc(g:DV.'/bundle/')
-Bundle 'gmarik/vundle'
+let &rtp.=','.g:DV.'/bundle/Vundle.vim'
+call vundle#begin(g:DV.'/bundle')
+Plugin 'gmarik/Vundle.vim'
 
 " Use Git inside vim easily
-Bundle 'tpope/vim-fugitive.git'
-Bundle 'tpope/vim-git.git'
+Plugin 'tpope/vim-fugitive.git'
+Plugin 'tpope/vim-git.git'
 nnoremap dp dp]c
 nnoremap do do]c
 
@@ -82,78 +82,78 @@ function! GlogBackward()
 endfunction
 
 " Commenting tools
-Bundle 'scrooloose/nerdcommenter.git'
+Plugin 'scrooloose/nerdcommenter.git'
 
 " Lets you deal with braket pairs etc.
-Bundle 'tpope/vim-surround.git'
+Plugin 'tpope/vim-surround.git'
 
 " Autocomplete
-Bundle 'Valloric/YouCompleteMe'
+Plugin 'Valloric/YouCompleteMe'
 
 " Better javascript indenting etc.
-Bundle 'pangloss/vim-javascript.git'
+Plugin 'pangloss/vim-javascript.git'
 
 " Coffee script support
-Bundle 'kchmck/vim-coffee-script'
+Plugin 'kchmck/vim-coffee-script'
 
 " Node.js tools
-Bundle 'moll/vim-node'
+Plugin 'moll/vim-node'
 
 " better yaml support
-Bundle 'chase/vim-ansible-yaml'
+Plugin 'chase/vim-ansible-yaml'
 
 " Arduino syntax highlighting
-"Bundle "sudar/vim-arduino-syntax"
+"Plugin "sudar/vim-arduino-syntax"
 
 " extended matching with %
-Bundle 'edsono/vim-matchit.git'
+Plugin 'edsono/vim-matchit.git'
 
 " make more commands work with repate
-Bundle 'tpope/vim-repeat'
+Plugin 'tpope/vim-repeat'
 
 " handle word variants
-Bundle 'tpope/vim-abolish'
+Plugin 'tpope/vim-abolish'
 
 " visual selection search with # and *
-Bundle 'nelstrom/vim-visual-star-search'
+Plugin 'nelstrom/vim-visual-star-search'
 
 " various mappings related to pairs
-Bundle 'tpope/vim-unimpaired.git'
+Plugin 'tpope/vim-unimpaired.git'
 
 " colors can be highlighed using <leader>c
-Bundle 'chrisbra/color_highlight'
+Plugin 'chrisbra/color_highlight'
 nnoremap <leader>c <Plug>Colorizer<CR>
 
 " less syntax highlighting
-Bundle 'groenewege/vim-less'
+Plugin 'groenewege/vim-less'
 
 " File browsing
-Bundle 'scrooloose/nerdtree.git'
+Plugin 'scrooloose/nerdtree.git'
 noremap <silent> <leader>1 :NERDTreeToggle<CR>
 let NERDTreeIgnore = ['\~$', '\.pyc']
 
 " Ack search integration
-Bundle 'mileszs/ack.vim.git'
+Plugin 'mileszs/ack.vim.git'
 let g:ack_default_options = " -H --nocolor --nogroup --column --smart-case --follow"
 
 " Add Cdo and Ldo (similar to argdo but for the quickfix list)
-Bundle 'Peeja/vim-cdo'
+Plugin 'Peeja/vim-cdo'
 
 " Toggle quickfix and localist
-Bundle 'milkypostman/vim-togglelist'
+Plugin 'milkypostman/vim-togglelist'
 
 " Ctag viewer
-Bundle 'majutsushi/tagbar.git'
+Plugin 'majutsushi/tagbar.git'
 let g:tagbar_iconchars = ['+', '-']
 noremap <silent> <leader>2 :TagbarToggle<CR>
 
 " Nice buffer browsers/switcher
-Bundle 'corntrace/bufexplorer'
+Plugin 'corntrace/bufexplorer'
 noremap <silent> <leader>3 :BufExplorer<CR>
 let g:bufExplorerDefaultHelp=0
 
 " Vim sugar for unix shell commands that need it
-Bundle 'tpope/vim-eunuch.git'
+Plugin 'tpope/vim-eunuch.git'
 
 " branching undo is new in vim 7.3
 if v:version > 702
@@ -164,19 +164,19 @@ if v:version > 702
     set undofile
 
     " Graphical interface for the vim's branching undo stuff
-    Bundle 'sjl/gundo.vim.git'
+    Plugin 'sjl/gundo.vim.git'
     nnoremap <silent> <leader>4 :GundoToggle<CR>
     let g:gundo_right = 1
     let g:gundo_help  = 0
 endif
 
 " A better status line
-Bundle 'Lokaltog/vim-powerline.git'
+Plugin 'Lokaltog/vim-powerline.git'
 let g:Powerline_stl_path_style='relative'
 let g:Powerline_symbols='compatible'
 
 " A fuzzy file finder-- really great just press CTRL-P!
-Bundle 'kien/ctrlp.vim.git'
+Plugin 'kien/ctrlp.vim.git'
 let g:ctrlp_working_path_mode = 'ar'
 let g:ctrlp_extensions = ['dir']
 let g:ctrlp_cmd = 'CtrlP'
@@ -186,10 +186,8 @@ let g:ctrlp_custom_ignore = {
     \ }
 
 " Snippets Plugin
-" Note: snipmate has more snippets, but fewer features---I think ultisnips
-" will win out pretty soon
-Bundle "SirVer/ultisnips"
-set runtimepath+=~/.vim/ultisnips_rep
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 nnoremap <leader>u :UltiSnipsEdit<CR>
 
 function! g:UltiSnips_Complete()
@@ -216,7 +214,7 @@ let g:UltiSnipsListSnippets="<c-e>"
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Syntax highlighting interface
-Bundle 'scrooloose/syntastic.git'
+Plugin 'scrooloose/syntastic.git'
 let g:locliststate=1
 let g:syntastic_enable_ballons=0
 let g:syntastic_auto_loc_list=1
@@ -250,23 +248,23 @@ nnoremap <silent> <leader>e :call SyntasticToggle()<CR>
 
 
 " OTHER GOOD PLUGINS
-" Uncomment and run BundleInstall! to use
+" Uncomment and run PluginInstall! to use
 
 " Conque Shell
-" Bundle 'vim-scripts/Conque-Shell'
+" Plugin 'vim-scripts/Conque-Shell'
 
 " The solarized color theme
-" Bundle 'altercation/vim-colors-solarized'
+" Plugin 'altercation/vim-colors-solarized'
 " let g:solarized_termcolors=256
 
 " Save the vim state and reload when you come back
-" Bundle 'xolox/vim-session.git'
+" Plugin 'xolox/vim-session.git'
 
 " A nice indicator for git
-" Bundle 'airblade/vim-gitgutter'
+" Plugin 'airblade/vim-gitgutter'
 
 " Put in closing brackets automatically
-" Bundle 'Townk/vim-autoclose.git'
+" Plugin 'Townk/vim-autoclose.git'
 
 
 " GOOGLE SEARCH
@@ -483,6 +481,7 @@ else
 endif
 
 syntax enable
+call vundle#end()
 filetype plugin indent on
 
 set t_Co=256

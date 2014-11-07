@@ -1,5 +1,4 @@
 tags
-bundle/
-!bundle/vundle
 tmp/
+bundle/
 *.spl

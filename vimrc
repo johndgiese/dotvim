@@ -93,6 +93,9 @@ Bundle 'Valloric/YouCompleteMe'
 " Better javascript indenting etc.
 Bundle 'pangloss/vim-javascript.git'
 
+" Coffee script support
+Bundle 'kchmck/vim-coffee-script'
+
 " Node.js tools
 Bundle 'moll/vim-node'
 

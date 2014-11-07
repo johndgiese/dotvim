@@ -96,6 +96,9 @@ Bundle 'pangloss/vim-javascript.git'
 " Node.js tools
 Bundle 'moll/vim-node'
 
+" better yaml support
+Bundle 'chase/vim-ansible-yaml'
+
 " Arduino syntax highlighting
 "Bundle "sudar/vim-arduino-syntax"
 

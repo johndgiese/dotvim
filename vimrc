@@ -189,6 +189,8 @@ let g:ctrlp_custom_ignore = {
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 nnoremap <leader>u :UltiSnipsEdit<CR>
+let g:UltiSnipsSnippetDirectories=["snips"]
+let &rtp.=','.g:DV.'/snips'
 
 function! g:UltiSnips_Complete()
     call UltiSnips#ExpandSnippet()
@@ -449,6 +451,7 @@ let g:html_indent_style1 = "inc"
 au FileType htmldjango set ft=htmldjango.html
 au BufRead,BufNewFile Vagrantfile set ft=ruby
 au BufRead,BufNewFile *.coffee set ft=coffee
+au BufRead,BufNewFile *.snippets set ft=snippets
 
 
 " Cscope stuff

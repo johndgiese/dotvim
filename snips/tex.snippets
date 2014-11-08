@@ -1,0 +1,138 @@
+# rjght left (
+snippet (
+\left(${1:content}\right)${2}
+endsni
+endsnippet
+
+# right left [
+snippet [
+\left[${1:content}\right]${2}
+endsnippet
+
+# right left {
+snippet {
+\left\{${1:content}\right\}${2}
+endsnippet
+
+# langle rangle
+snippet <
+\left\langle ${1:content} \right\rangle${2}
+endsnippet
+
+# intertext
+snippet int
+\intertext{${1:content}}
+endsnippet
+
+# textrm
+snippet \t
+\textrm{${1:content}}${2}
+endsnippet
+
+# partial derivative
+snippet pd
+\frac{\partial}{\partial${1}}${2}
+endsnippet
+
+# multiple figures (3)
+snippet mfig3
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{${2:example1.pdf}}
+		\caption{${3:This is the first figure.}}
+		\label{fig:$1_1}
+	\end{subfigure}%
+	~
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{${4:example2.pdf}}
+		\caption{${5:This is the second figure.}}
+		\label{fig:$1_2}
+	\end{subfigure}
+	~
+	\begin{subfigure}[b]{0.3\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{${6:example3.pdf}}
+		\caption{${7:This is the third figure.}}
+		\label{fig:$1_3}
+	\end{subfigure}
+	\caption{${8:The caption for the entire figure goes here. Don't forget the subcaption package!}}
+	\label{fig:${1:label}}
+\end{figure}
+endsnippet
+
+# multiple figures (2)
+snippet mfig2
+\begin{figure}
+	\centering
+	\begin{subfigure}[b]{0.48\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{${2:example1.pdf}}
+		\caption{${3:This is the first figure.}}
+		\label{fig:$1_1}
+	\end{subfigure}%
+	~
+	\begin{subfigure}[b]{0.48\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{${4:example2.pdf}}
+		\caption{${5:This is the second figure.}}
+		\label{fig:$1_2}
+	\end{subfigure}
+	\caption{${8:The caption for the entire figure goes here. Don't forget the subcaption package!}}
+	\label{fig:${1:label}}
+\end{figure}
+endsnippet
+
+# sidecaption figure
+snippet SCfig
+\begin{SCfigure}
+	\centering
+	\includegraphics[width=0.5\textwidth]{${2:example.pdf}}
+	\caption{${3:This is a side caption; make sure to include sidecap package!}}
+	\label{fig:${1:label}}
+\end{SCfigure}
+endsnippet
+
+# inkscape latex+figure
+snippet inkfig
+\begin{SCfigure}
+	\centering
+	\def\svgwidth{6in}
+	\input{${2:example.pdf_tex}}
+	\caption{${3:Save pdf file in inkscape with latex in it so that you can have consisten latex in your figures!}}
+	\label{fig:${1:label}}
+\end{SCfigure}
+endsnippet
+
+# wrapped figure
+snippet wrapfig
+\begin{wrapfigure}{r}{0.5\textwidth}
+	\vspace{-20pt}
+	\begin{center}
+		\includegraphics[width=\textwidth]{${2:example1.pdf}}
+	\end{center}
+	\vspace{-20pt}
+	\caption{${3:Caption goes here; don't forget the wrapfig package!}}
+	\vspace{-10pt}
+	\label{fig:${1:label}}
+\end{wrapfigure}
+endsnippet
+
+# simple bibliography
+snippet thebib
+\begin{thebibliography}{9}
+	${1}
+\end{thebibliography}
+endsnippet
+
+# standard reference
+snippet bibitem
+\bibitem{${1:author2012}}
+	${2:First Authors 1}, and ${3:Author 3}.
+	${4:Year}.
+	${5:Title goes here}.
+	\emph{${6:Jour. Abbr. Here.}}.
+	${7:Volume}:${8:PageStart}-${9:PageEnd}.
+endsnippet

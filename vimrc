@@ -448,6 +448,7 @@ let g:html_indent_style1 = "inc"
 " General web stuff
 au FileType htmldjango set ft=htmldjango.html
 au BufRead,BufNewFile Vagrantfile set ft=ruby
+au BufRead,BufNewFile *.coffee set ft=coffee
 
 
 " Cscope stuff

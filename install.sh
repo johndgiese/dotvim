@@ -5,7 +5,11 @@ echo -e "\nSETTING UP SYMBOLIC LINKS..."
 ln -svf $HOME/.vim/vimrc $HOME/.vimrc
 ln -svf $HOME/.vim/gvimrc $HOME/.gvimrc
 
-if [[ -f $HOME/.vim/bundle/Vundle.vim ]]; then
+if [ ! -d $HOME/.vim/bundle ]; then
+    mkdir $HOME/.vim/bundle
+fi
+
+if [ ! -d $HOME/.vim/bundle/Vundle.vim ]; then
     echo -e "\nINSTALLING VUNDLE, THE VIM PLUGIN MANAGER, ..."
     git clone -v https://github.com/gmarik/vundle.git ~/.vim/bundle/Vundle.vim
 else

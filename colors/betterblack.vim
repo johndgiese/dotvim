@@ -2,15 +2,15 @@ set background=dark
 
 hi Normal guibg=#060609 guifg=#e3e3e4 gui=NONE ctermbg=Black ctermfg=White cterm=NONE
 " Coding 
-hi String guibg=NONE guifg=#FF2020 gui=NONE ctermbg=NONE ctermfg=160 cterm=NONE
+hi String guibg=NONE guifg=#FF2020 gui=NONE ctermbg=NONE ctermfg=196 cterm=NONE
 hi Special guibg=NONE guifg=#FF3030 gui=NONE ctermbg=NONE ctermfg=174 cterm=NONE
 hi Comment guibg=NONE guifg=#FF7300 gui=NONE ctermbg=NONE ctermfg=166 cterm=NONE
 hi Number guibg=NONE guifg=#C92040 gui=NONE ctermbg=NONE ctermfg=161 cterm=NONE
 hi Function guibg=NONE guifg=#0Fef33 gui=NONE ctermbg=NONE ctermfg=Green cterm=NONE
-hi Keyword guibg=NONE guifg=#3381FF gui=NONE ctermbg=NONE ctermfg=4 cterm=NONE
-hi Statement guibg=NONE guifg=#3381FF gui=NONE ctermbg=NONE ctermfg=4 cterm=NONE
+hi Keyword guibg=NONE guifg=#3381FF gui=NONE ctermbg=NONE ctermfg=27 cterm=NONE
+hi Statement guibg=NONE guifg=#3381FF gui=NONE ctermbg=NONE ctermfg=27 cterm=NONE
 hi Identifier guibg=NONE guifg=#00ED45 gui=NONE ctermbg=NONE ctermfg=Green cterm=NONE
-hi Type guibg=NONE guifg=#0052FF gui=NONE ctermbg=NONE ctermfg=4 cterm=NONE
+hi Type guibg=NONE guifg=#3381FF gui=NONE ctermbg=NONE ctermfg=27 cterm=NONE
 hi Todo guibg=#151515 guifg=#FF7300 gui=NONE ctermbg=233 ctermfg=166 cterm=NONE
 hi Title guibg=#060609 guifg=#FFFFFF gui=NONE ctermbg=NONE ctermfg=White cterm=NONE
 hi PreProc ctermfg=176

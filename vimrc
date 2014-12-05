@@ -102,6 +102,10 @@ Plugin 'moll/vim-node'
 " better yaml support
 Plugin 'chase/vim-ansible-yaml'
 
+" Julia support
+Plugin 'JuliaLang/julia-vim'
+au BufRead,BufNewFile *.jl set ft=julia
+
 " Arduino syntax highlighting
 "Plugin "sudar/vim-arduino-syntax"
 

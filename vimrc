@@ -287,6 +287,7 @@ set pastetoggle=<leader>p
 nnoremap <leader>5 :call Make()<CR>
 vnoremap <leader>5 :call Make()<CR>
 
+let g:quickfix_open=0
 function! Make()
     make
     if !g:quickfix_open

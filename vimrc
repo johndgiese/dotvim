@@ -473,3 +473,22 @@ filetype plugin indent on
 
 set t_Co=256
 colorscheme betterblack
+
+" Send to tmux
+function! Get_visual_selection()
+  let [lnum1, col1] = getpos("'<")[1:2]
+  let [lnum2, col2] = getpos("'>")[1:2]
+  let lines = getline(lnum1, lnum2)
+  let lines[-1] = lines[-1][: col2 - (&selection == 'inclusive' ? 1 : 2)]
+  let lines[0] = lines[0][col1 - 1:]
+  return lines
+endfunction
+
+function! Send_select_to_last_pane()
+    let non_empty_lines = filter(Get_visual_selection(), 'v:val !~ "^\\s*$"')
+    let concatenated_lines = join(non_empty_lines, "")
+    call system('tmux send-keys -t :.-1 -l ' . shellescape(concatenated_lines) . '')
+endfunction
+
+vnoremap <c-g> <ESC>:call Send_select_to_last_pane()<CR>
+nnoremap <c-g> vaw<ESC>:call Send_select_to_last_pane()<CR>

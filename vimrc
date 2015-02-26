@@ -281,7 +281,7 @@ nnoremap Q <nop>
 vnoremap Q <nop>
 
 " set paste toggle
-set pastetoggle=<leader>p
+set pastetoggle=<F1>
 
 " set make program shortcut
 nnoremap <leader>5 :call Make()<CR>

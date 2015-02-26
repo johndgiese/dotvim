@@ -125,8 +125,8 @@ Plugin 'nelstrom/vim-visual-star-search'
 Plugin 'tpope/vim-unimpaired.git'
 
 " colors can be highlighed using <leader>c
-Plugin 'chrisbra/color_highlight'
-nnoremap <leader>c <Plug>Colorizer<CR>
+Plugin 'chrisbra/Colorizer'
+nnoremap <leader>c :ColorToggle<CR>
 
 " less syntax highlighting
 Plugin 'groenewege/vim-less'

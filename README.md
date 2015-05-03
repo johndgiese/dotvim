@@ -63,6 +63,17 @@ Assuming you have the node package manager (npm) installed:
 
 to install tern.
 
+
+#### Install ag for global searching
+
+On Mac OSX with homebrew:
+
+    brew install the_silver_searcher
+
+On Ubuntu (>= 13.10):
+
+    apt-get install silversearcher-ag
+
 # How this vim setup differs from normal vim
 
 The most important three changes are:

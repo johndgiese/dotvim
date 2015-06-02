@@ -87,6 +87,9 @@ Plugin 'scrooloose/nerdcommenter.git'
 " Lets you deal with braket pairs etc.
 Plugin 'tpope/vim-surround.git'
 
+" Adds indent objects
+Plugin 'michaeljsmith/vim-indent-object'
+
 " Autocomplete
 Plugin 'Valloric/YouCompleteMe'
 

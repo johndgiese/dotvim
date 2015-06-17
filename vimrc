@@ -138,6 +138,8 @@ Plugin 'groenewege/vim-less'
 Plugin 'scrooloose/nerdtree.git'
 noremap <silent> <leader>1 :NERDTreeToggle<CR>
 let NERDTreeIgnore = ['\~$', '\.pyc']
+let NERDTreeMapHelp = '<f1>'
+
 
 " Ack search integration
 Plugin 'mileszs/ack.vim.git'

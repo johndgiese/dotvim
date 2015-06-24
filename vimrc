@@ -463,7 +463,9 @@ elseif has('mac')
     let macvim_skip_cmd_opt_movement = 1
     let macvim_skip_colorscheme = 1
     let macvim_hig_shift_movement = 1
-    set macmeta
+    if exists("&macmeta")
+        set macmeta
+    endif
     set noantialias
     set guifont=Monaco:h10
 else

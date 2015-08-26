@@ -109,6 +109,9 @@ Plugin 'chase/vim-ansible-yaml'
 Plugin 'JuliaLang/julia-vim'
 au BufRead,BufNewFile *.jl set ft=julia
 
+" better PHP support
+Plugin 'StanAngeloff/php.vim'
+
 " Arduino syntax highlighting
 "Plugin "sudar/vim-arduino-syntax"
 

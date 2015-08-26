@@ -197,6 +197,9 @@ let g:ctrlp_custom_ignore = {
     \ 'dir': '\v[\/](env|collected_static)$',
     \ }
 
+" Close buffers (:BufOnly)
+Plugin 'vim-scripts/BufOnly.vim'
+
 " Snippets Plugin
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'

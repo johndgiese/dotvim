@@ -447,6 +447,8 @@ au BufRead,BufNewFile Vagrantfile set ft=ruby
 au BufRead,BufNewFile *.coffee set ft=coffee
 au BufRead,BufNewFile *.snippets set ft=snippets
 
+" Crontab
+autocmd filetype crontab setlocal nobackup nowritebackup
 
 " Cscope stuff
 if has("cscope")

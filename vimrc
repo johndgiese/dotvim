@@ -140,7 +140,7 @@ Plugin 'groenewege/vim-less'
 " File browsing
 Plugin 'scrooloose/nerdtree.git'
 noremap <silent> <leader>1 :NERDTreeToggle<CR>
-let NERDTreeIgnore = ['\~$', '\.pyc']
+let NERDTreeIgnore = ['\~$', '\.pyc', '__pycache__']
 let NERDTreeMapHelp = '<f1>'
 
 

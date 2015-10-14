@@ -139,3 +139,13 @@ endsnippet
 snippet debug "debug line"
 console.log($1);
 endsnippet
+
+snippet .state "ui router state"
+.state('${1:name}', {
+	url: '/$1',
+	templateUrl: 'templates/$1.html',
+	controller: '`!p snip.rv = t[1].capitalize()`Ctrl',$0
+})
+
+
+endsnippet

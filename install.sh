@@ -22,9 +22,9 @@ vim +PluginInstall +qall
 # see https://bugs.launchpad.net/ultisnips/+bug/1067416
 echo -e "\nSetting up symbolic links for ultisnips"
 mkdir -p ~/.vim/after/plugin
-ln -s ~/.vim/bundle/ultisnips/after/plugin/* ~/.vim/after/plugin
-mkdir ~/.vim/ftdetext
-ln -s ~/.vim/bundle/ultisnips/ftdetect/* ~/.vim/ftdetect
+ln -fs ~/.vim/bundle/ultisnips/after/plugin/* ~/.vim/after/plugin
+mkdir -p ~/.vim/ftdetect
+ln -fs ~/.vim/bundle/ultisnips/ftdetect/* ~/.vim/ftdetect
 
 echo -e "\nCompiling YouCompleteMe"
 $HOME/.vim/bundle/YouCompleteMe/install.sh

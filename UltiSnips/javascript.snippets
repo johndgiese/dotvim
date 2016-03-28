@@ -55,13 +55,13 @@ endsnippet
 # testing snippets
 
 snippet desc "testing describe"
-describe('$1', function() {
+describe("$1", function() {
 	$0
 });
 endsnippet
 
 snippet it "testing it"
-it('$1', function() {
+it("$1", function() {
 	$0
 });
 endsnippet
@@ -148,4 +148,58 @@ snippet .state "ui router state"
 })
 
 
+endsnippet
+
+snippet ngunit "angular unit test"
+describe('The \`$1\` service', function() {
+  beforeEach(module('$1'));
+
+  var s;
+
+  beforeEach(inject(function($1) {
+    s = $1;
+  }));
+
+
+  it('$2', function() {
+    assert.isTrue();
+  });
+
+});
+endsnippet
+
+snippet ngctrlunit "angular unit test for controllers"
+describe('The \`$1Ctrl\` service', function() {
+  beforeEach(module('$1Ctrl'));
+
+  var c, $scope, $httpBackend;
+
+  beforeEach(inject(function($controller, _$httpBackend_) {
+    $scope = {};
+    c = $controller('$1Ctrl', {$scope: $scope});
+    $httpBackend = _$httpBackend_;
+  }));
+
+
+  it('$2', function() {
+    $httpBackend.expectGET('/example/url/')
+    .respond(200, {data: exampleResponse});
+    $3
+    assert.isTrue();
+  });
+
+});
+endsnippet
+
+snippet ngmod "angular module"
+angular.module("$1", [
+ ${2:dependencies}
+])
+
+/**
+ * $3
+ */
+.`!p snip.rv = ('controller' if t[1].endswith('Ctrl') else ('directive' if t[1].endswith('Directive') else ('filter' if t[1].endswith('Filter') else 'service')))`("$1", function(`!p deps = t[2].replace('\n', '').split(','); snip.rv = ", ".join([d.strip(' \'"') for d in deps]).rstrip(', ')`) {
+  $4
+});
 endsnippet

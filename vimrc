@@ -164,7 +164,7 @@ let g:tagbar_iconchars = ['+', '-']
 noremap <silent> <leader>2 :TagbarToggle<CR>
 
 " Nice buffer browsers/switcher
-Plugin 'corntrace/bufexplorer'
+Plugin 'ivegotasthma/bufexplorer'
 noremap <silent> <leader>3 :BufExplorer<CR>
 let g:bufExplorerDefaultHelp=0
 

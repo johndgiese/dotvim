@@ -110,7 +110,11 @@ Plugin 'JuliaLang/julia-vim'
 au BufRead,BufNewFile *.jl set ft=julia
 
 " better PHP support
-Plugin 'StanAngeloff/php.vim'
+"Plugin 'StanAngeloff/php.vim'
+
+" better markdown
+Plugin 'tpope/vim-markdown'
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'javascript=js']
 
 " Arduino syntax highlighting
 "Plugin "sudar/vim-arduino-syntax"

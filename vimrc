@@ -98,7 +98,10 @@ Plugin 'pangloss/vim-javascript.git'
 Plugin 'leafgarland/typescript-vim.git'
 
 " Coffee script support
-Plugin 'kchmck/vim-coffee-script'
+"Plugin 'kchmck/vim-coffee-script'
+
+" Sass syntax
+Plugin 'cakebaker/scss-syntax.vim'
 
 " Node.js tools
 Plugin 'moll/vim-node'

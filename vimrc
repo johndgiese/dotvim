@@ -118,7 +118,7 @@ au BufRead,BufNewFile *.jl set ft=julia
 
 " better markdown
 Plugin 'tpope/vim-markdown'
-let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'javascript=js']
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 
 " Arduino syntax highlighting
 "Plugin "sudar/vim-arduino-syntax"

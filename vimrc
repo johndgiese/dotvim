@@ -95,6 +95,7 @@ Plugin 'Valloric/YouCompleteMe'
 
 " Better javascript indenting etc.
 Plugin 'pangloss/vim-javascript.git'
+Plugin 'leafgarland/typescript-vim.git'
 
 " Coffee script support
 Plugin 'kchmck/vim-coffee-script'

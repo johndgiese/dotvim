@@ -97,6 +97,10 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'pangloss/vim-javascript.git'
 Plugin 'leafgarland/typescript-vim.git'
 
+" JSX Support
+Plugin 'mxw/vim-jsx'
+let g:jsx_ext_required = 0
+
 " Coffee script support
 "Plugin 'kchmck/vim-coffee-script'
 
@@ -451,6 +455,7 @@ au FileType htmldjango set ft=htmldjango.html
 au BufRead,BufNewFile Vagrantfile set ft=ruby
 au BufRead,BufNewFile *.coffee set ft=coffee
 au BufRead,BufNewFile *.snippets set ft=snippets
+au BufRead,BufNewFile Jenkinsfile set ft=groovy
 
 " Crontab
 autocmd filetype crontab setlocal nobackup nowritebackup

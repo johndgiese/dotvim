@@ -96,6 +96,7 @@ Plugin 'Valloric/YouCompleteMe'
 " Better javascript indenting etc.
 Plugin 'pangloss/vim-javascript.git'
 Plugin 'leafgarland/typescript-vim.git'
+autocmd BufNewFile,BufFilePre,BufRead *.tsx set filetype=typescript
 
 " JSX Support
 Plugin 'mxw/vim-jsx'
@@ -175,6 +176,11 @@ noremap <silent> <leader>2 :TagbarToggle<CR>
 Plugin 'ivegotasthma/bufexplorer'
 noremap <silent> <leader>3 :BufExplorer<CR>
 let g:bufExplorerDefaultHelp=0
+
+" Auto open buffer explorer after splitting a window
+" 95% of the time when I open a slit, I want to view a currently open file
+noremap <silent> <C-w>s <C-w>s:BufExplorer<CR>
+noremap <silent> <C-w>v <C-w>v:BufExplorer<CR>
 
 " Vim sugar for unix shell commands that need it
 Plugin 'tpope/vim-eunuch.git'
@@ -282,6 +288,7 @@ vnoremap <leader>g "gy<Esc>:call GoogleSearch()<CR>
 
 " better <ESC> (to go back to normal mode from insert mode)
 inoremap jk <ESC>
+inoremap kj <ESC>
 inoremap <ESC> <nop>
 
 " switch semi-colon and colon

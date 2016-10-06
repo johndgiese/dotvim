@@ -200,6 +200,9 @@ if v:version > 702
     let g:gundo_help  = 0
 endif
 
+" Tmux vim bindings
+Plugin 'christoomey/vim-tmux-navigator'
+
 " A better status line
 Plugin 'Lokaltog/vim-powerline.git'
 let g:Powerline_stl_path_style='relative'

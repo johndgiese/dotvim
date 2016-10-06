@@ -103,7 +103,7 @@ Plugin 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
 
 " Coffee script support
-"Plugin 'kchmck/vim-coffee-script'
+Plugin 'kchmck/vim-coffee-script'
 
 " Sass syntax
 Plugin 'cakebaker/scss-syntax.vim'

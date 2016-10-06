@@ -29,7 +29,7 @@ start with Bundle).
 
 #### Ctags
 
-Ctags is a program that parses your code and generates links between files.  Ctags is used by a few plugins that I have, and they will complain if you don't have them installed.  You can comment out the plugins in the vimrc file, but I recommend trying to install ctags.  It is super useful.  You can read about it [here](http://ctags.sourceforge.net/).
+Ctags is a program that parses your code and generates links between files.  Ctags is used by a few plugins that I have, and they will complain if you don't have them installed.  You can comment out the plugins in the vimrc file, but I recommend trying to install ctags.  It is super useful.  You can read about it [here](https://ctags.io).
 
 On Ubuntu this is:
 
@@ -37,7 +37,9 @@ On Ubuntu this is:
 
 On Mac OSX with homebrew:
   
-    brew install ctags-exuberant
+    # see: http://docs.ctags.io/en/latest/osx.html
+    brew tap universal-ctags/universal-ctags
+    brew install --HEAD universal-ctags
 
 On Windows you will have to find the executable online.
 

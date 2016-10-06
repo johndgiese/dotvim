@@ -313,7 +313,25 @@ vnoremap Q <nop>
 " set paste toggle
 set pastetoggle=<F1>
 
-" set make program shortcut
+" tool to build up "file traces" when debugging
+vnoremap <C-m> :call CopyTraceAbove()<CR>
+
+function! s:get_visual_selection()
+  " Why is this not a built-in Vim script function?!
+  let [lnum1, col1] = getpos("'<")[1:2]
+  let [lnum2, col2] = getpos("'>")[1:2]
+  let lines = getline(lnum1, lnum2)
+  let lines[-1] = lines[-1][: col2 - (&selection == 'inclusive' ? 1 : 2)]
+  let lines[0] = lines[0][col1 - 1:]
+  return join(lines, "\n")
+endfunction
+
+function! CopyTraceAbove()
+    let trace = expand('%') . ':' . line('.') . ' ' . s:get_visual_selection()
+    execute "normal! \<C-w>ko" . trace . "\<ESC>\<C-w>j"
+endfunction
+
+ " set make program shortcut
 nnoremap <leader>5 :call Make()<CR>
 vnoremap <leader>5 :call Make()<CR>
 

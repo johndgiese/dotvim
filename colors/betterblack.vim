@@ -17,7 +17,7 @@ hi PreProc ctermfg=176
 hi SpecialComment guibg=NONE guifg=#FF8310 gui=NONE ctermbg=NONE ctermfg=178 cterm=NONE
 
 " VIM gui 
-hi LineNr guibg=NONE guifg=#424252 gui=NONE ctermbg=Black ctermfg=235 cterm=NONE
+hi LineNr guibg=NONE guifg=#626272 gui=NONE ctermbg=Black ctermfg=245 cterm=NONE
 hi Folded guibg=NONE guifg=#727282 gui=NONE ctermbg=Black ctermfg=240 cterm=NONE
 hi NonText guibg=#060609 guifg=#181828 gui=NONE ctermbg=Black ctermfg=235 cterm=NONE
 hi PMenu guibg=#181828 guifg=#FFFFFF gui=NONE ctermbg=235 ctermfg=White cterm=NONE

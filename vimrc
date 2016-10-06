@@ -159,7 +159,7 @@ let NERDTreeMapHelp = '<f1>'
 
 " Ack search integration
 Plugin 'mileszs/ack.vim.git'
-let g:ackprg = 'ag --noheading --nocolor --nogroup --column --smart-case --follow --nobreak'
+let g:ackprg = 'ag --noheading --nocolor --nogroup --column --smart-case --follow --nobreak --silent'
 
 " Add Cdo and Ldo (similar to argdo but for the quickfix list)
 Plugin 'Peeja/vim-cdo'

@@ -108,6 +108,10 @@ Plugin 'kchmck/vim-coffee-script'
 " Sass syntax
 Plugin 'cakebaker/scss-syntax.vim'
 
+" Rust syntax
+Plugin 'rust-lang/rust.vim'
+au BufRead,BufNewFile *.rs set ft=rust
+
 " Node.js tools
 Plugin 'moll/vim-node'
 

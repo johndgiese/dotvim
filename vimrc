@@ -129,12 +129,6 @@ au BufRead,BufNewFile *.jl set ft=julia
 Plugin 'tpope/vim-markdown'
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 
-" Arduino syntax highlighting
-"Plugin "sudar/vim-arduino-syntax"
-
-" extended matching with %
-Plugin 'edsono/vim-matchit.git'
-
 " make more commands work with repate
 Plugin 'tpope/vim-repeat'
 

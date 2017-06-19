@@ -224,6 +224,9 @@ nnoremap <leader>u :UltiSnipsEdit<CR>
 let g:UltiSnipsExpandTrigger="<nul>"
 let g:UltiSnipsJumpForwardTrigger="<nul>"
 
+" Bracketed Paste
+Plugin 'ConradIrwin/vim-bracketed-paste'
+
 " Syntax highlighting interface
 Plugin 'scrooloose/syntastic.git'
 let g:locliststate=1

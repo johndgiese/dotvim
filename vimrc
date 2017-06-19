@@ -278,13 +278,6 @@ nnoremap <silent> <leader>e :call SyntasticToggle()<CR>
 " Plugin 'Townk/vim-autoclose.git'
 
 
-" GOOGLE SEARCH
-function! GoogleSearch()
-    let searchterm = getreg("g")
-    silent! exec "silent! !chrome \"http://google.com/search?q=" . searchterm . "\" &"
-endfunction
-vnoremap <leader>g "gy<Esc>:call GoogleSearch()<CR>
-
 " MAPPINGS
 
 " better <ESC> (to go back to normal mode from insert mode)

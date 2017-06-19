@@ -100,7 +100,6 @@ These three shortcuts will save you a lot of time, and keep your hands more comf
 * \<leader\>o opens the colorscheme file for easy updating if you use different languages
 * \<leader\>O shows the syntax groups below the cursor
 * \<leader\>c toggles color highlighting
-* \<leader\>g will do a Google search on the current selection
 * \<leader\>w will highlight whitespace at the ends of lines, and ,W will delete it.
 * \<leader\>e toggles syntastic plugin (see below) on and off
 * \<leader\>q toggles the quickfix open and closed, and \<A-]\> and \<A-]\>

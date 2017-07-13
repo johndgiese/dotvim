@@ -286,6 +286,7 @@ nnoremap <silent> <leader>e :call SyntasticToggle()<CR>
 " better <ESC> (to go back to normal mode from insert mode)
 inoremap jk <ESC>
 xnoremap jk <ESC>
+cnoremap jk <ESC>
 
 " switch semi-colon and colon
 nnoremap ; :

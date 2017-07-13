@@ -27,6 +27,6 @@ mkdir -p ~/.vim/ftdetect
 ln -fs ~/.vim/bundle/ultisnips/ftdetect/* ~/.vim/ftdetect
 
 echo -e "\nCompiling YouCompleteMe"
-$HOME/.vim/bundle/YouCompleteMe/install.sh
+python $HOME/.vim/bundle/YouCompleteMe/install.py
 
 echo -e "\nFINISHED!  HAPPY VIMMING!"

@@ -2,6 +2,8 @@
 set autoindent
 set showmatch
 set ruler
+set exrc
+set secure
 set laststatus=2
 set backspace=indent,eol,start
 set showmode
@@ -92,6 +94,7 @@ Plugin 'michaeljsmith/vim-indent-object'
 
 " Autocomplete
 Plugin 'Valloric/YouCompleteMe'
+let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf.py'
 
 " Better javascript indenting etc.
 Plugin 'pangloss/vim-javascript.git'
@@ -115,19 +118,14 @@ au BufRead,BufNewFile *.rs set ft=rust
 " Node.js tools
 Plugin 'moll/vim-node'
 
-" better yaml support
-Plugin 'chase/vim-ansible-yaml'
-
 " Julia support
-Plugin 'JuliaLang/julia-vim'
-au BufRead,BufNewFile *.jl set ft=julia
+"Plugin 'JuliaLang/julia-vim'
+"au BufRead,BufNewFile *.jl set ft=julia
 
 " better PHP support
 "Plugin 'StanAngeloff/php.vim'
 
 " better markdown
-Plugin 'tpope/vim-markdown'
-let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 
 " make more commands work with repate
 Plugin 'tpope/vim-repeat'
@@ -145,8 +143,13 @@ Plugin 'tpope/vim-unimpaired.git'
 Plugin 'chrisbra/Colorizer'
 nnoremap <leader>c :ColorToggle<CR>
 
-" less syntax highlighting
+" filetypes
 Plugin 'groenewege/vim-less'
+Plugin 'peterhoeg/vim-qml'
+au BufRead,BufNewFile *.qml set ft=qml
+
+Plugin 'tpope/vim-markdown'
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 
 " File browsing
 Plugin 'scrooloose/nerdtree.git'
@@ -221,7 +224,7 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 nnoremap <leader>u :UltiSnipsEdit<CR>
 
-let g:UltiSnipsExpandTrigger="<nul>"
+let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<nul>"
 
 " Bracketed Paste
@@ -243,9 +246,9 @@ let g:syntastic_python_pylint_args = "--errors-only"
 
 let g:syntastic_javascript_checkers=['jshint']
 
-let g:syntastic_cpp_checkers=['gcc']
+let g:syntastic_cpp_checkers=['clang++']
 
-let g:syntastic_c_checkers=['gcc']
+let g:syntastic_c_checkers=['clang']
 
 
 let g:syntastic_enable_highlighting=0
@@ -384,7 +387,7 @@ nnoremap 0 g0
 " jumping to definitions
 
 " goto definition
-nnoremap gd <C-]>zz
+nnoremap gd :YcmCompleter GoTo<CR>
 
 " go back
 nnoremap gb <C-t>

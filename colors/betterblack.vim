@@ -35,7 +35,7 @@ hi CursorLine guibg=#252525  gui=NONE ctermbg=NONE ctermfg=Gray cterm=NONE
 hi CursorColumn guibg=#252525 gui=NONE ctermbg=NONE ctermfg=Gray cterm=NONE
 hi FoldColumn guibg=#060609 guifg=#FFFFFF gui=NONE ctermbg=NONE ctermfg=White cterm=NONE
 hi Visual guibg=#303040 gui=NONE ctermbg=White ctermfg=235 cterm=NONE
-hi SignColumn guibg=#222222 guifg=#FFFFFF gui=NONE ctermbg=235 ctermfg=White cterm=NONE
+hi SignColumn guibg=#060609 guifg=#FFFFFF gui=NONE ctermbg=Black ctermfg=White cterm=NONE
 hi helpSpecial guibg=NONE guifg=#FFFF71
 
 " VIM
@@ -51,8 +51,8 @@ hi NERDTreeDirSlash guibg=#060609 guifg=#0052FF gui=NONE ctermbg=Black ctermfg=W
 hi link NERDTreeHelp Comment
 
 " Syntastic
-hi SyntasticErrorSign guibg=#222222 guifg=#FF0000 gui=NONE ctermbg=White ctermfg=235 cterm=NONE
-hi SyntasticWarningSign guibg=#222222 guifg=#0000FF gui=NONE ctermbg=White ctermfg=235 cterm=NONE
+hi SyntasticErrorSign guibg=#060609 guifg=#FF0000 gui=NONE ctermbg=Black ctermfg=196 cterm=NONE
+hi SyntasticWarningSign guibg=#060609 guifg=#0000FF gui=NONE ctermbg=Black ctermfg=166 cterm=NONE
 hi SyntasticErrorLine guibg=#2f0000
 hi SpellCap guibg=NONE guifg=NONE gui=undercurl ctermbg=Black ctermfg=NONE cterm=NONE guisp=#FF1234 
 

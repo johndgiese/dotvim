@@ -205,9 +205,9 @@ endif
 Plugin 'christoomey/vim-tmux-navigator'
 
 " A better status line
-Plugin 'Lokaltog/vim-powerline.git'
-let g:Powerline_stl_path_style='relative'
-let g:Powerline_symbols='compatible'
+Plugin 'vim-airline/vim-airline.git'
+let g:airline_section_b = ''
+let g:airline_section_z = '%3p%% %l:%c'
 
 " A fuzzy file finder-- really great just press CTRL-P!
 Plugin 'kien/ctrlp.vim.git'

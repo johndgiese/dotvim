@@ -214,7 +214,14 @@ Plugin 'kien/ctrlp.vim.git'
 let g:ctrlp_working_path_mode = 'ar'
 let g:ctrlp_extensions = ['dir']
 let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+
+let g:ctrlp_user_command = {
+\ 'types': {
+  \ 1: ['.git', 'cd %s && git ls-files . -co --exclude-standard'],
+  \ },
+\ 'fallback': 'find %s -type f',
+\ 'ignore': 1
+\ }
 
 " Close buffers (:BufOnly)
 Plugin 'vim-scripts/BufOnly.vim'

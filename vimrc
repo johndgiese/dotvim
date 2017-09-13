@@ -154,7 +154,7 @@ let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 " File browsing
 Plugin 'scrooloose/nerdtree.git'
 noremap <silent> <leader>1 :NERDTreeToggle<CR>
-let NERDTreeIgnore = ['\~$', '\.pyc', '__pycache__']
+let NERDTreeIgnore = ['\~$', '\.pyc', '__pycache__', '\.qmlc', '\.jsc']
 let NERDTreeMapHelp = '<f1>'
 
 

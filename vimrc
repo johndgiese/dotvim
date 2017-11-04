@@ -205,9 +205,7 @@ endif
 Plugin 'christoomey/vim-tmux-navigator'
 
 " A better status line
-Plugin 'vim-airline/vim-airline.git'
-let g:airline_section_b = ''
-let g:airline_section_z = '%3p%% %l:%c'
+Plugin 'itchyny/lightline.vim'
 
 " A fuzzy file finder-- really great just press CTRL-P!
 Plugin 'kien/ctrlp.vim.git'
@@ -239,18 +237,18 @@ Plugin 'ConradIrwin/vim-bracketed-paste'
 
 " Syntax highlighting interface
 Plugin 'scrooloose/syntastic.git'
-let g:locliststate=1
 let g:syntastic_enable_ballons=0
-let g:syntastic_auto_loc_list=1
+let g:syntastic_auto_loc_list=0
 let g:syntastic_enable_signs=1
-let g:syntastic_enable_auto_jump=1
+let g:syntastic_enable_auto_jump=0
+let g:syntastic_mode_map = { 'mode': 'passive',
+                            \ 'active_filetypes': ['cpp', 'c', 'python'],
+                            \ 'passive_filetypes': ['javascript'] }
 
-let g:syntastic_python_checkers=['flake8', 'pylint']
-let g:syntastic_python_pylint_args = "--errors-only"
+let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_javascript_checkers=['eslint']
 
 let g:syntastic_cpp_checkers=['clang++']
-
 let g:syntastic_c_checkers=['clang']
 
 
@@ -265,6 +263,8 @@ function! SyntasticToggle()
     let g:syntastic_on=!g:syntastic_on
 endfunction
 nnoremap <silent> <leader>e :call SyntasticToggle()<CR>
+
+Plugin 'terryma/vim-multiple-cursors'
 
 
 " OTHER GOOD PLUGINS

@@ -52,6 +52,7 @@ hi link NERDTreeHelp Comment
 
 " Syntastic
 hi SyntasticErrorSign guibg=#060609 guifg=#FF0000 gui=NONE ctermbg=Black ctermfg=196 cterm=NONE
+hi SyntasticStyleErrorSign guibg=#060609 guifg=#FF0000 gui=NONE ctermbg=Black ctermfg=45 cterm=NONE
 hi SyntasticWarningSign guibg=#060609 guifg=#0000FF gui=NONE ctermbg=Black ctermfg=166 cterm=NONE
 hi SyntasticErrorLine guibg=#2f0000
 hi SpellCap guibg=NONE guifg=NONE gui=undercurl ctermbg=Black ctermfg=NONE cterm=NONE guisp=#FF1234 

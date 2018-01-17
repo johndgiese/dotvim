@@ -13,12 +13,12 @@ REQUIREMENT 1: We assume that you have bash and curl installed and on the $PATH,
 
 If you are on a Mac or Linux Machine, run
 
-	git clone https://github.com/johndgiese/dotvim.git ~/.vim
+	git clone git@github.com:johndgiese/dotvim.git ~/.vim
     sh ~/.vim/install.sh
 
 if you are on a windows machine run
 
-	git clone https://github.com/johndgiese/dotvim.git %HOME%\vimfiles
+	git clone git@github.com:johndgiese/dotvim.git %HOME%\vimfiles
     vimfiles\install
 
 ### 2. Install optional programs used by plugins

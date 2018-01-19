@@ -293,7 +293,7 @@ nnoremap <silent> <leader>e :call SyntasticToggle()<CR>
 inoremap jk <ESC>
 xnoremap jk <ESC>
 cnoremap jk <ESC>
-set timeoutlen=400
+set timeoutlen=300
 
 " switch semi-colon and colon
 nnoremap ; :

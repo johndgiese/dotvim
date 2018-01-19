@@ -118,15 +118,6 @@ au BufRead,BufNewFile *.rs set ft=rust
 " Node.js tools
 Plugin 'moll/vim-node'
 
-" Julia support
-"Plugin 'JuliaLang/julia-vim'
-"au BufRead,BufNewFile *.jl set ft=julia
-
-" better PHP support
-"Plugin 'StanAngeloff/php.vim'
-
-" better markdown
-
 " make more commands work with repate
 Plugin 'tpope/vim-repeat'
 
@@ -207,7 +198,7 @@ Plugin 'christoomey/vim-tmux-navigator'
 " A better status line
 Plugin 'itchyny/lightline.vim'
 
-" A fuzzy file finder-- really great just press CTRL-P!
+" A fuzzy file finder
 Plugin 'kien/ctrlp.vim.git'
 let g:ctrlp_working_path_mode = 'ar'
 let g:ctrlp_extensions = ['dir']
@@ -294,28 +285,6 @@ function! SyntasticToggle()
 endfunction
 nnoremap <silent> <leader>e :call SyntasticToggle()<CR>
 
-Plugin 'terryma/vim-multiple-cursors'
-
-
-" OTHER GOOD PLUGINS
-" Uncomment and run PluginInstall! to use
-
-" Conque Shell
-" Plugin 'vim-scripts/Conque-Shell'
-
-" The solarized color theme
-" Plugin 'altercation/vim-colors-solarized'
-" let g:solarized_termcolors=256
-
-" Save the vim state and reload when you come back
-" Plugin 'xolox/vim-session.git'
-
-" A nice indicator for git
-" Plugin 'airblade/vim-gitgutter'
-
-" Put in closing brackets automatically
-" Plugin 'Townk/vim-autoclose.git'
-
 
 " MAPPINGS
 
@@ -400,9 +369,6 @@ nnoremap <A-[> :cprev<CR>
 
 " Remap block-visual mode to alt-V, and set paste-from-clipboard to C-v
 nnoremap <A-v> <C-v>
-"nnoremap <C-v> "+gp
-"inoremap <C-v> <ESC>"+gpi
-"vnoremap <C-v> d"+p
 vnoremap <C-c> "+y
 vnoremap <C-x> "+ygvd
 

@@ -218,6 +218,7 @@ Plugin 'honza/vim-snippets'
 nnoremap <leader>u :UltiSnipsEdit<CR>
 let g:UltiSnipsSnippetsDir = g:DV.'/mysnippets/'
 let g:UltiSnipsSnippetDirectories = ["mysnippets", "UltiSnips"]
+autocmd BufNewFile,BufRead *.snippets set filetype=snippets
 
 function! g:UltiSnips_Complete()
   call UltiSnips#ExpandSnippet()

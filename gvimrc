@@ -1,5 +1,3 @@
-" I don't like all the scrollbars etc -- I think they clutter
-" Vim's elegant simplicity
 set columns=120 lines=50
 set guioptions-=m 		" remove menu bar
 set guioptions-=T		" remove toolbar

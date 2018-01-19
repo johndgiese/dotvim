@@ -26,22 +26,22 @@ set autoread
 
 " DIRECTORIES
 if has('win32') || has('win64')
-    let g:DV=$HOME.'\vimfiles'
+    let g:rcroot=$HOME.'\vimfiles'
 else
-    let g:DV=$HOME.'/.vim'
+    let g:rcroot=$HOME.'/.vim'
 endif
-let g:DV=expand(g:DV)
+let g:rcroot=expand(g:rcroot)
 
 " backup
-let &backupdir=g:DV."/tmp/backup"
-if !isdirectory(g:DV."/tmp/backup")
-    call mkdir(g:DV."/tmp/backup", 'p', 0755)
+let &backupdir=g:rcroot."/tmp/backup"
+if !isdirectory(g:rcroot."/tmp/backup")
+    call mkdir(g:rcroot."/tmp/backup", 'p', 0755)
 endif
 
 " tags
-let &tags=g:DV."/tmp/tags/"
-if !isdirectory(g:DV."/tmp/tags")
-    call mkdir(g:DV."/tmp/tags", 'p', 0755)
+let &tags=g:rcroot."/tmp/tags/"
+if !isdirectory(g:rcroot."/tmp/tags")
+    call mkdir(g:rcroot."/tmp/tags", 'p', 0755)
 endif
 
 
@@ -49,8 +49,8 @@ endif
 " Set everything so vundle can load
 autocmd!
 filetype off
-let &rtp.=','.g:DV.'/bundle/Vundle.vim'
-call vundle#begin(g:DV.'/bundle')
+let &rtp.=','.g:rcroot.'/bundle/Vundle.vim'
+call vundle#begin(g:rcroot.'/bundle')
 Plugin 'gmarik/Vundle.vim'
 
 " Use Git inside vim easily
@@ -179,9 +179,9 @@ Plugin 'tpope/vim-eunuch.git'
 
 " branching undo is new in vim 7.3
 if v:version > 702
-    let &undodir=g:DV."/tmp/undo"
-    if !isdirectory(g:DV."/tmp/undo")
-        call mkdir(g:DV."/tmp/undo", 'p', 0755)
+    let &undodir=g:rcroot."/tmp/undo"
+    if !isdirectory(g:rcroot."/tmp/undo")
+        call mkdir(g:rcroot."/tmp/undo", 'p', 0755)
     endif
     set undofile
 
@@ -216,7 +216,7 @@ let g:ctrlp_user_command = {
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 nnoremap <leader>u :UltiSnipsEdit<CR>
-let g:UltiSnipsSnippetsDir = g:DV.'/mysnippets/'
+let g:UltiSnipsSnippetsDir = g:rcroot.'/mysnippets/'
 let g:UltiSnipsSnippetDirectories = ["mysnippets", "UltiSnips"]
 autocmd BufNewFile,BufRead *.snippets set filetype=snippets
 
@@ -429,20 +429,20 @@ nnoremap <silent> <leader>s :set spell!<CR>
 " correct the current word and move to the next one using ,S
 nnoremap <silent> <leader>S 1z=]s
 set spelllang=en_us " Set region to US English
-let &spellfile=g:DV."/spell/en.latin1.add"
+let &spellfile=g:rcroot."/spell/en.latin1.add"
 
 
 " EDIT CUSTOMIZATION
 " Start editing the vimrc in a new buffer
 nnoremap <leader>v :call Edit_vimrc()<CR>
 function! Edit_vimrc()
-    exe 'edit ' . g:DV . '/vimrc'
+    exe 'edit ' . g:rcroot . '/vimrc'
 endfunction
 
 " Edit your colorscheme on the fly!
 nnoremap <leader>o :call Edit_colorscheme()<CR>
 function! Edit_colorscheme()
-    exe 'edit ' . g:DV . '/colors/betterblack.vim'
+    exe 'edit ' . g:rcroot . '/colors/betterblack.vim'
 endfunction
 
 " See what syntax groups are under the cursor
@@ -485,22 +485,6 @@ au BufRead,BufNewFile Jenkinsfile set ft=groovy
 
 " Crontab
 autocmd filetype crontab setlocal nobackup nowritebackup
-
-" Cscope stuff
-if has("cscope")
-    set csprg=/usr/local/bin/cscope
-    set csto=0
-    set cst
-    set nocsverb
-    " add any database in current directory
-    if filereadable("cscope.out")
-        cs add cscope.out
-    " else add database pointed to by environment
-    elseif $CSCOPE_DB != ""
-        cs add $CSCOPE_DB
-    endif
-    set csverb
-endif
 
 " OS DEPENDENT STUFF
 if has('win32') || has('win64')

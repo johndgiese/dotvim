@@ -1,7 +1,7 @@
 set background=dark
 
 hi Normal guibg=#060609 guifg=#e3e3e4 gui=NONE ctermbg=Black ctermfg=White cterm=NONE
-" Coding 
+" Coding
 hi String guibg=NONE guifg=#FF2020 gui=NONE ctermbg=NONE ctermfg=196 cterm=NONE
 hi Special guibg=NONE guifg=#FF3030 gui=NONE ctermbg=NONE ctermfg=174 cterm=NONE
 hi Comment guibg=NONE guifg=#FF7300 gui=NONE ctermbg=NONE ctermfg=166 cterm=NONE
@@ -16,7 +16,7 @@ hi Title guibg=#060609 guifg=#FFFFFF gui=NONE ctermbg=NONE ctermfg=White cterm=N
 hi PreProc ctermfg=176
 hi SpecialComment guibg=NONE guifg=#FF8310 gui=NONE ctermbg=NONE ctermfg=178 cterm=NONE
 
-" VIM gui 
+" VIM gui
 hi LineNr guibg=NONE guifg=#626272 gui=NONE ctermbg=Black ctermfg=245 cterm=NONE
 hi Folded guibg=NONE guifg=#727282 gui=NONE ctermbg=Black ctermfg=240 cterm=NONE
 hi NonText guibg=#060609 guifg=#181828 gui=NONE ctermbg=Black ctermfg=235 cterm=NONE
@@ -55,7 +55,7 @@ hi SyntasticErrorSign guibg=#060609 guifg=#FF0000 gui=NONE ctermbg=Black ctermfg
 hi SyntasticStyleErrorSign guibg=#060609 guifg=#FF0000 gui=NONE ctermbg=Black ctermfg=45 cterm=NONE
 hi SyntasticWarningSign guibg=#060609 guifg=#0000FF gui=NONE ctermbg=Black ctermfg=166 cterm=NONE
 hi SyntasticErrorLine guibg=#2f0000
-hi SpellCap guibg=NONE guifg=NONE gui=undercurl ctermbg=Black ctermfg=NONE cterm=NONE guisp=#FF1234 
+hi SpellCap guibg=NONE guifg=NONE gui=undercurl ctermbg=Black ctermfg=NONE cterm=NONE guisp=#FF1234
 
 " Taglist
 hi TaglistFileName guibg=#060609 guifg=#FFFFFF gui=italic ctermbg=Black ctermfg=White cterm=NONE

@@ -95,11 +95,16 @@ Plugin 'michaeljsmith/vim-indent-object'
 " Autocomplete
 Plugin 'Valloric/YouCompleteMe'
 let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf.py'
+if !exists("g:ycm_semantic_triggers")
+  let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers['typescript'] = ['.']
 
 " Better javascript indenting etc.
 Plugin 'pangloss/vim-javascript.git'
 Plugin 'leafgarland/typescript-vim.git'
 autocmd BufNewFile,BufFilePre,BufRead *.tsx set filetype=typescript
+autocmd BufNewFile,BufFilePre,BufRead *.ts set filetype=typescript
 
 " JSX Support
 Plugin 'mxw/vim-jsx'
@@ -107,6 +112,9 @@ let g:jsx_ext_required = 0
 
 " Coffee script support
 Plugin 'kchmck/vim-coffee-script'
+
+" Jinja template syntax
+Plugin 'Glench/Vim-Jinja2-Syntax'
 
 " Sass syntax
 Plugin 'cakebaker/scss-syntax.vim'
@@ -168,11 +176,6 @@ noremap <silent> <leader>2 :TagbarToggle<CR>
 Plugin 'ivegotasthma/bufexplorer'
 noremap <silent> <leader>3 :BufExplorer<CR>
 let g:bufExplorerDefaultHelp=0
-
-" Auto open buffer explorer after splitting a window
-" 95% of the time when I open a slit, I want to view a currently open file
-noremap <silent> <C-w>s <C-w>s:BufExplorer<CR>
-noremap <silent> <C-w>v <C-w>v:BufExplorer<CR>
 
 " Vim sugar for unix shell commands that need it
 Plugin 'tpope/vim-eunuch.git'
@@ -264,11 +267,12 @@ let g:syntastic_auto_loc_list=0
 let g:syntastic_enable_signs=1
 let g:syntastic_enable_auto_jump=0
 let g:syntastic_mode_map = { 'mode': 'passive',
-                            \ 'active_filetypes': ['cpp', 'c', 'python'],
+                            \ 'active_filetypes': ['cpp', 'c', 'python', 'typescript'],
                             \ 'passive_filetypes': ['javascript'] }
 
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_javascript_checkers=['eslint']
+let g:syntastic_typescript_checkers=['tslint']
 
 let g:syntastic_cpp_checkers=['clang++']
 let g:syntastic_c_checkers=['clang']
@@ -421,6 +425,29 @@ nnoremap <C-l> <C-w>l
 " Highlight whitespace with <leader>w, and remove with <leader>W
 nnoremap <leader>w :/\s\+$<CR>
 nnoremap <leader>W :%s/\s\+$//e<CR><silent>:noh<CR>
+
+nnoremap <silent> <leader>f :call FocusMode()<CR>
+
+let g:focus_mode=0
+function! FocusMode()
+    if g:focus_mode
+        let g:focus_mode=0
+        set showmode
+        set ruler
+        set laststatus=2
+        set showcmd
+        set number
+        execute "normal! zE"
+    else
+        let g:focus_mode=1
+        set noshowmode
+        set noruler
+        set laststatus=0
+        set noshowcmd
+        set nonumber
+        execute "0;/^---$/ fold"
+    end
+endfunction
 
 " SPELLING
 " toggle spell checking

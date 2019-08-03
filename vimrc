@@ -193,6 +193,9 @@ if v:version > 702
     nnoremap <silent> <leader>4 :GundoToggle<CR>
     let g:gundo_right = 1
     let g:gundo_help  = 0
+    if has('python3')
+        let g:gundo_prefer_python3 = 1
+    endif
 endif
 
 " Tmux vim bindings

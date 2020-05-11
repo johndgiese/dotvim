@@ -222,8 +222,8 @@ let g:ctrlp_user_command = {
 
 " Snippets
 Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
 nnoremap <leader>u :UltiSnipsEdit<CR>
+
 let g:UltiSnipsSnippetsDir = g:rcroot.'/mysnippets/'
 let g:UltiSnipsSnippetDirectories = ["mysnippets", "UltiSnips"]
 autocmd BufNewFile,BufRead *.snippets set filetype=snippets
@@ -450,7 +450,6 @@ function! FocusMode()
         set laststatus=0
         set noshowcmd
         set nonumber
-        execute "0;/^---$/ fold"
     end
 endfunction
 

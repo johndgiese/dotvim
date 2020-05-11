@@ -159,9 +159,9 @@ let NERDTreeIgnore = ['\~$', '\.pyc', '__pycache__', '\.qmlc', '\.jsc']
 let NERDTreeMapHelp = '<f1>'
 
 
-" Ack search integration
-Plugin 'mileszs/ack.vim.git'
-let g:ackprg = 'ag --noheading --nocolor --nogroup --column --smart-case --follow --nobreak --silent'
+" Ripgrep search integration
+Plugin 'jremmen/vim-ripgrep'
+nnoremap <silent> <leader>g yaw:Rg <C-R>0<CR>
 
 " Add Cdo and Ldo (similar to argdo but for the quickfix list)
 Plugin 'Peeja/vim-cdo'

@@ -120,6 +120,8 @@ Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'cakebaker/scss-syntax.vim'
 
 " Rust syntax
+Plugin 'cespare/vim-toml'
+au BufRead,BufNewFile *.toml set ft=toml
 Plugin 'rust-lang/rust.vim'
 au BufRead,BufNewFile *.rs set ft=rust
 

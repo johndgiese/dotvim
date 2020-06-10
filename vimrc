@@ -46,16 +46,11 @@ endif
 
 
 " PLUGINS
-" Set everything so vundle can load
-autocmd!
-filetype off
-let &rtp.=','.g:rcroot.'/bundle/Vundle.vim'
-call vundle#begin(g:rcroot.'/bundle')
-Plugin 'gmarik/Vundle.vim'
+call plug#begin(g:rcroot.'/bundle')
 
 " Use Git inside vim easily
-Plugin 'tpope/vim-fugitive.git'
-Plugin 'tpope/vim-git.git'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-git'
 nnoremap dp dp]c
 nnoremap do do]c
 
@@ -84,103 +79,94 @@ function! GlogBackward()
 endfunction
 
 " Commenting tools
-Plugin 'scrooloose/nerdcommenter.git'
+Plug 'scrooloose/nerdcommenter'
 
 " Lets you deal with braket pairs etc.
-Plugin 'tpope/vim-surround.git'
+Plug 'tpope/vim-surround'
 
 " Adds indent objects
-Plugin 'michaeljsmith/vim-indent-object'
-
-" Autocomplete
-Plugin 'Valloric/YouCompleteMe'
-let g:ycm_global_ycm_extra_conf = '~/.vim/ycm_extra_conf.py'
-if !exists("g:ycm_semantic_triggers")
-  let g:ycm_semantic_triggers = {}
-endif
-let g:ycm_semantic_triggers['typescript'] = ['.']
+Plug 'michaeljsmith/vim-indent-object'
 
 " Better javascript indenting etc.
-Plugin 'pangloss/vim-javascript.git'
-Plugin 'leafgarland/typescript-vim.git'
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
 autocmd BufNewFile,BufFilePre,BufRead *.tsx set filetype=typescript
 autocmd BufNewFile,BufFilePre,BufRead *.ts set filetype=typescript
 
 " JSX Support
-Plugin 'mxw/vim-jsx'
+Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
 
 " Coffee script support
-Plugin 'kchmck/vim-coffee-script'
+Plug 'kchmck/vim-coffee-script'
 
 " Jinja template syntax
-Plugin 'Glench/Vim-Jinja2-Syntax'
+Plug 'Glench/Vim-Jinja2-Syntax'
 
 " Sass syntax
-Plugin 'cakebaker/scss-syntax.vim'
+Plug 'cakebaker/scss-syntax.vim'
 
 " Rust syntax
-Plugin 'cespare/vim-toml'
+Plug 'cespare/vim-toml'
 au BufRead,BufNewFile *.toml set ft=toml
-Plugin 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim'
 au BufRead,BufNewFile *.rs set ft=rust
 
 " Node.js tools
-Plugin 'moll/vim-node'
+Plug 'moll/vim-node'
 
 " make more commands work with repate
-Plugin 'tpope/vim-repeat'
+Plug 'tpope/vim-repeat'
 
 " handle word variants
-Plugin 'tpope/vim-abolish'
+Plug 'tpope/vim-abolish'
 
 " visual selection search with # and *
-Plugin 'nelstrom/vim-visual-star-search'
+Plug 'nelstrom/vim-visual-star-search'
 
 " various mappings related to pairs
-Plugin 'tpope/vim-unimpaired.git'
+Plug 'tpope/vim-unimpaired'
 
 " colors can be highlighed using <leader>c
-Plugin 'chrisbra/Colorizer'
+Plug 'chrisbra/Colorizer'
 nnoremap <leader>c :ColorToggle<CR>
 
 " filetypes
-Plugin 'groenewege/vim-less'
-Plugin 'peterhoeg/vim-qml'
+Plug 'groenewege/vim-less'
+Plug 'peterhoeg/vim-qml'
 au BufRead,BufNewFile *.qml set ft=qml
 
-Plugin 'tpope/vim-markdown'
+Plug 'tpope/vim-markdown'
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh']
 
 " File browsing
-Plugin 'scrooloose/nerdtree.git'
+Plug 'scrooloose/nerdtree'
 noremap <silent> <leader>1 :NERDTreeToggle<CR>
 let NERDTreeIgnore = ['\~$', '\.pyc', '__pycache__', '\.qmlc', '\.jsc']
 let NERDTreeMapHelp = '<f1>'
 
-
 " Ripgrep search integration
-Plugin 'jremmen/vim-ripgrep'
+Plug 'jremmen/vim-ripgrep'
 nnoremap <silent> <leader>g yaw:Rg <C-R>0<CR>
 
 " Add Cdo and Ldo (similar to argdo but for the quickfix list)
-Plugin 'Peeja/vim-cdo'
+Plug 'Peeja/vim-cdo'
 
 " Toggle quickfix and localist
-Plugin 'milkypostman/vim-togglelist'
+Plug 'milkypostman/vim-togglelist'
 
 " Ctag viewer
-Plugin 'majutsushi/tagbar.git'
+Plug 'majutsushi/tagbar'
 let g:tagbar_iconchars = ['+', '-']
 noremap <silent> <leader>2 :TagbarToggle<CR>
 
 " Nice buffer browsers/switcher
-Plugin 'ivegotasthma/bufexplorer'
+Plug 'jlanzarotta/bufexplorer'
 noremap <silent> <leader>3 :BufExplorer<CR>
 let g:bufExplorerDefaultHelp=0
 
 " Vim sugar for unix shell commands that need it
-Plugin 'tpope/vim-eunuch.git'
+Plug 'tpope/vim-eunuch'
 
 " branching undo is new in vim 7.3
 if v:version > 702
@@ -191,7 +177,7 @@ if v:version > 702
     set undofile
 
     " Graphical interface for the vim's branching undo stuff
-    Plugin 'sjl/gundo.vim.git'
+    Plug 'sjl/gundo.vim'
     nnoremap <silent> <leader>4 :GundoToggle<CR>
     let g:gundo_right = 1
     let g:gundo_help  = 0
@@ -201,13 +187,13 @@ if v:version > 702
 endif
 
 " Tmux vim bindings
-Plugin 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-navigator'
 
 " A better status line
-Plugin 'itchyny/lightline.vim'
+Plug 'itchyny/lightline.vim'
 
 " A fuzzy file finder
-Plugin 'kien/ctrlp.vim.git'
+Plug 'kien/ctrlp.vim'
 let g:ctrlp_working_path_mode = 'ar'
 let g:ctrlp_extensions = ['dir']
 let g:ctrlp_cmd = 'CtrlP'
@@ -220,81 +206,10 @@ let g:ctrlp_user_command = {
 \ 'ignore': 1
 \ }
 
-" Snippets
-Plugin 'SirVer/ultisnips'
-nnoremap <leader>u :UltiSnipsEdit<CR>
-
-let g:UltiSnipsSnippetsDir = g:rcroot.'/mysnippets/'
-let g:UltiSnipsSnippetDirectories = ["mysnippets", "UltiSnips"]
-autocmd BufNewFile,BufRead *.snippets set filetype=snippets
-
-function! g:UltiSnips_Complete()
-  call UltiSnips#ExpandSnippet()
-  if g:ulti_expand_res == 0
-    if pumvisible()
-      return "\<C-n>"
-    else
-      call UltiSnips#JumpForwards()
-      if g:ulti_jump_forwards_res == 0
-        return "\<TAB>"
-      endif
-    endif
-  endif
-  return ""
-endfunction
-
-function! g:UltiSnips_Reverse()
-  call UltiSnips#JumpBackwards()
-  if g:ulti_jump_backwards_res == 0
-    return "\<C-P>"
-  endif
-  return ""
-endfunction
-
-if !exists("g:UltiSnipsJumpForwardTrigger")
-  let g:UltiSnipsJumpForwardTrigger = "<tab>"
-endif
-
-if !exists("g:UltiSnipsJumpBackwardTrigger")
-  let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-endif
-
-au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
-
 " Bracketed Paste
-Plugin 'ConradIrwin/vim-bracketed-paste'
+Plug 'ConradIrwin/vim-bracketed-paste'
 
-" Syntax highlighting interface
-Plugin 'scrooloose/syntastic.git'
-let g:syntastic_enable_ballons=0
-let g:syntastic_auto_loc_list=0
-let g:syntastic_enable_signs=1
-let g:syntastic_enable_auto_jump=0
-let g:syntastic_mode_map = { 'mode': 'passive',
-                            \ 'active_filetypes': ['cpp', 'c', 'python', 'typescript'],
-                            \ 'passive_filetypes': ['javascript'] }
-
-let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_javascript_checkers=['eslint']
-let g:syntastic_typescript_checkers=['tslint']
-
-let g:syntastic_cpp_checkers=['clang++']
-let g:syntastic_c_checkers=['clang']
-
-
-let g:syntastic_enable_highlighting=0
-let g:syntastic_on=0
-function! SyntasticToggle()
-    let g:syntastic_enable_highlighting=g:syntastic_on
-    SyntasticCheck
-    if g:syntastic_on
-        lclose
-    end
-    let g:syntastic_on=!g:syntastic_on
-endfunction
-nnoremap <silent> <leader>e :call SyntasticToggle()<CR>
-
+call plug#end()
 
 " MAPPINGS
 
@@ -518,24 +433,14 @@ au BufRead,BufNewFile Jenkinsfile set ft=groovy
 autocmd filetype crontab setlocal nobackup nowritebackup
 
 " OS DEPENDENT STUFF
-if has('win32') || has('win64')
-    set guifont=Consolas:h10
-elseif has('mac')
+if has('mac')
     let macvim_skip_cmd_opt_movement = 1
     let macvim_skip_colorscheme = 1
     let macvim_hig_shift_movement = 1
     if exists("&macmeta")
         set macmeta
     endif
-    set noantialias
-    set guifont=Monaco:h10
-else
-    set guifont=CodingFontTobi\ 12
 endif
-
-syntax enable
-call vundle#end()
-filetype plugin indent on
 
 set t_Co=256
 colorscheme betterblack

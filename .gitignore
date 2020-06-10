@@ -1,4 +1,5 @@
 tags
 tmp/
 bundle/
+autoload/plug.vim
 *.spl

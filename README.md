@@ -1,13 +1,16 @@
 # This is just a starting point...
-I love vim because it is FAST, lightweight, powerful, works in the commandline, and is mostly OS independent. That being said, some of the default settings are no good, and there is a lot of missing functionality.  I have developed a set of customizations to vim that fix these problems and will allow you to sync your vim customizations across the major operating systems.
+
+I love vim because it is fast, lightweight, customizable, works in the commandline, and is mostly OS independent. Also, because it is open source and widely used, I don't have to worry that it will stop being supported (this is not the case for commercial IDEs). Finally, if I want to use a new programming language, chances are high there will be vim plugins for it before most IDEs support it.
+
+There are downsides to vim too. It is not easy to learn. Keeping your configuration up to date takes effort, which you may prefer to spend working.  Also, some of the default settings are no good, and there is a lot of missing functionality.  This repository contains my vim customizations. It will also allow you to sync your vim customizations across the major operating systems.
 
 Everyone has their own tastes, and will probably want to customize their setup further, so my vimrc is just a starting point.  I hope that you will be able to fork my repository and customize your own from there!  By using my vimrc as a starting place, you will save yourself a good deal of unnecessary frustration and more quickly be able to harness the full power of vim.
 
-Please let me know if you get stuck in the install process (make a github issue) and I will try to help out.
+Please let me know if you get stuck in the install process (make a GitHub issue) and I will try to help out.
 
 # Installation
 
-### 1. Download the repository and run install script
+## 1. Download the repository and run install script
 
 REQUIREMENT 1: We assume that you have bash and curl installed and on the $PATH, and that you want your vimfiles installed in your $HOME folder.  If either of these isn't the case, then I suggest opening up the install.sh script and trying to duplicate the commands by hand (it isn't complicated at all).
 
@@ -21,13 +24,13 @@ if you are on a windows machine run
 	git clone git@github.com:johndgiese/dotvim.git %HOME%\vimfiles
     vimfiles\install
 
-### 2. Install optional programs used by plugins
+## 2. Install optional programs used by plugins
 
 My setup uses the vundle plugin manager.  If any of the plugins give you
 trouble, you can comment them out in your vimrc (just look for the lines that
 start with Bundle).
 
-#### Ctags
+### Ctags
 
 Ctags is a program that parses your code and generates links between files.  Ctags is used by a few plugins that I have, and they will complain if you don't have them installed.  You can comment out the plugins in the vimrc file, but I recommend trying to install ctags.  It is super useful.  You can read about it [here](https://ctags.io).
 
@@ -109,7 +112,7 @@ These three shortcuts will save you a lot of time, and keep your hands more comf
 * \<C-p\> opens the super awesome fuzzy file browser (:h ctrlp for details)
 
 The following other plugins are installed:
-* Vundle - lets you manage plugins more easily (look in the bundle directory)
+* vim-plug - lets you manage plugins more easily (look in the bundle directory)
 * Nerdtree - browse files inside vim
 * Tagbar - view the structure of your files using ctags
 * Gundo - graphical view of undo branches; see the [vimcast](http://vimcasts.org/episodes/undo-branching-and-gundo-vim/)
@@ -160,7 +163,7 @@ finally, if you are hosting your vim setup online you would push to the remote r
 Note that you may need to update the origin url for the repo (Google online if you don't know how to do this)
 
 ### Managing plugins
-I use Vundle to manage plugins; it is much better than the default way.  Google online if you don't believe me.  Instructions on how to use it [here](https://github.com/gmarik/vundle).
+I use vim-plug to manage plugins; it is much better than the default way.  Google online if you don't believe me.  Instructions on how to use it [here](https://github.com/junegunn/vim-plug).
 
 ### Updating the VIMRC
 You can quickly update the vimrc by pressing \<leader\>v in normal mode.  When you save it, it will source the changes so that you can see the effects immediately.  Note that this doesn't always work as expected, so you may have to fully reset vim to use this.

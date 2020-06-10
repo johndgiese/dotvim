@@ -1,1 +1,0 @@
-/Users/johndavidgiese/.vim/bundle/ultisnips/after/plugin/UltiSnips_after.vim

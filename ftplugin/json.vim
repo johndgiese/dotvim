@@ -1,1 +1,0 @@
-nnoremap ,% :!jsonlint % -q<CR>

@@ -167,7 +167,6 @@ ico
 decoherence
 forseeably
 otoscope
-br
 list_display
 export
 manual
@@ -190,13 +189,9 @@ QMS
 linters
 linter
 config
-#heckin
-#eccomended
-T1_
 Newormics
 Elegans
 phenotypes
 neurotoxity
 whitespace
 TypeScript
-from

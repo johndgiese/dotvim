@@ -12,6 +12,6 @@ else
 fi
 
 echo "Installing plugins, may take a while ..."
-vim +PlugInstall +qall
+nvim +PlugInstall +qall
 
 echo "Finished! Happy vimming!"

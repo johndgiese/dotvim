@@ -2,9 +2,10 @@
 set ruler
 set secure
 set hidden
-set number numberwidth=3 relativenumber
+set nonumber numberwidth=3 relativenumber
 set wrap linebreak
 set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
+set breakindent
 
 " set a more ergonomic escape
 inoremap jk <ESC>
@@ -68,16 +69,36 @@ nnoremap 0 g0
 nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
+" focus mode
+nnoremap <silent> <leader>f :call FocusMode()<CR>
+
+let g:focus_mode=0
+function! FocusMode()
+    if g:focus_mode
+        let g:focus_mode=0
+        set showmode
+        set ruler
+        set laststatus=2
+        set showcmd
+        set number
+        set relativenumber
+        execute "normal! zE"
+    else
+        let g:focus_mode=1
+        set noshowmode
+        set noruler
+        set laststatus=0
+        set noshowcmd
+        set nonumber
+        set norelativenumber
+    end
+endfunction
+
 " toggle spell checking
 nnoremap <silent> <leader>s :set spell!<CR>
 
 " configure spell check language
 set spelllang=en_us
-
-" turn relative number on when scrolling and off while typing
-autocmd InsertEnter * :set relativenumber!
-autocmd InsertLeave * :set relativenumber
-
 " PLUGINS
 call plug#begin(stdpath('data') . '/plugged')
 
@@ -88,11 +109,6 @@ Plug 'tpope/vim-git'
 " file browsing
 Plug 'scrooloose/nerdtree'
 noremap <silent> <leader>1 :NERDTreeToggle<CR>
-
-" ctag viewer
-Plug 'majutsushi/tagbar'
-let g:tagbar_iconchars = ['+', '-']
-noremap <silent> <leader>2 :TagbarToggle<CR>
 
 " buffer browsers/switcher
 Plug 'jlanzarotta/bufexplorer'
@@ -125,6 +141,13 @@ Plug 'tpope/vim-unimpaired'
 " highlight colors
 Plug 'chrisbra/Colorizer'
 nnoremap <leader>c :ColorToggle<CR>
+
+" vime tmux
+Plug 'christoomey/vim-tmux-navigator'
+
+" typescript
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 
 " fuzzy-file finding
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }

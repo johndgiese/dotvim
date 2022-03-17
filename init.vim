@@ -116,11 +116,9 @@ let g:bufExplorerDefaultHelp=0
 noremap <silent> <leader>3 :BufExplorer<CR>
 
 " branching undo plugin
-Plug 'sjl/gundo.vim'
-let g:gundo_prefer_python3 = 1
-let g:gundo_right = 1
-let g:gundo_help = 0
-nnoremap <silent> <leader>4 :GundoToggle<CR>
+Plug 'simnalamburt/vim-mundo'
+let g:mundo_right = 1
+nnoremap <silent> <leader>4 :MundoToggle<CR>
 
 " ripgrep search integration
 Plug 'jremmen/vim-ripgrep'

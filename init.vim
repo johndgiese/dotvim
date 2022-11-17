@@ -153,6 +153,9 @@ Plug 'junegunn/fzf.vim'
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 nnoremap <C-p> :FZF<CR>
 
+" github copilot
+Plug 'github/copilot.vim'
+
 " status line
 Plug 'vim-airline/vim-airline'
 let g:airline_section_b = ''  " hide git branch

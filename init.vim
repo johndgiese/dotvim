@@ -2,7 +2,7 @@
 set ruler
 set secure
 set hidden
-set nonumber numberwidth=3 relativenumber
+set number
 set wrap linebreak
 set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 set breakindent
@@ -110,6 +110,10 @@ Plug 'tpope/vim-git'
 Plug 'scrooloose/nerdtree'
 noremap <silent> <leader>1 :NERDTreeToggle<CR>
 
+" tag bar
+Plug 'preservim/tagbar'
+nnoremap <silent> <leader>2 :TagbarToggle<CR>
+
 " buffer browsers/switcher
 Plug 'jlanzarotta/bufexplorer'
 let g:bufExplorerDefaultHelp=0
@@ -146,6 +150,9 @@ Plug 'christoomey/vim-tmux-navigator'
 " typescript
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
+
+" terraform
+Plug 'hashivim/vim-terraform'
 
 " fuzzy-file finding
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }

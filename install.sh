@@ -14,4 +14,22 @@ fi
 echo "Installing plugins, may take a while ..."
 nvim +PlugInstall +qall
 
+COC_EXTENSIONS=(
+    coc-tsserver
+    coc-pyright
+    coc-json
+    coc-yaml
+    coc-sh
+    coc-html
+    coc-css
+    coc-eslint
+    coc-prettier
+    coc-terraform
+    coc-rust-analyzer
+    coc-clangd
+)
+
+echo "Installing Coc language extensions ..."
+nvim --headless +"CocInstall -sync ${COC_EXTENSIONS[*]}" +qall
+
 echo "Finished! Happy vimming!"

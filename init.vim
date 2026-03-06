@@ -160,8 +160,8 @@ Plug 'junegunn/fzf.vim'
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
 nnoremap <C-p> :FZF<CR>
 
-" github copilot
-Plug 'github/copilot.vim'
+" language server + go-to-definition
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " status line
 Plug 'vim-airline/vim-airline'
@@ -175,6 +175,20 @@ let g:airline_symbols.linenr = ' '
 let g:airline_symbols.maxlinenr = ''
 
 call plug#end()
+
+" coc.nvim navigation and docs
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gD <Plug>(coc-declaration)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+function! ShowDocumentation()
+    if index(['vim', 'help'], &filetype) >= 0
+        execute 'help ' . expand('<cword>')
+    else
+        call CocActionAsync('doHover')
+    endif
+endfunction
+nnoremap <silent> K :call ShowDocumentation()<CR>
 
 " disable matching parenthesise when on a network file
 autocmd BufReadPre //* :NoMatchParen

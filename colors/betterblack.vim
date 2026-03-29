@@ -13,7 +13,7 @@ hi Identifier guibg=NONE guifg=#00ED45 gui=NONE ctermbg=NONE ctermfg=Green cterm
 hi Type guibg=NONE guifg=#3381FF gui=NONE ctermbg=NONE ctermfg=39 cterm=NONE
 hi Todo guibg=#151515 guifg=#FF7300 gui=NONE ctermbg=233 ctermfg=166 cterm=NONE
 hi Title guibg=#060609 guifg=#FFFFFF gui=NONE ctermbg=NONE ctermfg=White cterm=NONE
-hi PreProc ctermfg=176
+hi PreProc guibg=NONE guifg=#d787d7 gui=NONE ctermbg=NONE ctermfg=176 cterm=NONE
 hi SpecialComment guibg=NONE guifg=#FF8310 gui=NONE ctermbg=NONE ctermfg=178 cterm=NONE
 
 " VIM gui
@@ -67,6 +67,20 @@ hi link TagListComment Comment
 
 " TagBar
 hi TagbarHighlight guibg=#333333 guifg=NONE gui=NONE  ctermbg=235 ctermfg=NONE cterm=NONE
+
+" Diagnostics (LSP / coc.nvim)
+hi DiagnosticError guibg=NONE guifg=#FF0000 gui=NONE ctermbg=NONE ctermfg=196 cterm=NONE
+hi DiagnosticWarn guibg=NONE guifg=#FFAA00 gui=NONE ctermbg=NONE ctermfg=214 cterm=NONE
+hi DiagnosticInfo guibg=NONE guifg=#3381FF gui=NONE ctermbg=NONE ctermfg=39 cterm=NONE
+hi DiagnosticHint guibg=NONE guifg=#626272 gui=NONE ctermbg=NONE ctermfg=245 cterm=NONE
+
+" Floating windows
+hi link NormalFloat PMenu
+hi link FloatBorder PMenu
+
+" Treesitter
+hi link @constructor Function
+hi link @module Identifier
 
 " Python
 hi link PythonEscape String

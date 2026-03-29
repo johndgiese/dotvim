@@ -163,6 +163,9 @@ nnoremap <C-p> :FZF<CR>
 " language server + go-to-definition
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+" AI inline completions
+Plug 'github/copilot.vim'
+
 " status line
 Plug 'vim-airline/vim-airline'
 let g:airline_section_b = ''  " hide git branch
@@ -189,6 +192,8 @@ function! ShowDocumentation()
     endif
 endfunction
 nnoremap <silent> K :call ShowDocumentation()<CR>
+autocmd FileType markdown let b:coc_suggest_disable = 1
+let g:coc_user_config = { 'inlayHint.enable': v:false }
 
 " disable matching parenthesise when on a network file
 autocmd BufReadPre //* :NoMatchParen

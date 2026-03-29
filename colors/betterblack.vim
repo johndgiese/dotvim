@@ -25,6 +25,7 @@ hi PMenu guibg=#181828 guifg=#FFFFFF gui=NONE ctermbg=235 ctermfg=White cterm=NO
 hi PMenuSelect guibg=#282838 guifg=#FFFFFF gui=NONE ctermbg=Black ctermfg=White cterm=NONE
 hi PMenuThumb guibg=#060609 guifg=#EEFFAA gui=NONE ctermbg=Black ctermfg=Yellow cterm=NONE
 hi VertSplit guibg=#060609 guifg=#181222 gui=NONE ctermbg=Black ctermfg=235 cterm=NONE
+hi WinSeparator guibg=#060609 guifg=#333333 gui=NONE ctermbg=Black ctermfg=236 cterm=NONE
 hi FoldColumn guibg=#060609 guifg=#EEFFAA gui=NONE ctermbg=Black ctermfg=Yellow cterm=NONE
 hi MatchParen guibg=#555555 guifg=#FFFFFF gui=NONE ctermbg=235 ctermfg=White cterm=NONE
 hi TabLineFill guibg=#060609 guifg=#FFFFFF gui=NONE ctermbg=Black ctermfg=White cterm=NONE
